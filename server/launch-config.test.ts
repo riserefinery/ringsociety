@@ -11,9 +11,9 @@ describe('launch configuration', () => {
     expect(config.routes[1]).toEqual({ src: '/(.*)', dest: '/index.html' })
   })
 
-  it('references the verified managed social image', () => {
+  it('references the verified public CDN social image', () => {
     const html = readFileSync(resolve(root, 'index.html'), 'utf8')
-    expect(html).toContain('/manus-storage/ring-society-og-image_b9ffc876.jpg')
+    expect(html).toContain('https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/RYBFIhkABMOYqBjI.jpg')
   })
 
   it('defines page-specific metadata for every legal placeholder route', () => {
