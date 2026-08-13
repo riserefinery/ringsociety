@@ -54,6 +54,8 @@ export type HeroProps = {
   ready?: boolean
   /** Makes only the desktop image surface full-bleed while retaining its original inner content grid. */
   fullBleedDesktop?: boolean
+  /** Aligns a full-bleed desktop hero’s content column with the shared page grid while retaining its original right edge. */
+  alignContentToPageGrid?: boolean
 }
 
 export default function Hero(props: HeroProps) {
@@ -134,6 +136,7 @@ function HeroDesktop({
   imagePosition = '70% center',
   ready,
   fullBleedDesktop = false,
+  alignContentToPageGrid = false,
 }: HeroProps) {
   const MHeading = motion[as]
   return (
@@ -156,8 +159,18 @@ function HeroDesktop({
         />
         <div className="absolute inset-0 flex items-center">
           <motion.div
-            className="flex max-w-[560px] flex-col gap-9 px-8 text-white md:px-24"
-            style={fullBleedDesktop ? { paddingLeft: 'max(136px, calc((100vw - 1440px) / 2 + 136px))', paddingRight: 96 } : undefined}
+            className={`flex flex-col gap-9 px-8 text-white md:px-24 ${fullBleedDesktop && alignContentToPageGrid ? 'max-w-none' : 'max-w-[560px]'}`}
+            style={
+              fullBleedDesktop
+                ? alignContentToPageGrid
+                  ? {
+                      width: 'min(656px, calc(100vw - 80px))',
+                      paddingLeft: 'max(40px, calc((100vw - 1440px) / 2 + 40px))',
+                      paddingRight: 0,
+                    }
+                  : { paddingLeft: 'max(136px, calc((100vw - 1440px) / 2 + 136px))', paddingRight: 96 }
+                : undefined
+            }
             {...heroContainerProps(ready)}
           >
             {(label || badge) && (

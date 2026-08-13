@@ -46,3 +46,8 @@
 - [x] Allow the managed preview host in the Vite development server configuration without changing the Vercel production deployment behavior.
 - [x] Verify that the shared managed preview opens the homepage and the updated desktop full-bleed sections without a blocked-host error.
 - [x] Capture a managed-preview desktop validation of the full-bleed hero and CTA-to-footer junction after the host allowlist repair.
+- [ ] Align the homepage hero content’s left edge with the shared desktop page grid while retaining its current right edge to create the approved wider content column.
+- [ ] Apply the shared CTA’s full-width desktop background treatment everywhere the Newsletter component appears, keeping a CTA flush with the footer when immediately above it.
+- [ ] Apply the full-bleed desktop hero system to All Resources and Top Guides while retaining their existing internal content grid and mobile behavior.
+- [ ] Apply the homepage-aligned full-bleed desktop hero system to Our Mission, preserving its existing content and mobile behavior.
+- [ ] Validate the homepage, All Resources, Top Guides, and Our Mission at desktop and mobile breakpoints to confirm the targeted layout changes do not affect other sections.

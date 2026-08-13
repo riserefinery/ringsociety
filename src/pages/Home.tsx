@@ -234,6 +234,7 @@ export default function Home() {
           ctaTo="/guides/the-definitive-engagement-ring-buying-guide-2026"
           ready={heroReady}
           fullBleedDesktop
+          alignContentToPageGrid
         />
         <div className="flex w-full flex-col items-center gap-16 pb-16 pt-16 md:gap-24 md:pb-0 md:pt-24">
           <DiscoverGuides />

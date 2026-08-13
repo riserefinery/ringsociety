@@ -73,6 +73,7 @@ export default function Resources() {
         subtitle="Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders"
         image={resourcesBg}
         filters={<FilterChips selected={selected} onSelect={onSelect} />}
+        fullBleedDesktop
       />
       <section className="mx-auto w-full max-w-[1440px] px-5 pt-12 md:px-10 md:pt-16">
         <h2 className="sr-only">All engagement ring guides and articles</h2>
@@ -84,7 +85,7 @@ export default function Resources() {
           ))}
         </Stagger>
       </section>
-      <div className="w-full pb-16 pt-16 md:pb-24 md:pt-24">
+      <div className="w-full pt-16 md:pt-24">
         <Newsletter />
       </div>
     </>

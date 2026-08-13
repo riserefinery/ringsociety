@@ -152,8 +152,10 @@ export default function OurMission() {
         title="We're here to make one of life's biggest decisions feel less like gambling."
         body="We are a free, independent resource for couples researching engagement rings."
         ctaLabel="explore top guides"
-        mobilePanelColor="#000000"
-        imagePosition="center"
+          mobilePanelColor="#000000"
+          imagePosition="center"
+          fullBleedDesktop
+          alignContentToPageGrid
       />
       <Statement
         eyebrow="Our Mission"
@@ -162,7 +164,7 @@ export default function OurMission() {
       />
       <Vision />
       <WhatWeDo />
-      <div className="w-full pb-16 pt-16 md:pb-24 md:pt-24">
+      <div className="w-full pt-16 md:pt-24">
         <Newsletter />
       </div>
     </>

@@ -11,16 +11,19 @@ export default function PageHeader({
   subtitle,
   image,
   filters,
+  fullBleedDesktop = false,
 }: {
   title: string
   subtitle?: string
   image: string
   filters?: ReactNode
+  /** Extends the desktop header surface to the viewport edges while preserving its centered internal content. */
+  fullBleedDesktop?: boolean
 }) {
   return (
-    <section className="w-full md:mx-auto md:max-w-[1440px] md:px-10">
+    <section className={fullBleedDesktop ? 'w-full' : 'w-full md:mx-auto md:max-w-[1440px] md:px-10'}>
       <div
-        className="relative flex min-h-[calc(100svh-91px)] items-center justify-center overflow-hidden px-6 py-20 md:min-h-[320px] md:rounded-lg md:py-[120px]"
+        className={`relative flex min-h-[calc(100svh-91px)] items-center justify-center overflow-hidden px-6 py-20 md:min-h-[320px] md:py-[120px] ${fullBleedDesktop ? 'md:rounded-none' : 'md:rounded-lg'}`}
         style={{ background: '#1a1a1a' }}
       >
         <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" />

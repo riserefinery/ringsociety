@@ -9,6 +9,7 @@ export default function TopGuides() {
         title="Top Guides"
         subtitle="Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders"
         image={topGuidesBg}
+        fullBleedDesktop
       />
       <div className="flex w-full flex-col items-center gap-12 pt-8 md:gap-6 md:pt-6">
         {pillarGuides.map((g) => (
@@ -17,7 +18,7 @@ export default function TopGuides() {
           </Reveal>
         ))}
       </div>
-      <div className="w-full pb-16 pt-16 md:pb-24 md:pt-24">
+      <div className="w-full pt-16 md:pt-24">
         <Newsletter />
       </div>
     </>
