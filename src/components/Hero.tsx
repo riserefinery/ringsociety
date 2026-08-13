@@ -78,13 +78,14 @@ function HeroMobile({
   ctaTo,
   as = 'h1',
   mobilePanelColor = '#817164',
+  mobileImagePosition = 'center 30%',
   ready,
 }: HeroProps) {
   const MHeading = motion[as]
   return (
     <section className="w-full md:hidden">
       <div className="h-[330px] w-full overflow-hidden" style={{ background: '#978778' }}>
-        <img src={mobileImage ?? image} alt={alt} className="h-full w-full object-cover object-[center_30%]" />
+        <img src={mobileImage ?? image} alt={alt} className="h-full w-full object-cover" style={{ objectPosition: mobileImagePosition }} />
       </div>
       <motion.div
         className="flex flex-col gap-6 px-6 pb-12 pt-8"
@@ -186,7 +187,11 @@ function HeroDesktop({
                 )}
               </motion.div>
             )}
-            <MHeading variants={fadeUp} className="text-[clamp(40px,5vw,58px)] leading-[1.05] tracking-[-1px]" style={{ fontFamily: serif }}>
+            <MHeading
+              variants={fadeUp}
+              className={`text-[clamp(40px,5vw,58px)] leading-[1.05] tracking-[-1px] ${alignContentToPageGrid ? 'max-w-[467px]' : ''}`}
+              style={{ fontFamily: serif }}
+            >
               {title}
             </MHeading>
             <motion.p variants={fadeUp} className="max-w-[467px] text-[17px] leading-[1.6] text-white/90">

@@ -1,34 +1,57 @@
-import { Eyebrow, serif } from '../components'
+import { useEffect, useState } from 'react'
 import LeadForm from '../components/LeadForm'
+import { resourcesBg } from '../lib/assets'
+import { PageHeader, serif } from '../components'
+import { getCmsPage } from '../sanity/queries'
+import { resolvePageHero } from '../sanity/pageHero'
 
 export default function Contact() {
+  const [pageSettings, setPageSettings] = useState<CmsPageDocument | null>(null)
+  useEffect(() => {
+    let active = true
+    getCmsPage('contactPage').then((page) => active && setPageSettings(page))
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const hero = resolvePageHero(pageSettings?.heroImage, resourcesBg, 'Green marble texture')
+  const supportEmail = pageSettings?.supportEmail ?? 'hello@ringsociety.com'
+  const responseTime = pageSettings?.responseTime ?? 'Within 1–2 business days'
   return (
-    <section className="w-full px-5 py-14 md:px-10 md:py-24">
-      <div className="mx-auto grid max-w-[1180px] overflow-hidden rounded-lg bg-[#fbf9f7] md:grid-cols-[1.1fr_0.9fr]">
-        <div className="flex flex-col justify-between bg-[#244737] px-8 py-14 text-[#f9f6f2] md:px-16 md:py-20">
-          <div>
-            <Eyebrow>Ring Society</Eyebrow>
-            <h1 className="mt-6 max-w-[540px] text-[46px] leading-[1.08] tracking-[-0.8px] md:text-[66px]" style={{ fontFamily: serif }}>
-              Let’s Start With Your Questions
-            </h1>
-          </div>
-          <p className="mt-12 max-w-[450px] text-[16px] leading-[1.65] text-[#dce3dc] md:text-[18px]">
-            Whether you are looking for the right guide or have a question about Ring Society, send us a note and we will be in touch.
+    <>
+      <PageHeader
+        eyebrow={pageSettings?.eyebrow ?? 'Get In Touch'}
+        title={pageSettings?.headline ?? "We're Here to Help"}
+        subtitle={pageSettings?.introduction ?? 'Questions about engagement rings, jeweler partnerships, press inquiries — send us a note and we will be in touch within one business day.'}
+        image={hero.image}
+        imagePosition={hero.imagePosition}
+        fullBleedDesktop
+      />
+      <section className="mx-auto grid w-full max-w-[1440px] gap-12 px-5 py-16 md:grid-cols-[0.82fr_1.18fr] md:gap-24 md:px-10 md:py-24">
+        <div>
+          <h2 className="text-[34px] leading-[1.12] tracking-[-0.6px] text-[#173d2c] md:text-[48px]" style={{ fontFamily: serif }}>How can we help you?</h2>
+          <p className="mt-7 max-w-[430px] text-[16px] leading-[1.7] text-[#626262] md:text-[18px]">
+            Whether you are beginning your ring journey, interested in a jeweler partnership, or working on a story — we would love to hear from you.
           </p>
+          <dl className="mt-12 flex flex-col gap-8 text-[#173d2c]">
+            <div>
+              <dt className="text-[11px] font-semibold uppercase tracking-[1.8px]">General Inquiries</dt>
+              <dd className="mt-2 text-[17px]">{supportEmail}</dd>
+            </div>
+            <div>
+              <dt className="text-[11px] font-semibold uppercase tracking-[1.8px]">Response Time</dt>
+              <dd className="mt-2 text-[17px]">{responseTime}</dd>
+            </div>
+          </dl>
         </div>
-        <div className="px-8 py-14 md:px-16 md:py-20">
-          <Eyebrow>Contact Us</Eyebrow>
-          <p className="mt-5 max-w-[360px] text-[15px] leading-[1.65] text-[#7b7b7b]">
-            Please share your details below. Fields marked with an asterisk are required.
-          </p>
-          <LeadForm
-            source="Contact Page"
-            submitLabel="Send Message"
-            successMessage="Thank you — we will be in touch soon."
-            className="mt-12 max-w-[420px]"
-          />
+        <div className="rounded-lg bg-[#f3eeea] px-6 py-10 md:px-12 md:py-14">
+          <p className="text-[11px] font-semibold uppercase tracking-[1.8px] text-[#173d2c]">Send us a note</p>
+          <p className="mt-4 max-w-[480px] text-[16px] leading-[1.7] text-[#626262]">Share your details below and our team will follow up as soon as possible.</p>
+          <LeadForm source="Contact Page" submitLabel="Send Message" successMessage="Thank you — we will be in touch soon." className="mt-10 max-w-[540px]" />
+          <p className="mt-7 text-[12px] leading-[1.6] text-[#747474]">By submitting this form you agree to our <a className="underline underline-offset-2" href="/privacy-policy">Privacy Policy</a> and <a className="underline underline-offset-2" href="/terms-and-conditions">Terms &amp; Conditions</a>.</p>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   )
 }

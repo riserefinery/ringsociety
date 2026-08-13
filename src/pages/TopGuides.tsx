@@ -1,17 +1,32 @@
+import { useEffect, useState } from 'react'
 import { topGuidesBg } from '../lib/assets'
 import { pillarGuides } from '../lib/content'
 import { PageHeader, GuideFeature, Newsletter, Reveal } from '../components'
+import { getCmsPage } from '../sanity/queries'
+import { resolvePageHero } from '../sanity/pageHero'
 
 export default function TopGuides() {
+  const [pageSettings, setPageSettings] = useState<CmsPageDocument | null>(null)
+  useEffect(() => {
+    let active = true
+    getCmsPage('topGuidesLanding').then((page) => active && setPageSettings(page))
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const hero = resolvePageHero(pageSettings?.heroImage, topGuidesBg, 'Black marble texture')
   return (
     <>
       <PageHeader
-        title="Top Guides"
-        subtitle="Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders"
-        image={topGuidesBg}
+        title={pageSettings?.headline ?? 'Top Guides'}
+        subtitle={pageSettings?.introduction ?? 'Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders'}
+        image={hero.image}
+        imagePosition={hero.imagePosition}
         fullBleedDesktop
+        matchResourcesHeight
       />
-      <div className="flex w-full flex-col items-center gap-12 pt-8 md:gap-6 md:pt-6">
+      <div className="flex w-full flex-col items-center gap-12 pt-8 md:gap-6 md:pt-16">
         {pillarGuides.map((g) => (
           <Reveal key={g.slug} className="w-full">
             <GuideFeature guide={g} />

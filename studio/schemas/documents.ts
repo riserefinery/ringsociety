@@ -118,10 +118,38 @@ export const blogLanding = defineType({
   fields: [
     defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'All Resources' }),
     defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
+    defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Set the image crop with Focal Alignment.' }),
     defineField({ name: 'featuredPost', title: 'Featured Post', type: 'reference', to: [{ type: 'post' }] }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
   ],
   preview: { prepare: () => ({ title: 'All Resources' }) },
+})
+
+export const topGuidesLanding = defineType({
+  name: 'topGuidesLanding',
+  title: 'Top Guides',
+  type: 'document',
+  fields: [
+    defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'Top Guides' }),
+    defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
+    defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Set the image crop with Focal Alignment.' }),
+    defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
+  ],
+  preview: { prepare: () => ({ title: 'Top Guides' }) },
+})
+
+export const missionPage = defineType({
+  name: 'missionPage',
+  title: 'Our Mission',
+  type: 'document',
+  fields: [
+    defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string', initialValue: 'The #1 resource for finding your engagement ring' }),
+    defineField({ name: 'headline', title: 'Headline', type: 'string' }),
+    defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
+    defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Use Center Center for an even vertical crop when the viewport changes.' }),
+    defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
+  ],
+  preview: { prepare: () => ({ title: 'Our Mission' }) },
 })
 
 export const contactPage = defineType({
@@ -131,6 +159,10 @@ export const contactPage = defineType({
   fields: [
     defineField({ name: 'headline', title: 'Headline', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
+    defineField({ name: 'eyebrow', title: 'Eyebrow', type: 'string', initialValue: 'Get In Touch' }),
+    defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Set the image crop with Focal Alignment.' }),
+    defineField({ name: 'supportEmail', title: 'Support Email', type: 'string', initialValue: 'hello@ringsociety.com' }),
+    defineField({ name: 'responseTime', title: 'Response Time', type: 'string', initialValue: 'Within 1–2 business days' }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
   ],
   preview: { prepare: () => ({ title: 'Contact' }) },

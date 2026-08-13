@@ -56,3 +56,12 @@ export type CmsPost = {
   relatedPosts?: CmsPost[]
   publishedAt?: string
 }
+
+export type CmsPageDocument = {
+  headline?: string
+  introduction?: string
+  eyebrow?: string
+  heroImage?: CmsResponsiveImage
+  supportEmail?: string
+  responseTime?: string
+}

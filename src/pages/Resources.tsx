@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router'
 import { resourcesBg } from '../lib/assets'
 import { FILTERS, allArticles, type FilterKey } from '../lib/content'
 import { PageHeader, GuideCard, Newsletter, Stagger, RevealItem } from '../components'
-import { getCmsArticleCards } from '../sanity/queries'
+import { getCmsArticleCards, getCmsPage } from '../sanity/queries'
+import { resolvePageHero } from '../sanity/pageHero'
 
 type Selected = FilterKey | 'all'
 
@@ -38,6 +39,7 @@ export default function Resources() {
   const initial: Selected = paramFilter && VALID_KEYS.has(paramFilter as Selected) ? (paramFilter as Selected) : 'all'
   const [selected, setSelected] = useState<Selected>(initial)
   const [articles, setArticles] = useState(allArticles)
+  const [pageSettings, setPageSettings] = useState<CmsPageDocument | null>(null)
 
   // keep the filter in sync when arriving via a pre-filtered link
   useEffect(() => {
@@ -56,6 +58,14 @@ export default function Resources() {
     }
   }, [])
 
+  useEffect(() => {
+    let active = true
+    getCmsPage('blogLanding').then((page) => active && setPageSettings(page))
+    return () => {
+      active = false
+    }
+  }, [])
+
   const onSelect = (key: Selected) => {
     setSelected(key)
     setSearchParams(key === 'all' ? {} : { filter: key }, { replace: true })
@@ -65,15 +75,18 @@ export default function Resources() {
     () => (selected === 'all' ? articles : articles.filter((a) => a.filters.includes(selected))),
     [articles, selected],
   )
+  const hero = resolvePageHero(pageSettings?.heroImage, resourcesBg, 'Green marble texture')
 
   return (
     <>
       <PageHeader
-        title="All Resources"
-        subtitle="Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders"
-        image={resourcesBg}
+        title={pageSettings?.headline ?? 'All Resources'}
+        subtitle={pageSettings?.introduction ?? 'Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders'}
+        image={hero.image}
+        imagePosition={hero.imagePosition}
         filters={<FilterChips selected={selected} onSelect={onSelect} />}
         fullBleedDesktop
+        matchResourcesHeight
       />
       <section className="mx-auto w-full max-w-[1440px] px-5 pt-12 md:px-10 md:pt-16">
         <h2 className="sr-only">All engagement ring guides and articles</h2>

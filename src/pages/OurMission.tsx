@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import {
   missionHero,
   missionHeroMobile,
@@ -8,6 +9,8 @@ import {
   iconMatch,
 } from '../lib/assets'
 import { Hero, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
+import { getCmsPage } from '../sanity/queries'
+import { resolvePageHero } from '../sanity/pageHero'
 
 /* ---------- shared statement block (Our Mission / Our Vision) ---------- */
 function Statement({
@@ -141,19 +144,30 @@ function WhatWeDo() {
 
 /* ---------- page ---------- */
 export default function OurMission() {
+  const [pageSettings, setPageSettings] = useState<CmsPageDocument | null>(null)
+  useEffect(() => {
+    let active = true
+    getCmsPage('missionPage').then((page) => active && setPageSettings(page))
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const hero = resolvePageHero(pageSettings?.heroImage, missionHero, 'A couple embracing, the light catching an engagement ring')
   return (
     <>
       <Hero
         as="h1"
-        image={missionHero}
-        mobileImage={missionHeroMobile}
-        alt="A couple embracing, the light catching an engagement ring"
-        label="The #1 resource for finding your engagement ring"
-        title="We're here to make one of life's biggest decisions feel less like gambling."
-        body="We are a free, independent resource for couples researching engagement rings."
+        image={hero.image}
+        mobileImage={hero.mobileImage === missionHero ? missionHeroMobile : hero.mobileImage}
+        alt={hero.alt}
+        label={pageSettings?.eyebrow ?? 'The #1 resource for finding your engagement ring'}
+        title={pageSettings?.headline ?? "We're here to make one of life's biggest decisions feel less like gambling."}
+        body={pageSettings?.introduction ?? 'We are a free, independent resource for couples researching engagement rings.'}
         ctaLabel="explore top guides"
           mobilePanelColor="#000000"
-          imagePosition="center"
+        imagePosition={hero.imagePosition}
+        mobileImagePosition={hero.imagePosition}
           fullBleedDesktop
           alignContentToPageGrid
       />

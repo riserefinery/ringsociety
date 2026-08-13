@@ -1,5 +1,5 @@
 import { callout, definitionList, pageSeo, responsiveImage } from './common'
-import { blogLanding, category, contactPage, legalPage, post, publicationSettings, siteSettings } from './documents'
+import { blogLanding, category, contactPage, legalPage, missionPage, post, publicationSettings, siteSettings, topGuidesLanding } from './documents'
 
 export const schemaTypes = [
   pageSeo,
@@ -11,6 +11,8 @@ export const schemaTypes = [
   category,
   post,
   blogLanding,
+  topGuidesLanding,
+  missionPage,
   contactPage,
   legalPage,
 ]

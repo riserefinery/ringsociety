@@ -1,6 +1,7 @@
 import { sanityClient } from './client'
 import { toArticleDoc, toCmsCards } from './mappers'
 import type { CmsPost } from './types'
+import type { CmsPageDocument } from './types'
 
 const postProjection = `{
   _id,
@@ -50,6 +51,18 @@ export async function getCmsArticle(slug: string | undefined) {
       { slug },
     )
     return post ? toArticleDoc(post) : null
+  } catch {
+    return null
+  }
+}
+
+const pageProjection = `{headline, introduction, eyebrow, heroImage, supportEmail, responseTime}`
+
+export async function getCmsPage(documentType: 'blogLanding' | 'topGuidesLanding' | 'missionPage' | 'contactPage') {
+  if (!sanityClient) return null
+
+  try {
+    return await sanityClient.fetch<CmsPageDocument | null>(`*[_type == $documentType][0] ${pageProjection}`, { documentType })
   } catch {
     return null
   }
