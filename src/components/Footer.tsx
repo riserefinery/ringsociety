@@ -58,9 +58,9 @@ export default function Footer() {
       style={{ background: 'linear-gradient(180deg, #244737 0%, #102d1f 100%)' }}
     >
       <div className="mx-auto max-w-[1440px] px-5 pt-[92px] pb-10 md:px-10">
-        <div className="flex flex-col justify-between gap-16 xl:flex-row">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 md:gap-x-10 md:gap-y-14 lg:grid-cols-4 lg:gap-8 xl:gap-12">
           {/* brand column */}
-          <div className="flex w-[282px] shrink-0 flex-col">
+          <div className="flex w-full flex-col md:min-w-0">
             <img src={iconRS} alt="Ring Society" className="h-[38px] w-auto self-start" />
             <p className="mt-[23px] text-[19px] italic leading-[1.4]" style={{ fontFamily: serif, color: 'var(--sage)' }}>
               Your trusted guide to the perfect ring
@@ -82,16 +82,13 @@ export default function Footer() {
             </button>
           </div>
 
-          {/* right cluster of link columns */}
-          <div className="flex flex-wrap gap-x-5 gap-y-12">
-            {col('Most-Loved Guides', guides, 'w-[278px]')}
-            {col('More', [{ label: 'Our Mission', to: '/our-mission' }, { label: 'Contact Us', to: '/contact' }], 'w-[160px]')}
-            <div className="flex w-[240px] flex-col gap-[25px]">
-              {col('Legal', legalLinks, 'w-full')}
-              <p className="text-[11px] leading-[1.5]" style={{ color: 'var(--sage)', opacity: 0.6 }}>
-                {copyright}
-              </p>
-            </div>
+          {col('Most-Loved Guides', guides, 'w-full min-w-0')}
+          {col('More', [{ label: 'Our Mission', to: '/our-mission' }, { label: 'Contact Us', to: '/contact' }], 'w-full min-w-0')}
+          <div className="flex w-full min-w-0 flex-col gap-[25px]">
+            {col('Legal', legalLinks, 'w-full')}
+            <p className="text-[11px] leading-[1.5]" style={{ color: 'var(--sage)', opacity: 0.6 }}>
+              {copyright}
+            </p>
           </div>
         </div>
 

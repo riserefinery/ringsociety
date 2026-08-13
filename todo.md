@@ -51,9 +51,12 @@
 - [x] Apply the full-bleed desktop hero system to All Resources and Top Guides while retaining their existing internal content grid and mobile behavior.
 - [x] Apply the homepage-aligned full-bleed desktop hero system to Our Mission, preserving its existing content and mobile behavior.
 - [x] Validate the homepage, All Resources, Top Guides, and Our Mission at desktop and mobile breakpoints to confirm the targeted layout changes do not affect other sections.
-- [ ] Keep hero heading and body text in the same responsive content column across desktop widths while preserving the approved grid alignment.
-- [ ] Match the Top Guides hero height and post-hero desktop spacing to the All Resources page.
-- [ ] Set the Our Mission hero image to a stable vertically centered crop and add an editor-controlled Sanity hero alignment setting for future CMS-driven hero updates.
-- [ ] Rebuild the Contact page using the information architecture of `ringsociety.com/contact`, the All Resources background, and the existing Ring Society type, color, header, footer, and lead form system.
-- [ ] Validate the refined hero behavior and rebuilt Contact page at desktop and mobile breakpoints before publishing to the Vercel review build.
+- [x] Keep hero heading and body text in the same responsive content column across desktop widths while preserving the approved grid alignment.
+- [x] Match the Top Guides hero height and post-hero desktop spacing to the All Resources page.
+- [x] Set the Our Mission hero image to a stable vertically centered crop and add an editor-controlled Sanity hero alignment setting in the Studio source for future CMS-driven hero updates.
+- [x] Rebuild the Contact page using the information architecture of `ringsociety.com/contact`, the All Resources background, and the existing Ring Society type, color, header, footer, and lead form system.
+- [x] Validate the refined hero behavior and rebuilt Contact page at desktop and mobile breakpoints before publishing to the Vercel review build.
 - [ ] Publish the validated Studio schema release after the Sanity CLI session is re-authorized, then verify the All Resources, Top Guides, Our Mission, and Contact singletons expose Hero Image and Alignment controls.
+- [x] Refine the footer’s small-laptop breakpoint so its brand, Most-Loved Guides, More, and Legal columns stay balanced in a single deliberate row rather than wrapping below the brand column.
+- [x] Validate the footer at small-laptop, desktop, and mobile widths to preserve readable links, hierarchy, and the existing mobile stack.
+- [x] Capture and review a post-change desktop-width footer validation to confirm the four-column hierarchy remains balanced at the widest layout.
