@@ -18,7 +18,9 @@
     "motion": "^13.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router": "^8.3.0"
+    "react-markdown": "^10.1.0",
+    "react-router": "^8.3.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.0",
@@ -27,6 +29,7 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^6.0.0",
     "oxfmt": "^0.2.0",
+    "playwright": "^1.62.1",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.7.0",
     "vite": "^8.0.0",

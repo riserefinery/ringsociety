@@ -95,15 +95,15 @@ export default function MobileNav({ open, onClose }: { open: boolean; onClose: (
           <p className="flex flex-wrap gap-x-2">
             {legalLinks.slice(0, 3).map((l, i) => (
               <span key={l.label}>
-                <a className="cursor-pointer transition-opacity hover:opacity-100">{l.label}</a>
+                <Link to={l.to ?? '/'} onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">{l.label}</Link>
                 {i < 2 && <span className="pl-2 opacity-60">|</span>}
               </span>
             ))}
           </p>
           {legalLinks.slice(3).map((l) => (
-            <a key={l.label} className="cursor-pointer transition-opacity hover:opacity-100">
+            <Link key={l.label} to={l.to ?? '/'} onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">
               {l.label}
-            </a>
+            </Link>
           ))}
         </div>
         <p className="text-[11px] leading-[1.5] text-[#abb7b1] opacity-80">{copyright}</p>

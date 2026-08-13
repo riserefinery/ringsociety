@@ -23,7 +23,7 @@ export const legalLinks: NavLink[] = [
   { label: 'Privacy Policy', to: '/privacy-policy' },
   { label: 'Terms & Conditions', to: '/terms-and-conditions' },
   { label: 'Accessibility', to: '/accessibility' },
-  { label: 'Do Not Sell My Personal Information', to: '/do-not-sell' },
+  { label: 'Your Privacy Choices', to: '/do-not-sell' },
 ]
 
 export const copyright = '© Ring Society 2026 | All Rights Reserved'

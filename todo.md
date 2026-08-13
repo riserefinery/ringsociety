@@ -21,7 +21,7 @@
 - [x] Document the deployed Studio, content workflow, editorial schema, CORS setup, pending legal content, and deferred GoHighLevel activation for launch handoff.
 - [x] Add page-specific metadata for each legal placeholder and verify article/legal canonical, Open Graph, and Twitter tags in the browser.
 - [x] Supply a real social-sharing image at `/og-image.jpg` or replace the existing social metadata URL with a verified deployed asset.
-- [ ] Ensure Vercel’s SPA fallback does not intercept `/api/lead-capture`, then validate API function routing in the deployment model.
+- [x] Ensure Vercel’s SPA fallback does not intercept `/api/lead-capture`, then validate API function routing in the deployment model.
 - [x] Consolidate and externalize all oversized imported Figma image assets to managed storage, then replace every local production asset reference without altering the rendered design.
 - [x] Connect the cleaned public-site repository to the existing Ring Society GitHub project and configure a Vercel review deployment as the shared development URL.
 - [x] Add the concrete Vercel review origin to Sanity CORS after the first deployment is created.
@@ -30,3 +30,13 @@
 - [x] Document the recommended Vercel project separation, DNS ownership checks, preview host, and cross-linking conventions for the quiz and editorial experiences.
 - [x] Configure Vercel Deployment Protection or an approved access method so intended reviewers can open the Ring Society review deployment without a Vercel login.
 - [x] Validate the live Vercel homepage, resources route, and Contact route from a review-accessible URL after deployment access is resolved.
+- [x] Replace the four temporary legal-page placeholders with the supplied Privacy Policy, Terms and Conditions, Accessibility Statement, and Do Not Disclose My Personal Information documents.
+- [x] Render the legal documents in a restrained responsive legal layout that retains the existing global header and footer.
+- [x] Replace the mobile-menu legal label “Do Not Sell My Personal Information” with “Your Privacy Choices” while retaining the supplied privacy-request route.
+- [x] Link and test all four footer and mobile-menu legal destinations against their published content pages.
+- [x] Verify all four footer legal links navigate to the correct published legal pages in the browser.
+- [x] Open the mobile menu and validate all four legal links route correctly to the published legal pages on the review build.
+- [x] Verify all four footer legal links by clicking them in the browser/review build and confirming each destination page loads.
+- [x] Open the mobile menu on the review build and click each legal link to confirm all four route to the correct legal page.
+- [ ] Publish the legal-document update to the Vercel review deployment and verify all four footer legal links on that live URL.
+- [ ] Verify all four mobile-menu legal links on the Vercel review deployment after the legal-document update is live.

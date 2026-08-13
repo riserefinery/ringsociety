@@ -27,19 +27,19 @@ const routeMeta: Record<string, { title: string; description: string }> = {
   },
   '/privacy-policy': {
     title: 'Privacy Policy | Ring Society',
-    description: 'Review the Ring Society Privacy Policy when the approved policy is published.',
+    description: 'Read the Ring Society Privacy Policy, including information practices, privacy choices, and consumer rights.',
   },
   '/terms-and-conditions': {
     title: 'Terms & Conditions | Ring Society',
-    description: 'Review the Ring Society Terms & Conditions when the approved terms are published.',
+    description: 'Read the terms governing access to Ring Society websites, quizzes, educational content, and matching services.',
   },
   '/accessibility': {
-    title: 'Accessibility | Ring Society',
-    description: 'Review Ring Society accessibility information when the approved statement is published.',
+    title: 'Accessibility Statement | Ring Society',
+    description: 'Learn about Ring Society’s accessibility commitment and how to request accessibility assistance.',
   },
   '/do-not-sell': {
-    title: 'Do Not Sell My Personal Information | Ring Society',
-    description: 'Review Ring Society privacy choices when the approved notice is published.',
+    title: 'Your Privacy Choices | Ring Society',
+    description: 'Learn how to exercise applicable privacy choices with Ring Society, including sale, sharing, and targeted-advertising opt-outs.',
   },
 }
 
