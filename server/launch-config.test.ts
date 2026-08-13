@@ -13,7 +13,7 @@ describe('launch configuration', () => {
 
   it('references the verified public CDN social image', () => {
     const html = readFileSync(resolve(root, 'index.html'), 'utf8')
-    expect(html).toContain('https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/RYBFIhkABMOYqBjI.jpg')
+    expect(html).toContain('https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/vbmFUlAVJjZnPXSl.webp')
   })
 
   it('defines page-specific metadata for every legal placeholder route', () => {

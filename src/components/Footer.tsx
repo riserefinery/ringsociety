@@ -58,7 +58,7 @@ export default function Footer() {
       style={{ background: 'linear-gradient(180deg, #244737 0%, #102d1f 100%)' }}
     >
       <div className="mx-auto max-w-[1440px] px-5 pt-[92px] pb-10 md:px-10">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 md:gap-x-10 md:gap-y-14 lg:grid-cols-4 lg:gap-8 xl:gap-12">
+        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 md:gap-x-10 md:gap-y-14 lg:grid-cols-[1.25fr_1.1fr_.7fr_.9fr] lg:gap-8 xl:gap-12">
           {/* brand column */}
           <div className="flex w-full flex-col md:min-w-0">
             <img src={iconRS} alt="Ring Society" className="h-[38px] w-auto self-start" />

@@ -60,3 +60,9 @@
 - [x] Refine the footer’s small-laptop breakpoint so its brand, Most-Loved Guides, More, and Legal columns stay balanced in a single deliberate row rather than wrapping below the brand column.
 - [x] Validate the footer at small-laptop, desktop, and mobile widths to preserve readable links, hierarchy, and the existing mobile stack.
 - [x] Capture and review a post-change desktop-width footer validation to confirm the four-column hierarchy remains balanced at the widest layout.
+- [ ] Restore a wider brand column in the small-laptop footer while retaining the deliberate no-wrap four-column responsive grid.
+- [ ] Add a Contact-only “What brings you here?” topic selector with the five supplied options and an optional Message text area styled within the existing Ring Society form system.
+- [ ] Extend the Contact-only lead payload contract and future GoHighLevel mapping to include `topic` and `message` without changing the shared footer CTA fields.
+- [ ] Validate the revised small-laptop footer and expanded Contact form at desktop and mobile breakpoints before publishing to Vercel.
+- [ ] Replace the current Open Graph and Twitter social-sharing image with the supplied Ring Society share graphic using a public Vercel-compatible CDN URL.
+- [ ] Validate the homepage social metadata references the supplied share image in the local source and deployed Vercel review build.

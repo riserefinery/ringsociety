@@ -3,6 +3,8 @@ export type LeadPayload = {
   lastName: string
   email: string
   source: string
+  topic?: string
+  message?: string
   website?: string
 }
 

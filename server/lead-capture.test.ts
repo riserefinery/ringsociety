@@ -19,4 +19,22 @@ describe('GoHighLevel lead payload validation', () => {
   it('silently blocks honeypot submissions', () => {
     expect(parseLead({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', website: 'bot.example' })).toEqual({ blocked: true })
   })
+
+  it('includes the Contact-only topic and message while keeping the footer payload compact', () => {
+    expect(parseLead({
+      firstName: 'Ada',
+      lastName: 'Lovelace',
+      email: 'ada@example.com',
+      source: 'Contact Page',
+      topic: ' General question about engagement rings ',
+      message: ' Can you help us compare settings? ',
+    })).toEqual({
+      firstName: 'Ada',
+      lastName: 'Lovelace',
+      email: 'ada@example.com',
+      source: 'Contact Page',
+      topic: 'General question about engagement rings',
+      message: 'Can you help us compare settings?',
+    })
+  })
 })

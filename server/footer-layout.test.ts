@@ -9,7 +9,7 @@ describe('footer responsive layout', () => {
     const footer = readFileSync(resolve(root, 'src/components/Footer.tsx'), 'utf8')
 
     expect(footer).toContain('grid grid-cols-1 gap-16 md:grid-cols-2')
-    expect(footer).toContain('lg:grid-cols-4')
+    expect(footer).toContain('lg:grid-cols-[1.25fr_1.1fr_.7fr_.9fr]')
     expect(footer).toContain('md:gap-x-10 md:gap-y-14')
     expect(footer).toContain("col('Most-Loved Guides', guides, 'w-full min-w-0')")
     expect(footer).toContain("col('More', [{ label: 'Our Mission', to: '/our-mission' }, { label: 'Contact Us', to: '/contact' }], 'w-full min-w-0')")

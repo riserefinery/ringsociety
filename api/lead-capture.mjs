@@ -5,11 +5,20 @@ export function parseLead(body = {}) {
   const lastName = String(body.lastName ?? '').trim()
   const email = String(body.email ?? '').trim().toLowerCase()
   const source = String(body.source ?? 'Ring Society Website').trim().slice(0, 120)
+  const topic = String(body.topic ?? '').trim().slice(0, 160)
+  const message = String(body.message ?? '').trim().slice(0, 4000)
 
   if (!firstName || !lastName || !EMAIL_PATTERN.test(email)) return null
   if (String(body.website ?? '').trim()) return { blocked: true }
 
-  return { firstName, lastName, email, source }
+  return {
+    firstName,
+    lastName,
+    email,
+    source,
+    ...(topic ? { topic } : {}),
+    ...(message ? { message } : {}),
+  }
 }
 
 export default async function leadCapture(req, res) {
@@ -31,6 +40,8 @@ export default async function leadCapture(req, res) {
         lastName: lead.lastName,
         email: lead.email,
         source: lead.source,
+        ...(lead.topic ? { topic: lead.topic } : {}),
+        ...(lead.message ? { message: lead.message } : {}),
       }),
     })
 
