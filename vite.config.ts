@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => {
       host: '0.0.0.0',
       port: parseInt(process.env.PORT || '8443'),
       strictPort: true,
+      allowedHosts: ['8443-ikhphpgc84ri93frtn5d3-5d580842.us2.manus.computer'],
       watch: { ignored: ['**/.figma/**'] },
     },
     preview: {

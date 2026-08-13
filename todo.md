@@ -40,6 +40,9 @@
 - [x] Open the mobile menu on the review build and click each legal link to confirm all four route to the correct legal page.
 - [x] Publish the legal-document update to the Vercel review deployment and verify all four footer legal links on that live URL.
 - [x] Verify all four mobile-menu legal links on the Vercel review deployment after the legal-document update is live.
-- [ ] Make the homepage hero background full-bleed on desktop while preserving its existing inner content grid, typography, imagery, and mobile behavior.
-- [ ] Make the homepage footer CTA full-bleed on desktop and flush with the footer while preserving its existing inner form/card layout and mobile behavior.
-- [ ] Validate that no other desktop sections change and that the updated full-bleed hero and CTA remain visually correct at desktop and mobile breakpoints.
+- [x] Make the homepage hero background full-bleed on desktop while preserving its existing inner content grid, typography, imagery, and mobile behavior.
+- [x] Make the homepage footer CTA full-bleed on desktop and flush with the footer while preserving its existing inner form/card layout and mobile behavior.
+- [x] Validate that no other desktop sections change and that the updated full-bleed hero and CTA remain visually correct at desktop and mobile breakpoints.
+- [x] Allow the managed preview host in the Vite development server configuration without changing the Vercel production deployment behavior.
+- [x] Verify that the shared managed preview opens the homepage and the updated desktop full-bleed sections without a blocked-host error.
+- [x] Capture a managed-preview desktop validation of the full-bleed hero and CTA-to-footer junction after the host allowlist repair.
