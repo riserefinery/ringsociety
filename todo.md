@@ -9,7 +9,7 @@
 - [ ] Configure the server-side GoHighLevel handoff for First Name, Last Name, and Email only, using a private workflow URL stored in deployment secrets.
 - [ ] Defer GoHighLevel workflow credential entry and live submission testing until all remaining CMS, public-page, SEO, and responsive work has been completed.
 - [x] Add the current Vercel review origin to Sanity CORS while reserving `ringsociety.com` and `www.ringsociety.com` for the future production cutover.
-- [ ] Await counsel-approved Privacy Policy, Terms & Conditions, Accessibility, and Do Not Sell content before publishing these routes.
+- [x] Receive and publish the supplied Privacy Policy, Terms & Conditions, Accessibility Statement, and privacy-choice content on their legal routes.
 - [x] Treat `https://ringsociety.com` as the intended canonical production URL, subject to final domain configuration confirmation.
 - [x] Add a code-managed Ring Society Studio application, organization byline singleton, categories, posts, blog landing, contact-page, legal-page, SEO, and responsive-image schemas without seeding content.
 - [x] Connect the existing resources listing and guide detail template to published Sanity posts through an additive query/mapping layer with local Figma Make fallback content.
@@ -38,5 +38,8 @@
 - [x] Open the mobile menu and validate all four legal links route correctly to the published legal pages on the review build.
 - [x] Verify all four footer legal links by clicking them in the browser/review build and confirming each destination page loads.
 - [x] Open the mobile menu on the review build and click each legal link to confirm all four route to the correct legal page.
-- [ ] Publish the legal-document update to the Vercel review deployment and verify all four footer legal links on that live URL.
-- [ ] Verify all four mobile-menu legal links on the Vercel review deployment after the legal-document update is live.
+- [x] Publish the legal-document update to the Vercel review deployment and verify all four footer legal links on that live URL.
+- [x] Verify all four mobile-menu legal links on the Vercel review deployment after the legal-document update is live.
+- [ ] Make the homepage hero background full-bleed on desktop while preserving its existing inner content grid, typography, imagery, and mobile behavior.
+- [ ] Make the homepage footer CTA full-bleed on desktop and flush with the footer while preserving its existing inner form/card layout and mobile behavior.
+- [ ] Validate that no other desktop sections change and that the updated full-bleed hero and CTA remain visually correct at desktop and mobile breakpoints.

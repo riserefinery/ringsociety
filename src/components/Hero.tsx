@@ -52,6 +52,8 @@ export type HeroProps = {
   imagePosition?: string
   /** Homepage load-in gate. When set, hero content stays hidden until true. */
   ready?: boolean
+  /** Makes only the desktop image surface full-bleed while retaining its original inner content grid. */
+  fullBleedDesktop?: boolean
 }
 
 export default function Hero(props: HeroProps) {
@@ -131,13 +133,18 @@ function HeroDesktop({
   as = 'h1',
   imagePosition = '70% center',
   ready,
+  fullBleedDesktop = false,
 }: HeroProps) {
   const MHeading = motion[as]
   return (
-    <section className="mx-auto hidden w-full max-w-[1440px] px-10 md:block">
+    <section className={fullBleedDesktop ? 'hidden w-full md:block' : 'mx-auto hidden w-full max-w-[1440px] px-10 md:block'}>
       <div
-        className="relative overflow-hidden rounded-lg"
-        style={{ background: '#978778', aspectRatio: '1360 / 768', minHeight: 520 }}
+        className={fullBleedDesktop ? 'relative overflow-hidden rounded-lg md:rounded-none' : 'relative overflow-hidden rounded-lg'}
+        style={
+          fullBleedDesktop
+            ? { background: '#978778', minHeight: 520, height: 'clamp(520px, calc((100vw - 80px) * 0.5647), 768px)' }
+            : { background: '#978778', aspectRatio: '1360 / 768', minHeight: 520 }
+        }
       >
         <img src={image} alt={alt} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
         <div
@@ -148,7 +155,11 @@ function HeroDesktop({
           }}
         />
         <div className="absolute inset-0 flex items-center">
-          <motion.div className="flex max-w-[560px] flex-col gap-9 px-8 text-white md:px-24" {...heroContainerProps(ready)}>
+          <motion.div
+            className="flex max-w-[560px] flex-col gap-9 px-8 text-white md:px-24"
+            style={fullBleedDesktop ? { paddingLeft: 'max(136px, calc((100vw - 1440px) / 2 + 136px))', paddingRight: 96 } : undefined}
+            {...heroContainerProps(ready)}
+          >
             {(label || badge) && (
               <motion.div variants={fadeUp} className="flex items-center gap-5">
                 {label && <span className="text-[11px] font-semibold uppercase tracking-[2px]">{label}</span>}

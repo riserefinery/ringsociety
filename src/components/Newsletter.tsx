@@ -7,8 +7,8 @@ import LeadForm from './LeadForm'
 export default function Newsletter() {
   return (
     <section className="relative w-full overflow-hidden">
-      <div className="mx-auto max-w-[1440px] px-5 md:px-10">
-        <div className="relative overflow-hidden rounded-lg">
+      <div className="mx-auto max-w-[1440px] px-5 md:max-w-none md:px-0">
+        <div className="relative overflow-hidden rounded-lg md:rounded-none">
           <img src={IMAGES.roses} alt="" className="absolute inset-0 h-full w-full object-cover" />
           <div className="absolute inset-0" style={{ background: 'rgba(16,45,31,0.28)' }} />
           <div className="relative flex justify-center px-6 py-24">
