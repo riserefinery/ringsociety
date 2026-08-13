@@ -1,0 +1,27 @@
+# Ring Society — Confirmed Follow-Up Items
+
+- [x] Replace the proposed `author` document requirement with an organization-authored `publicationSettings` singleton, defaulting visible bylines to Ring Society.
+- [x] Defer all post/article seed scripts until complete, approved editorial content is supplied; preserve the existing definitive guide only as a presentation reference.
+- [x] Select the secure GoHighLevel connection method for the Contact page and the existing newsletter/CTA form, then document required credentials and field mapping.
+- [x] Explain and confirm the recommended deployment arrangement: one Vercel public-site project and a managed Sanity Studio, both sourced from the same GitHub repository.
+- [x] Confirm the Ring Society Sanity project ID as `p1o8iwkt` and the intended dataset name as `production`.
+- [x] Verify that project `p1o8iwkt` owns the intended `production` dataset and contains no Reflect Advisors documents before writing Ring Society content.
+- [ ] Configure the server-side GoHighLevel handoff for First Name, Last Name, and Email only, using a private workflow URL stored in deployment secrets.
+- [ ] Defer GoHighLevel workflow credential entry and live submission testing until all remaining CMS, public-page, SEO, and responsive work has been completed.
+- [ ] Add the preview URL only after the Vercel preview environment exists; reserve `ringsociety.com` and `www.ringsociety.com` as production origins.
+- [ ] Await counsel-approved Privacy Policy, Terms & Conditions, Accessibility, and Do Not Sell content before publishing these routes.
+- [x] Treat `https://ringsociety.com` as the intended canonical production URL, subject to final domain configuration confirmation.
+- [x] Add a code-managed Ring Society Studio application, organization byline singleton, categories, posts, blog landing, contact-page, legal-page, SEO, and responsive-image schemas without seeding content.
+- [x] Connect the existing resources listing and guide detail template to published Sanity posts through an additive query/mapping layer with local Figma Make fallback content.
+- [ ] Replace the footer CTA’s local-only form behavior with First Name, Last Name, and Email capture that posts only to a private server-side GoHighLevel workflow endpoint.
+- [x] Add the Contact page and functional footer Contact link without changing the established public-site visual language.
+- [x] Register no-index legal route scaffolds and footer destinations while withholding counsel-approved legal copy until supplied.
+- [ ] Add route-aware document titles, canonical URLs, social metadata, and no-index handling for unpublished legal placeholders.
+- [ ] Add the minimal Vercel single-page application routing and security configuration needed for public-site deployment and the private lead-capture endpoint.
+- [x] Document the deployed Studio, content workflow, editorial schema, CORS setup, pending legal content, and deferred GoHighLevel activation for launch handoff.
+- [ ] Add page-specific metadata for each legal placeholder and verify article/legal canonical, Open Graph, and Twitter tags in the browser.
+- [ ] Supply a real social-sharing image at `/og-image.jpg` or replace the existing social metadata URL with a verified deployed asset.
+- [ ] Ensure Vercel’s SPA fallback does not intercept `/api/lead-capture`, then validate API function routing in the deployment model.
+- [x] Consolidate and externalize all oversized imported Figma image assets to managed storage, then replace every local production asset reference without altering the rendered design.
+- [ ] Connect the cleaned public-site repository to the existing Ring Society GitHub project and configure a Vercel preview deployment as the shared development URL.
+- [ ] Add the concrete Vercel preview origin to Sanity CORS after the first preview deployment is created.

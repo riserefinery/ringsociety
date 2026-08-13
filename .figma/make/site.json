@@ -1,0 +1,10 @@
+{
+  "description": "This modern and responsive blog platform caters to luxury consumers, offering an elegant space to share high-end lifestyle content and engage with a discerning audience.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
