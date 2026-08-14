@@ -68,6 +68,7 @@ const topGuidesProjection = `{
   responseTime,
   "selectedPosts": selectedPosts[]{
     _key,
+    "postId": @._ref,
     "post": @->${postProjection}
   }
 }`

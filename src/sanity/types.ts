@@ -61,6 +61,7 @@ export type CmsPost = {
 
 export type CmsTopGuidesSelection = {
   _key: string
+  postId?: string
   post?: CmsPost | null
 }
 

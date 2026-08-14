@@ -136,7 +136,7 @@ export const topGuidesLanding = defineType({
     defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'Top Guides' }),
     defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
     defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Set the image crop with Focal Alignment.' }),
-    defineField({ name: 'selectedPosts', title: 'Top Guides Order', description: 'Add posts or guides, then drag to control their display order. Each row uses the selected post’s title, excerpt, Big Feature Image, badge, and overlay text setting.', type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }] })] }),
+    defineField({ name: 'selectedPosts', title: 'Top Guides Order', description: 'Add posts or guides, then drag to control their display order. Each row uses the selected post’s title, excerpt, Big Feature Image, badge, and overlay text setting.', type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }], weak: true })] }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
   ],
   preview: { prepare: () => ({ title: 'Top Guides' }) },

@@ -10,7 +10,7 @@ export const sanityClient = isSanityConfigured
       projectId,
       dataset,
       apiVersion: '2025-02-19',
-      useCdn: true,
+      useCdn: false,
       perspective: 'published',
     })
   : null

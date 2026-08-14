@@ -174,7 +174,7 @@ async function main() {
     _type: 'topGuidesLanding',
     headline: 'Top Guides',
     introduction: 'Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders',
-    selectedPosts: topGuideSlugs.map((slug) => ({ _key: `top-guide-${slug}`, _type: 'reference', _ref: `drafts.post-${slug}` })),
+    selectedPosts: topGuideSlugs.map((slug) => ({ _key: `top-guide-${slug}`, _type: 'reference', _ref: `post-${slug}`, _weak: true })),
   })
 
   const legalDocuments = [

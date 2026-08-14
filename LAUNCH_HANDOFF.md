@@ -34,6 +34,8 @@ To change a row’s wide desktop background, open **Blog & Guides → All Posts 
 
 The migrated Top Guides draft begins with the current eight rows and their current order. To make an editor’s changes public, publish the selected posts and then publish the Top Guides page. Draft records remain visible to editors but are intentionally not returned by the public site until publication.
 
+There is **no separate Vercel push for published Sanity content**. The public site loads published CMS data directly. While the full catalog is still being completed, publishing one selected post and then publishing the Top Guides page updates that post’s row while the other selected rows retain their local fallback content. This lets editors review a single Big Feature image change without waiting for every guide to be published.
+
 ### Editing the top hello bar
 
 Open **Site Settings → Hello Bar Text**, edit the short message shown in the green bar above the navigation, then publish Site Settings. The existing message remains as the public-site fallback until that singleton is published.

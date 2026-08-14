@@ -24,3 +24,5 @@ On 2026-08-14, a raw-perspective query against the `p1o8iwkt` production dataset
 ## Top Guides and hello-bar migration
 
 On 2026-08-14, the migration created `drafts.topGuidesLanding` with eight ordered guide references, added each relevant post’s `bigFeatureImage`, and created `drafts.siteSettings` with the current green hello-bar message. The review deployment continued to display the existing eight-row Top Guides fallback, including the supplied Jeweler Framework background, while those CMS records remain drafts. Once the selected posts and Top Guides singleton are published, the public page will instead use the editor-managed order and post-level Big Feature images.
+
+After an editor updated the Jeweler Framework Big Feature image, the Top Guides selection was repaired to use **weak references to canonical post IDs** rather than references to draft post IDs. This preserves the current eight-row order, retains the editor’s selected image asset, and allows each referenced post to publish without a draft-reference deletion conflict.

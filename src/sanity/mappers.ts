@@ -121,3 +121,17 @@ function toTopGuide(post: CmsPost): Guide | null {
 export function toTopGuideRows(selections: CmsTopGuidesSelection[] | undefined): Guide[] {
   return (selections ?? []).flatMap((selection) => (selection.post ? [toTopGuide(selection.post)].filter((guide): guide is Guide => Boolean(guide)) : []))
 }
+
+export function mergeTopGuideRows(selections: CmsTopGuidesSelection[] | undefined, fallbackRows: Guide[]): Guide[] {
+  if (!selections?.length) return fallbackRows
+
+  const fallbackBySlug = new Map(fallbackRows.map((guide) => [guide.slug, guide]))
+  return selections.flatMap((selection) => {
+    const publishedGuide = selection.post ? toTopGuide(selection.post) : null
+    if (publishedGuide) return [publishedGuide]
+
+    const fallbackSlug = selection.postId?.replace(/^post-/, '')
+    const fallbackGuide = fallbackSlug ? fallbackBySlug.get(fallbackSlug) : undefined
+    return fallbackGuide ? [fallbackGuide] : []
+  })
+}

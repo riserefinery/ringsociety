@@ -46,12 +46,14 @@ describe('CMS page hero settings and contact layout', () => {
     expect(documents).toContain("name: 'topGuidesTextTone'")
     expect(documents).toContain("name: 'selectedPosts'")
     expect(documents).toContain("title: 'Top Guides Order'")
+    expect(documents).toContain("to: [{ type: 'post' }], weak: true")
     expect(queries).toContain('getCmsTopGuidesPage')
     expect(queries).toContain('"selectedPosts": selectedPosts[]')
+    expect(queries).toContain('"postId": @._ref')
     expect(queries).toContain('bigFeatureImage')
-    expect(mappers).toContain('toTopGuideRows')
+    expect(mappers).toContain('mergeTopGuideRows')
     expect(mappers).toContain('post.bigFeatureImage?.focalPoint')
-    expect(topGuides).toContain('selectedRows.length === pageSettings.selectedPosts.length')
+    expect(topGuides).toContain('mergeTopGuideRows(pageSettings?.selectedPosts, pillarGuides)')
   })
 
   it('centralizes the shared hello-bar text in Site Settings', () => {

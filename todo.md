@@ -93,3 +93,7 @@
 - [ ] Verify in the authenticated live Studio UI that Pages → Top Guides exposes the ordered selected-post list and drag-reorder controls.
 - [ ] Verify in the authenticated live Studio UI that a post exposes the Big Feature Image field and that it is populated on the Jeweler Framework draft.
 - [x] Remove the post publishing-date field and all public query dependencies so routine Sanity edits no longer require date entry.
+- [ ] Replace the Top Guides draft’s draft-to-draft post references with publish-safe references so editors can save and publish Big Feature image updates.
+- [ ] Retry the Jeweler Framework Big Feature image save and publish in live Studio without the draft-reference conflict.
+- [ ] Verify the repaired Top Guides weak references remain intact after the Jeweler Framework post is published.
+- [ ] Merge individually published CMS Top Guides rows into the existing fallback order so a published Big Feature image update appears on Vercel without waiting for every referenced post to be published.
