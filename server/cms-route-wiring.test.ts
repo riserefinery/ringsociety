@@ -46,6 +46,8 @@ describe('CMS route wiring', () => {
     const card = read('src/components/GuideCard.tsx')
 
     expect(article).toContain('<GuideCard card={c} />')
+    expect(article).toContain('<div className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">')
+    expect(article).not.toContain('<Stagger className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">')
     expect(card).toContain('return card.to ?')
     expect(card).toContain('to={card.to}')
   })

@@ -632,16 +632,16 @@ export default function Article() {
       {/* ---------- explore more ---------- */}
       <section className="w-full pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="mx-auto w-full max-w-[1440px] px-6 md:px-10">
-          <Reveal as="h2" className="text-[32px] leading-[1.2] tracking-[-0.5px] text-black md:text-[42px]">
+          <h2 className="text-[32px] leading-[1.2] tracking-[-0.5px] text-black md:text-[42px]">
             <span style={{ fontFamily: serif }}>Explore More</span>
-          </Reveal>
-          <Stagger className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">
+          </h2>
+          <div className="mt-9 grid grid-cols-1 gap-5 md:grid-cols-3">
             {related.map((c) => (
-              <RevealItem key={c.title} className="h-full">
+              <div key={c.title} className="h-full">
                 <GuideCard card={c} />
-              </RevealItem>
+              </div>
             ))}
-          </Stagger>
+          </div>
         </div>
       </section>
 
