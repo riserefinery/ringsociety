@@ -106,6 +106,6 @@
 - [x] Make each article card’s image, title, and CTA a reliable link to its matching article route, including Top Guides and All Resources cards.
 - [x] Prevent the Top Guides rows from rendering a local hero-image fallback before their published Big Feature Images resolve from Sanity.
 - [x] Prevent the Top Guides newsletter and footer from shifting into view before the CMS guide rows are ready by reserving the guide-list layout during loading.
-- [ ] Redeploy and verify the hosted Studio bundle so the existing Site Settings `helloBarText` value is recognized as the editable Hello Bar Text field.
-- [ ] Confirm in the authenticated hosted Studio UI that the prior unknown-field warning is gone and Hello Bar Text is editable in Site Settings.
-- [ ] Link each homepage resource-card image, title, and CTA to its corresponding connected article route.
+- [x] Redeploy and verify the hosted Studio bundle so the existing Site Settings `helloBarText` value is recognized as the editable Hello Bar Text field.
+- [x] Confirm in the authenticated hosted Studio UI that the prior unknown-field warning is gone and Hello Bar Text is editable in Site Settings.
+- [x] Link each homepage resource-card image, title, and CTA to its corresponding connected article route.
