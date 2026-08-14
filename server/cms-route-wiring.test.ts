@@ -29,6 +29,7 @@ describe('CMS route wiring', () => {
     expect(feature).toContain('<Link\n                to={`/guides/${slug}`}')
     expect(feature).toContain('src={guideFeature ?? feature}')
     expect(feature).toContain('aria-label={`Read ${title}`}')
+    expect(feature).toContain('inline-flex h-[45px] w-full')
     expect(topGuides).toContain('const [cmsResolved, setCmsResolved] = useState(false)')
     expect(topGuides).toContain('const guides = cmsResolved ? mergeTopGuideRows')
     expect(topGuides).toContain('aria-busy={!cmsResolved}')
