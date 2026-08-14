@@ -12,6 +12,7 @@ The dedicated **Ring Society CMS** Studio has been deployed at [ring-society.san
 | Ring Society CMS Studio | Ready | Hosted Studio application at `ring-society.sanity.studio`; title is **Ring Society CMS**. The released Studio includes the Presentation preview tool pointing to the Shopfine Vercel review site. |
 | Organization byline | Ready | Use the `Publication settings` singleton. Published content defaults to Ring Society, not individual authors. |
 | Guide/resource CMS adapter | Ready | Fifteen editable guide/article drafts, four legal-page drafts, and their imagery are available in Studio. Local source content remains the visual fallback until editorial publication. |
+| Article related-guide controls | Ready | Each post can override its ordered Explore More cards in Studio; blank selections automatically favor other published Most-Loved Guides. |
 | Top Guides controls | Ready | Editors select, add, remove, and drag-order post references from the Top Guides page; the copy and Big Feature background remain centralized on each selected post. |
 | Global hello bar | Ready | The green bar above the navigation is editable from Site Settings. |
 | Contact page and footer CTA UI | Ready | The footer CTA collects First Name, Last Name, and Email. The Contact page additionally collects a topic and optional message. Live GoHighLevel delivery remains intentionally disabled until the final integration phase. |
@@ -20,7 +21,7 @@ The dedicated **Ring Society CMS** Studio has been deployed at [ring-society.san
 
 ## Editorial workflow
 
-Use the CMS Studio for **Site Settings**, **Categories**, **Posts**, **Pages**, **Legal pages**, and the **Publication settings** singleton. The post structure includes a title, slug, excerpt, hero image with alt text, category, Portable Text body, related posts, featured flag, publication date, and search/social metadata.
+Use the CMS Studio for **Site Settings**, **Categories**, **Posts**, **Pages**, **Legal pages**, and the **Publication settings** singleton. The post structure includes a title, slug, excerpt, hero image with alt text, category, Portable Text body, related-guide controls, Most-Loved Guide status, and search/social metadata. There are no editor-managed publishing or review date fields.
 
 > Do not use the existing short definitive guide as source copy for launch. It is only a template and design reference. Create and publish each guide after its complete, approved editorial copy and assets are available.
 
@@ -35,6 +36,14 @@ To change a row’s wide desktop background, open **Blog & Guides → All Posts 
 The migrated Top Guides draft begins with the current eight rows and their current order. To make an editor’s changes public, publish the selected posts and then publish the Top Guides page. Draft records remain visible to editors but are intentionally not returned by the public site until publication.
 
 There is **no separate Vercel push for published Sanity content**. The public site loads published CMS data directly. While the full catalog is still being completed, publishing one selected post and then publishing the Top Guides page updates that post’s row while the other selected rows retain their local fallback content. This lets editors review a single Big Feature image change without waiting for every guide to be published.
+
+### Managing article Explore More cards
+
+Open **Blog & Guides → All Posts & Guides → [the post] → Discovery → Related Guides (Optional Override)**. Add up to three posts and drag them into the exact order you want beneath that article. These selections become the article’s Explore More cards after both the referenced guides and the current guide are published. The public page excludes the current guide automatically, so an article cannot recommend itself.
+
+Leave **Related Guides (Optional Override)** blank to use the automatic fallback. In that case, the public page selects other **published** posts marked **Most-Loved Guide**, then uses the existing local most-loved catalog only to fill any remaining spaces while content is still being published. To change automatic recommendations sitewide, edit each post’s **Most-Loved Guide** toggle in the Discovery group and publish it.
+
+This recommendation system is editorial and context-aware—it never shows the article currently being read—but it does **not** track an individual visitor’s browsing history. True per-visitor “not yet viewed” recommendations would require a future consent-aware personalization feature with visitor storage; it is intentionally outside the current public site scope.
 
 ### Editing the top hello bar
 
