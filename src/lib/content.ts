@@ -163,6 +163,31 @@ export function filterKeyForCategory(label: string): FilterKey | undefined {
 
 export type Article = Card & { filters: FilterKey[] }
 
+const cmsSlugByTitle: Record<string, string> = {
+  'How to Buy an Engagement Ring': 'how-to-buy-an-engagement-ring',
+  'How to Choose A Jeweler: Our 10-Point Framework': 'how-to-choose-a-jeweler',
+  'The Most Popular & Trending Ring Styles and Diamonds in 2026': 'most-popular-trending-ring-styles-2026',
+  'Engagement Rings with Hidden Halos: The Subtle Sparkle Trend': 'engagement-rings-with-hidden-halos',
+  'Engagement Ring Budgets: How Much Should You Spend?': 'engagement-ring-budgets',
+  'The Complete Guide to Engagement Ring Settings & Styles': 'engagement-ring-settings-and-styles',
+  'How to Find Her Ring Size Without Ruining the Surprise': 'how-to-find-her-ring-size',
+  'Which Diamond Shape Looks the Biggest?': 'which-diamond-shape-looks-biggest',
+  'The 4Cs of Diamonds (Explained in Plain English)': '4cs-of-diamonds',
+  'Go Big or Shop Small? Big-Box vs. Local vs. Online': 'go-big-or-shop-small',
+  'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison': 'natural-vs-lab-grown-diamonds',
+  'What Drives Diamond Pricing? Hear from Experts': 'what-drives-diamond-pricing',
+  'The Ultimate Guide to Diamond Clarity, and What it Means for Your Ring Choice & Budget': 'ultimate-guide-to-diamond-clarity',
+  'The Ideal Diamond Cut: How to Choose the Right Diamond for Your Ring Setting and Budget': 'ideal-diamond-cut',
+}
+
+export function articleSlugForTitle(title: string): string {
+  return cmsSlugByTitle[title] ?? title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
+export function articlePathForTitle(title: string): string {
+  return `/guides/${articleSlugForTitle(title)}`
+}
+
 export const allArticles: Article[] = [
   {
     category: 'Guide',
@@ -279,6 +304,28 @@ export const allArticles: Article[] = [
     filters: ['diamonds'],
   },
 ]
+
+/**
+ * Keeps the full resource grid navigable while articles are published one at a
+ * time. Published CMS cards override their matching local card; not-yet-published
+ * records retain the established design fallback and route.
+ */
+export function mergePublishedArticleCards(cmsArticles: Article[]): Article[] {
+  const cmsByPath = new Map(cmsArticles.filter((card) => card.to).map((card) => [card.to as string, card]))
+  const merged = allArticles.map((fallback) => {
+    const path = articlePathForTitle(fallback.title)
+    const cms = cmsByPath.get(path)
+    return {
+      ...fallback,
+      ...cms,
+      to: path,
+      filters: cms?.filters?.length ? cms.filters : fallback.filters,
+    }
+  })
+
+  const knownPaths = new Set(merged.map((card) => card.to))
+  return [...merged, ...cmsArticles.filter((card) => card.to && !knownPaths.has(card.to))]
+}
 
 /* ---------------------------------------------------------------
    Article template — the master content model for every guide &
@@ -428,8 +475,49 @@ const definitiveGuide: ArticleDoc = {
 
 export const articleDocs: ArticleDoc[] = [definitiveGuide]
 
+function categoryLabels(filters: FilterKey[]): string[] {
+  const labels = filters.map((filter) => FILTERS.find((item) => item.key === filter)?.label).filter(Boolean) as string[]
+  return labels.length ? labels : ['Guides']
+}
+
+function temporaryArticleFor(slug: string): ArticleDoc | null {
+  const fallback = allArticles.find((article) => articleSlugForTitle(article.title) === slug)
+  if (!fallback) return null
+
+  const guide = pillarGuides.find((item) => item.slug === slug)
+  return {
+    slug,
+    category: fallback.category,
+    badge: guide?.badge,
+    title: fallback.title,
+    subtitle: guide?.excerpt ?? `This is the working article page for ${fallback.title}.`,
+    readTime: '',
+    hero: fallback.image,
+    categories: categoryLabels(fallback.filters),
+    keywordTags: [fallback.category, ...fallback.filters],
+    intro: [
+      {
+        type: 'p',
+        text: 'This connected article preview is in place so the complete Ring Society experience can be reviewed before final editorial copy is published from Sanity.',
+      },
+    ],
+    body: [
+      { type: 'h2', text: 'Article Preview', toc: 'Article Preview' },
+      {
+        type: 'p',
+        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. This temporary text shows the final article template, reading flow, navigation, and related-content behavior without representing approved Ring Society editorial copy.',
+      },
+      { type: 'h2', text: 'Editorial Draft Area', toc: 'Editorial Draft Area' },
+      {
+        type: 'p',
+        text: 'Replace this placeholder body in Sanity when the approved article is ready. Once published, the CMS record automatically replaces this local preview while retaining the same route and page design.',
+      },
+    ],
+  }
+}
+
 export function getArticle(slug?: string): ArticleDoc {
-  return articleDocs.find((a) => a.slug === slug) ?? definitiveGuide
+  return articleDocs.find((article) => article.slug === slug) ?? temporaryArticleFor(slug ?? '') ?? definitiveGuide
 }
 
 /**

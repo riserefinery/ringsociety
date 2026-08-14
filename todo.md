@@ -97,3 +97,7 @@
 - [ ] Retry the Jeweler Framework Big Feature image save and publish in live Studio without the draft-reference conflict.
 - [ ] Verify the repaired Top Guides weak references remain intact after the Jeweler Framework post is published.
 - [ ] Merge individually published CMS Top Guides rows into the existing fallback order so a published Big Feature image update appears on Vercel without waiting for every referenced post to be published.
+- [ ] Diagnose and repair the mismatch between the published Jeweler Framework Big Feature image in Sanity and the image rendered on the public Top Guides page.
+- [ ] Complete the current guide catalog as connected CMS-backed routes so editors can test the real article, resource-card, Top Guides, and navigation behavior before final copy is ready.
+- [ ] Add generic local article fallbacks for every existing guide/resource slug, with clearly marked placeholder body content that is overridden by published Sanity content.
+- [ ] Link the Top Guides desktop and mobile actions, plus every All Resources card, to their corresponding article routes.

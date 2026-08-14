@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { resourcesBg } from '../lib/assets'
-import { FILTERS, allArticles, type FilterKey } from '../lib/content'
+import { FILTERS, allArticles, mergePublishedArticleCards, type FilterKey } from '../lib/content'
 import { PageHeader, GuideCard, Newsletter, Stagger, RevealItem } from '../components'
 import { getCmsArticleCards, getCmsPage } from '../sanity/queries'
 import { resolvePageHero } from '../sanity/pageHero'
@@ -51,7 +51,7 @@ export default function Resources() {
     let active = true
 
     getCmsArticleCards().then((cmsArticles) => {
-      if (active && cmsArticles.length) setArticles(cmsArticles)
+      if (active) setArticles(mergePublishedArticleCards(cmsArticles))
     })
 
     return () => {

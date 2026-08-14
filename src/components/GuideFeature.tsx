@@ -1,5 +1,6 @@
 import { svgPaths } from '../lib/assets'
 import type { Guide } from '../lib/content'
+import { Link } from 'react-router'
 import { SolidButton, serif } from './ui'
 
 /**
@@ -12,7 +13,7 @@ import { SolidButton, serif } from './ui'
  *    above a light text block — consistent across all cards.
  */
 export default function GuideFeature({ guide }: { guide: Guide }) {
-  const { category, badge, title, excerpt, feature, guideFeature, tone, imagePosition = 'center' } = guide
+  const { slug, category, badge, title, excerpt, feature, guideFeature, tone, imagePosition = 'center' } = guide
   const light = tone === 'light' // white text on desktop overlay
 
   const overlay = light
@@ -43,9 +44,9 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
             <p className="text-[15px] leading-[1.6] tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
               {excerpt}
             </p>
-            <button className="mt-1 w-full rounded-lg bg-black py-[14px] text-[12px] font-semibold uppercase tracking-[1.2px] text-[#fbf9f7]">
+            <Link to={`/guides/${slug}`} className="mt-1 w-full rounded-lg bg-black py-[14px] text-center text-[12px] font-semibold uppercase tracking-[1.2px] text-[#fbf9f7]">
               View the guide
-            </button>
+            </Link>
           </div>
         </article>
       </section>
@@ -80,7 +81,9 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               <p className="max-w-[467px] text-[15px] leading-[1.6] tracking-[0.1px]" style={{ color: light ? 'rgba(255,255,255,0.9)' : '#2a2a2a' }}>
                 {excerpt}
               </p>
-              <SolidButton variant={light ? 'light' : 'dark'} className="w-fit !h-[41px]">view the guide</SolidButton>
+              <Link to={`/guides/${slug}`}>
+                <SolidButton variant={light ? 'light' : 'dark'} className="w-fit !h-[41px]">view the guide</SolidButton>
+              </Link>
             </div>
           </div>
         </div>
