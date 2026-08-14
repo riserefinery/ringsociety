@@ -13,7 +13,7 @@ type LeadFormProps = {
 const field =
   'w-full border-b border-[#c1c1c1] bg-transparent pb-2 text-[17px] leading-[1.5] outline-none transition-colors placeholder:text-[var(--muted)] focus:border-black'
 const contactField = field
-const contactLabel = 'sr-only'
+const contactLabel = 'contents'
 const contactTopics = [
   'General question about engagement rings',
   'Jeweler partnership inquiry',
@@ -60,27 +60,27 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
         <>
           <div className="grid gap-6 md:grid-cols-2">
             <label className={contactLabel}>
-              First Name
+              <span className="sr-only">First Name</span>
               <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={contactField} />
             </label>
             <label className={contactLabel}>
-              Last Name
+              <span className="sr-only">Last Name</span>
               <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={contactField} />
             </label>
           </div>
           <label className={contactLabel}>
-            Email Address
+            <span className="sr-only">Email Address</span>
             <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={contactField} />
           </label>
           <label className={contactLabel}>
-            What brings you here?
+            <span className="sr-only">What brings you here?</span>
             <select required name="topic" defaultValue="" className={`${contactField} appearance-none`}>
               <option value="" disabled>What brings you here?*</option>
               {contactTopics.map((topic) => <option key={topic} value={topic}>{topic}</option>)}
             </select>
           </label>
           <label className={contactLabel}>
-            Message <span className="normal-case tracking-normal text-[#818181]">(optional)</span>
+            <span className="sr-only">Message (optional)</span>
             <textarea name="message" rows={6} placeholder="Message (optional)" className={`${contactField} min-h-32 resize-y`} />
           </label>
         </>
