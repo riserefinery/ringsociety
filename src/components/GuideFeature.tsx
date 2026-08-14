@@ -27,7 +27,9 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
       <section className="w-full px-5 md:hidden">
         <article className="flex flex-col gap-5">
           <div className="relative h-[228px] w-full overflow-hidden rounded-[12px]" style={{ background: '#d8cfc4' }}>
-            <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
+            <Link to={`/guides/${slug}`} aria-label={`Read ${title}`} className="block h-full w-full">
+              <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
+            </Link>
             {badge && (
               <span className="absolute left-4 top-4">
                 <Badge badge={badge} color="#fff" bg="rgba(155,155,155,0.28)" />
@@ -38,9 +40,11 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
             <p className="text-[11px] font-semibold uppercase tracking-[1.5px]" style={{ color: 'var(--muted)' }}>
               {category}
             </p>
-            <h2 className="text-[28px] leading-[1.18] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
-              {title}
-            </h2>
+            <Link to={`/guides/${slug}`} className="w-fit transition-opacity hover:opacity-65">
+              <h2 className="text-[28px] leading-[1.18] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
+                {title}
+              </h2>
+            </Link>
             <p className="text-[15px] leading-[1.6] tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
               {excerpt}
             </p>
@@ -54,13 +58,15 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
       {/* desktop */}
       <section className="mx-auto hidden w-full max-w-[1440px] px-10 md:block">
         <div className="relative overflow-hidden rounded-lg" style={{ background: '#31353d', aspectRatio: '1344 / 633', minHeight: 560 }}>
-          <img
-            src={guideFeature ?? feature}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover"
-            style={{ objectPosition: imagePosition }}
-          />
-          <div className="absolute inset-0" style={{ background: overlay }} />
+          <Link to={`/guides/${slug}`} aria-label={`Read ${title}`} className="absolute inset-0 block">
+            <img
+              src={guideFeature ?? feature}
+              alt=""
+              className="h-full w-full object-cover"
+              style={{ objectPosition: imagePosition }}
+            />
+          </Link>
+          <div className="pointer-events-none absolute inset-0" style={{ background: overlay }} />
           <div className="absolute inset-0 flex items-center">
             <div className="flex max-w-[560px] flex-col gap-9 px-[92px]" style={{ color: textColor }}>
               <div className="flex items-center gap-5">
@@ -75,9 +81,11 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
                   />
                 )}
               </div>
-              <h2 className="text-[clamp(32px,3.2vw,42px)] leading-[1.15] tracking-[-0.6px]" style={{ fontFamily: serif }}>
-                {title}
-              </h2>
+              <Link to={`/guides/${slug}`} className="w-fit transition-opacity hover:opacity-65">
+                <h2 className="text-[clamp(32px,3.2vw,42px)] leading-[1.15] tracking-[-0.6px]" style={{ fontFamily: serif }}>
+                  {title}
+                </h2>
+              </Link>
               <p className="max-w-[467px] text-[15px] leading-[1.6] tracking-[0.1px]" style={{ color: light ? 'rgba(255,255,255,0.9)' : '#2a2a2a' }}>
                 {excerpt}
               </p>

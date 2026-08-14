@@ -22,5 +22,7 @@ describe('CMS route wiring', () => {
 
     expect(feature).toContain('to={`/guides/${slug}`}')
     expect(feature).toContain('<Link\n                to={`/guides/${slug}`}')
+    expect(feature).toContain('src={guideFeature ?? feature}')
+    expect(feature).toContain('aria-label={`Read ${title}`}')
   })
 })
