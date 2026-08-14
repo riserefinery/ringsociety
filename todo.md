@@ -126,3 +126,4 @@
 - [x] Establish shared body-copy style tokens and apply them consistently across public page templates and new content surfaces.
 - [x] Audit and repair public-page metadata, title hierarchy, and semantic heading structure for SEO best practices.
 - [x] Document any post-audit Sanity content or SEO-field updates required from Ring Society editors.
+- [ ] Match the rendered Contact text inputs, select, and message area exactly to the newsletter CTA field styling while retaining Contact-specific labels and controls.

@@ -13,7 +13,8 @@ describe('public SEO, form, and typography system', () => {
 
     expect(styles).toContain('.body-copy')
     expect(styles).toContain('font-size: 17px')
-    expect(leadForm).toContain("const contactField = `mt-3 ${field} text-[#173d2c]`")
+    expect(leadForm).toContain('const contactField = field')
+    expect(leadForm).toContain('placeholder="First Name*" className={contactField}')
     expect(contact).toContain('background: \'var(--cream)\'')
   })
 
