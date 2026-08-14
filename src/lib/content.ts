@@ -377,8 +377,10 @@ export type ArticleDoc = {
   cta?: ArticleCta
   intro: ArticleBlock[]
   body: ArticleBlock[]
-  /** "Explore More" cards. Omit to default to the most recent articles. */
+  /** Editor-selected Explore More cards. When present, they are used in this order. */
   related?: Card[]
+  /** Published Most-Loved CMS cards used when no per-article override is selected. */
+  popularRelated?: Card[]
 }
 
 const definitiveGuide: ArticleDoc = {
@@ -547,14 +549,24 @@ export function readingTimeFor(doc: ArticleDoc): string {
 }
 
 /**
- * "Explore More" cards for an article: its own `related` list when set,
- * otherwise the most recent articles from the catalogue (top of
- * `allArticles`), skipping the one being read.
+ * "Explore More" cards for an article: its own editor-selected `related` list
+ * when set, otherwise published Most-Loved CMS cards followed by local
+ * Most-Loved fallbacks. The active article is never recommended to itself.
  */
 export function getRelated(doc: ArticleDoc): Card[] {
-  const cards = doc.related ?? allArticles.filter((a) => a.title !== doc.title).slice(0, 3)
-  return cards.map((card) => ({
-    ...card,
-    to: card.to ?? articlePathForTitle(card.title),
-  }))
+  const currentPath = `/guides/${doc.slug}`
+  const seen = new Set<string>()
+  const collect = (cards: Card[]) =>
+    cards.flatMap((card) => {
+      const to = card.to ?? articlePathForTitle(card.title)
+      if (to === currentPath || seen.has(to)) return []
+      seen.add(to)
+      return [{ ...card, to }]
+    })
+
+  const selected = collect(doc.related ?? [])
+  if (selected.length) return selected.slice(0, 3)
+
+  const localMostLoved = allArticles.filter((article) => article.filters.includes('most-loved'))
+  return collect([...(doc.popularRelated ?? []), ...localMostLoved, ...allArticles]).slice(0, 3)
 }

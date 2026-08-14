@@ -47,11 +47,18 @@ export async function getCmsArticle(slug: string | undefined) {
   if (!sanityClient || !slug) return null
 
   try {
-    const post = await sanityClient.fetch<CmsPost | null>(
-      `*[_type == "post" && slug.current == $slug][0] ${postProjection}`,
-      { slug },
-    )
-    return post ? toArticleDoc(post) : null
+    const [post, popularPosts] = await Promise.all([
+      sanityClient.fetch<CmsPost | null>(
+        `*[_type == "post" && slug.current == $slug][0] ${postProjection}`,
+        { slug },
+      ),
+      sanityClient.fetch<CmsPost[]>(
+        `*[_type == "post" && isMostLoved == true && defined(slug.current) && slug.current != $slug] | order(_updatedAt desc)[0...6] ${postProjection}`,
+        { slug },
+      ),
+    ])
+    const article = post ? toArticleDoc(post) : null
+    return article ? { ...article, popularRelated: toCmsCards(popularPosts) } : null
   } catch {
     return null
   }

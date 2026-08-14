@@ -95,7 +95,15 @@ export const post = defineType({
     defineField({ name: 'topGuidesBadge', title: 'Top Guides Badge', description: 'Optional label shown when this post is selected for Top Guides.', type: 'string', group: 'discovery', options: { list: [{ title: 'None', value: 'none' }, { title: 'Featured', value: 'featured' }, { title: 'Most Loved', value: 'mostLoved' }] }, initialValue: 'none' }),
     defineField({ name: 'topGuidesTextTone', title: 'Top Guides Overlay Text', description: 'Choose the text color that remains legible over this post’s Big Feature Image.', type: 'string', group: 'discovery', options: { list: [{ title: 'Light text', value: 'light' }, { title: 'Dark text', value: 'dark' }] }, initialValue: 'light' }),
     defineField({ name: 'keywordTags', title: 'Keyword Tags', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'string' })], options: { layout: 'tags' } }),
-    defineField({ name: 'relatedPosts', title: 'Related Posts', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }] })] }),
+    defineField({
+      name: 'relatedPosts',
+      title: 'Related Guides (Optional Override)',
+      description: 'Choose up to three guides, then drag to set the Explore More order. When blank, the site recommends other Most-Loved Guides automatically. The current guide is always excluded on the public page.',
+      type: 'array',
+      group: 'discovery',
+      of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }], weak: true })],
+      validation: (Rule) => Rule.unique().max(3),
+    }),
     defineField({
       name: 'sidebarCta',
       title: 'Sidebar CTA',

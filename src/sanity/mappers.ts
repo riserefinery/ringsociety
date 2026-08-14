@@ -70,7 +70,9 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
   const hero = imageUrl(post.heroImage?.mainImage, 1800)
   if (!post.slug || !post.title || !post.excerpt || !hero) return null
 
-  const related = (post.relatedPosts ?? []).map(toCmsCard).filter((card) => Boolean(card.image))
+  const related = (post.relatedPosts ?? [])
+    .map(toCmsCard)
+    .filter((card) => Boolean(card.image && card.to && card.to !== `/guides/${post.slug}`))
 
   return {
     slug: post.slug,
