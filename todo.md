@@ -56,7 +56,7 @@
 - [x] Set the Our Mission hero image to a stable vertically centered crop and add an editor-controlled Sanity hero alignment setting in the Studio source for future CMS-driven hero updates.
 - [x] Rebuild the Contact page using the information architecture of `ringsociety.com/contact`, the All Resources background, and the existing Ring Society type, color, header, footer, and lead form system.
 - [x] Validate the refined hero behavior and rebuilt Contact page at desktop and mobile breakpoints before publishing to the Vercel review build.
-- [ ] Publish the validated Studio schema release after the Sanity CLI session is re-authorized, then verify the All Resources, Top Guides, Our Mission, and Contact singletons expose Hero Image and Alignment controls.
+- [x] Publish the validated Studio schema release after the Sanity CLI session is re-authorized, then verify the All Resources, Top Guides, Our Mission, and Contact singletons expose Hero Image and Alignment controls.
 - [x] Refine the footer’s small-laptop breakpoint so its brand, Most-Loved Guides, More, and Legal columns stay balanced in a single deliberate row rather than wrapping below the brand column.
 - [x] Validate the footer at small-laptop, desktop, and mobile widths to preserve readable links, hierarchy, and the existing mobile stack.
 - [x] Capture and review a post-change desktop-width footer validation to confirm the four-column hierarchy remains balanced at the widest layout.
@@ -66,3 +66,10 @@
 - [x] Validate the revised small-laptop footer and expanded Contact form at desktop and mobile breakpoints before publishing to Vercel.
 - [x] Replace the current Open Graph and Twitter social-sharing image with the supplied Ring Society share graphic using a public Vercel-compatible CDN URL.
 - [x] Validate the homepage social metadata references the supplied share image in the local source and deployed Vercel review build.
+- [x] Update the launch handoff with the Contact-only topic/message mapping and browser-independent Studio schema release instructions.
+- [x] Release the updated Studio schema and verify the Vercel review URL is configured for the live Studio preview workflow before handing off the site for content management.
+- [x] Add the current Shopfine Vercel review URL as the Ring Society Studio’s editor-accessible presentation preview destination.
+- [x] Defer GoHighLevel credential entry and live lead testing until the user explicitly resumes the CRM integration phase.
+- [x] Verify the deployed Studio schema exposes the Hero Image and Alignment control in All Resources, Top Guides, Our Mission, and Contact singletons.
+- [x] Add explicit token-based Studio release instructions to the launch handoff for browser-independent future schema deployments.
+- [x] Verify from the authenticated live Studio UI that the Presentation tool opens the Shopfine Vercel review URL.
