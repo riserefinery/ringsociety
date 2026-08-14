@@ -130,4 +130,4 @@
 - [x] Link every related-guide card at the bottom of article pages so its image, title, and CTA open the corresponding connected article route.
 - [x] Eliminate the intermittent mobile white gap before article-page Explore More cards so all related guides render reliably without a refresh.
 - [x] Eliminate the desktop header height oscillation at the hello-bar scroll threshold while preserving the intended compact header state.
-- [ ] Add CMS-managed related-guide selections to posts, with per-article ordered overrides and a fallback that excludes the current article and favors designated popular guides.
+- [x] Add CMS-managed related-guide selections to posts, with per-article ordered overrides and a fallback that excludes the current article and favors designated popular guides.
