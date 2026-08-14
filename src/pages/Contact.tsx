@@ -4,6 +4,7 @@ import { resourcesBg } from '../lib/assets'
 import { PageHeader, serif } from '../components'
 import { getCmsPage } from '../sanity/queries'
 import { resolvePageHero } from '../sanity/pageHero'
+import type { CmsPageDocument } from '../sanity/types'
 
 export default function Contact() {
   const [pageSettings, setPageSettings] = useState<CmsPageDocument | null>(null)

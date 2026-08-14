@@ -5,6 +5,7 @@ import { FILTERS, allArticles, type FilterKey } from '../lib/content'
 import { PageHeader, GuideCard, Newsletter, Stagger, RevealItem } from '../components'
 import { getCmsArticleCards, getCmsPage } from '../sanity/queries'
 import { resolvePageHero } from '../sanity/pageHero'
+import type { CmsPageDocument } from '../sanity/types'
 
 type Selected = FilterKey | 'all'
 

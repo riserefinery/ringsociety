@@ -25,6 +25,7 @@ export const siteSettings = defineType({
   type: 'document',
   fields: [
     defineField({ name: 'siteTitle', title: 'Site Title', type: 'string', initialValue: 'Ring Society' }),
+    defineField({ name: 'helloBarText', title: 'Hello Bar Text', description: 'Short message shown in the green bar above the site navigation.', type: 'string', initialValue: 'Your trusted guide to the perfect Engagement ring', validation: (Rule) => Rule.required().max(120) }),
     defineField({ name: 'defaultSeo', title: 'Default SEO', type: 'pageSeo' }),
     defineField({ name: 'socialLinks', title: 'Social Links', type: 'array', of: [defineArrayMember({ type: 'url' })] }),
     defineField({ name: 'supportEmail', title: 'Support Email', type: 'string' }),
@@ -89,8 +90,11 @@ export const post = defineType({
     defineField({ name: 'intro', title: 'Article Introduction', type: 'array', group: 'content', of: [standardBlock] }),
     defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [standardBlock, articleImage, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
     defineField({ name: 'heroImage', title: 'Hero Image', type: 'responsiveImage', group: 'media', validation: (Rule) => Rule.required() }),
+    defineField({ name: 'bigFeatureImage', title: 'Big Feature Image', description: 'Wide background artwork for this post when it appears on the Top Guides page. Leave blank to use Hero Image.', type: 'responsiveImage', group: 'media' }),
     defineField({ name: 'categories', title: 'Categories', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'reference', to: [{ type: 'category' }] })] }),
     defineField({ name: 'isMostLoved', title: 'Most-Loved Guide', type: 'boolean', group: 'discovery', initialValue: false }),
+    defineField({ name: 'topGuidesBadge', title: 'Top Guides Badge', description: 'Optional label shown when this post is selected for Top Guides.', type: 'string', group: 'discovery', options: { list: [{ title: 'None', value: 'none' }, { title: 'Featured', value: 'featured' }, { title: 'Most Loved', value: 'mostLoved' }] }, initialValue: 'none' }),
+    defineField({ name: 'topGuidesTextTone', title: 'Top Guides Overlay Text', description: 'Choose the text color that remains legible over this post’s Big Feature Image.', type: 'string', group: 'discovery', options: { list: [{ title: 'Light text', value: 'light' }, { title: 'Dark text', value: 'dark' }] }, initialValue: 'light' }),
     defineField({ name: 'keywordTags', title: 'Keyword Tags', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'string' })], options: { layout: 'tags' } }),
     defineField({ name: 'relatedPosts', title: 'Related Posts', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }] })] }),
     defineField({
@@ -133,6 +137,7 @@ export const topGuidesLanding = defineType({
     defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'Top Guides' }),
     defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
     defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Set the image crop with Focal Alignment.' }),
+    defineField({ name: 'selectedPosts', title: 'Top Guides Order', description: 'Add posts or guides, then drag to control their display order. Each row uses the selected post’s title, excerpt, Big Feature Image, badge, and overlay text setting.', type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }] })] }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
   ],
   preview: { prepare: () => ({ title: 'Top Guides' }) },

@@ -37,10 +37,12 @@ export function SolidButton({
   children,
   variant = 'dark',
   className = '',
+  disabled = false,
 }: {
   children: string
   variant?: 'dark' | 'light'
   className?: string
+  disabled?: boolean
 }) {
   const dark = variant === 'dark'
   // hover fades each button to its exact inverse — no lift, no shadow
@@ -49,6 +51,7 @@ export function SolidButton({
     : 'border border-transparent bg-white text-black hover:bg-black hover:text-white'
   return (
     <button
+      disabled={disabled}
       className={`h-[45px] rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${tones} ${className}`}
     >
       {children}

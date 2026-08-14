@@ -7,6 +7,9 @@ type MigrationCatalog = {
   guideCount: number
   legalCount: number
   jewelerHeroAsset?: string
+  jewelerBigFeatureAsset?: string
+  topGuideSelectionCount: number
+  helloBarText?: string
 }
 
 describe('Sanity migrated content catalog', () => {
@@ -17,7 +20,10 @@ describe('Sanity migrated content catalog', () => {
     const query = `{
       "guideCount": count(*[_type == "post" && _id match "drafts.**"]),
       "legalCount": count(*[_type == "legalPage" && _id match "drafts.**"]),
-      "jewelerHeroAsset": *[_id == "drafts.post-how-to-choose-a-jeweler"][0].heroImage.mainImage.asset._ref
+      "jewelerHeroAsset": *[_id == "drafts.post-how-to-choose-a-jeweler"][0].heroImage.mainImage.asset._ref,
+      "jewelerBigFeatureAsset": *[_id == "drafts.post-how-to-choose-a-jeweler"][0].bigFeatureImage.mainImage.asset._ref,
+      "topGuideSelectionCount": count(*[_id == "drafts.topGuidesLanding"][0].selectedPosts),
+      "helloBarText": *[_id == "drafts.siteSettings"][0].helloBarText
     }`
     const response = await fetch(
       `https://${projectId}.api.sanity.io/v2026-08-13/data/query/${dataset}?perspective=raw&query=${encodeURIComponent(query)}`,
@@ -30,5 +36,8 @@ describe('Sanity migrated content catalog', () => {
     expect(payload.result.guideCount).toBe(15)
     expect(payload.result.legalCount).toBe(4)
     expect(payload.result.jewelerHeroAsset).toBe('image-b326d3006e0d637442eb00c087fbc53130793ac8-1340x895-jpg')
+    expect(payload.result.jewelerBigFeatureAsset).toBe('image-b326d3006e0d637442eb00c087fbc53130793ac8-1340x895-jpg')
+    expect(payload.result.topGuideSelectionCount).toBe(8)
+    expect(payload.result.helloBarText).toBe('Your trusted guide to the perfect Engagement ring')
   })
 })

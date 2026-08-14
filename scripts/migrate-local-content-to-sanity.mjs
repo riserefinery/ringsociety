@@ -31,22 +31,29 @@ const sources = {
   definitiveHero: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/hMRVJNIUabdYFWOo.png',
   anatomy: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/OWqnlWlvIuDcqkVF.png',
   settingsDiagram: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/wuvbtZrsLxQfrIyD.png',
+  bigFeatureJeweler: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/QwiXUftFpgsSnumz.jpg',
+  bigFeatureBudgets: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/fKOcyQuJEeuUHCpz.jpg',
+  bigFeatureLabGrown: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/GkZGYuwxyGjJYYCf.jpg',
+  bigFeatureSettings: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/bsaGZmmdfsoCbOUG.jpg',
+  bigFeatureBigBox: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/tsixmYGlQYMxDvwA.jpg',
+  bigFeaturePricing: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/ByyEtHdFmDcPOceG.jpg',
+  bigFeatureClarity: 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/HkhNntTGilnADxkj.jpg',
 }
 
 const guides = [
   { slug: 'how-to-buy-an-engagement-ring', category: 'Guide', title: 'How to Buy an Engagement Ring', excerpt: 'Shopping for an engagement ring should be one of life’s biggest moments… but often couples find it intimidating and stressful. We’ll show you everything, from styles to budgeting, to jewelers.', cta: 'view the guide', image: 'howToBuy', alt: 'A woman resting her hand against her face, an engagement ring catching the light', filters: ['most-loved'] },
-  { slug: 'how-to-choose-a-jeweler', category: 'Guide', title: 'How to Choose A Jeweler: Our 10-Point Framework', excerpt: 'Before you walk into any jeweler, there are 10 things you should be evaluating — from how long they’ve been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and more.', cta: 'view the guide', image: 'jeweler', alt: 'A Ring Society guide about choosing the right jeweler', filters: ['most-loved', 'jeweler'] },
+  { slug: 'how-to-choose-a-jeweler', category: 'Guide', title: 'How to Choose A Jeweler: Our 10-Point Framework', excerpt: 'Before you walk into any jeweler, there are 10 things you should be evaluating — from how long they’ve been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and more.', cta: 'view the guide', image: 'jeweler', alt: 'A Ring Society guide about choosing the right jeweler', filters: ['most-loved', 'jeweler'], bigFeature: 'bigFeatureJeweler', topGuidesBadge: 'featured' },
   { slug: 'most-popular-trending-ring-styles-2026', category: 'Trends', title: 'The Most Popular & Trending Ring Styles and Diamonds in 2026', excerpt: 'Discover the ring styles and diamond trends shaping 2026.', cta: 'trending diamond rings', image: 'trending', alt: 'A brilliant-cut diamond ring resting on textured fabric', filters: ['trends'] },
   { slug: 'engagement-rings-with-hidden-halos', category: 'Perspectives', title: 'Engagement Rings with Hidden Halos: The Subtle Sparkle Trend', excerpt: 'A closer look at the hidden-halo engagement-ring trend.', cta: 'hidden halo engagement rings', image: 'halo', alt: 'A diamond solitaire ring on deep blue velvet', filters: ['perspectives', 'trends'] },
-  { slug: 'engagement-ring-budgets', category: 'Guide', title: 'Engagement Ring Budgets: How Much Should You Spend?', excerpt: 'How much should you actually spend on an engagement ring? We break down real budget ranges, what drives the price, and how to get the most sparkle for what you’re comfortable spending.', cta: 'view the guide', image: 'budgets', alt: 'An engagement ring displayed in a presentation box', filters: ['most-loved'] },
-  { slug: 'engagement-ring-settings-and-styles', category: 'Guide', title: 'The Complete Guide to Engagement Ring Settings & Styles', excerpt: 'A visual guide detailing every major ring setting and how different settings affect day-to-day wear.', cta: 'view the guide', image: 'settings', alt: 'An assortment of rings on a dark surface', filters: ['most-loved'] },
+  { slug: 'engagement-ring-budgets', category: 'Guide', title: 'Engagement Ring Budgets: How Much Should You Spend?', excerpt: 'How much should you actually spend on an engagement ring? We break down real budget ranges, what drives the price, and how to get the most sparkle for what you’re comfortable spending.', cta: 'view the guide', image: 'budgets', alt: 'An engagement ring displayed in a presentation box', filters: ['most-loved'], bigFeature: 'bigFeatureBudgets' },
+  { slug: 'engagement-ring-settings-and-styles', category: 'Guide', title: 'The Complete Guide to Engagement Ring Settings & Styles', excerpt: 'A visual guide detailing every major ring setting and how different settings affect day-to-day wear.', cta: 'view the guide', image: 'settings', alt: 'An assortment of rings on a dark surface', filters: ['most-loved'], bigFeature: 'bigFeatureSettings' },
   { slug: 'how-to-find-her-ring-size', category: 'Article', title: 'How to Find Her Ring Size Without Ruining the Surprise', excerpt: 'A practical guide to learning ring size without spoiling the moment.', cta: 'ring sizing guide', image: 'ringSize', alt: 'A couple holding hands', filters: ['jeweler'] },
   { slug: 'which-diamond-shape-looks-biggest', category: 'Article', title: 'Which Diamond Shape Looks the Biggest?', excerpt: 'Compare diamond shapes and their visual presence.', cta: 'compare diamond shapes', image: 'shape', alt: 'A diamond ring photographed on fabric', filters: ['diamonds'] },
   { slug: '4cs-of-diamonds', category: 'Guide', title: 'The 4Cs of Diamonds (Explained in Plain English)', excerpt: 'A plain-English guide to cut, color, clarity, and carat weight.', cta: 'view the guide', image: 'fourCs', alt: 'A woman with her hand resting near her face', filters: ['most-loved', 'diamonds'] },
-  { slug: 'go-big-or-shop-small', category: 'Guide', title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online', excerpt: 'How national chains, online-only retailers, and independent local jewelers differ.', cta: 'view the guide', image: 'emerald', alt: 'A gold ring set with an emerald-green stone', filters: ['jeweler', 'perspectives'] },
-  { slug: 'natural-vs-lab-grown-diamonds', category: 'Guide', title: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', excerpt: 'A transparent guide comparing price, chemical makeup, long-term value retention, and ethical considerations.', cta: 'view the guide', image: 'labGrown', alt: 'Loose diamonds scattered across a surface', filters: ['most-loved', 'diamonds'] },
-  { slug: 'what-drives-diamond-pricing', category: 'Guide', title: 'What Drives Diamond Pricing? Hear from Experts', excerpt: 'Industry insiders explain how the 4Cs, certification, and market forces affect diamond pricing.', cta: 'diamond pricing guide', image: 'pricing', alt: 'A jeweler working at a bench', filters: ['diamonds', 'perspectives'] },
-  { slug: 'ultimate-guide-to-diamond-clarity', category: 'Guide', title: 'The Ultimate Guide to Diamond Clarity, and What it Means for Your Ring Choice & Budget', excerpt: 'Learn what clarity grades really mean, which inclusions you will never see, and where to spend versus save.', cta: 'view the guide', image: 'clarity', alt: 'A gold ring with a green gemstone on a table', filters: ['diamonds'] },
+  { slug: 'go-big-or-shop-small', category: 'Guide', title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online', excerpt: 'How national chains, online-only retailers, and independent local jewelers differ.', cta: 'view the guide', image: 'emerald', alt: 'A gold ring set with an emerald-green stone', filters: ['jeweler', 'perspectives'], bigFeature: 'bigFeatureBigBox' },
+  { slug: 'natural-vs-lab-grown-diamonds', category: 'Guide', title: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', excerpt: 'A transparent guide comparing price, chemical makeup, long-term value retention, and ethical considerations.', cta: 'view the guide', image: 'labGrown', alt: 'Loose diamonds scattered across a surface', filters: ['most-loved', 'diamonds'], bigFeature: 'bigFeatureLabGrown', topGuidesTextTone: 'dark' },
+  { slug: 'what-drives-diamond-pricing', category: 'Guide', title: 'What Drives Diamond Pricing? Hear from Experts', excerpt: 'Industry insiders explain how the 4Cs, certification, and market forces affect diamond pricing.', cta: 'diamond pricing guide', image: 'pricing', alt: 'A jeweler working at a bench', filters: ['diamonds', 'perspectives'], bigFeature: 'bigFeaturePricing' },
+  { slug: 'ultimate-guide-to-diamond-clarity', category: 'Guide', title: 'The Ultimate Guide to Diamond Clarity, and What it Means for Your Ring Choice & Budget', excerpt: 'Learn what clarity grades really mean, which inclusions you will never see, and where to spend versus save.', cta: 'view the guide', image: 'clarity', alt: 'A gold ring with a green gemstone on a table', filters: ['diamonds'], bigFeature: 'bigFeatureClarity' },
   { slug: 'ideal-diamond-cut', category: 'Article', title: 'The Ideal Diamond Cut: How to Choose the Right Diamond for Your Ring Setting and Budget', excerpt: 'A guide to choosing a diamond cut for your setting and budget.', cta: 'how to choose a diamond', image: 'idealCut', alt: 'A silver ring worn on a finger', filters: ['diamonds'] },
 ]
 
@@ -106,6 +113,13 @@ async function main() {
     })
   }
 
+  await client.createOrReplace({
+    _id: 'drafts.siteSettings',
+    _type: 'siteSettings',
+    siteTitle: 'Ring Society',
+    helloBarText: 'Your trusted guide to the perfect Engagement ring',
+  })
+
   for (const guide of guides) {
     const imageAsset = assets[guide.image]
     await client.createOrReplace({
@@ -117,6 +131,9 @@ async function main() {
       contentType: guide.category,
       isMostLoved: guide.filters.includes('most-loved'),
       heroImage: { _type: 'responsiveImage', mainImage: imageField(imageAsset._id), alt: guide.alt, focalPoint: 'center center' },
+      ...(guide.bigFeature ? { bigFeatureImage: { _type: 'responsiveImage', mainImage: imageField(assets[guide.bigFeature]._id), alt: `${guide.title} Top Guides background`, focalPoint: 'center center' } } : {}),
+      ...(guide.topGuidesBadge ? { topGuidesBadge: guide.topGuidesBadge } : {}),
+      ...(guide.topGuidesTextTone ? { topGuidesTextTone: guide.topGuidesTextTone } : {}),
       categories: guide.filters.filter((filter) => filter !== 'most-loved').map((filter) => ({ _key: `category-${filter}`, _type: 'reference', _ref: `category-${filter}` })),
       keywordTags: [guide.category, ...guide.filters],
       intro: [block(guide.excerpt)],
@@ -149,6 +166,15 @@ async function main() {
       block("Almost every guide begins with the 4Cs of diamonds. We suggest a different starting point: figure out what kind of ring you're drawn to before you think about a single gemstone. Style shapes everything downstream."),
       { _type: 'callout', _key: 'callout-key-advice', label: 'Key advice', text: "Before you walk into any store or open any browser tab, spend some time with Pinterest, Instagram, or even friends' hands. Notice what catches your eye." },
     ],
+  })
+
+  const topGuideSlugs = ['how-to-choose-a-jeweler', 'engagement-ring-budgets', 'natural-vs-lab-grown-diamonds', 'how-to-buy-an-engagement-ring', 'engagement-ring-settings-and-styles', 'go-big-or-shop-small', 'what-drives-diamond-pricing', 'ultimate-guide-to-diamond-clarity']
+  await client.createOrReplace({
+    _id: 'drafts.topGuidesLanding',
+    _type: 'topGuidesLanding',
+    headline: 'Top Guides',
+    introduction: 'Browse our most-loved guides, trending engagement rings, and perspectives from industry insiders',
+    selectedPosts: topGuideSlugs.map((slug) => ({ _key: `top-guide-${slug}`, _type: 'reference', _ref: `drafts.post-${slug}` })),
   })
 
   const legalDocuments = [

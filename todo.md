@@ -83,3 +83,10 @@
 - [x] Restore the missing `superjson` dependency so the existing authentication regression test runs with the full validation suite.
 - [x] Verify via Sanity query that the migrated guide and legal draft documents are present in the production dataset and visible to Studio.
 - [x] Add a lightweight validation test that asserts the expected migrated draft record counts are present in the production dataset.
+- [x] Add a dedicated post-level Big Feature Image field so each article can supply a separate Top Guides background image without duplicating content.
+- [x] Convert the Top Guides singleton into an editor-managed ordered list of referenced posts, allowing entries to be added, removed, and reordered entirely in Sanity.
+- [x] Update the public Top Guides query and rendering layer to use the selected post order and each post’s Big Feature Image, while retaining a local fallback until CMS content is published.
+- [ ] Release and verify the updated Studio schema and Top Guides editor workflow, including drag ordering and post image replacement.
+- [x] Restore TypeScript validation by repairing the pre-existing shared component and CMS page-state contracts surfaced during Top Guides verification.
+- [x] Add an editable Site Settings hello-bar text field and connect the shared public header to its published Sanity value with the existing text as a fallback.
+- [ ] Push the validated Top Guides and hello-bar public-site implementation to GitHub and verify the review deployment.

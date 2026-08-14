@@ -50,6 +50,8 @@ export type HeroProps = {
   mobilePanelColor?: string
   /** object-position for the desktop image. */
   imagePosition?: string
+  /** object-position for the mobile image. */
+  mobileImagePosition?: string
   /** Homepage load-in gate. When set, hero content stays hidden until true. */
   ready?: boolean
   /** Makes only the desktop image surface full-bleed while retaining its original inner content grid. */

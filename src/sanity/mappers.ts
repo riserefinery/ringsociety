@@ -1,6 +1,6 @@
-import type { Article, ArticleBlock, ArticleCta, ArticleDoc, FilterKey } from '../lib/content'
+import type { Article, ArticleBlock, ArticleCta, ArticleDoc, FilterKey, Guide } from '../lib/content'
 import { imageUrl } from './image'
-import type { CmsPortableBlock, CmsPost, CmsSidebarCta } from './types'
+import type { CmsPortableBlock, CmsPost, CmsSidebarCta, CmsTopGuidesSelection } from './types'
 
 function textFromBlock(block: CmsPortableBlock): string {
   return block.children?.map((child) => child.text ?? '').join('').trim() ?? ''
@@ -92,4 +92,32 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
 
 export function toCmsCards(posts: CmsPost[]): Article[] {
   return posts.map(toCmsCard).filter((card) => Boolean(card.image && card.to))
+}
+
+function toTopGuideBadge(post: CmsPost): Guide['badge'] | undefined {
+  if (post.topGuidesBadge === 'featured') return 'Featured'
+  if (post.topGuidesBadge === 'mostLoved' || post.isMostLoved) return 'most loved'
+  return undefined
+}
+
+function toTopGuide(post: CmsPost): Guide | null {
+  const feature = imageUrl(post.heroImage?.mainImage, 1200)
+  if (!post.slug || !post.title || !post.excerpt || !feature) return null
+
+  return {
+    slug: post.slug,
+    category: post.contentType || post.categories?.[0]?.title || 'Guide',
+    badge: toTopGuideBadge(post),
+    title: post.title,
+    excerpt: post.excerpt,
+    cardCta: 'view the guide',
+    feature,
+    guideFeature: imageUrl(post.bigFeatureImage?.mainImage, 1800),
+    tone: post.topGuidesTextTone === 'dark' ? 'dark' : 'light',
+    imagePosition: post.bigFeatureImage?.focalPoint ?? post.heroImage?.focalPoint ?? 'center center',
+  }
+}
+
+export function toTopGuideRows(selections: CmsTopGuidesSelection[] | undefined): Guide[] {
+  return (selections ?? []).flatMap((selection) => (selection.post ? [toTopGuide(selection.post)].filter((guide): guide is Guide => Boolean(guide)) : []))
 }

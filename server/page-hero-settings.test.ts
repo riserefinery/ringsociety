@@ -35,6 +35,38 @@ describe('CMS page hero settings and contact layout', () => {
     expect(topGuides).toContain('md:pt-16')
   })
 
+  it('centralizes Top Guides selection, order, copy, and feature backgrounds in Sanity posts', () => {
+    const documents = read('studio/schemas/documents.ts')
+    const queries = read('src/sanity/queries.ts')
+    const mappers = read('src/sanity/mappers.ts')
+    const topGuides = read('src/pages/TopGuides.tsx')
+
+    expect(documents).toContain("name: 'bigFeatureImage'")
+    expect(documents).toContain("name: 'topGuidesBadge'")
+    expect(documents).toContain("name: 'topGuidesTextTone'")
+    expect(documents).toContain("name: 'selectedPosts'")
+    expect(documents).toContain("title: 'Top Guides Order'")
+    expect(queries).toContain('getCmsTopGuidesPage')
+    expect(queries).toContain('"selectedPosts": selectedPosts[]')
+    expect(queries).toContain('bigFeatureImage')
+    expect(mappers).toContain('toTopGuideRows')
+    expect(mappers).toContain('post.bigFeatureImage?.focalPoint')
+    expect(topGuides).toContain('selectedRows.length === pageSettings.selectedPosts.length')
+  })
+
+  it('centralizes the shared hello-bar text in Site Settings', () => {
+    const documents = read('studio/schemas/documents.ts')
+    const queries = read('src/sanity/queries.ts')
+    const header = read('src/components/Header.tsx')
+
+    expect(documents).toContain("name: 'helloBarText'")
+    expect(documents).toContain("title: 'Hello Bar Text'")
+    expect(queries).toContain('getCmsSiteSettings')
+    expect(queries).toContain('{helloBarText}')
+    expect(header).toContain('getCmsSiteSettings')
+    expect(header).toContain('{helloBarText}')
+  })
+
   it('keeps the Contact page within the approved Ring Society form and content system', () => {
     const contact = read('src/pages/Contact.tsx')
     const leadForm = read('src/components/LeadForm.tsx')

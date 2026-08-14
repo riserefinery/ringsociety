@@ -11,6 +11,7 @@ import {
 import { Hero, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import { getCmsPage } from '../sanity/queries'
 import { resolvePageHero } from '../sanity/pageHero'
+import type { CmsPageDocument } from '../sanity/types'
 
 /* ---------- shared statement block (Our Mission / Our Vision) ---------- */
 function Statement({

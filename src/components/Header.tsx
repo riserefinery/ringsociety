@@ -5,6 +5,7 @@ import { headerNav } from '../lib/nav'
 import MobileNav from './MobileNav'
 import SearchOverlay from './SearchOverlay'
 import { SearchIcon } from './ui'
+import { getCmsSiteSettings } from '../sanity/queries'
 
 /** Universal site header + nav. Shared across every page. */
 export default function Header() {
@@ -12,6 +13,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [helloBarText, setHelloBarText] = useState('Your trusted guide to the perfect Engagement ring')
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
@@ -38,6 +40,16 @@ export default function Header() {
     return () => window.removeEventListener('keydown', onKey)
   }, [searchOpen])
 
+  useEffect(() => {
+    let active = true
+    getCmsSiteSettings().then((settings) => {
+      if (active && settings?.helloBarText) setHelloBarText(settings.helloBarText)
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
   const openSearch = () => {
     setMenuOpen(false)
     setSearchOpen(true)
@@ -50,7 +62,7 @@ export default function Header() {
         style={{ background: 'var(--forest)' }}
       >
         <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
-          Your trusted guide to the perfect Engagement ring
+          {helloBarText}
         </p>
       </div>
 

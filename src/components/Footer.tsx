@@ -3,7 +3,7 @@ import { svgPaths, iconRS, logoXL } from '../lib/assets'
 import { legalLinks, copyright } from '../lib/nav'
 import { serif } from './ui'
 
-type FooterLink = string | { label: string; to: string }
+type FooterLink = string | { label: string; to?: string }
 
 function ArrowCircle() {
   return (
@@ -39,7 +39,7 @@ export default function Footer() {
           const label = typeof i === 'string' ? i : i.label
           const cls =
             'cursor-pointer text-[14px] leading-[1.6] text-[color:var(--sage)] transition-colors hover:text-white'
-          return typeof i === 'string' ? (
+          return typeof i === 'string' || !i.to ? (
             <a key={label} className={cls}>
               {label}
             </a>

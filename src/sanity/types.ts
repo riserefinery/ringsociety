@@ -49,12 +49,20 @@ export type CmsPost = {
   categories?: CmsCategory[]
   isMostLoved?: boolean
   heroImage?: CmsResponsiveImage
+  bigFeatureImage?: CmsResponsiveImage
+  topGuidesBadge?: 'none' | 'featured' | 'mostLoved'
+  topGuidesTextTone?: 'light' | 'dark'
   intro?: CmsPortableBlock[]
   body?: CmsPortableBlock[]
   keywordTags?: string[]
   sidebarCta?: CmsSidebarCta
   relatedPosts?: CmsPost[]
   publishedAt?: string
+}
+
+export type CmsTopGuidesSelection = {
+  _key: string
+  post?: CmsPost | null
 }
 
 export type CmsPageDocument = {
@@ -64,4 +72,12 @@ export type CmsPageDocument = {
   heroImage?: CmsResponsiveImage
   supportEmail?: string
   responseTime?: string
+}
+
+export type CmsTopGuidesDocument = CmsPageDocument & {
+  selectedPosts?: CmsTopGuidesSelection[]
+}
+
+export type CmsSiteSettings = {
+  helloBarText?: string
 }
