@@ -121,15 +121,15 @@ export default function Header() {
             aria-label="Open menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex h-6 w-[15px] items-center justify-center"
+            className="flex h-8 w-8 items-center justify-center"
           >
-            <img src={burgerMenu} alt="" className="h-6 w-[15px]" />
+            <img src={burgerMenu} alt="" className="h-[28.8px] w-[18px]" />
           </button>
           <Link to="/" className="shrink-0 cursor-pointer" onClick={() => setMenuOpen(false)}>
             <img src={logoWordmark} alt="Ring Society" className="h-[22px] w-auto" />
           </Link>
-          <button onClick={openSearch} aria-label="Search" className="flex h-6 w-6 items-center justify-center">
-            <SearchIcon size={16} />
+          <button onClick={openSearch} aria-label="Search" className="flex h-8 w-8 items-center justify-center">
+            <SearchIcon size={18} />
           </button>
         </div>
       </div>
