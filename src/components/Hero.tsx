@@ -100,7 +100,7 @@ function HeroMobile({
               {mobileEyebrow}
             </motion.p>
           )}
-          <MHeading variants={fadeUp} className="text-[44px] leading-[1.5] tracking-[-0.5px]" style={{ fontFamily: serif }}>
+          <MHeading variants={fadeUp} className="text-[44px] leading-[1.1] tracking-[-0.5px]" style={{ fontFamily: serif }}>
             {title}
           </MHeading>
         </div>
@@ -111,12 +111,12 @@ function HeroMobile({
           {ctaTo ? (
             <Link
               to={ctaTo}
-              className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase leading-[1.5] tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white"
+              className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white"
             >
               {ctaLabel}
             </Link>
           ) : (
-            <button className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase leading-[1.5] tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white">
+            <button className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white">
               {ctaLabel}
             </button>
           )}

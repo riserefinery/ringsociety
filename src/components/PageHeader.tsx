@@ -38,7 +38,7 @@ export default function PageHeader({
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
         <div className="relative flex max-w-[560px] flex-col items-center gap-6 text-center text-[#f9f6f2]">
           {eyebrow && <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#f9f6f2]/70">{eyebrow}</p>}
-          <h1 className="text-[44px] leading-[1.5] tracking-[-1.5px] md:text-[clamp(40px,6vw,58px)] md:leading-[1.1]" style={{ fontFamily: serif }}>
+          <h1 className="text-[44px] leading-[1.1] tracking-[-1.5px] md:text-[clamp(40px,6vw,58px)]" style={{ fontFamily: serif }}>
             {title}
           </h1>
           {subtitle && <p className="max-w-[444px] text-[17px] leading-[1.5] md:text-[18px] md:leading-[1.6]">{subtitle}</p>}

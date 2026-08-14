@@ -54,9 +54,9 @@ describe('shared full-bleed hero and CTA layout', () => {
     const legal = readFileSync(resolve(root, 'src/pages/LegalPage.tsx'), 'utf8')
     const favicon = readFileSync(resolve(root, 'index.html'), 'utf8')
 
-    expect(hero).toContain('text-[44px] leading-[1.5]')
-    expect(pageHeader).toContain('text-[44px] leading-[1.5]')
-    expect(feature).toContain('text-[36px] leading-[1.5]')
+    expect(hero).toContain('text-[44px] leading-[1.1]')
+    expect(pageHeader).toContain('text-[44px] leading-[1.1]')
+    expect(feature).toContain('text-[36px] leading-[1.18]')
     expect(article).toContain('text-[17px] leading-[1.5]')
     expect(legal).toContain('text-[17px] leading-[1.5]')
     expect(favicon).toContain('/manus-storage/ring-society-favicon_7da91438.svg')

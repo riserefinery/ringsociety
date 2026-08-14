@@ -41,7 +41,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               {category}
             </p>
             <Link to={`/guides/${slug}`} className="w-fit transition-opacity hover:opacity-65">
-              <h2 className="text-[36px] leading-[1.5] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
+              <h2 className="text-[36px] leading-[1.18] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
                 {title}
               </h2>
             </Link>

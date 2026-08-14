@@ -19,7 +19,7 @@ export function CtaLine({ label, tone = 'dark' }: { label: string; tone?: 'dark'
   const color = tone === 'light' ? '#fff' : '#000'
   return (
     <span className="group inline-flex items-center gap-2 cursor-pointer">
-      <span className="text-[13px] font-semibold uppercase leading-[1.5] tracking-[1.4px] md:tracking-[2px]" style={{ color }}>
+      <span className="text-[13px] font-semibold uppercase tracking-[1.4px] md:tracking-[2px]" style={{ color }}>
         {label}
       </span>
       <span className="relative flex h-[9px] w-[19px] shrink-0 items-center transition-all duration-300 ease-out md:w-7 md:group-hover:w-[19px]">

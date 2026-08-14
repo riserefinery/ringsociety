@@ -116,3 +116,4 @@
 - [x] Adjust the approved mobile reading-copy roles to 17px: hero body, page-header description, Top Guides/card excerpts, article intro/body/subtitle, legal body, and homepage editorial-feature body.
 - [x] Preserve Resource Card CTA size while reducing its mobile letter spacing by 30 percent.
 - [x] Replace the site favicon with the supplied Ring Society SVG icon through managed static storage.
+- [ ] Restore the original line heights for the enlarged mobile homepage hero headline, interior page headers, Top Guides titles, and shared CTA/card text while retaining the approved size changes.
