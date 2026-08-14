@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { IMAGES, heroMobileImg } from '../lib/assets'
+import { articlePathForTitle } from '../lib/content'
 import { Newsletter, Hero, GuideCard, EditorialRow, HomeIntro, Reveal, Stagger, RevealItem, serif, type Card } from '../components'
 
 /** Whether the homepage load-in should play (once per session, honoring reduced motion). */
@@ -45,7 +46,7 @@ function DiscoverGuides() {
         <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {discoverCards.map((c) => (
             <RevealItem key={c.title} className="h-full">
-              <GuideCard card={c} />
+              <GuideCard card={{ ...c, to: articlePathForTitle(c.title) }} />
             </RevealItem>
           ))}
         </Stagger>
@@ -95,6 +96,7 @@ function EditorialSection() {
           </>
         }
         body="Before you walk into any jeweler, there are 10 things you should be evaluating — from how long they've been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and more."
+        to="/guides/how-to-choose-a-jeweler"
       />
       <EditorialRow
         reverse
@@ -103,13 +105,14 @@ function EditorialSection() {
         eyebrow="Guide"
         title="The Complete Guide to Engagement Ring Settings & Styles"
         body="A visual guide detailing every major ring setting (Solitaire, Halo, Pavé, Bezel, Channel, Three-Stone). It covers the pros and cons of each, how different settings impact the perceived size of the center stone, and which styles suit more active lifestyles."
+        to="/guides/engagement-ring-settings-and-styles"
       />
       <div>
         <h2 className="sr-only">More engagement ring guides and articles</h2>
         <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {secondRowCards.map((c) => (
             <RevealItem key={c.title} className="h-full">
-              <GuideCard card={c} />
+              <GuideCard card={{ ...c, to: articlePathForTitle(c.title) }} />
             </RevealItem>
           ))}
         </Stagger>
@@ -134,9 +137,10 @@ function BlackSection() {
               <br />
               Big-Box vs. Local vs. Online
             </>
-          }
-          body="Before a single conversation about stones or settings, there's a bigger decision hiding underneath all of it: where you buy the ring. National chains, online-only retailers, and independent local jewelers each operate genuinely differently, and the differences matter more than most buyers expect going in."
-        />
+        }
+        body="Before a single conversation about stones or settings, there's a bigger decision hiding underneath all of it: where you buy the ring. National chains, online-only retailers, and independent local jewelers each operate genuinely differently, and the differences matter more than most buyers expect going in."
+        to="/guides/go-big-or-shop-small"
+      />
         <EditorialRow
           reverse
           tone="light"
@@ -149,9 +153,10 @@ function BlackSection() {
               <br />
               The Honest, Unbiased Comparison
             </>
-          }
-          body="A transparent guide tackling the biggest question being asked right now. It compares price, chemical makeup, long-term value retention, and ethical considerations."
-        />
+        }
+        body="A transparent guide tackling the biggest question being asked right now. It compares price, chemical makeup, long-term value retention, and ethical considerations."
+        to="/guides/natural-vs-lab-grown-diamonds"
+      />
       </div>
     </section>
   )
@@ -190,7 +195,7 @@ function MoreGuides() {
       <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {thirdRowCards.map((c) => (
           <RevealItem key={c.title} className="h-full">
-            <GuideCard card={c} />
+            <GuideCard card={{ ...c, to: articlePathForTitle(c.title) }} />
           </RevealItem>
         ))}
       </Stagger>
