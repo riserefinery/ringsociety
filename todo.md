@@ -86,11 +86,11 @@
 - [x] Add a dedicated post-level Big Feature Image field so each article can supply a separate Top Guides background image without duplicating content.
 - [x] Convert the Top Guides singleton into an editor-managed ordered list of referenced posts, allowing entries to be added, removed, and reordered entirely in Sanity.
 - [x] Update the public Top Guides query and rendering layer to use the selected post order and each post’s Big Feature Image, while retaining a local fallback until CMS content is published.
-- [ ] Release and verify the updated Studio schema and Top Guides editor workflow, including drag ordering and post image replacement.
+- [x] Release and verify the updated Studio schema and Top Guides editor workflow, including drag ordering and post image replacement.
 - [x] Restore TypeScript validation by repairing the pre-existing shared component and CMS page-state contracts surfaced during Top Guides verification.
 - [x] Add an editable Site Settings hello-bar text field and connect the shared public header to its published Sanity value with the existing text as a fallback.
 - [x] Push the validated Top Guides and hello-bar public-site implementation to GitHub and verify the review deployment.
-- [ ] Verify in the authenticated live Studio UI that Pages → Top Guides exposes the ordered selected-post list and drag-reorder controls.
+- [x] Verify in the authenticated live Studio UI that Pages → Top Guides exposes the ordered selected-post list and drag-reorder controls.
 - [x] Verify in the authenticated live Studio UI that a post exposes the Big Feature Image field and that it is populated on the Jeweler Framework draft.
 - [x] Remove the post publishing-date field and all public query dependencies so routine Sanity edits no longer require date entry.
 - [x] Replace the Top Guides draft’s draft-to-draft post references with publish-safe references so editors can save and publish Big Feature image updates.
@@ -101,7 +101,7 @@
 - [x] Complete the current guide catalog as connected CMS-backed routes so editors can test the real article, resource-card, Top Guides, and navigation behavior before final copy is ready.
 - [x] Add generic local article fallbacks for every existing guide/resource slug, with clearly marked placeholder body content that is overridden by published Sanity content.
 - [x] Link the Top Guides desktop and mobile actions, plus every All Resources card, to their corresponding article routes.
-- [ ] Perform and confirm a harmless live Studio drag reorder on Top Guides before finalizing the editor workflow verification.
+- [x] Perform and confirm a harmless live Studio drag reorder on Top Guides before finalizing the editor workflow verification.
 - [x] Correct the Top Guides public renderer so a post’s published Big Feature Image is used instead of its regular Hero Image.
 - [x] Make each article card’s image, title, and CTA a reliable link to its matching article route, including Top Guides and All Resources cards.
 - [x] Prevent the Top Guides rows from rendering a local hero-image fallback before their published Big Feature Images resolve from Sanity.
@@ -109,3 +109,10 @@
 - [x] Redeploy and verify the hosted Studio bundle so the existing Site Settings `helloBarText` value is recognized as the editable Hello Bar Text field.
 - [x] Confirm in the authenticated hosted Studio UI that the prior unknown-field warning is gone and Hello Bar Text is editable in Site Settings.
 - [x] Link each homepage resource-card image, title, and CTA to its corresponding connected article route.
+- [x] Audit and document the current mobile type sizes and line heights by common text role before applying any typography refinements.
+- [ ] Increase the mobile homepage hero headline to 44px and align its CTA text and styling with the shared guide-button system.
+- [ ] Set mobile interior page headers to 44px and the requested mobile display-heading line height to 1.50.
+- [ ] Increase mobile Top Guides titles to 36px and apply the requested 1.50 line height to the approved mobile display type roles.
+- [ ] Adjust the approved mobile reading-copy roles to 17px: hero body, page-header description, Top Guides/card excerpts, article intro/body/subtitle, legal body, and homepage editorial-feature body.
+- [ ] Preserve Resource Card CTA size while reducing its mobile letter spacing by 30 percent.
+- [ ] Replace the site favicon with the supplied Ring Society SVG icon through managed static storage.

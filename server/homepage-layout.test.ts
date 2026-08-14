@@ -45,4 +45,20 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(topGuides).toContain('w-full pt-16 md:pt-24')
     expect(mission).toContain('w-full pt-16 md:pt-24')
   })
+
+  it('keeps the approved mobile type scale and supplied favicon wired through the shared templates', () => {
+    const hero = readFileSync(resolve(root, 'src/components/Hero.tsx'), 'utf8')
+    const pageHeader = readFileSync(resolve(root, 'src/components/PageHeader.tsx'), 'utf8')
+    const feature = readFileSync(resolve(root, 'src/components/GuideFeature.tsx'), 'utf8')
+    const article = readFileSync(resolve(root, 'src/pages/Article.tsx'), 'utf8')
+    const legal = readFileSync(resolve(root, 'src/pages/LegalPage.tsx'), 'utf8')
+    const favicon = readFileSync(resolve(root, 'index.html'), 'utf8')
+
+    expect(hero).toContain('text-[44px] leading-[1.5]')
+    expect(pageHeader).toContain('text-[44px] leading-[1.5]')
+    expect(feature).toContain('text-[36px] leading-[1.5]')
+    expect(article).toContain('text-[17px] leading-[1.5]')
+    expect(legal).toContain('text-[17px] leading-[1.5]')
+    expect(favicon).toContain('/manus-storage/ring-society-favicon_7da91438.svg')
+  })
 })

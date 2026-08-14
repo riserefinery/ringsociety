@@ -204,7 +204,7 @@ function ArticleBody({
         return (
           <p
             key={key}
-            className={`text-[14px] leading-[1.6] tracking-[0.1px] md:tracking-normal ${
+            className={`text-[17px] leading-[1.5] tracking-[0.1px] md:text-[14px] md:leading-[1.6] md:tracking-normal ${
               block.muted ? 'text-[#7b7b7b]' : 'text-black'
             }`}
           >
@@ -215,7 +215,7 @@ function ArticleBody({
         return (
           <div
             key={key}
-            className="rounded-[8px] border border-[#abb7b1]/20 bg-[#fbf9f7] p-4 text-[14px] leading-[1.6] tracking-[0.1px] text-black"
+            className="rounded-[8px] border border-[#abb7b1]/20 bg-[#fbf9f7] p-4 text-[17px] leading-[1.5] tracking-[0.1px] text-black md:text-[14px] md:leading-[1.6]"
           >
             <span className="font-semibold">{block.label}: </span>
             {block.text}
@@ -229,7 +229,7 @@ function ArticleBody({
                 <dt className="text-[12px] font-semibold uppercase tracking-[1px] text-black">
                   {it.term}
                 </dt>
-                <dd className="text-[14px] leading-[1.6] text-[#7b7b7b]">{it.def}</dd>
+                <dd className="text-[17px] leading-[1.5] text-[#7b7b7b] md:text-[14px] md:leading-[1.6]">{it.def}</dd>
               </div>
             ))}
           </dl>
@@ -259,7 +259,7 @@ function ArticleBody({
               </figcaption>
             )}
             {block.note && (
-              <p className="text-[14px] italic leading-[1.6] text-black">{block.note}</p>
+              <p className="text-[17px] italic leading-[1.5] text-black md:text-[14px] md:leading-[1.6]">{block.note}</p>
             )}
           </figure>
         )
@@ -278,7 +278,7 @@ function ArticleBody({
   let key = 0
   return (
     <div className="flex w-full flex-col gap-8 md:gap-12">
-      <div className="flex flex-col gap-4 text-[15px] leading-[1.6] text-black md:gap-5 md:text-[18px]">
+      <div className="flex flex-col gap-4 text-[17px] leading-[1.5] text-black md:gap-5 md:text-[18px] md:leading-[1.6]">
         {intro.map((b) => (
           <p key={key++}>{b.type === 'p' ? b.text : ''}</p>
         ))}
@@ -511,7 +511,7 @@ export default function Article() {
                   >
                     {doc.title}
                   </h1>
-                  <p className="text-[15px] leading-[1.6] tracking-[0.3px] text-black md:tracking-normal">
+                  <p className="text-[17px] leading-[1.5] tracking-[0.3px] text-black md:text-[15px] md:leading-[1.6] md:tracking-normal">
                     {doc.subtitle}
                   </p>
                 </div>

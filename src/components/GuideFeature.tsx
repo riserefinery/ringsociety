@@ -41,11 +41,11 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               {category}
             </p>
             <Link to={`/guides/${slug}`} className="w-fit transition-opacity hover:opacity-65">
-              <h2 className="text-[28px] leading-[1.18] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
+              <h2 className="text-[36px] leading-[1.5] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
                 {title}
               </h2>
             </Link>
-            <p className="text-[15px] leading-[1.6] tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
+            <p className="text-[17px] leading-[1.5] tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
               {excerpt}
             </p>
             <Link to={`/guides/${slug}`} className="mt-1 w-full rounded-lg bg-black py-[14px] text-center text-[12px] font-semibold uppercase tracking-[1.2px] text-[#fbf9f7]">

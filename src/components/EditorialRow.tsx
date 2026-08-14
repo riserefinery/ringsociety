@@ -75,7 +75,7 @@ export default function EditorialRow({
             {title}
           </h2>
         )}
-        <p className="text-[18px] leading-[1.6]" style={{ color: tone === 'light' ? 'rgba(255,255,255,0.82)' : '#111' }}>
+        <p className="text-[17px] leading-[1.5] md:text-[18px] md:leading-[1.6]" style={{ color: tone === 'light' ? 'rgba(255,255,255,0.82)' : '#111' }}>
           {body}
         </p>
         {to ? <Link to={to} className={ctaClasses}>view the guide</Link> : <span className={ctaClasses}>view the guide</span>}

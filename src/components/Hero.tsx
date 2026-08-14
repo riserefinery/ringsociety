@@ -100,23 +100,23 @@ function HeroMobile({
               {mobileEyebrow}
             </motion.p>
           )}
-          <MHeading variants={fadeUp} className="text-[38px] leading-[1.1] tracking-[-0.5px]" style={{ fontFamily: serif }}>
+          <MHeading variants={fadeUp} className="text-[44px] leading-[1.5] tracking-[-0.5px]" style={{ fontFamily: serif }}>
             {title}
           </MHeading>
         </div>
-        <motion.p variants={fadeUp} className="text-[15px] leading-[1.6] tracking-[0.3px] text-white">
+        <motion.p variants={fadeUp} className="text-[17px] leading-[1.5] tracking-[0.3px] text-white">
           {body}
         </motion.p>
         <motion.div variants={fadeUp}>
           {ctaTo ? (
             <Link
               to={ctaTo}
-              className="block w-full rounded-lg border border-transparent bg-white py-[14px] text-center text-[12px] font-semibold uppercase tracking-[1.2px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white"
+              className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase leading-[1.5] tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white"
             >
               {ctaLabel}
             </Link>
           ) : (
-            <button className="w-full rounded-lg border border-transparent bg-white py-[14px] text-[12px] font-semibold uppercase tracking-[1.2px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white">
+            <button className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase leading-[1.5] tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white">
               {ctaLabel}
             </button>
           )}
