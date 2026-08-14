@@ -102,5 +102,5 @@
 - [x] Add generic local article fallbacks for every existing guide/resource slug, with clearly marked placeholder body content that is overridden by published Sanity content.
 - [x] Link the Top Guides desktop and mobile actions, plus every All Resources card, to their corresponding article routes.
 - [ ] Perform and confirm a harmless live Studio drag reorder on Top Guides before finalizing the editor workflow verification.
-- [ ] Correct the Top Guides public renderer so a post’s published Big Feature Image is used instead of its regular Hero Image.
-- [ ] Make each article card’s image, title, and CTA a reliable link to its matching article route, including Top Guides and All Resources cards.
+- [x] Correct the Top Guides public renderer so a post’s published Big Feature Image is used instead of its regular Hero Image.
+- [x] Make each article card’s image, title, and CTA a reliable link to its matching article route, including Top Guides and All Resources cards.
