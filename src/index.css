@@ -22,6 +22,18 @@ body {
   color: var(--ink);
 }
 
+/* Shared public-site reading copy. Use this for ordinary explanatory and editorial text. */
+.body-copy {
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .body-copy {
+    line-height: 1.6;
+  }
+}
+
 ::selection {
   background: var(--forest);
   color: #fff;

@@ -41,7 +41,7 @@ export default function PageHeader({
           <h1 className="text-[44px] leading-[1.1] tracking-[-1.5px] md:text-[clamp(40px,6vw,58px)]" style={{ fontFamily: serif }}>
             {title}
           </h1>
-          {subtitle && <p className="max-w-[444px] text-[17px] leading-[1.5] md:text-[18px] md:leading-[1.6]">{subtitle}</p>}
+          {subtitle && <p className="body-copy max-w-[444px]">{subtitle}</p>}
           {filters && <div className="mt-3 md:mt-4">{filters}</div>}
         </div>
       </div>

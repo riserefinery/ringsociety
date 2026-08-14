@@ -22,7 +22,7 @@ export default function Newsletter() {
               <h2 className="mx-auto mt-4 max-w-[400px] text-[32px] leading-[1.2] tracking-[-0.5px] text-black md:text-[42px]" style={{ fontFamily: serif }}>
                 Get Our 3 Most-Loved Guides for Ring Shopping
               </h2>
-              <p className="mx-auto mt-4 max-w-[400px] text-[15px] leading-[1.6] md:text-[17px]" style={{ color: 'var(--muted)' }}>
+              <p className="body-copy mx-auto mt-4 max-w-[400px]" style={{ color: 'var(--muted)' }}>
                 Start with our most-loved guides on diamonds, settings, and budgeting — the same
                 questions thousands of couples ask before they buy.
               </p>

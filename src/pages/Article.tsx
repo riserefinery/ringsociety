@@ -204,7 +204,7 @@ function ArticleBody({
         return (
           <p
             key={key}
-            className={`text-[17px] leading-[1.5] tracking-[0.1px] md:text-[14px] md:leading-[1.6] md:tracking-normal ${
+            className={`body-copy tracking-[0.1px] md:tracking-normal ${
               block.muted ? 'text-[#7b7b7b]' : 'text-black'
             }`}
           >
@@ -215,7 +215,7 @@ function ArticleBody({
         return (
           <div
             key={key}
-            className="rounded-[8px] border border-[#abb7b1]/20 bg-[#fbf9f7] p-4 text-[17px] leading-[1.5] tracking-[0.1px] text-black md:text-[14px] md:leading-[1.6]"
+            className="body-copy rounded-[8px] border border-[#abb7b1]/20 bg-[#fbf9f7] p-4 tracking-[0.1px] text-black"
           >
             <span className="font-semibold">{block.label}: </span>
             {block.text}
@@ -229,7 +229,7 @@ function ArticleBody({
                 <dt className="text-[12px] font-semibold uppercase tracking-[1px] text-black">
                   {it.term}
                 </dt>
-                <dd className="text-[17px] leading-[1.5] text-[#7b7b7b] md:text-[14px] md:leading-[1.6]">{it.def}</dd>
+                <dd className="body-copy text-[#7b7b7b]">{it.def}</dd>
               </div>
             ))}
           </dl>
@@ -259,7 +259,7 @@ function ArticleBody({
               </figcaption>
             )}
             {block.note && (
-              <p className="text-[17px] italic leading-[1.5] text-black md:text-[14px] md:leading-[1.6]">{block.note}</p>
+              <p className="body-copy italic text-black">{block.note}</p>
             )}
           </figure>
         )
@@ -278,7 +278,7 @@ function ArticleBody({
   let key = 0
   return (
     <div className="flex w-full flex-col gap-8 md:gap-12">
-      <div className="flex flex-col gap-4 text-[17px] leading-[1.5] text-black md:gap-5 md:text-[18px] md:leading-[1.6]">
+      <div className="body-copy flex flex-col gap-4 text-black md:gap-5">
         {intro.map((b) => (
           <p key={key++}>{b.type === 'p' ? b.text : ''}</p>
         ))}
@@ -414,6 +414,53 @@ export default function Article() {
     }
   }, [slug])
 
+  useEffect(() => {
+    const canonical = `https://ringsociety.com/guides/${doc.slug}`
+    const upsert = (selector: string, attribute: 'name' | 'property', content: string) => {
+      let element = document.querySelector<HTMLMetaElement>(selector)
+      if (!element) {
+        element = document.createElement('meta')
+        element.setAttribute(attribute, selector.match(/="([^"]+)"/)?.[1] ?? '')
+        document.head.appendChild(element)
+      }
+      element.content = content
+    }
+    const canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+
+    document.title = `${doc.title} | Ring Society`
+    upsert('meta[name="description"]', 'name', doc.subtitle)
+    upsert('meta[property="og:title"]', 'property', doc.title)
+    upsert('meta[property="og:description"]', 'property', doc.subtitle)
+    upsert('meta[property="og:url"]', 'property', canonical)
+    upsert('meta[property="og:type"]', 'property', 'article')
+    upsert('meta[name="twitter:title"]', 'name', doc.title)
+    upsert('meta[name="twitter:description"]', 'name', doc.subtitle)
+    if (canonicalLink) canonicalLink.href = canonical
+
+    const schemaId = 'ring-society-article-schema'
+    let schema = document.getElementById(schemaId) as HTMLScriptElement | null
+    if (!schema) {
+      schema = document.createElement('script')
+      schema.id = schemaId
+      schema.type = 'application/ld+json'
+      document.head.appendChild(schema)
+    }
+    schema.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: doc.title,
+      description: doc.subtitle,
+      mainEntityOfPage: canonical,
+      author: { '@type': 'Organization', name: 'Ring Society' },
+      publisher: { '@type': 'Organization', name: 'Ring Society', url: 'https://ringsociety.com/' },
+    })
+
+    return () => {
+      document.getElementById(schemaId)?.remove()
+      upsert('meta[property="og:type"]', 'property', 'website')
+    }
+  }, [doc])
+
   const gallery: GalleryImage[] = useMemo(
     () =>
       doc.body
@@ -511,7 +558,7 @@ export default function Article() {
                   >
                     {doc.title}
                   </h1>
-                  <p className="text-[17px] leading-[1.5] tracking-[0.3px] text-black md:text-[15px] md:leading-[1.6] md:tracking-normal">
+                  <p className="body-copy tracking-[0.3px] text-black md:tracking-normal">
                     {doc.subtitle}
                   </p>
                 </div>

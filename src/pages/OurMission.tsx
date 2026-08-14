@@ -26,12 +26,12 @@ function Statement({
   return (
     <Reveal as="section" className="mx-auto w-full max-w-[1440px] px-6 py-12 md:px-[130px] md:py-[103px]">
       <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-16">
-        <p
+        <h2
           className="shrink-0 text-[28px] leading-[1.2] tracking-[-0.3px] text-[#0e0e0e] md:text-[42px] md:tracking-[-0.5px]"
           style={{ fontFamily: serif }}
         >
           {eyebrow}
-        </p>
+        </h2>
         <div className="flex flex-col gap-6 md:w-[828px]">
           <p
             className="text-[28px] leading-[1.18] tracking-[-0.3px] text-[#0e0e0e] md:text-[40px] md:leading-[1.1] md:tracking-[-1.5px]"
@@ -40,7 +40,7 @@ function Statement({
             {statement}
           </p>
           {body && (
-            <p className="text-[15px] font-light leading-[1.5] tracking-[0.3px] text-[#0f2d1e] md:text-[20px] md:tracking-normal">
+            <p className="body-copy font-light tracking-[0.3px] text-[#0f2d1e] md:tracking-normal">
               {body}
             </p>
           )}
@@ -63,7 +63,7 @@ function Vision() {
           <img src={visionImgMobile} alt="" className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-col gap-6 bg-white px-6 py-12">
-          <p className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#0e0e0e]">Our Vision</p>
+          <h2 className="text-[11px] font-semibold uppercase tracking-[1.5px] text-[#0e0e0e]">Our Vision</h2>
           <p className="text-[28px] leading-[1.18] tracking-[-0.3px] text-[#0e0e0e]" style={{ fontFamily: serif }}>
             {visionStatement}
           </p>
@@ -75,9 +75,9 @@ function Vision() {
         <img src={visionImg} alt="" className="absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.25)' }} />
         <div className="relative mx-auto flex min-h-[700px] w-full max-w-[1440px] justify-between px-[130px] py-[94px] text-[#fbf9f7]">
-          <p className="text-[42px] leading-[1.2] tracking-[-0.5px]" style={{ fontFamily: serif }}>
+          <h2 className="text-[42px] leading-[1.2] tracking-[-0.5px]" style={{ fontFamily: serif }}>
             Our Vision
-          </p>
+          </h2>
           <div className="flex w-[828px] flex-col justify-end">
             <p className="w-[795px] text-[40px] leading-[1.2] tracking-[-0.5px]" style={{ fontFamily: serif }}>
               {visionStatement}
@@ -128,10 +128,10 @@ function WhatWeDo() {
             >
               <img src={f.icon} alt="" className="h-[96px] w-auto self-start" />
               <div className="flex flex-col gap-2 md:gap-3">
-                <p className="text-[18px] font-medium leading-[1.35] text-[#0e0e0e] md:text-[24px] md:tracking-[-0.96px]">
+                <h3 className="text-[18px] font-medium leading-[1.35] text-[#0e0e0e] md:text-[24px] md:tracking-[-0.96px]">
                   {f.title}
-                </p>
-                <p className="text-[14px] leading-[1.6] tracking-[0.1px] text-[#6e6e6e] md:text-[16px] md:tracking-normal">
+                </h3>
+                <p className="body-copy tracking-[0.1px] text-[#6e6e6e] md:tracking-normal">
                   {f.body}
                 </p>
               </div>

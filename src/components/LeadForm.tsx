@@ -11,9 +11,8 @@ type LeadFormProps = {
 }
 
 const field =
-  'w-full border-b bg-transparent pb-2 text-[13px] outline-none transition-colors placeholder:text-[var(--muted)] focus:border-black md:text-[15px]'
-const contactField =
-  'mt-3 w-full border border-[#c7c4bd] bg-white px-4 py-3.5 text-[16px] text-[#173d2c] outline-none transition-colors placeholder:text-[#818181] focus:border-[#173d2c]'
+  'w-full border-b border-[#c1c1c1] bg-transparent pb-2 text-[17px] leading-[1.5] outline-none transition-colors placeholder:text-[var(--muted)] focus:border-black'
+const contactField = `mt-3 ${field} text-[#173d2c]`
 const contactLabel = 'text-[12px] font-semibold uppercase tracking-[1.7px] text-[#173d2c]'
 const contactTopics = [
   'General question about engagement rings',
@@ -87,9 +86,9 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
         </>
       ) : (
         <>
-          <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={field} style={{ borderColor: '#c1c1c1' }} />
-          <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={field} style={{ borderColor: '#c1c1c1' }} />
-          <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={field} style={{ borderColor: '#c1c1c1' }} />
+          <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={field} />
+          <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={field} />
+          <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={field} />
         </>
       )}
       <input name="website" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden="true" />

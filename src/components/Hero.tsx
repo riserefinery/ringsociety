@@ -107,7 +107,7 @@ function HeroMobile({
             {title}
           </MHeading>
         </div>
-        <motion.p variants={fadeUp} className="text-[17px] leading-[1.5] tracking-[0.3px] text-white">
+        <motion.p variants={fadeUp} className="body-copy tracking-[0.3px] text-white">
           {body}
         </motion.p>
         <motion.div variants={fadeUp}>
@@ -199,7 +199,7 @@ function HeroDesktop({
             >
               {title}
             </MHeading>
-            <motion.p variants={fadeUp} className="max-w-[467px] text-[17px] leading-[1.6] text-white/90">
+            <motion.p variants={fadeUp} className="body-copy max-w-[467px] text-white/90">
               {body}
             </motion.p>
             <motion.div variants={fadeUp}>

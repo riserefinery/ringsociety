@@ -45,7 +45,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
                 {title}
               </h2>
             </Link>
-            <p className="text-[17px] leading-[1.5] tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
+            <p className="body-copy tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
               {excerpt}
             </p>
             <Link to={`/guides/${slug}`} className="mt-1 w-full rounded-lg bg-black py-[14px] text-center text-[12px] font-semibold uppercase tracking-[1.2px] text-[#fbf9f7]">
@@ -86,7 +86,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
                   {title}
                 </h2>
               </Link>
-              <p className="max-w-[467px] text-[15px] leading-[1.6] tracking-[0.1px]" style={{ color: light ? 'rgba(255,255,255,0.9)' : '#2a2a2a' }}>
+              <p className="body-copy max-w-[467px] tracking-[0.1px]" style={{ color: light ? 'rgba(255,255,255,0.9)' : '#2a2a2a' }}>
                 {excerpt}
               </p>
               <Link

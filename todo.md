@@ -122,3 +122,7 @@
 - [x] Scale the mobile hamburger and search icons proportionally to 18px and expand each mobile navigation touch target to 32px.
 - [x] Restore the compact desktop Top Guides CTA and remove the mistakenly applied desktop full-width treatment.
 - [x] Make the full-width Top Guides mobile button treatment the default for comparable homepage mobile CTAs without changing desktop CTA widths.
+- [ ] Match the Contact form field styling to the newsletter CTA form while retaining its additional topic and message controls.
+- [ ] Establish shared body-copy style tokens and apply them consistently across public page templates and new content surfaces.
+- [ ] Audit and repair public-page metadata, title hierarchy, and semantic heading structure for SEO best practices.
+- [ ] Document any post-audit Sanity content or SEO-field updates required from Ring Society editors.
