@@ -73,11 +73,13 @@
 - [x] Verify the deployed Studio schema exposes the Hero Image and Alignment control in All Resources, Top Guides, Our Mission, and Contact singletons.
 - [x] Add explicit token-based Studio release instructions to the launch handoff for browser-independent future schema deployments.
 - [x] Verify from the authenticated live Studio UI that the Presentation tool opens the Shopfine Vercel review URL.
-- [ ] Create editable Sanity draft records for the existing local guide cards and article templates, retaining their current slugs, titles, excerpts, categories, and image references.
-- [ ] Upload the current guide imagery to Sanity assets and attach it to the corresponding editable guide records for Studio visibility.
-- [ ] Upload the supplied Jeweler Framework image to Sanity, attach it to the matching guide draft, and update the live fallback mapping so the replacement appears sitewide immediately.
-- [ ] Create editable Sanity draft records for the four published legal documents while preserving the existing public legal pages until editorial publication is chosen.
-- [ ] Verify that the Studio lists the migrated guide and legal drafts, and document the exact editor workflow for updating an image sitewide.
-- [ ] Restore the missing `zod` server dependency so the existing authentication regression test runs with the full validation suite.
-- [ ] Restore the missing `@trpc/server` dependency so the existing authentication regression test runs with the full validation suite.
-- [ ] Restore the missing `superjson` dependency so the existing authentication regression test runs with the full validation suite.
+- [x] Create editable Sanity draft records for the existing local guide cards and article templates, retaining their current slugs, titles, excerpts, categories, and image references.
+- [x] Upload the current guide imagery to Sanity assets and attach it to the corresponding editable guide records for Studio visibility.
+- [x] Upload the supplied Jeweler Framework image to Sanity, attach it to the matching guide draft, and update the live fallback mapping so the replacement appears sitewide immediately.
+- [x] Create editable Sanity draft records for the four published legal documents while preserving the existing public legal pages until editorial publication is chosen.
+- [x] Verify that the Studio lists the migrated guide and legal drafts, and document the exact editor workflow for updating an image sitewide.
+- [x] Restore the missing `zod` server dependency so the existing authentication regression test runs with the full validation suite.
+- [x] Restore the missing `@trpc/server` dependency so the existing authentication regression test runs with the full validation suite.
+- [x] Restore the missing `superjson` dependency so the existing authentication regression test runs with the full validation suite.
+- [x] Verify via Sanity query that the migrated guide and legal draft documents are present in the production dataset and visible to Studio.
+- [x] Add a lightweight validation test that asserts the expected migrated draft record counts are present in the production dataset.
