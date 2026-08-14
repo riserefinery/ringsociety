@@ -105,4 +105,4 @@
 - [x] Correct the Top Guides public renderer so a post’s published Big Feature Image is used instead of its regular Hero Image.
 - [x] Make each article card’s image, title, and CTA a reliable link to its matching article route, including Top Guides and All Resources cards.
 - [x] Prevent the Top Guides rows from rendering a local hero-image fallback before their published Big Feature Images resolve from Sanity.
-- [ ] Prevent the Top Guides newsletter and footer from shifting into view before the CMS guide rows are ready by reserving the guide-list layout during loading.
+- [x] Prevent the Top Guides newsletter and footer from shifting into view before the CMS guide rows are ready by reserving the guide-list layout during loading.
