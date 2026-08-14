@@ -97,6 +97,7 @@ function EditorialSection() {
         }
         body="Before you walk into any jeweler, there are 10 things you should be evaluating — from how long they've been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and more."
         to="/guides/how-to-choose-a-jeweler"
+        mobileCtaFullWidth
       />
       <EditorialRow
         reverse
@@ -106,6 +107,7 @@ function EditorialSection() {
         title="The Complete Guide to Engagement Ring Settings & Styles"
         body="A visual guide detailing every major ring setting (Solitaire, Halo, Pavé, Bezel, Channel, Three-Stone). It covers the pros and cons of each, how different settings impact the perceived size of the center stone, and which styles suit more active lifestyles."
         to="/guides/engagement-ring-settings-and-styles"
+        mobileCtaFullWidth
       />
       <div>
         <h2 className="sr-only">More engagement ring guides and articles</h2>
@@ -140,6 +142,7 @@ function BlackSection() {
         }
         body="Before a single conversation about stones or settings, there's a bigger decision hiding underneath all of it: where you buy the ring. National chains, online-only retailers, and independent local jewelers each operate genuinely differently, and the differences matter more than most buyers expect going in."
         to="/guides/go-big-or-shop-small"
+        mobileCtaFullWidth
       />
         <EditorialRow
           reverse
@@ -156,6 +159,7 @@ function BlackSection() {
         }
         body="A transparent guide tackling the biggest question being asked right now. It compares price, chemical makeup, long-term value retention, and ethical considerations."
         to="/guides/natural-vs-lab-grown-diamonds"
+        mobileCtaFullWidth
       />
       </div>
     </section>
@@ -237,6 +241,7 @@ export default function Home() {
           body="Shopping for an engagement ring should be one of life’s biggest moments… but often couples find it intimidating and stressful. We’ll show you everything, from styles to budgeting, to jewelers."
           ctaLabel="view the guide"
           ctaTo="/guides/the-definitive-engagement-ring-buying-guide-2026"
+          mobileCtaFullWidth
           ready={heroReady}
           fullBleedDesktop
           alignContentToPageGrid

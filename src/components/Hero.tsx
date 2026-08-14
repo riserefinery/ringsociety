@@ -44,6 +44,8 @@ export type HeroProps = {
   ctaLabel?: string
   /** Optional route the CTA button links to. */
   ctaTo?: string
+  /** Makes the CTA fill the mobile content column while preserving its desktop width. */
+  mobileCtaFullWidth?: boolean
   /** Heading level — use `h1` for the primary page hero, `h2` elsewhere. */
   as?: 'h1' | 'h2'
   /** Solid background color of the mobile text panel. */
@@ -78,6 +80,7 @@ function HeroMobile({
   mobileEyebrow,
   ctaLabel = 'view the guide',
   ctaTo,
+  mobileCtaFullWidth = false,
   as = 'h1',
   mobilePanelColor = '#817164',
   mobileImagePosition = 'center 30%',
@@ -111,12 +114,12 @@ function HeroMobile({
           {ctaTo ? (
             <Link
               to={ctaTo}
-              className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white"
+              className={`inline-flex h-[45px] items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white ${mobileCtaFullWidth ? 'w-full' : 'w-fit'}`}
             >
               {ctaLabel}
             </Link>
           ) : (
-            <button className="inline-flex h-[45px] w-fit items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white">
+            <button className={`inline-flex h-[45px] items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white ${mobileCtaFullWidth ? 'w-full' : 'w-fit'}`}>
               {ctaLabel}
             </button>
           )}

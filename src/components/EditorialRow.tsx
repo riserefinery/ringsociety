@@ -15,6 +15,7 @@ export default function EditorialRow({
   badge,
   tone = 'dark',
   to,
+  mobileCtaFullWidth = false,
 }: {
   image: string
   alt: string
@@ -25,9 +26,10 @@ export default function EditorialRow({
   badge?: string
   tone?: 'dark' | 'light'
   to?: string
+  mobileCtaFullWidth?: boolean
 }) {
   const textColor = tone === 'light' ? '#fff' : '#000'
-  const ctaClasses = `inline-flex h-[45px] w-fit items-center justify-center rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${
+  const ctaClasses = `inline-flex h-[45px] ${mobileCtaFullWidth ? 'w-full md:w-fit' : 'w-fit'} items-center justify-center rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${
     tone === 'light' ? 'border border-transparent bg-white text-black hover:bg-black hover:text-white' : 'border border-black bg-black text-[#fbf9f7] hover:bg-white hover:text-black'
   }`
   return (

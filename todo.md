@@ -120,3 +120,5 @@
 - [x] Apply the full-width mobile Top Guides CTA treatment to the desktop Top Guides guide rows.
 - [x] Audit and report the current mobile hamburger and search icon pixel dimensions before changing either navigation icon.
 - [x] Scale the mobile hamburger and search icons proportionally to 18px and expand each mobile navigation touch target to 32px.
+- [ ] Restore the compact desktop Top Guides CTA and remove the mistakenly applied desktop full-width treatment.
+- [ ] Make the full-width Top Guides mobile button treatment the default for comparable homepage mobile CTAs without changing desktop CTA widths.

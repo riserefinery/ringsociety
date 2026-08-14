@@ -91,7 +91,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               </p>
               <Link
                 to={`/guides/${slug}`}
-                className={`inline-flex h-[45px] w-full items-center justify-center rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${
+                className={`inline-flex h-[41px] w-fit items-center justify-center rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${
                   light ? 'border border-transparent bg-white text-black hover:bg-black hover:text-white' : 'border border-black bg-black text-[#fbf9f7] hover:bg-white hover:text-black'
                 }`}
               >
