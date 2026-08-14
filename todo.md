@@ -110,9 +110,9 @@
 - [x] Confirm in the authenticated hosted Studio UI that the prior unknown-field warning is gone and Hello Bar Text is editable in Site Settings.
 - [x] Link each homepage resource-card image, title, and CTA to its corresponding connected article route.
 - [x] Audit and document the current mobile type sizes and line heights by common text role before applying any typography refinements.
-- [ ] Increase the mobile homepage hero headline to 44px and align its CTA text and styling with the shared guide-button system.
-- [ ] Set mobile interior page headers to 44px and the requested mobile display-heading line height to 1.50.
-- [ ] Increase mobile Top Guides titles to 36px and apply the requested 1.50 line height to the approved mobile display type roles.
-- [ ] Adjust the approved mobile reading-copy roles to 17px: hero body, page-header description, Top Guides/card excerpts, article intro/body/subtitle, legal body, and homepage editorial-feature body.
-- [ ] Preserve Resource Card CTA size while reducing its mobile letter spacing by 30 percent.
-- [ ] Replace the site favicon with the supplied Ring Society SVG icon through managed static storage.
+- [x] Increase the mobile homepage hero headline to 44px and align its CTA text and styling with the shared guide-button system.
+- [x] Set mobile interior page headers to 44px and the requested mobile display-heading line height to 1.50.
+- [x] Increase mobile Top Guides titles to 36px and apply the requested 1.50 line height to the approved mobile display type roles.
+- [x] Adjust the approved mobile reading-copy roles to 17px: hero body, page-header description, Top Guides/card excerpts, article intro/body/subtitle, legal body, and homepage editorial-feature body.
+- [x] Preserve Resource Card CTA size while reducing its mobile letter spacing by 30 percent.
+- [x] Replace the site favicon with the supplied Ring Society SVG icon through managed static storage.
