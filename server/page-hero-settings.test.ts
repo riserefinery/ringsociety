@@ -67,6 +67,17 @@ describe('CMS page hero settings and contact layout', () => {
     expect(header).toContain('{helloBarText}')
   })
 
+  it('does not require editors to maintain publishing dates on posts', () => {
+    const documents = read('studio/schemas/documents.ts')
+    const queries = read('src/sanity/queries.ts')
+
+    expect(documents).not.toContain("name: 'publishedAt'")
+    expect(documents).not.toContain("name: 'lastReviewed'")
+    expect(documents).toContain("subtitle: 'contentType'")
+    expect(queries).not.toContain('defined(publishedAt)')
+    expect(queries).toContain('order(_updatedAt desc)')
+  })
+
   it('keeps the Contact page within the approved Ring Society form and content system', () => {
     const contact = read('src/pages/Contact.tsx')
     const leadForm = read('src/components/LeadForm.tsx')

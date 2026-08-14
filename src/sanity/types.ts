@@ -57,7 +57,6 @@ export type CmsPost = {
   keywordTags?: string[]
   sidebarCta?: CmsSidebarCta
   relatedPosts?: CmsPost[]
-  publishedAt?: string
 }
 
 export type CmsTopGuidesSelection = {

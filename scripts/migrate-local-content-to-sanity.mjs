@@ -191,7 +191,6 @@ async function main() {
       _type: 'legalPage',
       title: legal.title,
       slug: { _type: 'slug', current: legal.slug },
-      lastReviewed: '2026-08-13',
       body: markdownToBlocks(markdown),
     })
   }

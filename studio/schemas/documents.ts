@@ -86,7 +86,6 @@ export const post = defineType({
     defineField({ name: 'slug', title: 'Slug', type: 'slug', group: 'content', options: { source: 'title', maxLength: 96 }, validation: (Rule) => Rule.required() }),
     defineField({ name: 'excerpt', title: 'Excerpt', type: 'text', group: 'content', rows: 3, validation: (Rule) => Rule.required().max(240) }),
     defineField({ name: 'contentType', title: 'Content Type', type: 'string', group: 'content', initialValue: 'Guide', options: { list: ['Guide', 'Article', 'Trends', 'Perspectives'] } }),
-    defineField({ name: 'publishedAt', title: 'Publish Date', type: 'datetime', group: 'content', validation: (Rule) => Rule.required() }),
     defineField({ name: 'intro', title: 'Article Introduction', type: 'array', group: 'content', of: [standardBlock] }),
     defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [standardBlock, articleImage, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
     defineField({ name: 'heroImage', title: 'Hero Image', type: 'responsiveImage', group: 'media', validation: (Rule) => Rule.required() }),
@@ -112,7 +111,7 @@ export const post = defineType({
     }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo', group: 'seo' }),
   ],
-  preview: { select: { title: 'title', subtitle: 'publishedAt', media: 'heroImage.mainImage' } },
+  preview: { select: { title: 'title', subtitle: 'contentType', media: 'heroImage.mainImage' } },
 })
 
 export const blogLanding = defineType({
@@ -180,9 +179,8 @@ export const legalPage = defineType({
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'slug', title: 'Slug', type: 'slug', options: { source: 'title', maxLength: 96 }, validation: (Rule) => Rule.required() }),
-    defineField({ name: 'lastReviewed', title: 'Last Reviewed', type: 'date' }),
     defineField({ name: 'body', title: 'Legal Copy', type: 'array', of: [standardBlock], validation: (Rule) => Rule.required() }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
   ],
-  preview: { select: { title: 'title', subtitle: 'lastReviewed' } },
+  preview: { select: { title: 'title', subtitle: 'slug.current' } },
 })

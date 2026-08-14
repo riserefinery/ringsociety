@@ -20,3 +20,7 @@ On 2026-08-14, the Shopfine review deployment at `https://ringsociety-web.vercel
 ## Dataset verification
 
 On 2026-08-14, a raw-perspective query against the `p1o8iwkt` production dataset confirmed **15 editable `post` drafts** and **4 editable `legalPage` drafts**. It also confirmed that `drafts.post-how-to-choose-a-jeweler` references the supplied Jeweler Framework asset: `image-b326d3006e0d637442eb00c087fbc53130793ac8-1340x895-jpg`. The regression suite includes `server/sanity-migration-catalog.test.ts` to retain this check.
+
+## Top Guides and hello-bar migration
+
+On 2026-08-14, the migration created `drafts.topGuidesLanding` with eight ordered guide references, added each relevant post’s `bigFeatureImage`, and created `drafts.siteSettings` with the current green hello-bar message. The review deployment continued to display the existing eight-row Top Guides fallback, including the supplied Jeweler Framework background, while those CMS records remain drafts. Once the selected posts and Top Guides singleton are published, the public page will instead use the editor-managed order and post-level Big Feature images.

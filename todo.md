@@ -89,4 +89,7 @@
 - [ ] Release and verify the updated Studio schema and Top Guides editor workflow, including drag ordering and post image replacement.
 - [x] Restore TypeScript validation by repairing the pre-existing shared component and CMS page-state contracts surfaced during Top Guides verification.
 - [x] Add an editable Site Settings hello-bar text field and connect the shared public header to its published Sanity value with the existing text as a fallback.
-- [ ] Push the validated Top Guides and hello-bar public-site implementation to GitHub and verify the review deployment.
+- [x] Push the validated Top Guides and hello-bar public-site implementation to GitHub and verify the review deployment.
+- [ ] Verify in the authenticated live Studio UI that Pages → Top Guides exposes the ordered selected-post list and drag-reorder controls.
+- [ ] Verify in the authenticated live Studio UI that a post exposes the Big Feature Image field and that it is populated on the Jeweler Framework draft.
+- [x] Remove the post publishing-date field and all public query dependencies so routine Sanity edits no longer require date entry.

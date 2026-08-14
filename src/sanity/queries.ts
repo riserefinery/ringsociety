@@ -17,7 +17,6 @@ const postProjection = `{
   body,
   keywordTags,
   sidebarCta,
-  publishedAt,
   "categories": categories[]->{title, filterKey},
   "relatedPosts": relatedPosts[]->{
     _id,
@@ -36,7 +35,7 @@ export async function getCmsArticleCards() {
 
   try {
     const posts = await sanityClient.fetch<CmsPost[]>(
-      `*[_type == "post" && defined(slug.current) && defined(publishedAt)] | order(publishedAt desc) ${postProjection}`,
+      `*[_type == "post" && defined(slug.current)] | order(_updatedAt desc) ${postProjection}`,
     )
     return toCmsCards(posts)
   } catch {
@@ -49,7 +48,7 @@ export async function getCmsArticle(slug: string | undefined) {
 
   try {
     const post = await sanityClient.fetch<CmsPost | null>(
-      `*[_type == "post" && slug.current == $slug && defined(publishedAt)][0] ${postProjection}`,
+      `*[_type == "post" && slug.current == $slug][0] ${postProjection}`,
       { slug },
     )
     return post ? toArticleDoc(post) : null
