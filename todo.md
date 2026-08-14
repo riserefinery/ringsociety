@@ -118,5 +118,5 @@
 - [x] Replace the site favicon with the supplied Ring Society SVG icon through managed static storage.
 - [x] Restore the original line heights for the enlarged mobile homepage hero headline, interior page headers, Top Guides titles, and shared CTA/card text while retaining the approved size changes.
 - [x] Apply the full-width mobile Top Guides CTA treatment to the desktop Top Guides guide rows.
-- [ ] Audit and report the current mobile hamburger and search icon pixel dimensions before changing either navigation icon.
-- [ ] Scale the mobile hamburger and search icons proportionally to 18px and expand each mobile navigation touch target to 32px.
+- [x] Audit and report the current mobile hamburger and search icon pixel dimensions before changing either navigation icon.
+- [x] Scale the mobile hamburger and search icons proportionally to 18px and expand each mobile navigation touch target to 32px.
