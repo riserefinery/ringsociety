@@ -552,6 +552,9 @@ export function readingTimeFor(doc: ArticleDoc): string {
  * `allArticles`), skipping the one being read.
  */
 export function getRelated(doc: ArticleDoc): Card[] {
-  if (doc.related) return doc.related
-  return allArticles.filter((a) => a.title !== doc.title).slice(0, 3)
+  const cards = doc.related ?? allArticles.filter((a) => a.title !== doc.title).slice(0, 3)
+  return cards.map((card) => ({
+    ...card,
+    to: card.to ?? articlePathForTitle(card.title),
+  }))
 }

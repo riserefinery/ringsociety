@@ -15,6 +15,7 @@ describe('CMS route wiring', () => {
     expect(content).toContain('mergePublishedArticleCards')
     expect(content).toContain('temporaryArticleFor')
     expect(content).toContain('Replace this placeholder body in Sanity')
+    expect(content).toContain('to: card.to ?? articlePathForTitle(card.title)')
     expect(resources).toContain('mergePublishedArticleCards(cmsArticles)')
     expect(home).toContain('articlePathForTitle')
     expect(home).toContain('GuideCard card={{ ...c, to: articlePathForTitle(c.title) }}')
@@ -38,5 +39,14 @@ describe('CMS route wiring', () => {
     expect(editorialRow).toContain('Read ${typeof title === \'string\' ? title : eyebrow}')
     expect(editorialRow).toContain("mobileCtaFullWidth ? 'w-full md:w-fit' : 'w-fit'")
     expect(read('src/pages/Home.tsx')).toContain('mobileCtaFullWidth')
+  })
+
+  it('connects article-page Explore More cards to their matching article routes', () => {
+    const article = read('src/pages/Article.tsx')
+    const card = read('src/components/GuideCard.tsx')
+
+    expect(article).toContain('<GuideCard card={c} />')
+    expect(card).toContain('return card.to ?')
+    expect(card).toContain('to={card.to}')
   })
 })
