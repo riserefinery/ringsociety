@@ -7,6 +7,9 @@ import SearchOverlay from './SearchOverlay'
 import { SearchIcon } from './ui'
 import { getCmsSiteSettings } from '../sanity/queries'
 
+const COMPACT_HEADER_ENTER_SCROLL_Y = 48
+const COMPACT_HEADER_EXIT_SCROLL_Y = 16
+
 /** Universal site header + nav. Shared across every page. */
 export default function Header() {
   const nav = headerNav.slice(0, 2)
@@ -15,7 +18,12 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [helloBarText, setHelloBarText] = useState('Your trusted guide to the perfect Engagement ring')
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => {
+      const scrollY = window.scrollY
+      setScrolled((wasScrolled) =>
+        wasScrolled ? scrollY > COMPACT_HEADER_EXIT_SCROLL_Y : scrollY > COMPACT_HEADER_ENTER_SCROLL_Y,
+      )
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)

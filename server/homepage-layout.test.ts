@@ -64,5 +64,8 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(header).toContain('h-[28.8px] w-[18px]')
     expect(header).toContain('<SearchIcon size={18} />')
     expect(header).toContain('className="flex h-8 w-8 items-center justify-center"')
+    expect(header).toContain('COMPACT_HEADER_ENTER_SCROLL_Y = 48')
+    expect(header).toContain('COMPACT_HEADER_EXIT_SCROLL_Y = 16')
+    expect(header).toContain('wasScrolled ? scrollY > COMPACT_HEADER_EXIT_SCROLL_Y : scrollY > COMPACT_HEADER_ENTER_SCROLL_Y')
   })
 })
