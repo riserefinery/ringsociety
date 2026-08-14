@@ -21,6 +21,6 @@ describe('CMS route wiring', () => {
     const feature = read('src/components/GuideFeature.tsx')
 
     expect(feature).toContain('to={`/guides/${slug}`}')
-    expect(feature).toContain('<Link to={`/guides/${slug}`}>')
+    expect(feature).toContain('<Link\n                to={`/guides/${slug}`}')
   })
 })

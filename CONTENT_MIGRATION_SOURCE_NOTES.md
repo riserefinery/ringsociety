@@ -26,3 +26,9 @@ On 2026-08-14, a raw-perspective query against the `p1o8iwkt` production dataset
 On 2026-08-14, the migration created `drafts.topGuidesLanding` with eight ordered guide references, added each relevant post’s `bigFeatureImage`, and created `drafts.siteSettings` with the current green hello-bar message. The review deployment continued to display the existing eight-row Top Guides fallback, including the supplied Jeweler Framework background, while those CMS records remain drafts. Once the selected posts and Top Guides singleton are published, the public page will instead use the editor-managed order and post-level Big Feature images.
 
 After an editor updated the Jeweler Framework Big Feature image, the Top Guides selection was repaired to use **weak references to canonical post IDs** rather than references to draft post IDs. This preserves the current eight-row order, retains the editor’s selected image asset, and allows each referenced post to publish without a draft-reference deletion conflict.
+
+## Browser access and connected guide previews
+
+On 2026-08-14, the missing `https://ringsociety-web.vercel.app` Sanity CORS origin was added. Before that correction, the browser silently retained local fallbacks because its client-side Sanity requests were blocked. After the origin was authorized, the Top Guides page immediately rendered the published Jeweler Framework Big Feature asset from Sanity.
+
+The existing resource catalog now retains its complete fallback order while published CMS cards override their matching entries. Every existing guide/resource destination also has a connected article-template preview route with clearly marked temporary text; publishing an approved Sanity post replaces that temporary content at the same route.

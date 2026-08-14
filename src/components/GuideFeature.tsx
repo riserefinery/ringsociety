@@ -1,7 +1,7 @@
 import { svgPaths } from '../lib/assets'
 import type { Guide } from '../lib/content'
 import { Link } from 'react-router'
-import { SolidButton, serif } from './ui'
+import { serif } from './ui'
 
 /**
  * Universal large "guide feature" block for pillar guides.
@@ -81,8 +81,13 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               <p className="max-w-[467px] text-[15px] leading-[1.6] tracking-[0.1px]" style={{ color: light ? 'rgba(255,255,255,0.9)' : '#2a2a2a' }}>
                 {excerpt}
               </p>
-              <Link to={`/guides/${slug}`}>
-                <SolidButton variant={light ? 'light' : 'dark'} className="w-fit !h-[41px]">view the guide</SolidButton>
+              <Link
+                to={`/guides/${slug}`}
+                className={`inline-flex h-[41px] w-fit items-center justify-center rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${
+                  light ? 'border border-transparent bg-white text-black hover:bg-black hover:text-white' : 'border border-black bg-black text-[#fbf9f7] hover:bg-white hover:text-black'
+                }`}
+              >
+                view the guide
               </Link>
             </div>
           </div>
