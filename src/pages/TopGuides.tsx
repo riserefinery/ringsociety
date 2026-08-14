@@ -34,16 +34,25 @@ export default function TopGuides() {
         fullBleedDesktop
         matchResourcesHeight
       />
-      <div className="flex w-full flex-col items-center gap-12 pt-8 md:gap-6 md:pt-16">
-        {guides.map((guide) => (
-          <Reveal key={guide.slug} className="w-full">
-            <GuideFeature guide={guide} />
-          </Reveal>
-        ))}
+      <div
+        className="flex w-full flex-col items-center gap-12 pt-8 md:gap-6 md:pt-16"
+        aria-busy={!cmsResolved}
+      >
+        {cmsResolved ? (
+          guides.map((guide) => (
+            <Reveal key={guide.slug} className="w-full">
+              <GuideFeature guide={guide} />
+            </Reveal>
+          ))
+        ) : (
+          <div aria-hidden className="h-[420px] w-full md:h-[560px]" />
+        )}
       </div>
-      <div className="w-full pt-16 md:pt-24">
-        <Newsletter />
-      </div>
+      {cmsResolved && (
+        <div className="w-full pt-16 md:pt-24">
+          <Newsletter />
+        </div>
+      )}
     </>
   )
 }

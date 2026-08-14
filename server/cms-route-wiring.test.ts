@@ -27,5 +27,7 @@ describe('CMS route wiring', () => {
     expect(feature).toContain('aria-label={`Read ${title}`}')
     expect(topGuides).toContain('const [cmsResolved, setCmsResolved] = useState(false)')
     expect(topGuides).toContain('const guides = cmsResolved ? mergeTopGuideRows')
+    expect(topGuides).toContain('aria-busy={!cmsResolved}')
+    expect(topGuides).toContain('{cmsResolved && (')
   })
 })
