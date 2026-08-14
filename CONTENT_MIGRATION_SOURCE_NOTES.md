@@ -40,3 +40,5 @@ On 2026-08-14, the review deployment was rechecked after a CTA clarification. To
 On 2026-08-14, the article-page `Explore More` cards were connected to canonical guide routes. The deployed Jeweler Framework article exposed linked related-guide cards, and clicking the `How to Buy an Engagement Ring` card correctly opened `/guides/how-to-buy-an-engagement-ring`.
 
 On 2026-08-14, the mobile article-page Explore More section was changed to render directly rather than rely on below-the-fold reveal wrappers. This removes the intermittent white gap caused when mobile viewport animation state remained hidden. The local phone viewport and deployed Vercel article route both exposed all three related-guide cards without requiring a refresh.
+
+On 2026-08-14, the shared desktop header scroll state was given separate enter and exit thresholds: it compacts after 48px of scroll and remains compact until the page returns above 16px. This hysteresis prevents the header’s shrinking layout from repeatedly crossing a single threshold as the green hello bar leaves view.
