@@ -38,3 +38,5 @@ On 2026-08-14, the public Top Guides page was checked against the published Jewe
 On 2026-08-14, the review deployment was rechecked after a CTA clarification. Top Guides again uses its compact intrinsic-width desktop “View the Guide” action, while the homepage hero and homepage editorial guide rows use the same full-width action treatment only at the mobile breakpoint. The public review route continued to expose image, title, and CTA links for every Top Guides guide row.
 
 On 2026-08-14, the article-page `Explore More` cards were connected to canonical guide routes. The deployed Jeweler Framework article exposed linked related-guide cards, and clicking the `How to Buy an Engagement Ring` card correctly opened `/guides/how-to-buy-an-engagement-ring`.
+
+On 2026-08-14, the mobile article-page Explore More section was changed to render directly rather than rely on below-the-fold reveal wrappers. This removes the intermittent white gap caused when mobile viewport animation state remained hidden. The local phone viewport and deployed Vercel article route both exposed all three related-guide cards without requiring a refresh.

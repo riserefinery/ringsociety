@@ -128,4 +128,4 @@
 - [x] Document any post-audit Sanity content or SEO-field updates required from Ring Society editors.
 - [x] Match the rendered Contact text inputs, select, and message area exactly to the newsletter CTA field styling while retaining Contact-specific labels and controls.
 - [x] Link every related-guide card at the bottom of article pages so its image, title, and CTA open the corresponding connected article route.
-- [ ] Eliminate the intermittent mobile white gap before article-page Explore More cards so all related guides render reliably without a refresh.
+- [x] Eliminate the intermittent mobile white gap before article-page Explore More cards so all related guides render reliably without a refresh.
