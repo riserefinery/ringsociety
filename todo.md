@@ -104,4 +104,4 @@
 - [ ] Perform and confirm a harmless live Studio drag reorder on Top Guides before finalizing the editor workflow verification.
 - [x] Correct the Top Guides public renderer so a post’s published Big Feature Image is used instead of its regular Hero Image.
 - [x] Make each article card’s image, title, and CTA a reliable link to its matching article route, including Top Guides and All Resources cards.
-- [ ] Prevent the Top Guides rows from rendering a local hero-image fallback before their published Big Feature Images resolve from Sanity.
+- [x] Prevent the Top Guides rows from rendering a local hero-image fallback before their published Big Feature Images resolve from Sanity.
