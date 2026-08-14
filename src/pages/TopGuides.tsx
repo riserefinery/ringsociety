@@ -9,16 +9,21 @@ import type { CmsTopGuidesDocument } from '../sanity/types'
 
 export default function TopGuides() {
   const [pageSettings, setPageSettings] = useState<CmsTopGuidesDocument | null>(null)
+  const [cmsResolved, setCmsResolved] = useState(false)
   useEffect(() => {
     let active = true
-    getCmsTopGuidesPage().then((page) => active && setPageSettings(page))
+    getCmsTopGuidesPage().then((page) => {
+      if (!active) return
+      setPageSettings(page)
+      setCmsResolved(true)
+    })
     return () => {
       active = false
     }
   }, [])
 
   const hero = resolvePageHero(pageSettings?.heroImage, topGuidesBg, 'Black marble texture')
-  const guides = mergeTopGuideRows(pageSettings?.selectedPosts, pillarGuides)
+  const guides = cmsResolved ? mergeTopGuideRows(pageSettings?.selectedPosts, pillarGuides) : []
   return (
     <>
       <PageHeader
@@ -30,9 +35,9 @@ export default function TopGuides() {
         matchResourcesHeight
       />
       <div className="flex w-full flex-col items-center gap-12 pt-8 md:gap-6 md:pt-16">
-        {guides.map((g) => (
-          <Reveal key={g.slug} className="w-full">
-            <GuideFeature guide={g} />
+        {guides.map((guide) => (
+          <Reveal key={guide.slug} className="w-full">
+            <GuideFeature guide={guide} />
           </Reveal>
         ))}
       </div>

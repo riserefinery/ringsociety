@@ -19,10 +19,13 @@ describe('CMS route wiring', () => {
 
   it('connects both Top Guides actions to the corresponding article route', () => {
     const feature = read('src/components/GuideFeature.tsx')
+    const topGuides = read('src/pages/TopGuides.tsx')
 
     expect(feature).toContain('to={`/guides/${slug}`}')
     expect(feature).toContain('<Link\n                to={`/guides/${slug}`}')
     expect(feature).toContain('src={guideFeature ?? feature}')
     expect(feature).toContain('aria-label={`Read ${title}`}')
+    expect(topGuides).toContain('const [cmsResolved, setCmsResolved] = useState(false)')
+    expect(topGuides).toContain('const guides = cmsResolved ? mergeTopGuideRows')
   })
 })
