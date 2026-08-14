@@ -18,7 +18,7 @@ const trendingImg = 'https://files.manuscdn.com/user_upload_by_module/session_fi
 const haloImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/xeFgYxgqkbWOmlLh.jpg'
 const budgetsImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/QqEaUeTWpdRBWDjG.jpg'
 const ctaBgImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/ilQqZBCjoxWCXRen.jpg'
-const jewelerImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/yayZjVfLadOlHMFd.jpg'
+const jewelerImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/QwiXUftFpgsSnumz.jpg'
 const settingsImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/eAIVNFooCjXmmLJd.jpg'
 const ringSizeImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/hFZJHeyhppzEtJMe.jpg'
 const shapeImg = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/GEtCYTVLWsDDWQkj.jpg'
@@ -45,7 +45,7 @@ const iconResearch = 'https://files.manuscdn.com/user_upload_by_module/session_f
 const iconResources = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/utEJpjKzxwHlMuDB.svg'
 const iconMatch = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/ieYwnpHLFafjrmhy.svg'
 
-const gfJeweler = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/KxchGeqwlCHhdEpO.jpg'
+const gfJeweler = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/QwiXUftFpgsSnumz.jpg'
 const gfBudgets = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/fKOcyQuJEeuUHCpz.jpg'
 const gfLabGrown = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/GkZGYuwxyGjJYYCf.jpg'
 const gfBigBox = 'https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/tsixmYGlQYMxDvwA.jpg'

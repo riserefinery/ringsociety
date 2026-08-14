@@ -52,6 +52,12 @@ SANITY_AUTH_TOKEN="$SANITY_AUTH_TOKEN" pnpm exec sanity deploy --yes
 
 Confirm the release with `pnpm exec sanity schema list`. For editor-facing preview changes, build and deploy the Studio after confirming that `SANITY_STUDIO_PREVIEW_URL` is set as needed; the current default is `https://ringsociety-web.vercel.app`.
 
+## Updating a guide image sitewide
+
+Open **Blog & Guides → All Posts & Guides** in Ring Society Studio and select the guide. In **Hero Image and Alignment**, replace **Main Image**, complete the required alt text, choose the desired **Focal Alignment**, then publish when the guide content is ready. The same hero image feeds the guide card, listing surfaces, and guide detail template, so one update controls that guide sitewide.
+
+The current CMS migration created the existing catalog as **drafts**. Drafts are visible and editable in Studio but do not replace the local fallback content on the public site until published. The supplied **How to Choose A Jeweler: Our 10-Point Framework** image has also been applied to the local fallback immediately, so the current review site already uses it while its editable guide draft remains available in Studio.
+
 ## Remaining launch inputs
 
 | Input | Required for | Owner/action |
