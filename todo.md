@@ -127,4 +127,4 @@
 - [x] Audit and repair public-page metadata, title hierarchy, and semantic heading structure for SEO best practices.
 - [x] Document any post-audit Sanity content or SEO-field updates required from Ring Society editors.
 - [x] Match the rendered Contact text inputs, select, and message area exactly to the newsletter CTA field styling while retaining Contact-specific labels and controls.
-- [ ] Link every related-guide card at the bottom of article pages so its image, title, and CTA open the corresponding connected article route.
+- [x] Link every related-guide card at the bottom of article pages so its image, title, and CTA open the corresponding connected article route.
