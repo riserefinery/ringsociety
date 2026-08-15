@@ -467,6 +467,25 @@ export default function Article() {
   const [progress, setProgress] = useState(0)
   const [barVisible, setBarVisible] = useState(false)
   const [fadeVisible, setFadeVisible] = useState(true)
+  const [heroReady, setHeroReady] = useState(false)
+  const heroReadySlug = useRef<string | null>(null)
+
+  useEffect(() => {
+    heroReadySlug.current = null
+    setHeroReady(false)
+  }, [slug])
+
+  const revealHero = () => {
+    if (heroReadySlug.current === doc.slug) return
+    heroReadySlug.current = doc.slug
+    setHeroReady(true)
+    window.dispatchEvent(new CustomEvent('ring-society:article-hero-ready', { detail: { slug: doc.slug } }))
+  }
+
+  useEffect(() => {
+    const image = heroRef.current?.querySelector('img')
+    if (image?.complete && image.naturalWidth > 0) revealHero()
+  }, [doc.slug, doc.hero, doc.heroImage])
 
   // scroll-spy + reading progress
   useEffect(() => {
@@ -522,7 +541,7 @@ export default function Article() {
       </div>
 
       {/* ---------- hero split card ---------- */}
-      <section key={doc.slug} ref={heroRef} className="article-hero-arrival w-full">
+      <section key={doc.slug} ref={heroRef} className={`w-full ${heroReady ? 'article-hero-arrival' : 'article-hero-pending'}`}>
         <div className="mx-auto w-full max-w-[1440px] px-0 md:px-10">
           <div className="overflow-hidden bg-[#fbf9f7] md:rounded-[8px]">
             <div className="flex flex-col md:flex-row">
@@ -553,7 +572,7 @@ export default function Article() {
               </div>
               {/* photo */}
               <div
-                className="relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2"
+                className={`relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2 ${heroReady ? 'article-hero-image-arrival' : ''}`}
               >
                 <ResponsiveImage
                   image={doc.heroImage}
@@ -561,6 +580,7 @@ export default function Article() {
                   alt=""
                   className="h-full w-full object-cover"
                   sizes="(min-width: 768px) 50vw, 100vw"
+                  onLoad={revealHero}
                 />
                 {doc.badge && (
                   <div className="absolute bottom-4 left-6 md:bottom-[60px] md:left-auto md:right-[60px]">

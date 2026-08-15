@@ -2,6 +2,8 @@ import { sanityClient } from './client'
 import { toArticleDoc, toCmsCards } from './mappers'
 import type { CmsPageDocument, CmsPost, CmsSiteSettings, CmsTopGuidesDocument } from './types'
 
+const articleRequestCache = new Map<string, Promise<ReturnType<typeof toArticleDoc> | null>>()
+
 const postProjection = `{
   _id,
   title,
@@ -48,7 +50,11 @@ export async function getCmsArticleCards() {
 export async function getCmsArticle(slug: string | undefined) {
   if (!sanityClient || !slug) return null
 
-  try {
+  const cached = articleRequestCache.get(slug)
+  if (cached) return cached
+
+  const request = (async () => {
+    try {
     const [post, popularPosts] = await Promise.all([
       sanityClient.fetch<CmsPost | null>(
         `*[_type == "post" && slug.current == $slug][0] ${postProjection}`,
@@ -60,10 +66,18 @@ export async function getCmsArticle(slug: string | undefined) {
       ),
     ])
     const article = post ? toArticleDoc(post) : null
-    return article ? { ...article, popularRelated: toCmsCards(popularPosts) } : null
-  } catch {
-    return null
-  }
+      return article ? { ...article, popularRelated: toCmsCards(popularPosts) } : null
+    } catch {
+      return null
+    }
+  })()
+  articleRequestCache.set(slug, request)
+  return request
+}
+
+/** Prewarm the CMS record before a card navigation without blocking the interaction. */
+export function prefetchCmsArticle(slug: string | undefined) {
+  if (slug) void getCmsArticle(slug)
 }
 
 const pageProjection = `{headline, introduction, eyebrow, heroImage, supportEmail, responseTime}`

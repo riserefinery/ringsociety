@@ -20,6 +20,7 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [helloBarText, setHelloBarText] = useState<string | null>(null)
+  const [articleHeaderReady, setArticleHeaderReady] = useState(false)
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY
@@ -65,6 +66,17 @@ export default function Header() {
     }
   }, [])
 
+  useEffect(() => {
+    setArticleHeaderReady(false)
+    if (!articleRouteKey) return
+    const onArticleHeroReady = (event: Event) => {
+      const slug = (event as CustomEvent<{ slug?: string }>).detail?.slug
+      if (slug && articleRouteKey.endsWith(`/${slug}`)) setArticleHeaderReady(true)
+    }
+    window.addEventListener('ring-society:article-hero-ready', onArticleHeroReady)
+    return () => window.removeEventListener('ring-society:article-hero-ready', onArticleHeroReady)
+  }, [articleRouteKey])
+
   const openSearch = () => {
     setMenuOpen(false)
     setSearchOpen(true)
@@ -86,7 +98,7 @@ export default function Header() {
 
       {/* white bar — sticks to the top of the viewport sitewide */}
       <header
-        className={`sticky top-0 z-50 w-full bg-white transition-shadow duration-[600ms] ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
+        className={`sticky top-0 z-[90] w-full bg-white transition-shadow duration-[600ms] ${articleRouteKey ? articleHeaderReady ? 'article-header-arrival' : 'article-header-pending' : ''} ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
       >
       {/* desktop header */}
       <div
@@ -148,7 +160,7 @@ export default function Header() {
             <img src={burgerMenu} alt="" className="h-[28.8px] w-[18px]" />
           </button>
           <Link to="/" prefetch="intent" viewTransition className="shrink-0 cursor-pointer" onClick={() => setMenuOpen(false)}>
-            <img key={articleRouteKey} src={logoWordmark} alt="Ring Society" className={`h-[22px] w-auto ${articleRouteKey ? 'article-logo-arrival' : ''}`} />
+            <img src={logoWordmark} alt="Ring Society" className="h-[22px] w-auto" />
           </Link>
           <button onClick={openSearch} aria-label="Search" className="flex h-8 w-8 items-center justify-center">
             <SearchIcon size={18} />

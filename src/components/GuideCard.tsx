@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import ResponsiveImage from './ResponsiveImage'
 import ArticleLabel from './ArticleLabel'
 import type { CmsResponsiveImage } from '../sanity/types'
+import { prefetchCmsArticle } from '../sanity/queries'
 
 /**
  * Universal guide/blog card. The STRUCTURE is fixed across pages —
@@ -23,6 +24,8 @@ export type Card = {
 }
 
 export default function GuideCard({ card }: { card: Card }) {
+  const articleSlug = card.to?.match(/^\/guides\/([^/?#]+)/)?.[1]
+  const prefetchArticle = () => prefetchCmsArticle(articleSlug)
   const cardContent = (
     <article
       className="group flex h-full flex-col overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-1"
@@ -61,6 +64,8 @@ export default function GuideCard({ card }: { card: Card }) {
       className="block h-full"
       aria-label={`${card.title}: ${card.cta}`}
       prefetch="intent"
+      onPointerEnter={prefetchArticle}
+      onFocus={prefetchArticle}
     >
       {cardContent}
     </Link>

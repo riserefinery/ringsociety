@@ -153,3 +153,5 @@
 - [x] Apply the shared mobile article-card image transition and luxury easing to every linked article card, including Top Guides, homepage editorial features, All Resources, and article recommendations.
 - [x] Eliminate the white flash between a mobile article-card tap and its destination article hero while preserving the shared-image transition.
 - [x] Remove the duplicate article-image exposure during mobile card navigation and use a single controlled article hero and logo fade-down reveal.
+- [x] Keep the persistent navigation above all mobile article-loading and transition layers.
+- [x] Restore a flash-free mobile article hero zoom transition with a visibly slower, buttery header fade-down arrival.

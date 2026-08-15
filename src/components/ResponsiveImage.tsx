@@ -7,10 +7,11 @@ type ResponsiveImageProps = {
   alt: string
   className?: string
   sizes?: string
+  onLoad?: () => void
 }
 
 /** This preserves the current image layouts while allowing intentional editorial crops. */
-export default function ResponsiveImage({ image, fallbackSrc, alt, className, sizes }: ResponsiveImageProps) {
+export default function ResponsiveImage({ image, fallbackSrc, alt, className, sizes, onLoad }: ResponsiveImageProps) {
   const mobile = imageUrl(image?.mobileImage, 900)
   const tablet = imageUrl(image?.tabletImage, 1200)
   const xl = imageUrl(image?.xlImage, 2400)
@@ -22,7 +23,7 @@ export default function ResponsiveImage({ image, fallbackSrc, alt, className, si
       {xl && <source media="(min-width: 1536px)" srcSet={xl} />}
       {tablet && <source media="(min-width: 768px)" srcSet={tablet} />}
       {mobile && <source media="(max-width: 767px)" srcSet={mobile} />}
-      <img src={main} alt={image?.alt ?? alt} className={className} sizes={sizes} style={{ objectPosition }} />
+      <img src={main} alt={image?.alt ?? alt} className={className} sizes={sizes} style={{ objectPosition }} onLoad={onLoad} />
     </picture>
   )
 }
