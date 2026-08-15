@@ -169,3 +169,5 @@
 - [x] Restore an uninterrupted first-homepage curtain reveal that includes the green bar and navigation instead of stopping below the header.
 - [x] Eliminate the remaining brief mobile header flash during article-card navigation without changing the homepage loader flow.
 - [x] Run one final controlled experiment that removes residual native article-card route-transition behavior while retaining the destination hero arrival.
+- [x] Restore the mobile navigation overlay above the persistent header while it is open.
+- [x] Perform one final isolated refinement to reduce the remaining brief article-card route flash without altering the fixed homepage loader.

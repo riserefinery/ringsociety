@@ -13,7 +13,7 @@ import {
 import { shareArrow } from '../lib/assets'
 import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import ResponsiveImage from '../components/ResponsiveImage'
-import { getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
+import { getCachedCmsArticle, getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
 
 /* ---------- icons ---------- */
 
@@ -378,7 +378,8 @@ export default function Article() {
   // prior guide's CMS record until the matching record finishes loading so the
   // destination hero receives the correct shared-image transition identity.
   const cmsDocForSlug = cmsDoc?.slug === slug ? cmsDoc : null
-  const doc = cmsDocForSlug ?? fallbackDoc
+  const prewarmedCmsDoc = getCachedCmsArticle(slug)
+  const doc = prewarmedCmsDoc ?? cmsDocForSlug ?? fallbackDoc
   const cta = doc.cta ?? defaultArticleCta
   const readTime = useMemo(() => readingTimeFor(doc), [doc])
 

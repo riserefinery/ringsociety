@@ -64,6 +64,7 @@ export default function GuideCard({ card }: { card: Card }) {
       className="block h-full"
       aria-label={`${card.title}: ${card.cta}`}
       prefetch="intent"
+      onPointerDown={prefetchArticle}
       onPointerEnter={prefetchArticle}
       onFocus={prefetchArticle}
     >

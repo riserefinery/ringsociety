@@ -37,6 +37,7 @@ describe('core-page navigation transitions', () => {
     expect(header).toContain('closeMenuForNavigation')
     expect(mobileNav).toContain("from 'motion/react'")
     expect(mobileNav).toContain("animate={{ x: open ? '0%' : '-100%' }}")
+    expect(mobileNav).toContain('z-[100]')
     expect(mobileNav).not.toContain('opacity: open ? 1 : 0')
     expect(mobileNav).toContain('duration: 0.5')
     expect(mobileNav).toContain('ease: [0.16, 1, 0.12, 1]')

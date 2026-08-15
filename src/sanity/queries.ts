@@ -3,6 +3,7 @@ import { toArticleDoc, toCmsCards } from './mappers'
 import type { CmsPageDocument, CmsPost, CmsSiteSettings, CmsTopGuidesDocument } from './types'
 
 const articleRequestCache = new Map<string, Promise<ReturnType<typeof toArticleDoc> | null>>()
+const articleResultCache = new Map<string, ReturnType<typeof toArticleDoc> | null>()
 
 const postProjection = `{
   _id,
@@ -71,8 +72,17 @@ export async function getCmsArticle(slug: string | undefined) {
       return null
     }
   })()
-  articleRequestCache.set(slug, request)
-  return request
+  const trackedRequest = request.then((article) => {
+    articleResultCache.set(slug, article)
+    return article
+  })
+  articleRequestCache.set(slug, trackedRequest)
+  return trackedRequest
+}
+
+/** Return a prewarmed post synchronously when a prior card interaction completed its CMS request. */
+export function getCachedCmsArticle(slug: string | undefined) {
+  return slug ? articleResultCache.get(slug) ?? null : null
 }
 
 /** Prewarm the CMS record before a card navigation without blocking the interaction. */

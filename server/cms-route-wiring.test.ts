@@ -67,6 +67,8 @@ describe('CMS route wiring', () => {
     expect(card).not.toContain('useViewTransitionState')
     expect(card).not.toContain('viewTransitionName')
     expect(card).toContain('prefetch="intent"')
+    expect(card).toContain('onPointerDown={prefetchArticle}')
+    expect(article).toContain('getCachedCmsArticle(slug)')
     expect(article).toContain('article-hero-image-expand')
     expect(css).toContain('.article-hero-image-expand')
     expect(css).toContain('@keyframes article-hero-expand')

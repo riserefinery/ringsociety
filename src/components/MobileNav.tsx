@@ -37,7 +37,7 @@ export default function MobileNav({
       initial={false}
       animate={{ x: open ? '0%' : '-100%' }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.12, 1] }}
-      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] md:hidden ${open ? '' : 'pointer-events-none'}`}
+      className={`fixed inset-0 z-[100] flex flex-col justify-between bg-[#f9f6f2] md:hidden ${open ? '' : 'pointer-events-none'}`}
       role="dialog"
       aria-modal="true"
       aria-hidden={!open}
