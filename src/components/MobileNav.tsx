@@ -35,7 +35,7 @@ export default function MobileNav({
   return (
     <motion.div
       initial={false}
-      animate={{ x: open ? '0%' : '-100%', opacity: open ? 1 : 0 }}
+      animate={{ x: open ? '0%' : '-100%' }}
       transition={open ? { duration: 0.28, ease: [0.23, 1, 0.32, 1] } : { duration: 0.22, ease: [0.4, 0, 1, 1] }}
       className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] md:hidden ${open ? '' : 'pointer-events-none'}`}
       role="dialog"
