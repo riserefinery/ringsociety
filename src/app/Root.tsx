@@ -92,10 +92,7 @@ export default function Root() {
     <div className="flex w-full flex-col items-center bg-white">
       <RouteMeta />
       <Header />
-      <main
-        className="w-full"
-        style={isArticleRoute ? undefined : { viewTransitionName: 'core-page-shell' }}
-      >
+      <main className="w-full" style={{ viewTransitionName: 'route-shell' }}>
         <Outlet />
       </main>
       <Footer />

@@ -30,7 +30,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
       <section className="w-full px-5 md:hidden">
         <article className="flex flex-col gap-5">
           <div className="relative h-[228px] w-full overflow-hidden rounded-[12px]" style={{ background: '#d8cfc4' }}>
-            <Link to={articlePath} aria-label={`Read ${title}`} className="block h-full w-full" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
+            <Link to={articlePath} aria-label={`Read ${title}`} className="block h-full w-full" prefetch="intent" viewTransition onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
               <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
             </Link>
             {badge && (
@@ -43,7 +43,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
             <p className="text-[11px] font-semibold uppercase tracking-[1.5px]" style={{ color: 'var(--muted)' }}>
               {category}
             </p>
-            <Link to={articlePath} className="w-fit transition-opacity hover:opacity-65" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
+            <Link to={articlePath} className="w-fit transition-opacity hover:opacity-65" prefetch="intent" viewTransition onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
               <h2 className="text-[36px] leading-[1.18] tracking-[-0.3px] text-black" style={{ fontFamily: serif }}>
                 {title}
               </h2>
@@ -51,7 +51,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
             <p className="body-copy tracking-[0.3px]" style={{ color: 'var(--muted)' }}>
               {excerpt}
             </p>
-            <Link to={articlePath} className="mt-1 w-full rounded-lg bg-black py-[14px] text-center text-[12px] font-semibold uppercase tracking-[1.2px] text-[#fbf9f7]" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
+            <Link to={articlePath} className="mt-1 w-full rounded-lg bg-black py-[14px] text-center text-[12px] font-semibold uppercase tracking-[1.2px] text-[#fbf9f7]" prefetch="intent" viewTransition onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
               View the guide
             </Link>
           </div>
@@ -61,7 +61,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
       {/* desktop */}
       <section className="mx-auto hidden w-full max-w-[1440px] px-10 md:block">
         <div className="relative overflow-hidden rounded-lg" style={{ background: '#31353d', aspectRatio: '1344 / 633', minHeight: 560 }}>
-          <Link to={articlePath} aria-label={`Read ${title}`} className="absolute inset-0 block" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
+          <Link to={articlePath} aria-label={`Read ${title}`} className="absolute inset-0 block" prefetch="intent" viewTransition onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
             <img
               src={guideFeature ?? feature}
               alt=""
@@ -80,7 +80,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
                   <ArticleLabel label={badge} color={textColor} background={light ? 'rgba(255,255,255,0.15)' : 'rgba(16,16,16,0.08)'} />
                 )}
               </div>
-              <Link to={articlePath} className="w-fit transition-opacity hover:opacity-65" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
+              <Link to={articlePath} className="w-fit transition-opacity hover:opacity-65" prefetch="intent" viewTransition onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
                 <h2 className="text-[clamp(32px,3.2vw,42px)] leading-[1.15] tracking-[-0.6px]" style={{ fontFamily: serif }}>
                   {title}
                 </h2>
@@ -94,6 +94,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
                   light ? 'border border-transparent bg-white text-black hover:bg-black hover:text-white' : 'border border-black bg-black text-[#fbf9f7] hover:bg-white hover:text-black'
                 }`}
                 prefetch="intent"
+                viewTransition
                 onPointerDown={prefetchArticle}
                 onPointerEnter={prefetchArticle}
                 onFocus={prefetchArticle}

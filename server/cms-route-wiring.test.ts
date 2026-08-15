@@ -58,7 +58,7 @@ describe('CMS route wiring', () => {
     expect(card).toContain('to={card.to}')
   })
 
-  it('uses a controlled mobile destination reveal for article-card navigation without duplicate native image snapshots', () => {
+  it('uses a scoped mobile route-shell transition with a controlled destination hero reveal', () => {
     const article = read('src/pages/Article.tsx')
     const card = read('src/components/GuideCard.tsx')
     const css = read('src/index.css')
@@ -69,6 +69,7 @@ describe('CMS route wiring', () => {
     expect(card).toContain('prefetch="intent"')
     expect(card).toContain('onPointerDown={prefetchArticle}')
     expect(article).toContain('getCachedCmsArticle(slug)')
+    expect(card).toContain('viewTransition')
     expect(article).toContain('article-hero-image-expand')
     expect(css).toContain('.article-hero-image-expand')
     expect(css).toContain('@keyframes article-hero-expand')
@@ -77,7 +78,7 @@ describe('CMS route wiring', () => {
     expect(header).not.toContain('viewTransitionName')
     expect(header).toContain('HELLO_BAR_SESSION_KEY')
     expect(article).toContain('article-hero-image-expand')
-    expect(card).not.toContain('viewTransition')
+    expect(card).toContain('viewTransition')
     expect(css).toContain('cubic-bezier(0.16, 1, 0.12, 1)')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
     expect(css).not.toContain('ring-society-header')

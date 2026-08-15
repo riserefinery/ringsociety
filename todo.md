@@ -171,3 +171,4 @@
 - [x] Run one final controlled experiment that removes residual native article-card route-transition behavior while retaining the destination hero arrival.
 - [x] Restore the mobile navigation overlay above the persistent header while it is open.
 - [x] Perform one final isolated refinement to reduce the remaining brief article-card route flash without altering the fixed homepage loader.
+- [x] Evaluate and, if beneficial, implement a scoped View Transition API handoff for mobile article-card navigation to eliminate the residual flash while preserving the stable header and homepage loader.
