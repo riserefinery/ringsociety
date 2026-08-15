@@ -150,3 +150,4 @@
 - [x] Replace landing-page hero background wipes with a restrained fade-in and subtle zoom-out while preserving staged text and repeat-load safety.
 - [x] Increase the mobile menu’s final luxury settling by approximately 20 percent in both directions.
 - [x] Apply the same fast-start, slow-settling easing language to the mobile article-card shared-image transition.
+- [x] Apply the shared mobile article-card image transition and luxury easing to every linked article card, including Top Guides, homepage editorial features, All Resources, and article recommendations.

@@ -27,8 +27,8 @@ describe('CMS route wiring', () => {
     const topGuides = read('src/pages/TopGuides.tsx')
     const editorialRow = read('src/components/EditorialRow.tsx')
 
-    expect(feature).toContain('to={`/guides/${slug}`}')
-    expect(feature).toContain('<Link\n                to={`/guides/${slug}`}')
+    expect(feature).toContain('const articlePath = `/guides/${slug}`')
+    expect(feature).toContain('to={articlePath}')
     expect(feature).toContain('src={guideFeature ?? feature}')
     expect(feature).toContain('aria-label={`Read ${title}`}')
     expect(feature).toContain('inline-flex h-[41px] w-fit')
@@ -40,6 +40,10 @@ describe('CMS route wiring', () => {
     expect(editorialRow).toContain('Read ${typeof title === \'string\' ? title : eyebrow}')
     expect(editorialRow).toContain("mobileCtaFullWidth ? 'w-full md:w-fit' : 'w-fit'")
     expect(read('src/pages/Home.tsx')).toContain('mobileCtaFullWidth')
+    expect(feature).toContain('useViewTransitionState(articlePath)')
+    expect(feature).toContain('viewTransitionName: imageTransitionName')
+    expect(editorialRow).toContain('useViewTransitionState(to ?? \'/\')')
+    expect(editorialRow).toContain('viewTransitionName: imageTransitionName')
   })
 
   it('connects article-page Explore More cards to their matching article routes', () => {
