@@ -69,12 +69,13 @@ body {
 /* Core routes retain their native transition treatment. Article cards use a
    controlled destination entrance below to avoid duplicate image snapshots. */
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
-  /* The first-homepage loader is a complete screen. Keep persistent chrome
-     out of the revealed area until the centered branded loader has finished. */
-  html[data-ring-society-home-intro='true'] header,
-  html[data-ring-society-home-intro='true'] [data-testid='hello-bar'] {
-    visibility: hidden;
-    pointer-events: none;
+  /* Collapse the session-only bar synchronously on a card press, before
+     React changes route state, so the header has one continuous position. */
+  html[data-ring-society-hello-bar-exiting='true'] [data-testid='hello-bar'] {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
   }
 
   ::view-transition-group(*) {

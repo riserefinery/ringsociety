@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { logoWordmark } from '../lib/assets'
 import { EASE } from '../lib/motion'
@@ -16,16 +16,24 @@ export default function HomeIntro() {
   const [curtainUp, setCurtainUp] = useState(false)
   const [done, setDone] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.documentElement.dataset.ringSocietyHomeIntro = 'true'
-    const t1 = setTimeout(() => setHidePreloader(true), 3200)
-    const t2 = setTimeout(() => setCurtainUp(true), 3300)
-    const t3 = setTimeout(() => {
+    return () => {
       delete document.documentElement.dataset.ringSocietyHomeIntro
+      delete document.documentElement.dataset.ringSocietyHomeIntroReveal
+    }
+  }, [])
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setHidePreloader(true), 3200)
+    const t2 = setTimeout(() => {
+      document.documentElement.dataset.ringSocietyHomeIntroReveal = 'true'
+      setCurtainUp(true)
+    }, 3300)
+    const t3 = setTimeout(() => {
       setDone(true)
     }, 4400)
     return () => {
-      delete document.documentElement.dataset.ringSocietyHomeIntro
       clearTimeout(t1)
       clearTimeout(t2)
       clearTimeout(t3)
@@ -36,9 +44,9 @@ export default function HomeIntro() {
 
   return (
     <>
-      {/* curtain — lifts up to reveal the page */}
+      {/* Curtain lifts while the persistent green bar and navigation join the same reveal. */}
       <motion.div
-        className="fixed inset-0 z-[9998]"
+        className="fixed inset-0 z-[2147483646]"
         style={{ background: CREAM }}
         initial={{ y: '0%' }}
         animate={{ y: curtainUp ? '-100%' : '0%' }}
@@ -47,7 +55,7 @@ export default function HomeIntro() {
 
       {/* preloader — the header wordmark fades in and rises, then fades away */}
       <motion.div
-        className="fixed inset-0 z-[9999] flex items-center justify-center"
+        className="fixed inset-0 z-[2147483647] flex items-center justify-center"
         style={{ background: CREAM, pointerEvents: hidePreloader ? 'none' : 'auto' }}
         initial={{ opacity: 1 }}
         animate={{ opacity: hidePreloader ? 0 : 1 }}

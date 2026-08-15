@@ -166,3 +166,5 @@
 - [x] Remove the duplicate Ring Society branding/loading screen exposed during mobile article navigation.
 - [x] Exclude the persistent mobile header from transition snapshots so it cannot briefly flash during article route changes.
 - [x] Limit the branded homepage session loader to the first homepage entry only, ensuring it never appears during internal article-card navigation.
+- [x] Restore an uninterrupted first-homepage curtain reveal that includes the green bar and navigation instead of stopping below the header.
+- [ ] Eliminate the remaining brief mobile header flash during article-card navigation without changing the homepage loader flow.
