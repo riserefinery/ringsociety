@@ -69,6 +69,14 @@ body {
 /* Core routes retain their native transition treatment. Article cards use a
    controlled destination entrance below to avoid duplicate image snapshots. */
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  /* This marker is written before a card link changes routes, so stale site
+     chrome cannot sit over the article’s image-loading surface for a frame. */
+  html[data-ring-society-article-loading='true'] header,
+  html[data-ring-society-article-loading='true'] [data-testid='hello-bar'] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   ::view-transition-group(*) {
     animation-duration: 500ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.12, 1);

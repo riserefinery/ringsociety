@@ -159,3 +159,5 @@
 - [x] Keep the global mobile header independent and stable during article navigation, removing both preloader overlap and repeated header slide-ins.
 - [x] Suppress the mobile header while an article destination is genuinely preloading so it cannot appear over that loading surface.
 - [x] Test showing the green hello bar only on the first page load of a browser session, hiding it on subsequent internal visits.
+- [x] Remove the remaining Ring Society mobile wordmark/header exposure above the article loading surface.
+- [x] Prevent visible header replacement or reinitialization flashes during internal mobile page changes.

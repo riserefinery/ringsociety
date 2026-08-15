@@ -6,6 +6,7 @@ import MobileNav from './MobileNav'
 import SearchOverlay from './SearchOverlay'
 import { SearchIcon } from './ui'
 import { getCmsSiteSettings } from '../sanity/queries'
+import { ARTICLE_ARRIVAL_EVENT } from '../lib/articleArrival'
 
 const COMPACT_HEADER_ENTER_SCROLL_Y = 48
 const COMPACT_HEADER_EXIT_SCROLL_Y = 16
@@ -30,27 +31,19 @@ export default function Header() {
       return true
     }
   })
-  const [readyArticlePath, setReadyArticlePath] = useState<string | null>(null)
+  const [, setArticleArrivalRevision] = useState(0)
   const isArticleRoute = pathname.startsWith('/guides/')
-  const articleChromePending = isArticleRoute && readyArticlePath !== pathname
+  const articleChromePending = isArticleRoute && document.documentElement.dataset.ringSocietyArticleLoading === 'true'
 
   useEffect(() => {
     if (pathname !== initialPathname) setShowHelloBar(false)
   }, [initialPathname, pathname])
 
   useEffect(() => {
-    const syncReadyArticle = () => {
-      const readySlug = document.documentElement.dataset.ringSocietyArticleReady
-      setReadyArticlePath(readySlug ? `/guides/${readySlug}` : null)
-    }
-    const onArticleHeroReady = (event: Event) => {
-      const slug = (event as CustomEvent<{ slug?: string }>).detail?.slug
-      if (slug) setReadyArticlePath(`/guides/${slug}`)
-    }
-    syncReadyArticle()
-    window.addEventListener('ring-society:article-hero-ready', onArticleHeroReady)
-    return () => window.removeEventListener('ring-society:article-hero-ready', onArticleHeroReady)
-  }, [pathname])
+    const refreshArrivalState = () => setArticleArrivalRevision((revision) => revision + 1)
+    window.addEventListener(ARTICLE_ARRIVAL_EVENT, refreshArrivalState)
+    return () => window.removeEventListener(ARTICLE_ARRIVAL_EVENT, refreshArrivalState)
+  }, [])
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY

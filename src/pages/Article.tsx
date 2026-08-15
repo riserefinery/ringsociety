@@ -13,7 +13,8 @@ import {
 import { shareArrow } from '../lib/assets'
 import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import ResponsiveImage from '../components/ResponsiveImage'
-import { getCmsArticle } from '../sanity/queries'
+import { getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
+import { finishMobileArticleArrival } from '../lib/articleArrival'
 
 /* ---------- icons ---------- */
 
@@ -479,8 +480,7 @@ export default function Article() {
     if (heroReadySlug.current === doc.slug) return
     heroReadySlug.current = doc.slug
     setHeroReady(true)
-    document.documentElement.dataset.ringSocietyArticleReady = doc.slug
-    window.dispatchEvent(new CustomEvent('ring-society:article-hero-ready', { detail: { slug: doc.slug } }))
+    finishMobileArticleArrival(doc.slug)
   }
 
   useEffect(() => {
