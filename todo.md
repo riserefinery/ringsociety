@@ -132,6 +132,6 @@
 - [x] Eliminate the desktop header height oscillation at the hello-bar scroll threshold while preserving the intended compact header state.
 - [x] Add CMS-managed related-guide selections to posts, with per-article ordered overrides and a fallback that excludes the current article and favors designated popular guides.
 - [x] Add a fast mobile article-card-to-hero shared-image transition with a standard-navigation and reduced-motion fallback.
-- [ ] Make the mobile shared-image article transition work reliably across successive card-to-article navigations.
-- [ ] Prevent the green hello bar from briefly showing the local fallback text before its published Sanity value resolves.
-- [ ] Verify the Vercel review deployment remains healthy after the transition and hello-bar repairs.
+- [x] Make the mobile shared-image article transition work reliably across successive card-to-article navigations.
+- [x] Prevent the green hello bar from briefly showing the local fallback text before its published Sanity value resolves.
+- [x] Verify the Vercel review deployment remains healthy after the transition and hello-bar repairs.
