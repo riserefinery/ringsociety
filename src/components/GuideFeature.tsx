@@ -31,7 +31,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
             </Link>
             {badge && (
-              <span className="absolute bottom-4 left-4">
+              <span className="absolute right-4 top-4">
                 <ArticleLabel label={badge} />
               </span>
             )}

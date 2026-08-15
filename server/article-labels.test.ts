@@ -28,15 +28,15 @@ describe('CMS-managed article labels', () => {
     expect(mappers).toContain('if (post.articleLabel?.name) return post.articleLabel.name')
   })
 
-  it('uses a shared label primitive at the bottom-left of all mobile image surfaces', () => {
+  it('uses a shared label primitive at the top-right of all mobile card image surfaces', () => {
     const guideCard = read('src/components/GuideCard.tsx')
     const guideFeature = read('src/components/GuideFeature.tsx')
     const editorialRow = read('src/components/EditorialRow.tsx')
     const article = read('src/pages/Article.tsx')
 
-    expect(guideCard).toContain('absolute bottom-4 left-4')
-    expect(guideFeature).toContain('absolute bottom-4 left-4')
-    expect(editorialRow).toContain('absolute bottom-4 left-6')
+    expect(guideCard).toContain('absolute right-4 top-4 md:bottom-4 md:left-4 md:right-auto md:top-auto')
+    expect(guideFeature).toContain('absolute right-4 top-4')
+    expect(editorialRow).toContain('absolute right-6 top-5 md:bottom-4 md:left-6 md:right-auto md:top-auto')
     expect(article).toContain('absolute bottom-4 left-6')
     for (const source of [guideCard, guideFeature, editorialRow, article]) {
       expect(source).toContain('ArticleLabel')

@@ -141,3 +141,4 @@
 - [x] Add globally managed article-label options in Sanity and let each post select an approved label that renders consistently on Home, Top Guides, All Resources, and the article page.
 - [x] Align article labels bottom-left over mobile imagery sitewide and migrate the current Featured and Most Loved labels into the new article-level model.
 - [x] Remove clashing mobile core-page and mobile-navigation motion, and ensure hero images never remain black on repeated mobile visits.
+- [x] Move mobile article-card labels from bottom-left to top-right across homepage, Top Guides, and All Resources cards while keeping article hero labels unchanged.

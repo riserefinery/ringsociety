@@ -44,7 +44,7 @@ export default function EditorialRow({
           <img src={image} alt={alt} className="h-full w-full object-cover" />
         )}
         {badge && (
-          <div className="absolute bottom-4 left-6">
+          <div className="absolute right-6 top-5 md:bottom-4 md:left-6 md:right-auto md:top-auto">
             <ArticleLabel label={badge} background="rgba(255,255,255,0.20)" />
           </div>
         )}

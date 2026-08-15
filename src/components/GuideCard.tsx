@@ -44,7 +44,7 @@ export default function GuideCard({ card }: { card: Card }) {
           sizes="(min-width: 768px) 33vw, 100vw"
         />
         {card.badge && (
-          <div className="absolute bottom-4 left-4">
+          <div className="absolute right-4 top-4 md:bottom-4 md:left-4 md:right-auto md:top-auto">
             <ArticleLabel label={card.badge} />
           </div>
         )}
