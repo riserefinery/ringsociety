@@ -34,6 +34,15 @@ export default function PageHeader({
   const imageReady = loadedImage === image
 
   const revealState = imageReady ? 'show' : 'hidden'
+  const delayedTextStagger = {
+    ...staggerContainer,
+    show: {
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.24,
+      },
+    },
+  }
 
   return (
     <section className={fullBleedDesktop ? 'w-full' : 'w-full md:mx-auto md:max-w-[1440px] md:px-10'}>
@@ -45,15 +54,15 @@ export default function PageHeader({
         <motion.div
           key={image}
           aria-hidden="true"
-          className="absolute inset-0 hidden bg-[#1a1a1a] md:block"
+          className="absolute inset-0 bg-[#1a1a1a]"
           initial={{ x: 0 }}
-          animate={imageReady ? { x: '100%' } : { x: 0 }}
-          transition={{ duration: 0.62, ease: [0.23, 1, 0.32, 1] }}
+          animate={imageReady ? { x: '-100%' } : { x: 0 }}
+          transition={{ duration: 0.38, ease: [0.23, 1, 0.32, 1] }}
         />
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
         <motion.div
           className="relative flex max-w-[560px] flex-col items-center gap-6 text-center text-[#f9f6f2]"
-          variants={staggerContainer}
+          variants={delayedTextStagger}
           initial="hidden"
           animate={revealState}
         >

@@ -14,12 +14,10 @@ export default function MobileNav({
   open,
   onClose,
   onNavigate,
-  closeInstantly = false,
 }: {
   open: boolean
   onClose: () => void
   onNavigate: () => void
-  closeInstantly?: boolean
 }) {
   const { pathname } = useLocation()
 
@@ -35,7 +33,9 @@ export default function MobileNav({
 
   return (
     <div
-      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] ${closeInstantly ? 'transition-none' : 'transition-all duration-300 ease-out'} md:hidden ${
+      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] transition-[transform,opacity] md:hidden ${
+        open ? 'duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)]' : 'duration-[180ms] ease-[cubic-bezier(0.4,0,1,1)]'
+      } ${
         open ? 'translate-x-0 opacity-100' : 'pointer-events-none -translate-x-full opacity-0'
       }`}
       role="dialog"
