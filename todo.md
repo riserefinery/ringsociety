@@ -148,3 +148,5 @@
 - [x] Refine both mobile menu slide directions to use a fast-start, slow-settling luxury ease-out matching the hero text motion language.
 - [x] Increase the final deceleration of both mobile menu directions so they settle more deliberately before the open and closed endpoints.
 - [x] Replace landing-page hero background wipes with a restrained fade-in and subtle zoom-out while preserving staged text and repeat-load safety.
+- [x] Increase the mobile menu’s final luxury settling by approximately 20 percent in both directions.
+- [x] Apply the same fast-start, slow-settling easing language to the mobile article-card shared-image transition.

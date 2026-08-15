@@ -64,6 +64,8 @@ describe('CMS route wiring', () => {
     expect(article).toContain('useViewTransitionState(`/guides/${doc.slug}`)')
     expect(article).toContain('viewTransitionName: heroTransitionName')
     expect(css).toContain('::view-transition-group(*)')
+    expect(css).toContain('animation-duration: 500ms')
+    expect(css).toContain('cubic-bezier(0.16, 1, 0.12, 1)')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
   })
 

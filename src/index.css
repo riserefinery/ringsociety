@@ -70,8 +70,8 @@ body {
    transition on supporting browsers. Browsers without the API keep normal routing. */
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
   ::view-transition-group(*) {
-    animation-duration: 360ms;
-    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+    animation-duration: 500ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.12, 1);
   }
 
   ::view-transition-image-pair(*) {
