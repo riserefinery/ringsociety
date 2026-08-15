@@ -52,6 +52,20 @@ describe('CMS route wiring', () => {
     expect(card).toContain('to={card.to}')
   })
 
+  it('uses a native shared-image view transition for mobile article-card navigation with a reduced-motion fallback', () => {
+    const article = read('src/pages/Article.tsx')
+    const card = read('src/components/GuideCard.tsx')
+    const css = read('src/index.css')
+
+    expect(card).toContain('useViewTransitionState(card.to ?? \'/\')')
+    expect(card).toContain('viewTransition')
+    expect(card).toContain('prefetch="intent"')
+    expect(article).toContain('useViewTransitionState(`/guides/${doc.slug}`)')
+    expect(article).toContain('viewTransitionName: heroTransitionName')
+    expect(css).toContain('::view-transition-group(*)')
+    expect(css).toContain('@media (prefers-reduced-motion: reduce)')
+  })
+
   it('supports ordered Sanity related-guide overrides and popular-guide fallbacks without recommending the current article', () => {
     const content = read('src/lib/content.ts')
     const schema = read('studio/schemas/documents.ts')

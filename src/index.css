@@ -65,3 +65,22 @@ body {
   from { opacity: 0; transform: translateY(-8px) scale(0.985); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* Linked guide cards and their destination article heroes share this native route
+   transition on supporting browsers. Browsers without the API keep normal routing. */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*) {
+    animation-duration: 360ms;
+    animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  ::view-transition-image-pair(*) {
+    isolation: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation-duration: 1ms;
+  }
+}

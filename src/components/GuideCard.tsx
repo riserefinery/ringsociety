@@ -1,5 +1,5 @@
 import { Eyebrow, CtaLine } from './ui'
-import { Link } from 'react-router'
+import { Link, useViewTransitionState } from 'react-router'
 import ResponsiveImage from './ResponsiveImage'
 import type { CmsResponsiveImage } from '../sanity/types'
 
@@ -20,12 +20,19 @@ export type Card = {
 }
 
 export default function GuideCard({ card }: { card: Card }) {
+  const isTransitioning = useViewTransitionState(card.to ?? '/')
+  const articleSlug = card.to?.match(/^\/guides\/([^/?#]+)/)?.[1]
+  const imageTransitionName = articleSlug && isTransitioning ? `article-image-${articleSlug}` : undefined
+
   const cardContent = (
     <article
       className="group flex h-full flex-col overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-1"
       style={{ background: 'var(--cream)' }}
     >
-      <div className="relative h-[288px] overflow-hidden" style={{ background: card.dark ? '#000' : '#e7ded4' }}>
+      <div
+        className="relative h-[288px] overflow-hidden"
+        style={{ background: card.dark ? '#000' : '#e7ded4', viewTransitionName: imageTransitionName }}
+      >
         <ResponsiveImage
           image={card.responsiveImage}
           fallbackSrc={card.image}
@@ -45,7 +52,13 @@ export default function GuideCard({ card }: { card: Card }) {
   )
 
   return card.to ? (
-    <Link to={card.to} className="block h-full" aria-label={`${card.title}: ${card.cta}`}>
+    <Link
+      to={card.to}
+      className="block h-full"
+      aria-label={`${card.title}: ${card.cta}`}
+      prefetch="intent"
+      viewTransition
+    >
       {cardContent}
     </Link>
   ) : (

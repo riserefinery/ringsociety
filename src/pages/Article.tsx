@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router'
+import { Link, useParams, useViewTransitionState } from 'react-router'
 import {
   getArticle,
   getRelated,
@@ -479,6 +479,8 @@ export default function Article() {
   )
 
   const related = getRelated(doc)
+  const heroIsTransitioning = useViewTransitionState(`/guides/${doc.slug}`)
+  const heroTransitionName = heroIsTransitioning ? `article-image-${doc.slug}` : undefined
 
   const heroRef = useRef<HTMLElement>(null)
   const readingRef = useRef<HTMLDivElement>(null)
@@ -572,7 +574,10 @@ export default function Article() {
                 </div>
               </div>
               {/* photo */}
-              <div className="relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2">
+              <div
+                className="relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2"
+                style={{ viewTransitionName: heroTransitionName }}
+              >
                 <ResponsiveImage
                   image={doc.heroImage}
                   fallbackSrc={doc.hero}
