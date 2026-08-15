@@ -131,4 +131,4 @@
 - [x] Eliminate the intermittent mobile white gap before article-page Explore More cards so all related guides render reliably without a refresh.
 - [x] Eliminate the desktop header height oscillation at the hello-bar scroll threshold while preserving the intended compact header state.
 - [x] Add CMS-managed related-guide selections to posts, with per-article ordered overrides and a fallback that excludes the current article and favors designated popular guides.
-- [ ] Add a fast mobile article-card-to-hero shared-image transition with a standard-navigation and reduced-motion fallback.
+- [x] Add a fast mobile article-card-to-hero shared-image transition with a standard-navigation and reduced-motion fallback.
