@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import {
   getArticle,
@@ -470,7 +470,7 @@ export default function Article() {
   const [heroReady, setHeroReady] = useState(false)
   const heroReadySlug = useRef<string | null>(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     heroReadySlug.current = null
     setHeroReady(false)
   }, [slug])
@@ -479,6 +479,8 @@ export default function Article() {
     if (heroReadySlug.current === doc.slug) return
     heroReadySlug.current = doc.slug
     setHeroReady(true)
+    document.documentElement.dataset.ringSocietyArticleReady = doc.slug
+    window.dispatchEvent(new CustomEvent('ring-society:article-hero-ready', { detail: { slug: doc.slug } }))
   }
 
   useEffect(() => {

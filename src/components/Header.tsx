@@ -10,6 +10,7 @@ import { getCmsSiteSettings } from '../sanity/queries'
 const COMPACT_HEADER_ENTER_SCROLL_Y = 48
 const COMPACT_HEADER_EXIT_SCROLL_Y = 16
 const DEFAULT_HELLO_BAR_TEXT = 'Your trusted guide to the perfect Engagement ring'
+const HELLO_BAR_SESSION_KEY = 'ring-society:hello-bar-seen'
 
 /** Universal site header + nav. Shared across every page. */
 export default function Header() {
@@ -19,6 +20,37 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [helloBarText, setHelloBarText] = useState<string | null>(null)
+  const [initialPathname] = useState(pathname)
+  const [showHelloBar, setShowHelloBar] = useState(() => {
+    try {
+      if (sessionStorage.getItem(HELLO_BAR_SESSION_KEY)) return false
+      sessionStorage.setItem(HELLO_BAR_SESSION_KEY, 'true')
+      return true
+    } catch {
+      return true
+    }
+  })
+  const [readyArticlePath, setReadyArticlePath] = useState<string | null>(null)
+  const isArticleRoute = pathname.startsWith('/guides/')
+  const articleChromePending = isArticleRoute && readyArticlePath !== pathname
+
+  useEffect(() => {
+    if (pathname !== initialPathname) setShowHelloBar(false)
+  }, [initialPathname, pathname])
+
+  useEffect(() => {
+    const syncReadyArticle = () => {
+      const readySlug = document.documentElement.dataset.ringSocietyArticleReady
+      setReadyArticlePath(readySlug ? `/guides/${readySlug}` : null)
+    }
+    const onArticleHeroReady = (event: Event) => {
+      const slug = (event as CustomEvent<{ slug?: string }>).detail?.slug
+      if (slug) setReadyArticlePath(`/guides/${slug}`)
+    }
+    syncReadyArticle()
+    window.addEventListener('ring-society:article-hero-ready', onArticleHeroReady)
+    return () => window.removeEventListener('ring-society:article-hero-ready', onArticleHeroReady)
+  }, [pathname])
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY
@@ -73,19 +105,22 @@ export default function Header() {
   }
   return (
     <>
-      {/* green top bar — scrolls away with the page */}
-      <div
-        className="flex min-h-[34px] w-full items-center justify-center px-4 py-2"
-        style={{ background: 'var(--forest)' }}
-      >
-        <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
-          {helloBarText ?? '\u00a0'}
-        </p>
-      </div>
+      {/* Green hello bar: present for the opening page of each session only. */}
+      {showHelloBar && !articleChromePending && (
+        <div
+          data-testid="hello-bar"
+          className="flex min-h-[34px] w-full items-center justify-center px-4 py-2"
+          style={{ background: 'var(--forest)' }}
+        >
+          <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
+            {helloBarText ?? '\u00a0'}
+          </p>
+        </div>
+      )}
 
       {/* white bar — sticks to the top of the viewport sitewide */}
       <header
-        className={`sticky top-0 z-[90] w-full bg-white transition-shadow duration-[600ms] ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
+        className={`sticky top-0 z-[90] w-full bg-white transition-shadow duration-[600ms] ${articleChromePending ? 'max-md:invisible max-md:pointer-events-none' : ''} ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
       >
       {/* desktop header */}
       <div
