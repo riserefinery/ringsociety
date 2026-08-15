@@ -84,6 +84,7 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(homeIntro).toContain('delete document.documentElement.dataset.ringSocietyHomeIntro')
     expect(homeIntro).toContain('z-[2147483646]')
     expect(homeIntro).toContain('z-[2147483647]')
+    expect(homeIntro).toContain('createPortal')
     expect(css).toContain("data-ring-society-hello-bar-exiting='true'")
   })
 })

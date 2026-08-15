@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion } from 'motion/react'
 import { logoWordmark } from '../lib/assets'
 import { EASE } from '../lib/motion'
@@ -42,7 +43,7 @@ export default function HomeIntro() {
 
   if (done) return null
 
-  return (
+  return createPortal(
     <>
       {/* Curtain lifts while the persistent green bar and navigation join the same reveal. */}
       <motion.div
@@ -70,6 +71,7 @@ export default function HomeIntro() {
           transition={{ duration: 0.9, delay: 0.3, ease: EASE }}
         />
       </motion.div>
-    </>
+    </>,
+    document.body,
   )
 }
