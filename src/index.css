@@ -69,6 +69,14 @@ body {
 /* Core routes retain their native transition treatment. Article cards use a
    controlled destination entrance below to avoid duplicate image snapshots. */
 @media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  /* The first-homepage loader is a complete screen. Keep persistent chrome
+     out of the revealed area until the centered branded loader has finished. */
+  html[data-ring-society-home-intro='true'] header,
+  html[data-ring-society-home-intro='true'] [data-testid='hello-bar'] {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   ::view-transition-group(*) {
     animation-duration: 500ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.12, 1);
@@ -87,6 +95,18 @@ body {
 
   ::view-transition-old(root),
   ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  /* The site header is a single persistent shell, not a page surface. Keep it
+     visually fixed while any native route transition captures the rest of the app. */
+  ::view-transition-group(ring-society-header) {
+    animation-duration: 1ms;
+  }
+
+  ::view-transition-old(ring-society-header),
+  ::view-transition-new(ring-society-header) {
     animation: none;
     mix-blend-mode: normal;
   }

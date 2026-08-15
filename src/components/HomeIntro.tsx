@@ -17,10 +17,15 @@ export default function HomeIntro() {
   const [done, setDone] = useState(false)
 
   useEffect(() => {
+    document.documentElement.dataset.ringSocietyHomeIntro = 'true'
     const t1 = setTimeout(() => setHidePreloader(true), 3200)
     const t2 = setTimeout(() => setCurtainUp(true), 3300)
-    const t3 = setTimeout(() => setDone(true), 4400)
+    const t3 = setTimeout(() => {
+      delete document.documentElement.dataset.ringSocietyHomeIntro
+      setDone(true)
+    }, 4400)
     return () => {
+      delete document.documentElement.dataset.ringSocietyHomeIntro
       clearTimeout(t1)
       clearTimeout(t2)
       clearTimeout(t3)

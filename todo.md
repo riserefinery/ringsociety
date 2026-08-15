@@ -163,3 +163,6 @@
 - [x] Prevent visible header replacement or reinitialization flashes during internal mobile page changes.
 - [x] Remove route-level mobile article loading handoffs that expose a preloader or unrelated page content during card navigation.
 - [x] Keep the mobile header continuously stable and isolate the refined arrival motion to the destination article hero only.
+- [x] Remove the duplicate Ring Society branding/loading screen exposed during mobile article navigation.
+- [x] Exclude the persistent mobile header from transition snapshots so it cannot briefly flash during article route changes.
+- [x] Limit the branded homepage session loader to the first homepage entry only, ensuring it never appears during internal article-card navigation.

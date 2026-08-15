@@ -54,6 +54,8 @@ describe('shared full-bleed hero and CTA layout', () => {
     const article = readFileSync(resolve(root, 'src/pages/Article.tsx'), 'utf8')
     const legal = readFileSync(resolve(root, 'src/pages/LegalPage.tsx'), 'utf8')
     const favicon = readFileSync(resolve(root, 'index.html'), 'utf8')
+    const homeIntro = readFileSync(resolve(root, 'src/components/HomeIntro.tsx'), 'utf8')
+    const css = readFileSync(resolve(root, 'src/index.css'), 'utf8')
 
     expect(hero).toContain('text-[44px] leading-[1.1]')
     expect(pageHeader).toContain('text-[44px] leading-[1.1]')
@@ -73,5 +75,8 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(header).toContain('HELLO_BAR_SESSION_KEY')
     expect(header).toContain('showHelloBar && (')
     expect(article).toContain('const cmsDocForSlug = cmsDoc?.slug === slug ? cmsDoc : null')
+    expect(homeIntro).toContain("dataset.ringSocietyHomeIntro = 'true'")
+    expect(homeIntro).toContain('delete document.documentElement.dataset.ringSocietyHomeIntro')
+    expect(css).toContain("html[data-ring-society-home-intro='true'] header")
   })
 })

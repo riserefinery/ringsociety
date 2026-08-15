@@ -105,6 +105,7 @@ export default function Header() {
       {/* white bar — sticks to the top of the viewport sitewide */}
       <header
         className={`sticky top-0 z-[90] w-full bg-white transition-shadow duration-[600ms] ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
+        style={{ viewTransitionName: 'ring-society-header' }}
       >
       {/* desktop header */}
       <div
