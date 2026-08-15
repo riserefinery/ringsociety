@@ -42,7 +42,8 @@ describe('CMS page hero settings and contact layout', () => {
     const topGuides = read('src/pages/TopGuides.tsx')
 
     expect(documents).toContain("name: 'bigFeatureImage'")
-    expect(documents).toContain("name: 'topGuidesBadge'")
+    expect(documents).toContain("name: 'articleLabel', title: 'Article Label'")
+    expect(documents).toContain("to: [{ type: 'articleLabel' }]")
     expect(documents).toContain("name: 'topGuidesTextTone'")
     expect(documents).toContain("name: 'selectedPosts'")
     expect(documents).toContain("title: 'Top Guides Order'")

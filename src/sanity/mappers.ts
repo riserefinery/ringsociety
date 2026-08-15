@@ -61,6 +61,7 @@ export function toCmsCard(post: CmsPost): Article {
     image,
     alt: post.heroImage?.alt ?? '',
     responsiveImage: post.heroImage,
+    badge: post.articleLabel?.name,
     to: post.slug ? `/guides/${post.slug}` : undefined,
     filters: toFilters(post),
   }
@@ -77,7 +78,7 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
   return {
     slug: post.slug,
     category: post.contentType || post.categories?.[0]?.title || 'Guide',
-    badge: post.isMostLoved ? 'most loved' : undefined,
+    badge: post.articleLabel?.name ?? (post.isMostLoved ? 'most loved' : undefined),
     title: post.title,
     subtitle: post.excerpt,
     readTime: '',
@@ -97,6 +98,7 @@ export function toCmsCards(posts: CmsPost[]): Article[] {
 }
 
 function toTopGuideBadge(post: CmsPost): Guide['badge'] | undefined {
+  if (post.articleLabel?.name) return post.articleLabel.name
   if (post.topGuidesBadge === 'featured') return 'Featured'
   if (post.topGuidesBadge === 'mostLoved' || post.isMostLoved) return 'most loved'
   return undefined

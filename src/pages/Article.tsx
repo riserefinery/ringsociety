@@ -11,7 +11,7 @@ import {
   type ArticleDoc,
 } from '../lib/content'
 import { shareArrow } from '../lib/assets'
-import { GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
+import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import ResponsiveImage from '../components/ResponsiveImage'
 import { getCmsArticle } from '../sanity/queries'
 
@@ -34,33 +34,10 @@ function ZoomIcon({ className = '' }: { className?: string }) {
   )
 }
 
-function MostLovedIcon() {
-  return (
-    <svg width="14" height="12" viewBox="0 0 14 12" fill="none" aria-hidden>
-      <path
-        d="M7 11.5 1.3 6A3.3 3.3 0 0 1 7 2.4 3.3 3.3 0 0 1 12.7 6L7 11.5Z"
-        fill="white"
-      />
-    </svg>
-  )
-}
-
 const slugify = (s: string) =>
   s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
 /* ---------- shared building blocks ---------- */
-
-function Badge({ label }: { label: string }) {
-  return (
-    <span
-      className="inline-flex items-center gap-[7px] rounded-[14px] px-[14px] py-[6px] backdrop-blur-md"
-      style={{ background: 'rgba(155,155,155,0.25)' }}
-    >
-      {label === 'most loved' && <MostLovedIcon />}
-      <span className="text-[11px] font-semibold uppercase tracking-[2px] text-white">{label}</span>
-    </span>
-  )
-}
 
 /* ---------- lightbox gallery ---------- */
 
@@ -591,7 +568,7 @@ export default function Article() {
                 />
                 {doc.badge && (
                   <div className="absolute bottom-4 left-6 md:bottom-[60px] md:left-auto md:right-[60px]">
-                    <Badge label={doc.badge} />
+                    <ArticleLabel label={doc.badge} background="rgba(155,155,155,0.25)" />
                   </div>
                 )}
               </div>

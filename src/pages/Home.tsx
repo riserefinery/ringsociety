@@ -3,6 +3,7 @@ import { motion } from 'motion/react'
 import { IMAGES, heroMobileImg } from '../lib/assets'
 import { articlePathForTitle } from '../lib/content'
 import { Newsletter, Hero, GuideCard, EditorialRow, HomeIntro, Reveal, Stagger, RevealItem, serif, type Card } from '../components'
+import { getCmsArticleCards } from '../sanity/queries'
 
 /** Whether the homepage load-in should play (once per session, honoring reduced motion). */
 function shouldPlayIntro() {
@@ -36,7 +37,13 @@ const discoverCards: Card[] = [
   },
 ]
 
-function DiscoverGuides() {
+function cmsCardFor(card: Card, cmsCards: Card[]) {
+  const path = articlePathForTitle(card.title)
+  const cmsCard = cmsCards.find((candidate) => candidate.to === path)
+  return { ...card, ...cmsCard, to: path }
+}
+
+function DiscoverGuides({ cmsCards }: { cmsCards: Card[] }) {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-5 md:px-10">
       <div className="flex flex-col gap-6">
@@ -46,7 +53,7 @@ function DiscoverGuides() {
         <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {discoverCards.map((c) => (
             <RevealItem key={c.title} className="h-full">
-              <GuideCard card={{ ...c, to: articlePathForTitle(c.title) }} />
+              <GuideCard card={cmsCardFor(c, cmsCards)} />
             </RevealItem>
           ))}
         </Stagger>
@@ -80,13 +87,16 @@ const secondRowCards: Card[] = [
   },
 ]
 
-function EditorialSection() {
+function EditorialSection({ cmsCards }: { cmsCards: Card[] }) {
+  const jeweler = cmsCardFor({ category: 'Guide', title: 'How to Choose A Jeweler: Our 10-Point Framework', cta: 'view the guide', image: IMAGES.jeweler, alt: 'A jeweler holding a diamond engagement ring' }, cmsCards)
+  const settings = cmsCardFor({ category: 'Guide', title: 'The Complete Guide to Engagement Ring Settings & Styles', cta: 'view the guide', image: IMAGES.settings, alt: 'An assortment of rings on a dark surface' }, cmsCards)
+
   return (
     <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-16 px-5 md:gap-24 md:px-10">
       <EditorialRow
-        image={IMAGES.jeweler}
-        alt="A jeweler holding a diamond engagement ring"
-        badge="Featured"
+        image={jeweler.image}
+        alt={jeweler.alt}
+        badge={jeweler.badge ?? 'Featured'}
         eyebrow="Guide"
         title={
           <>
@@ -101,8 +111,9 @@ function EditorialSection() {
       />
       <EditorialRow
         reverse
-        image={IMAGES.settings}
-        alt="An assortment of rings on a dark surface"
+        image={settings.image}
+        alt={settings.alt}
+        badge={settings.badge}
         eyebrow="Guide"
         title="The Complete Guide to Engagement Ring Settings & Styles"
         body="A visual guide detailing every major ring setting (Solitaire, Halo, Pavé, Bezel, Channel, Three-Stone). It covers the pros and cons of each, how different settings impact the perceived size of the center stone, and which styles suit more active lifestyles."
@@ -114,7 +125,7 @@ function EditorialSection() {
         <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-3">
           {secondRowCards.map((c) => (
             <RevealItem key={c.title} className="h-full">
-              <GuideCard card={{ ...c, to: articlePathForTitle(c.title) }} />
+              <GuideCard card={cmsCardFor(c, cmsCards)} />
             </RevealItem>
           ))}
         </Stagger>
@@ -124,14 +135,18 @@ function EditorialSection() {
 }
 
 /* ---------- black section ---------- */
-function BlackSection() {
+function BlackSection({ cmsCards }: { cmsCards: Card[] }) {
+  const bigBox = cmsCardFor({ category: 'Guide', title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online', cta: 'view the guide', image: IMAGES.emerald, alt: 'A gold ring set with an emerald-green stone' }, cmsCards)
+  const labGrown = cmsCardFor({ category: 'Guide', title: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', cta: 'view the guide', image: IMAGES.labGrown, alt: 'Loose diamonds scattered across a surface' }, cmsCards)
+
   return (
     <section className="w-full bg-black py-16 md:py-24">
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-16 px-5 md:gap-24 md:px-10">
         <EditorialRow
           tone="light"
-          image={IMAGES.emerald}
-          alt="A gold ring set with an emerald-green stone"
+          image={bigBox.image}
+          alt={bigBox.alt}
+          badge={bigBox.badge}
           eyebrow="Guide"
           title={
             <>
@@ -147,8 +162,9 @@ function BlackSection() {
         <EditorialRow
           reverse
           tone="light"
-          image={IMAGES.labGrown}
-          alt="Loose diamonds scattered across a surface"
+          image={labGrown.image}
+          alt={labGrown.alt}
+          badge={labGrown.badge}
           eyebrow="Guide"
           title={
             <>
@@ -192,14 +208,14 @@ const thirdRowCards: Card[] = [
   },
 ]
 
-function MoreGuides() {
+function MoreGuides({ cmsCards }: { cmsCards: Card[] }) {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-5 md:px-10">
       <h2 className="sr-only">Diamond guides and expert perspectives</h2>
       <Stagger className="grid grid-cols-1 gap-5 md:grid-cols-3">
-        {thirdRowCards.map((c) => (
-          <RevealItem key={c.title} className="h-full">
-            <GuideCard card={{ ...c, to: articlePathForTitle(c.title) }} />
+          {thirdRowCards.map((c) => (
+            <RevealItem key={c.title} className="h-full">
+              <GuideCard card={cmsCardFor(c, cmsCards)} />
           </RevealItem>
         ))}
       </Stagger>
@@ -211,6 +227,7 @@ function MoreGuides() {
 export default function Home() {
   const [play] = useState(shouldPlayIntro)
   const [heroReady, setHeroReady] = useState(!play)
+  const [cmsCards, setCmsCards] = useState<Card[]>([])
 
   useEffect(() => {
     if (!play) return
@@ -218,6 +235,18 @@ export default function Home() {
     const t = setTimeout(() => setHeroReady(true), 4200)
     return () => clearTimeout(t)
   }, [play])
+
+  useEffect(() => {
+    let active = true
+    getCmsArticleCards().then((cards) => {
+      if (active) setCmsCards(cards)
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const heroLabel = cmsCards.find((card) => card.to === '/guides/the-definitive-engagement-ring-buying-guide-2026')?.badge ?? 'most loved'
 
   return (
     <>
@@ -235,7 +264,7 @@ export default function Home() {
           mobileImage={heroMobileImg}
           alt="A woman resting her hand against her face, an engagement ring catching the light"
           label="Guide"
-          badge="most loved"
+          badge={heroLabel}
           mobileEyebrow="Our Most-Loved Guide"
           title="How to Buy an Engagement Ring"
           body="Shopping for an engagement ring should be one of life’s biggest moments… but often couples find it intimidating and stressful. We’ll show you everything, from styles to budgeting, to jewelers."
@@ -247,10 +276,10 @@ export default function Home() {
           alignContentToPageGrid
         />
         <div className="flex w-full flex-col items-center gap-16 pb-16 pt-16 md:gap-24 md:pb-0 md:pt-24">
-          <DiscoverGuides />
-          <EditorialSection />
-          <BlackSection />
-          <MoreGuides />
+          <DiscoverGuides cmsCards={cmsCards} />
+          <EditorialSection cmsCards={cmsCards} />
+          <BlackSection cmsCards={cmsCards} />
+          <MoreGuides cmsCards={cmsCards} />
           <Newsletter />
         </div>
       </motion.div>

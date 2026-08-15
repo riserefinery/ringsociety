@@ -11,6 +11,7 @@ const postProjection = `{
   isMostLoved,
   heroImage,
   bigFeatureImage,
+  "articleLabel": articleLabel->{_id, name},
   topGuidesBadge,
   topGuidesTextTone,
   intro,
@@ -26,6 +27,7 @@ const postProjection = `{
     contentType,
     isMostLoved,
     heroImage,
+    "articleLabel": articleLabel->{_id, name},
     "categories": categories[]->{title, filterKey}
   }
 }`

@@ -71,6 +71,22 @@ export const category = defineType({
   preview: { select: { title: 'title', subtitle: 'filterKey' } },
 })
 
+/**
+ * A controlled vocabulary for the single optional label shown on a post.
+ * Editors create and rename approved labels here, then select one on a post.
+ */
+export const articleLabel = defineType({
+  name: 'articleLabel',
+  title: 'Article Label',
+  type: 'document',
+  fields: [
+    defineField({ name: 'name', title: 'Label Name', description: 'The text displayed on article pages and cards, for example “Featured” or “Most Loved”.', type: 'string', validation: (Rule) => Rule.required().max(40) }),
+    defineField({ name: 'slug', title: 'Internal Slug', type: 'slug', options: { source: 'name', maxLength: 40 }, validation: (Rule) => Rule.required() }),
+    defineField({ name: 'description', title: 'Editorial Note', description: 'Optional private note explaining when the label should be used.', type: 'text', rows: 2 }),
+  ],
+  preview: { select: { title: 'name' } },
+})
+
 export const post = defineType({
   name: 'post',
   title: 'Post or Guide',
@@ -92,7 +108,7 @@ export const post = defineType({
     defineField({ name: 'bigFeatureImage', title: 'Big Feature Image', description: 'Wide background artwork for this post when it appears on the Top Guides page. Leave blank to use Hero Image.', type: 'responsiveImage', group: 'media' }),
     defineField({ name: 'categories', title: 'Categories', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'reference', to: [{ type: 'category' }] })] }),
     defineField({ name: 'isMostLoved', title: 'Most-Loved Guide', type: 'boolean', group: 'discovery', initialValue: false }),
-    defineField({ name: 'topGuidesBadge', title: 'Top Guides Badge', description: 'Optional label shown when this post is selected for Top Guides.', type: 'string', group: 'discovery', options: { list: [{ title: 'None', value: 'none' }, { title: 'Featured', value: 'featured' }, { title: 'Most Loved', value: 'mostLoved' }] }, initialValue: 'none' }),
+    defineField({ name: 'articleLabel', title: 'Article Label', description: 'Optional approved label shown consistently everywhere this article appears.', type: 'reference', group: 'discovery', to: [{ type: 'articleLabel' }] }),
     defineField({ name: 'topGuidesTextTone', title: 'Top Guides Overlay Text', description: 'Choose the text color that remains legible over this post’s Big Feature Image.', type: 'string', group: 'discovery', options: { list: [{ title: 'Light text', value: 'light' }, { title: 'Dark text', value: 'dark' }] }, initialValue: 'light' }),
     defineField({ name: 'keywordTags', title: 'Keyword Tags', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'string' })], options: { layout: 'tags' } }),
     defineField({
@@ -144,7 +160,7 @@ export const topGuidesLanding = defineType({
     defineField({ name: 'headline', title: 'Headline', type: 'string', initialValue: 'Top Guides' }),
     defineField({ name: 'introduction', title: 'Introduction', type: 'text', rows: 3 }),
     defineField({ name: 'heroImage', title: 'Hero Image and Alignment', type: 'responsiveImage', description: 'Set the image crop with Focal Alignment.' }),
-    defineField({ name: 'selectedPosts', title: 'Top Guides Order', description: 'Add posts or guides, then drag to control their display order. Each row uses the selected post’s title, excerpt, Big Feature Image, badge, and overlay text setting.', type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }], weak: true })] }),
+    defineField({ name: 'selectedPosts', title: 'Top Guides Order', description: 'Add posts or guides, then drag to control their display order. Each row uses the selected post’s title, excerpt, Big Feature Image, article label, and overlay text setting.', type: 'array', of: [defineArrayMember({ type: 'reference', to: [{ type: 'post' }], weak: true })] }),
     defineField({ name: 'seo', title: 'SEO', type: 'pageSeo' }),
   ],
   preview: { prepare: () => ({ title: 'Top Guides' }) },

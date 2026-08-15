@@ -137,3 +137,6 @@
 - [x] Verify the Vercel review deployment remains healthy after the transition and hello-bar repairs.
 - [x] Add restrained shared core-page navigation transitions and route prefetching to improve perceived mobile speed without a preloader.
 - [x] Preserve standard navigation and reduced-motion fallbacks while validating stable layout behavior across core-page changes.
+- [x] Change the Our Mission hero pre-image background to black and make All Resources and Top Guides hero image/text load-ins match the homepage’s fast, smooth reveal.
+- [x] Add globally managed article-label options in Sanity and let each post select an approved label that renders consistently on Home, Top Guides, All Resources, and the article page.
+- [x] Align article labels bottom-left over mobile imagery sitewide and migrate the current Featured and Most Loved labels into the new article-level model.

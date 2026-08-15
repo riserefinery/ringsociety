@@ -166,11 +166,12 @@ export default function OurMission() {
         title={pageSettings?.headline ?? "We're here to make one of life's biggest decisions feel less like gambling."}
         body={pageSettings?.introduction ?? 'We are a free, independent resource for couples researching engagement rings.'}
         ctaLabel="explore top guides"
-          mobilePanelColor="#000000"
+        mobilePanelColor="#000000"
+        imageBackground="#000000"
         imagePosition={hero.imagePosition}
         mobileImagePosition={hero.imagePosition}
-          fullBleedDesktop
-          alignContentToPageGrid
+        fullBleedDesktop
+        alignContentToPageGrid
       />
       <Statement
         eyebrow="Our Mission"

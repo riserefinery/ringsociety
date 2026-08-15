@@ -24,7 +24,7 @@ import type { CmsResponsiveImage } from '../sanity/types'
 export type Guide = {
   slug: string
   category: string
-  badge?: 'Featured' | 'most loved'
+  badge?: string
   title: string
   excerpt: string
   cardCta: string
@@ -366,7 +366,7 @@ export const defaultArticleCta: ArticleCta = {
 export type ArticleDoc = {
   slug: string
   category: string
-  badge?: 'Featured' | 'most loved'
+  badge?: string
   title: string
   subtitle: string
   readTime: string

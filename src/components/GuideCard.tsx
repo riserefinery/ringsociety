@@ -1,6 +1,7 @@
 import { Eyebrow, CtaLine } from './ui'
 import { Link, useViewTransitionState } from 'react-router'
 import ResponsiveImage from './ResponsiveImage'
+import ArticleLabel from './ArticleLabel'
 import type { CmsResponsiveImage } from '../sanity/types'
 
 /**
@@ -17,6 +18,8 @@ export type Card = {
   dark?: boolean
   to?: string
   responsiveImage?: CmsResponsiveImage
+  /** Optional post-level label selected in Sanity. */
+  badge?: string
 }
 
 export default function GuideCard({ card }: { card: Card }) {
@@ -40,6 +43,11 @@ export default function GuideCard({ card }: { card: Card }) {
           className="h-full w-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105"
           sizes="(min-width: 768px) 33vw, 100vw"
         />
+        {card.badge && (
+          <div className="absolute bottom-4 left-4">
+            <ArticleLabel label={card.badge} />
+          </div>
+        )}
       </div>
       <div className="flex flex-1 flex-col justify-between gap-12 px-[30px] pb-7 pt-12">
         <Eyebrow>{card.category}</Eyebrow>

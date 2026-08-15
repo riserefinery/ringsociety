@@ -1,6 +1,6 @@
-import { svgPaths } from '../lib/assets'
 import type { Guide } from '../lib/content'
 import { Link } from 'react-router'
+import ArticleLabel from './ArticleLabel'
 import { serif } from './ui'
 
 /**
@@ -31,8 +31,8 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
               <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
             </Link>
             {badge && (
-              <span className="absolute left-4 top-4">
-                <Badge badge={badge} color="#fff" bg="rgba(155,155,155,0.28)" />
+              <span className="absolute bottom-4 left-4">
+                <ArticleLabel label={badge} />
               </span>
             )}
           </div>
@@ -74,11 +74,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
                   {category}
                 </span>
                 {badge && (
-                  <Badge
-                    badge={badge}
-                    color={textColor}
-                    bg={light ? 'rgba(255,255,255,0.15)' : 'rgba(16,16,16,0.08)'}
-                  />
+                  <ArticleLabel label={badge} color={textColor} background={light ? 'rgba(255,255,255,0.15)' : 'rgba(16,16,16,0.08)'} />
                 )}
               </div>
               <Link to={`/guides/${slug}`} className="w-fit transition-opacity hover:opacity-65">
@@ -102,27 +98,5 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
         </div>
       </section>
     </>
-  )
-}
-
-function Badge({ badge, color, bg }: { badge: NonNullable<Guide['badge']>; color: string; bg: string }) {
-  return (
-    <span className="flex items-center gap-2 rounded-full px-4 py-1.5 backdrop-blur-sm" style={{ background: bg }}>
-      <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
-        {badge === 'most loved' ? (
-          <path clipRule="evenodd" d={svgPaths.p206fd380} fill={color} fillRule="evenodd" />
-        ) : (
-          <g>
-            <path d={svgPaths.pf5a4280} fill={color} />
-            <path d={svgPaths.p2026f000} fill={color} />
-            <path d={svgPaths.p3b71c800} fill={color} />
-            <path d={svgPaths.p122a5800} fill={color} />
-          </g>
-        )}
-      </svg>
-      <span className="text-[11px] font-semibold uppercase tracking-[2px]" style={{ color }}>
-        {badge}
-      </span>
-    </span>
   )
 }

@@ -1,8 +1,8 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 import { motion } from 'motion/react'
-import { svgPaths } from '../lib/assets'
 import { fadeUp, staggerContainer, viewportOnce } from '../lib/motion'
+import ArticleLabel from './ArticleLabel'
 import { SolidButton, serif } from './ui'
 
 /**
@@ -50,6 +50,8 @@ export type HeroProps = {
   as?: 'h1' | 'h2'
   /** Solid background color of the mobile text panel. */
   mobilePanelColor?: string
+  /** Loading surface shown behind the hero image before it is available. */
+  imageBackground?: string
   /** object-position for the desktop image. */
   imagePosition?: string
   /** object-position for the mobile image. */
@@ -83,14 +85,21 @@ function HeroMobile({
   mobileCtaFullWidth = false,
   as = 'h1',
   mobilePanelColor = '#817164',
+  imageBackground = '#978778',
   mobileImagePosition = 'center 30%',
   ready,
+  badge,
 }: HeroProps) {
   const MHeading = motion[as]
   return (
     <section className="w-full md:hidden">
-      <div className="h-[330px] w-full overflow-hidden" style={{ background: '#978778' }}>
+      <div className="relative h-[330px] w-full overflow-hidden" style={{ background: imageBackground }}>
         <img src={mobileImage ?? image} alt={alt} className="h-full w-full object-cover" style={{ objectPosition: mobileImagePosition }} />
+        {badge && (
+          <div className="absolute bottom-4 left-6">
+            <ArticleLabel label={badge} />
+          </div>
+        )}
       </div>
       <motion.div
         className="flex flex-col gap-6 px-6 pb-12 pt-8"
@@ -142,6 +151,7 @@ function HeroDesktop({
   ctaTo,
   as = 'h1',
   imagePosition = '70% center',
+  imageBackground = '#978778',
   ready,
   fullBleedDesktop = false,
   alignContentToPageGrid = false,
@@ -153,8 +163,8 @@ function HeroDesktop({
         className={fullBleedDesktop ? 'relative overflow-hidden rounded-lg md:rounded-none' : 'relative overflow-hidden rounded-lg'}
         style={
           fullBleedDesktop
-            ? { background: '#978778', minHeight: 520, height: 'clamp(520px, calc((100vw - 80px) * 0.5647), 768px)' }
-            : { background: '#978778', aspectRatio: '1360 / 768', minHeight: 520 }
+            ? { background: imageBackground, minHeight: 520, height: 'clamp(520px, calc((100vw - 80px) * 0.5647), 768px)' }
+            : { background: imageBackground, aspectRatio: '1360 / 768', minHeight: 520 }
         }
       >
         <img src={image} alt={alt} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
@@ -185,12 +195,7 @@ function HeroDesktop({
               <motion.div variants={fadeUp} className="flex items-center gap-5">
                 {label && <span className="text-[11px] font-semibold uppercase tracking-[2px]">{label}</span>}
                 {badge && (
-                  <span className="flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 backdrop-blur-sm">
-                    <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
-                      <path clipRule="evenodd" d={svgPaths.p206fd380} fill="white" fillRule="evenodd" />
-                    </svg>
-                    <span className="text-[11px] font-semibold uppercase tracking-[2px]">{badge}</span>
-                  </span>
+                  <ArticleLabel label={badge} background="rgba(255,255,255,0.15)" />
                 )}
               </motion.div>
             )}

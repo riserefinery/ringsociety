@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { Link } from 'react-router'
-import { svgPaths } from '../lib/assets'
+import ArticleLabel from './ArticleLabel'
 import { Stagger, RevealItem } from './Reveal'
 import { Eyebrow, serif } from './ui'
 
@@ -44,22 +44,9 @@ export default function EditorialRow({
           <img src={image} alt={alt} className="h-full w-full object-cover" />
         )}
         {badge && (
-          <span className="absolute left-6 top-5 flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 backdrop-blur-sm">
-            <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
-              <g clipPath="url(#feat)">
-                <path d={svgPaths.pf5a4280} fill="white" />
-                <path d={svgPaths.p2026f000} fill="white" />
-                <path d={svgPaths.p3b71c800} fill="white" />
-                <path d={svgPaths.p122a5800} fill="white" />
-              </g>
-              <defs>
-                <clipPath id="feat">
-                  <rect width="14" height="12" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-            <span className="text-[11px] font-semibold uppercase tracking-[2px] text-white">{badge}</span>
-          </span>
+          <div className="absolute bottom-4 left-6">
+            <ArticleLabel label={badge} background="rgba(255,255,255,0.20)" />
+          </div>
         )}
       </div>
       </RevealItem>

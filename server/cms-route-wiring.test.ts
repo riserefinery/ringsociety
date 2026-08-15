@@ -18,7 +18,8 @@ describe('CMS route wiring', () => {
     expect(content).toContain('const to = card.to ?? articlePathForTitle(card.title)')
     expect(resources).toContain('mergePublishedArticleCards(cmsArticles)')
     expect(home).toContain('articlePathForTitle')
-    expect(home).toContain('GuideCard card={{ ...c, to: articlePathForTitle(c.title) }}')
+    expect(home).toContain('function cmsCardFor(card: Card, cmsCards: Card[])')
+    expect(home).toContain('GuideCard card={cmsCardFor(c, cmsCards)}')
   })
 
   it('connects both Top Guides actions to the corresponding article route', () => {

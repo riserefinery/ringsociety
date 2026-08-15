@@ -40,6 +40,11 @@ export type CmsSidebarCta = {
   to?: string
 }
 
+export type CmsArticleLabel = {
+  _id?: string
+  name?: string
+}
+
 export type CmsPost = {
   _id: string
   title?: string
@@ -50,6 +55,7 @@ export type CmsPost = {
   isMostLoved?: boolean
   heroImage?: CmsResponsiveImage
   bigFeatureImage?: CmsResponsiveImage
+  articleLabel?: CmsArticleLabel
   topGuidesBadge?: 'none' | 'featured' | 'mostLoved'
   topGuidesTextTone?: 'light' | 'dark'
   intro?: CmsPortableBlock[]

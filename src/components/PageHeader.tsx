@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
+import { motion } from 'motion/react'
+import { fadeUp, staggerContainer } from '../lib/motion'
 import { serif } from './ui'
 
 /**
@@ -28,22 +30,42 @@ export default function PageHeader({
   /** Keeps another page header level with the All Resources header. */
   matchResourcesHeight?: boolean
 }) {
+  const [imageReady, setImageReady] = useState(false)
+
+  useEffect(() => {
+    setImageReady(false)
+  }, [image])
+
+  const revealState = imageReady ? 'show' : 'hidden'
+
   return (
     <section className={fullBleedDesktop ? 'w-full' : 'w-full md:mx-auto md:max-w-[1440px] md:px-10'}>
       <div
         className={`relative flex min-h-[calc(100svh-91px)] items-center justify-center overflow-hidden px-6 py-20 md:py-[120px] ${matchResourcesHeight ? 'md:min-h-[480px]' : 'md:min-h-[320px]'} ${fullBleedDesktop ? 'md:rounded-none' : 'md:rounded-lg'}`}
         style={{ background: '#1a1a1a' }}
       >
-        <img src={image} alt="" className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
+        <img src={image} alt="" onLoad={() => setImageReady(true)} onError={() => setImageReady(true)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
+        <motion.div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[#1a1a1a]"
+          initial={{ x: 0 }}
+          animate={imageReady ? { x: '100%' } : { x: 0 }}
+          transition={{ duration: 0.62, ease: [0.23, 1, 0.32, 1] }}
+        />
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
-        <div className="relative flex max-w-[560px] flex-col items-center gap-6 text-center text-[#f9f6f2]">
-          {eyebrow && <p className="text-[11px] font-semibold uppercase tracking-[2px] text-[#f9f6f2]/70">{eyebrow}</p>}
-          <h1 className="text-[44px] leading-[1.1] tracking-[-1.5px] md:text-[clamp(40px,6vw,58px)]" style={{ fontFamily: serif }}>
+        <motion.div
+          className="relative flex max-w-[560px] flex-col items-center gap-6 text-center text-[#f9f6f2]"
+          variants={staggerContainer}
+          initial="hidden"
+          animate={revealState}
+        >
+          {eyebrow && <motion.p variants={fadeUp} className="text-[11px] font-semibold uppercase tracking-[2px] text-[#f9f6f2]/70">{eyebrow}</motion.p>}
+          <motion.h1 variants={fadeUp} className="text-[44px] leading-[1.1] tracking-[-1.5px] md:text-[clamp(40px,6vw,58px)]" style={{ fontFamily: serif }}>
             {title}
-          </h1>
-          {subtitle && <p className="body-copy max-w-[444px]">{subtitle}</p>}
-          {filters && <div className="mt-3 md:mt-4">{filters}</div>}
-        </div>
+          </motion.h1>
+          {subtitle && <motion.p variants={fadeUp} className="body-copy max-w-[444px]">{subtitle}</motion.p>}
+          {filters && <motion.div variants={fadeUp} className="mt-3 md:mt-4">{filters}</motion.div>}
+        </motion.div>
       </div>
     </section>
   )

@@ -15,6 +15,6 @@ export const structure: StructureResolver = (S) =>
         .child(S.list().title('Pages').items([singleton(S, 'blogLanding', 'All Resources'), singleton(S, 'topGuidesLanding', 'Top Guides'), singleton(S, 'missionPage', 'Our Mission'), singleton(S, 'contactPage', 'Contact')])),
       S.listItem()
         .title('Blog & Guides')
-        .child(S.list().title('Blog & Guides').items([S.documentTypeListItem('post').title('All Posts & Guides'), S.documentTypeListItem('category').title('Categories')])),
+        .child(S.list().title('Blog & Guides').items([S.documentTypeListItem('post').title('All Posts & Guides'), S.documentTypeListItem('articleLabel').title('Article Labels'), S.documentTypeListItem('category').title('Categories')])),
       S.listItem().title('Legal Pages').child(S.documentTypeList('legalPage').title('Legal Pages')),
     ])
