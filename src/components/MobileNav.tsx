@@ -36,7 +36,7 @@ export default function MobileNav({
     <motion.div
       initial={false}
       animate={{ x: open ? '0%' : '-100%' }}
-      transition={open ? { duration: 0.28, ease: [0.23, 1, 0.32, 1] } : { duration: 0.22, ease: [0.4, 0, 1, 1] }}
+      transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
       className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] md:hidden ${open ? '' : 'pointer-events-none'}`}
       role="dialog"
       aria-modal="true"

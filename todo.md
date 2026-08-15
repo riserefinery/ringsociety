@@ -145,3 +145,4 @@
 - [x] Add a lightly eased mobile menu open/close motion with right-to-left closing, plus a fast right-to-left hero-image wipe followed by a short hero-text reveal delay.
 - [x] Correct mobile navigation so it enters left-to-right and exits right-to-left with visible easing.
 - [x] Remove the mobile navigation opacity fade on exit while retaining its verified directional slide and easing.
+- [x] Refine both mobile menu slide directions to use a fast-start, slow-settling luxury ease-out matching the hero text motion language.
