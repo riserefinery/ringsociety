@@ -135,5 +135,5 @@
 - [x] Make the mobile shared-image article transition work reliably across successive card-to-article navigations.
 - [x] Prevent the green hello bar from briefly showing the local fallback text before its published Sanity value resolves.
 - [x] Verify the Vercel review deployment remains healthy after the transition and hello-bar repairs.
-- [ ] Add restrained shared core-page navigation transitions and route prefetching to improve perceived mobile speed without a preloader.
-- [ ] Preserve standard navigation and reduced-motion fallbacks while validating stable layout behavior across core-page changes.
+- [x] Add restrained shared core-page navigation transitions and route prefetching to improve perceived mobile speed without a preloader.
+- [x] Preserve standard navigation and reduced-motion fallbacks while validating stable layout behavior across core-page changes.
