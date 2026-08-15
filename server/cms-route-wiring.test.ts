@@ -40,10 +40,11 @@ describe('CMS route wiring', () => {
     expect(editorialRow).toContain('Read ${typeof title === \'string\' ? title : eyebrow}')
     expect(editorialRow).toContain("mobileCtaFullWidth ? 'w-full md:w-fit' : 'w-fit'")
     expect(read('src/pages/Home.tsx')).toContain('mobileCtaFullWidth')
-    expect(feature).toContain('useViewTransitionState(articlePath)')
-    expect(feature).toContain('viewTransitionName: imageTransitionName')
-    expect(editorialRow).toContain('useViewTransitionState(to ?? \'/\')')
-    expect(editorialRow).toContain('viewTransitionName: imageTransitionName')
+    expect(feature).not.toContain('useViewTransitionState')
+    expect(feature).not.toContain('viewTransitionName')
+    expect(feature).toContain('prefetch="intent"')
+    expect(editorialRow).not.toContain('useViewTransitionState')
+    expect(editorialRow).not.toContain('viewTransitionName')
   })
 
   it('connects article-page Explore More cards to their matching article routes', () => {
@@ -57,18 +58,20 @@ describe('CMS route wiring', () => {
     expect(card).toContain('to={card.to}')
   })
 
-  it('uses a native shared-image view transition for mobile article-card navigation with a reduced-motion fallback', () => {
+  it('uses a controlled mobile destination reveal for article-card navigation without duplicate native image snapshots', () => {
     const article = read('src/pages/Article.tsx')
     const card = read('src/components/GuideCard.tsx')
     const css = read('src/index.css')
+    const header = read('src/components/Header.tsx')
 
-    expect(card).toContain('useViewTransitionState(card.to ?? \'/\')')
-    expect(card).toContain('viewTransition')
+    expect(card).not.toContain('useViewTransitionState')
+    expect(card).not.toContain('viewTransitionName')
     expect(card).toContain('prefetch="intent"')
-    expect(article).toContain('useViewTransitionState(`/guides/${doc.slug}`)')
-    expect(article).toContain('viewTransitionName: heroTransitionName')
-    expect(css).toContain('::view-transition-group(*)')
-    expect(css).toContain('animation-duration: 500ms')
+    expect(article).toContain('article-hero-arrival')
+    expect(css).toContain('.article-hero-arrival')
+    expect(css).toContain('@keyframes article-arrival')
+    expect(header).toContain('article-logo-arrival')
+    expect(css).toContain('@keyframes article-logo-arrival')
     expect(css).toContain('cubic-bezier(0.16, 1, 0.12, 1)')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
   })

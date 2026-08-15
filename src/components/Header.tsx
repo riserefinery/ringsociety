@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useLocation } from 'react-router'
 import { logoWordmark, burgerMenu } from '../lib/assets'
 import { headerNav } from '../lib/nav'
 import MobileNav from './MobileNav'
@@ -13,6 +13,8 @@ const DEFAULT_HELLO_BAR_TEXT = 'Your trusted guide to the perfect Engagement rin
 
 /** Universal site header + nav. Shared across every page. */
 export default function Header() {
+  const { pathname } = useLocation()
+  const articleRouteKey = pathname.startsWith('/guides/') ? pathname : undefined
   const nav = headerNav.slice(0, 2)
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -146,7 +148,7 @@ export default function Header() {
             <img src={burgerMenu} alt="" className="h-[28.8px] w-[18px]" />
           </button>
           <Link to="/" prefetch="intent" viewTransition className="shrink-0 cursor-pointer" onClick={() => setMenuOpen(false)}>
-            <img src={logoWordmark} alt="Ring Society" className="h-[22px] w-auto" />
+            <img key={articleRouteKey} src={logoWordmark} alt="Ring Society" className={`h-[22px] w-auto ${articleRouteKey ? 'article-logo-arrival' : ''}`} />
           </Link>
           <button onClick={openSearch} aria-label="Search" className="flex h-8 w-8 items-center justify-center">
             <SearchIcon size={18} />

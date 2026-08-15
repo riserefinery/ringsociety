@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { Link, useViewTransitionState } from 'react-router'
+import { Link } from 'react-router'
 import ArticleLabel from './ArticleLabel'
 import { Stagger, RevealItem } from './Reveal'
 import { Eyebrow, serif } from './ui'
@@ -28,9 +28,6 @@ export default function EditorialRow({
   to?: string
   mobileCtaFullWidth?: boolean
 }) {
-  const articleSlug = to?.match(/^\/guides\/([^/?#]+)/)?.[1]
-  const isTransitioning = useViewTransitionState(to ?? '/')
-  const imageTransitionName = articleSlug && isTransitioning ? `article-image-${articleSlug}` : undefined
   const textColor = tone === 'light' ? '#fff' : '#000'
   const ctaClasses = `inline-flex h-[45px] ${mobileCtaFullWidth ? 'w-full md:w-fit' : 'w-fit'} items-center justify-center rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[1.5px] transition-colors duration-500 ease-out ${
     tone === 'light' ? 'border border-transparent bg-white text-black hover:bg-black hover:text-white' : 'border border-black bg-black text-[#fbf9f7] hover:bg-white hover:text-black'
@@ -38,9 +35,9 @@ export default function EditorialRow({
   return (
     <Stagger className={`grid grid-cols-1 items-center gap-10 lg:grid-cols-2 ${reverse ? 'lg:[direction:rtl]' : ''}`}>
       <RevealItem className="relative overflow-hidden rounded-lg [direction:ltr]">
-      <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: '670 / 447', background: '#d8cfc4', viewTransitionName: imageTransitionName }}>
+      <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: '670 / 447', background: '#d8cfc4' }}>
         {to ? (
-          <Link to={to} aria-label={`Read ${typeof title === 'string' ? title : eyebrow}`} className="block h-full w-full" viewTransition>
+          <Link to={to} aria-label={`Read ${typeof title === 'string' ? title : eyebrow}`} className="block h-full w-full" prefetch="intent">
             <img src={image} alt={alt} className="h-full w-full object-cover transition-transform duration-[900ms] ease-out hover:scale-105" />
           </Link>
         ) : (
@@ -57,7 +54,7 @@ export default function EditorialRow({
       <div className="flex flex-col gap-8" style={{ color: textColor }}>
         <Eyebrow tone={tone === 'light' ? 'light' : 'muted'}>{eyebrow}</Eyebrow>
         {to ? (
-          <Link to={to} className="w-fit transition-opacity hover:opacity-65" viewTransition>
+          <Link to={to} className="w-fit transition-opacity hover:opacity-65" prefetch="intent">
             <h2 className="text-[clamp(32px,3.2vw,42px)] leading-[1.2]" style={{ fontFamily: serif }}>
               {title}
             </h2>
@@ -70,7 +67,7 @@ export default function EditorialRow({
         <p className="body-copy" style={{ color: tone === 'light' ? 'rgba(255,255,255,0.82)' : '#111' }}>
           {body}
         </p>
-        {to ? <Link to={to} className={ctaClasses} viewTransition>view the guide</Link> : <span className={ctaClasses}>view the guide</span>}
+        {to ? <Link to={to} className={ctaClasses} prefetch="intent">view the guide</Link> : <span className={ctaClasses}>view the guide</span>}
       </div>
       </RevealItem>
     </Stagger>

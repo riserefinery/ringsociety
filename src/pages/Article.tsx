@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { Link, useParams, useViewTransitionState } from 'react-router'
+import { Link, useParams } from 'react-router'
 import {
   getArticle,
   getRelated,
@@ -460,9 +460,6 @@ export default function Article() {
   )
 
   const related = getRelated(doc)
-  const heroIsTransitioning = useViewTransitionState(`/guides/${doc.slug}`)
-  const heroTransitionName = heroIsTransitioning ? `article-image-${doc.slug}` : undefined
-
   const heroRef = useRef<HTMLElement>(null)
   const readingRef = useRef<HTMLDivElement>(null)
   const [lightbox, setLightbox] = useState<number | null>(null)
@@ -525,7 +522,7 @@ export default function Article() {
       </div>
 
       {/* ---------- hero split card ---------- */}
-      <section ref={heroRef} className="w-full">
+      <section key={doc.slug} ref={heroRef} className="article-hero-arrival w-full">
         <div className="mx-auto w-full max-w-[1440px] px-0 md:px-10">
           <div className="overflow-hidden bg-[#fbf9f7] md:rounded-[8px]">
             <div className="flex flex-col md:flex-row">
@@ -557,7 +554,6 @@ export default function Article() {
               {/* photo */}
               <div
                 className="relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2"
-                style={{ viewTransitionName: heroTransitionName }}
               >
                 <ResponsiveImage
                   image={doc.heroImage}
