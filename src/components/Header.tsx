@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { logoWordmark, burgerMenu } from '../lib/assets'
 import { headerNav } from '../lib/nav'
@@ -21,7 +21,6 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [helloBarText, setHelloBarText] = useState<string | null>(null)
   const [initialPathname] = useState(pathname)
-  const [helloBarExiting, setHelloBarExiting] = useState(false)
   const [showHelloBar, setShowHelloBar] = useState(() => {
     try {
       if (sessionStorage.getItem(HELLO_BAR_SESSION_KEY)) return false
@@ -32,35 +31,11 @@ export default function Header() {
     }
   })
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pathname !== initialPathname && showHelloBar) {
-      document.documentElement.dataset.ringSocietyHelloBarExiting = 'true'
-      setHelloBarExiting(true)
+      setShowHelloBar(false)
     }
   }, [initialPathname, pathname, showHelloBar])
-
-  useEffect(() => {
-    if (!helloBarExiting) return
-    const timeout = window.setTimeout(() => {
-      delete document.documentElement.dataset.ringSocietyHelloBarExiting
-      setShowHelloBar(false)
-    }, 280)
-    return () => window.clearTimeout(timeout)
-  }, [helloBarExiting])
-
-  useEffect(() => {
-    const beginExitBeforeNavigation = (event: PointerEvent) => {
-      if (!showHelloBar || helloBarExiting || !(event.target instanceof Element)) return
-      const link = event.target.closest('a[href^="/"]')
-      const href = link?.getAttribute('href')
-      if (href && href !== pathname) {
-        document.documentElement.dataset.ringSocietyHelloBarExiting = 'true'
-        setHelloBarExiting(true)
-      }
-    }
-    document.addEventListener('pointerdown', beginExitBeforeNavigation, true)
-    return () => document.removeEventListener('pointerdown', beginExitBeforeNavigation, true)
-  }, [helloBarExiting, pathname, showHelloBar])
 
   useEffect(() => {
     const onScroll = () => {
@@ -120,10 +95,7 @@ export default function Header() {
       {showHelloBar && (
         <div
           data-testid="hello-bar"
-          aria-hidden={helloBarExiting}
-          className={`flex w-full items-center justify-center overflow-hidden px-4 transition-[max-height,opacity,padding] duration-[280ms] [transition-timing-function:cubic-bezier(0.22,1,0.36,1)] ${
-            helloBarExiting ? 'max-h-0 py-0 opacity-0' : 'max-h-[40px] py-2 opacity-100'
-          }`}
+          className="flex w-full items-center justify-center overflow-hidden px-4 py-2"
           style={{ background: 'var(--forest)' }}
         >
           <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
