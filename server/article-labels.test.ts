@@ -45,20 +45,20 @@ describe('CMS-managed article labels', () => {
 })
 
 describe('landing-page hero load-in', () => {
-  it('uses a gated image wipe and the shared stagger/fade-up motion system', () => {
+  it('uses a gated fade-and-zoom image reveal and the shared stagger/fade-up motion system', () => {
     const pageHeader = read('src/components/PageHeader.tsx')
 
     expect(pageHeader).toContain("from 'motion/react'")
     expect(pageHeader).toContain('fadeUp, staggerContainer')
-    expect(pageHeader).toContain("animate={imageReady ? { x: '-100%' } : { x: 0 }}")
+    expect(pageHeader).toContain("animate={imageReady ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }}")
     expect(pageHeader).toContain('variants={delayedTextStagger}')
     expect(pageHeader).toContain('variants={fadeUp}')
     expect(pageHeader).toContain('const [loadedImage, setLoadedImage]')
     expect(pageHeader).toContain('const imageReady = loadedImage === image')
-    expect(pageHeader).toContain('<img key={image}')
-    expect(pageHeader).toContain('className="absolute inset-0 bg-[#1a1a1a]"')
-    expect(pageHeader).toContain('duration: 0.38')
-    expect(pageHeader).toContain('delayChildren: 0.24')
+    expect(pageHeader).toContain('<motion.img')
+    expect(pageHeader).toContain('initial={{ opacity: 0, scale: 1.06 }}')
+    expect(pageHeader).toContain('duration: 0.56')
+    expect(pageHeader).toContain('delayChildren: 0.3')
   })
 
   it('sets the Our Mission pre-image loading surface to black', () => {

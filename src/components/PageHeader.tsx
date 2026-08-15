@@ -39,7 +39,7 @@ export default function PageHeader({
     show: {
       transition: {
         staggerChildren: 0.12,
-        delayChildren: 0.24,
+        delayChildren: 0.3,
       },
     },
   }
@@ -50,14 +50,17 @@ export default function PageHeader({
         className={`relative flex min-h-[calc(100svh-91px)] items-center justify-center overflow-hidden px-6 py-20 md:py-[120px] ${matchResourcesHeight ? 'md:min-h-[480px]' : 'md:min-h-[320px]'} ${fullBleedDesktop ? 'md:rounded-none' : 'md:rounded-lg'}`}
         style={{ background: '#1a1a1a' }}
       >
-        <img key={image} src={image} alt="" onLoad={() => setLoadedImage(image)} onError={() => setLoadedImage(image)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
-        <motion.div
+        <motion.img
           key={image}
-          aria-hidden="true"
-          className="absolute inset-0 bg-[#1a1a1a]"
-          initial={{ x: 0 }}
-          animate={imageReady ? { x: '-100%' } : { x: 0 }}
-          transition={{ duration: 0.38, ease: [0.23, 1, 0.32, 1] }}
+          src={image}
+          alt=""
+          onLoad={() => setLoadedImage(image)}
+          onError={() => setLoadedImage(image)}
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: imagePosition }}
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={imageReady ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }}
+          transition={{ duration: 0.56, ease: [0.16, 1, 0.3, 1] }}
         />
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
         <motion.div

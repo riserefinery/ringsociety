@@ -146,3 +146,5 @@
 - [x] Correct mobile navigation so it enters left-to-right and exits right-to-left with visible easing.
 - [x] Remove the mobile navigation opacity fade on exit while retaining its verified directional slide and easing.
 - [x] Refine both mobile menu slide directions to use a fast-start, slow-settling luxury ease-out matching the hero text motion language.
+- [x] Increase the final deceleration of both mobile menu directions so they settle more deliberately before the open and closed endpoints.
+- [x] Replace landing-page hero background wipes with a restrained fade-in and subtle zoom-out while preserving staged text and repeat-load safety.
