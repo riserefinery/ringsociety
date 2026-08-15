@@ -93,6 +93,8 @@ export default function Header() {
               <Link
                 key={n.label}
                 to={n.to}
+                prefetch="intent"
+                viewTransition
                 className="cursor-pointer text-[12px] font-semibold uppercase tracking-[1px] text-black transition-opacity hover:opacity-60"
               >
                 {n.label}
@@ -107,12 +109,14 @@ export default function Header() {
             ),
           )}
         </nav>
-        <Link to="/" className="shrink-0 cursor-pointer">
+        <Link to="/" prefetch="intent" viewTransition className="shrink-0 cursor-pointer">
           <img src={logoWordmark} alt="Ring Society" className="h-[26px] w-auto" />
         </Link>
         <div className="flex flex-1 items-center justify-end gap-9">
           <Link
             to="/our-mission"
+            prefetch="intent"
+            viewTransition
             className="cursor-pointer text-[12px] font-semibold uppercase tracking-[1px] text-black transition-opacity hover:opacity-60"
           >
             Our Mission
@@ -138,7 +142,7 @@ export default function Header() {
           >
             <img src={burgerMenu} alt="" className="h-[28.8px] w-[18px]" />
           </button>
-          <Link to="/" className="shrink-0 cursor-pointer" onClick={() => setMenuOpen(false)}>
+          <Link to="/" prefetch="intent" viewTransition className="shrink-0 cursor-pointer" onClick={() => setMenuOpen(false)}>
             <img src={logoWordmark} alt="Ring Society" className="h-[22px] w-auto" />
           </Link>
           <button onClick={openSearch} aria-label="Search" className="flex h-8 w-8 items-center justify-center">

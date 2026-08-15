@@ -72,7 +72,7 @@ export default function MobileNav({ open, onClose }: { open: boolean; onClose: (
           return (
             <div key={item.label} className="relative z-[1] w-full">
               {item.to ? (
-                <Link to={item.to} onClick={onClose} className="block w-full">
+                <Link to={item.to} prefetch="intent" viewTransition onClick={onClose} className="block w-full">
                   {content}
                 </Link>
               ) : (
@@ -95,13 +95,13 @@ export default function MobileNav({ open, onClose }: { open: boolean; onClose: (
           <p className="flex flex-wrap gap-x-2">
             {legalLinks.slice(0, 3).map((l, i) => (
               <span key={l.label}>
-                <Link to={l.to ?? '/'} onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">{l.label}</Link>
+                <Link to={l.to ?? '/'} prefetch="intent" viewTransition onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">{l.label}</Link>
                 {i < 2 && <span className="pl-2 opacity-60">|</span>}
               </span>
             ))}
           </p>
           {legalLinks.slice(3).map((l) => (
-            <Link key={l.label} to={l.to ?? '/'} onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">
+            <Link key={l.label} to={l.to ?? '/'} prefetch="intent" viewTransition onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">
               {l.label}
             </Link>
           ))}

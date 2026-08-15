@@ -114,6 +114,8 @@ function HeroMobile({
           {ctaTo ? (
             <Link
               to={ctaTo}
+              prefetch="intent"
+              viewTransition
               className={`inline-flex h-[45px] items-center justify-center rounded-lg border border-transparent bg-white px-6 text-[13px] font-semibold uppercase tracking-[1.5px] text-black transition-colors duration-500 ease-out hover:bg-black hover:text-white ${mobileCtaFullWidth ? 'w-full' : 'w-fit'}`}
             >
               {ctaLabel}
@@ -204,7 +206,7 @@ function HeroDesktop({
             </motion.p>
             <motion.div variants={fadeUp}>
               {ctaTo ? (
-                <Link to={ctaTo} className="w-fit">
+                <Link to={ctaTo} prefetch="intent" viewTransition className="w-fit">
                   <SolidButton variant="light" className="w-fit !h-[41px]">{ctaLabel}</SolidButton>
                 </Link>
               ) : (

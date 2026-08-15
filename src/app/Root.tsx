@@ -85,11 +85,19 @@ function RouteMeta() {
 }
 /** Shared app shell: header + routed page + footer. */
 export default function Root() {
+  const { pathname } = useLocation()
+  const isArticleRoute = pathname.startsWith('/guides/')
+
   return (
     <div className="flex w-full flex-col items-center bg-white">
       <RouteMeta />
       <Header />
-      <Outlet />
+      <main
+        className="w-full"
+        style={isArticleRoute ? undefined : { viewTransitionName: 'core-page-shell' }}
+      >
+        <Outlet />
+      </main>
       <Footer />
       <ScrollRestoration />
     </div>

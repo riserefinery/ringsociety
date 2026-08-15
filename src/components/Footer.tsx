@@ -44,7 +44,7 @@ export default function Footer() {
               {label}
             </a>
           ) : (
-            <Link key={label} to={i.to} className={cls}>
+            <Link key={label} to={i.to} prefetch="intent" viewTransition className={cls}>
               {label}
             </Link>
           )
