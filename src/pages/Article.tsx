@@ -479,7 +479,6 @@ export default function Article() {
     if (heroReadySlug.current === doc.slug) return
     heroReadySlug.current = doc.slug
     setHeroReady(true)
-    window.dispatchEvent(new CustomEvent('ring-society:article-hero-ready', { detail: { slug: doc.slug } }))
   }
 
   useEffect(() => {
@@ -572,7 +571,7 @@ export default function Article() {
               </div>
               {/* photo */}
               <div
-                className={`relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2 ${heroReady ? 'article-hero-image-arrival' : ''}`}
+                className={`relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2 ${heroReady ? 'article-hero-image-expand' : ''}`}
               >
                 <ResponsiveImage
                   image={doc.heroImage}

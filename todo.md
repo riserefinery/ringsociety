@@ -155,3 +155,5 @@
 - [x] Remove the duplicate article-image exposure during mobile card navigation and use a single controlled article hero and logo fade-down reveal.
 - [x] Keep the persistent navigation above all mobile article-loading and transition layers.
 - [x] Restore a flash-free mobile article hero zoom transition with a visibly slower, buttery header fade-down arrival.
+- [x] Replace the mobile article scale-back with a single upward-growing hero movement originating from the tapped card’s visual scale.
+- [x] Keep the global mobile header independent and stable during article navigation, removing both preloader overlap and repeated header slide-ins.
