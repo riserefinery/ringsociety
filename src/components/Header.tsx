@@ -9,6 +9,7 @@ import { getCmsSiteSettings } from '../sanity/queries'
 
 const COMPACT_HEADER_ENTER_SCROLL_Y = 48
 const COMPACT_HEADER_EXIT_SCROLL_Y = 16
+const DEFAULT_HELLO_BAR_TEXT = 'Your trusted guide to the perfect Engagement ring'
 
 /** Universal site header + nav. Shared across every page. */
 export default function Header() {
@@ -16,7 +17,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [helloBarText, setHelloBarText] = useState('Your trusted guide to the perfect Engagement ring')
+  const [helloBarText, setHelloBarText] = useState<string | null>(null)
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY
@@ -50,9 +51,13 @@ export default function Header() {
 
   useEffect(() => {
     let active = true
-    getCmsSiteSettings().then((settings) => {
-      if (active && settings?.helloBarText) setHelloBarText(settings.helloBarText)
-    })
+    getCmsSiteSettings()
+      .then((settings) => {
+        if (active) setHelloBarText(settings?.helloBarText || DEFAULT_HELLO_BAR_TEXT)
+      })
+      .catch(() => {
+        if (active) setHelloBarText(DEFAULT_HELLO_BAR_TEXT)
+      })
     return () => {
       active = false
     }
@@ -70,7 +75,7 @@ export default function Header() {
         style={{ background: 'var(--forest)' }}
       >
         <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
-          {helloBarText}
+          {helloBarText ?? '\u00a0'}
         </p>
       </div>
 

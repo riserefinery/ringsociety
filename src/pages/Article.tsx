@@ -397,7 +397,11 @@ export default function Article() {
   const { slug } = useParams()
   const fallbackDoc = useMemo(() => getArticle(slug), [slug])
   const [cmsDoc, setCmsDoc] = useState<ArticleDoc | null>(null)
-  const doc = cmsDoc ?? fallbackDoc
+  // The route component is reused when readers move between guides. Ignore the
+  // prior guide's CMS record until the matching record finishes loading so the
+  // destination hero receives the correct shared-image transition identity.
+  const cmsDocForSlug = cmsDoc?.slug === slug ? cmsDoc : null
+  const doc = cmsDocForSlug ?? fallbackDoc
   const cta = doc.cta ?? defaultArticleCta
   const readTime = useMemo(() => readingTimeFor(doc), [doc])
 

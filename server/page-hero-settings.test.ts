@@ -66,7 +66,9 @@ describe('CMS page hero settings and contact layout', () => {
     expect(queries).toContain('getCmsSiteSettings')
     expect(queries).toContain('{helloBarText}')
     expect(header).toContain('getCmsSiteSettings')
-    expect(header).toContain('{helloBarText}')
+    expect(header).toContain('useState<string | null>(null)')
+    expect(header).toContain('settings?.helloBarText || DEFAULT_HELLO_BAR_TEXT')
+    expect(header).toContain("{helloBarText ?? '\\u00a0'}")
   })
 
   it('does not require editors to maintain publishing dates on posts', () => {
