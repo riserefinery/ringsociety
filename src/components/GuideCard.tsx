@@ -4,7 +4,6 @@ import ResponsiveImage from './ResponsiveImage'
 import ArticleLabel from './ArticleLabel'
 import type { CmsResponsiveImage } from '../sanity/types'
 import { prefetchCmsArticle } from '../sanity/queries'
-import { beginMobileArticleArrival } from '../lib/articleArrival'
 
 /**
  * Universal guide/blog card. The STRUCTURE is fixed across pages —
@@ -67,7 +66,6 @@ export default function GuideCard({ card }: { card: Card }) {
       prefetch="intent"
       onPointerEnter={prefetchArticle}
       onFocus={prefetchArticle}
-      onClick={beginMobileArticleArrival}
     >
       {cardContent}
     </Link>

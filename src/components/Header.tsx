@@ -6,7 +6,6 @@ import MobileNav from './MobileNav'
 import SearchOverlay from './SearchOverlay'
 import { SearchIcon } from './ui'
 import { getCmsSiteSettings } from '../sanity/queries'
-import { ARTICLE_ARRIVAL_EVENT } from '../lib/articleArrival'
 
 const COMPACT_HEADER_ENTER_SCROLL_Y = 48
 const COMPACT_HEADER_EXIT_SCROLL_Y = 16
@@ -31,19 +30,11 @@ export default function Header() {
       return true
     }
   })
-  const [, setArticleArrivalRevision] = useState(0)
-  const isArticleRoute = pathname.startsWith('/guides/')
-  const articleChromePending = isArticleRoute && document.documentElement.dataset.ringSocietyArticleLoading === 'true'
 
   useEffect(() => {
     if (pathname !== initialPathname) setShowHelloBar(false)
   }, [initialPathname, pathname])
 
-  useEffect(() => {
-    const refreshArrivalState = () => setArticleArrivalRevision((revision) => revision + 1)
-    window.addEventListener(ARTICLE_ARRIVAL_EVENT, refreshArrivalState)
-    return () => window.removeEventListener(ARTICLE_ARRIVAL_EVENT, refreshArrivalState)
-  }, [])
   useEffect(() => {
     const onScroll = () => {
       const scrollY = window.scrollY
@@ -99,7 +90,7 @@ export default function Header() {
   return (
     <>
       {/* Green hello bar: present for the opening page of each session only. */}
-      {showHelloBar && !articleChromePending && (
+      {showHelloBar && (
         <div
           data-testid="hello-bar"
           className="flex min-h-[34px] w-full items-center justify-center px-4 py-2"
@@ -113,7 +104,7 @@ export default function Header() {
 
       {/* white bar — sticks to the top of the viewport sitewide */}
       <header
-        className={`sticky top-0 z-[90] w-full bg-white transition-shadow duration-[600ms] ${articleChromePending ? 'max-md:invisible max-md:pointer-events-none' : ''} ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
+        className={`sticky top-0 z-[90] w-full bg-white transition-shadow duration-[600ms] ${scrolled ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.18)]' : 'shadow-none'}`}
       >
       {/* desktop header */}
       <div

@@ -71,7 +71,7 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(header).toContain('settings?.helloBarText || DEFAULT_HELLO_BAR_TEXT')
     expect(header).toContain("{helloBarText ?? '\\u00a0'}")
     expect(header).toContain('HELLO_BAR_SESSION_KEY')
-    expect(header).toContain('showHelloBar && !articleChromePending')
+    expect(header).toContain('showHelloBar && (')
     expect(article).toContain('const cmsDocForSlug = cmsDoc?.slug === slug ? cmsDoc : null')
   })
 })

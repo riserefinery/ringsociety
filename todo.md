@@ -161,3 +161,5 @@
 - [x] Test showing the green hello bar only on the first page load of a browser session, hiding it on subsequent internal visits.
 - [x] Remove the remaining Ring Society mobile wordmark/header exposure above the article loading surface.
 - [x] Prevent visible header replacement or reinitialization flashes during internal mobile page changes.
+- [x] Remove route-level mobile article loading handoffs that expose a preloader or unrelated page content during card navigation.
+- [x] Keep the mobile header continuously stable and isolate the refined arrival motion to the destination article hero only.

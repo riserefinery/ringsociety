@@ -14,7 +14,6 @@ import { shareArrow } from '../lib/assets'
 import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import ResponsiveImage from '../components/ResponsiveImage'
 import { getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
-import { finishMobileArticleArrival } from '../lib/articleArrival'
 
 /* ---------- icons ---------- */
 
@@ -480,7 +479,6 @@ export default function Article() {
     if (heroReadySlug.current === doc.slug) return
     heroReadySlug.current = doc.slug
     setHeroReady(true)
-    finishMobileArticleArrival(doc.slug)
   }
 
   useEffect(() => {
@@ -542,7 +540,7 @@ export default function Article() {
       </div>
 
       {/* ---------- hero split card ---------- */}
-      <section key={doc.slug} ref={heroRef} className={`w-full ${heroReady ? 'article-hero-arrival' : 'article-hero-pending'}`}>
+      <section key={doc.slug} ref={heroRef} className="w-full">
         <div className="mx-auto w-full max-w-[1440px] px-0 md:px-10">
           <div className="overflow-hidden bg-[#fbf9f7] md:rounded-[8px]">
             <div className="flex flex-col md:flex-row">

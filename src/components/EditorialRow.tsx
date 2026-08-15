@@ -4,7 +4,6 @@ import ArticleLabel from './ArticleLabel'
 import { Stagger, RevealItem } from './Reveal'
 import { Eyebrow, serif } from './ui'
 import { prefetchCmsArticle } from '../sanity/queries'
-import { beginMobileArticleArrival } from '../lib/articleArrival'
 
 /** Universal two-up editorial feature (image + copy). Reusable across pages. */
 export default function EditorialRow({
@@ -41,7 +40,7 @@ export default function EditorialRow({
       <RevealItem className="relative overflow-hidden rounded-lg [direction:ltr]">
       <div className="relative overflow-hidden rounded-lg" style={{ aspectRatio: '670 / 447', background: '#d8cfc4' }}>
         {to ? (
-          <Link to={to} aria-label={`Read ${typeof title === 'string' ? title : eyebrow}`} className="block h-full w-full" prefetch="intent" onPointerEnter={prefetchArticle} onFocus={prefetchArticle} onClick={beginMobileArticleArrival}>
+          <Link to={to} aria-label={`Read ${typeof title === 'string' ? title : eyebrow}`} className="block h-full w-full" prefetch="intent" onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
             <img src={image} alt={alt} className="h-full w-full object-cover transition-transform duration-[900ms] ease-out hover:scale-105" />
           </Link>
         ) : (
@@ -58,7 +57,7 @@ export default function EditorialRow({
       <div className="flex flex-col gap-8" style={{ color: textColor }}>
         <Eyebrow tone={tone === 'light' ? 'light' : 'muted'}>{eyebrow}</Eyebrow>
         {to ? (
-          <Link to={to} className="w-fit transition-opacity hover:opacity-65" prefetch="intent" onPointerEnter={prefetchArticle} onFocus={prefetchArticle} onClick={beginMobileArticleArrival}>
+          <Link to={to} className="w-fit transition-opacity hover:opacity-65" prefetch="intent" onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
             <h2 className="text-[clamp(32px,3.2vw,42px)] leading-[1.2]" style={{ fontFamily: serif }}>
               {title}
             </h2>
@@ -71,7 +70,7 @@ export default function EditorialRow({
         <p className="body-copy" style={{ color: tone === 'light' ? 'rgba(255,255,255,0.82)' : '#111' }}>
           {body}
         </p>
-        {to ? <Link to={to} className={ctaClasses} prefetch="intent" onPointerEnter={prefetchArticle} onFocus={prefetchArticle} onClick={beginMobileArticleArrival}>view the guide</Link> : <span className={ctaClasses}>view the guide</span>}
+        {to ? <Link to={to} className={ctaClasses} prefetch="intent" onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>view the guide</Link> : <span className={ctaClasses}>view the guide</span>}
       </div>
       </RevealItem>
     </Stagger>
