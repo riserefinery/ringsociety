@@ -151,3 +151,4 @@
 - [x] Increase the mobile menu’s final luxury settling by approximately 20 percent in both directions.
 - [x] Apply the same fast-start, slow-settling easing language to the mobile article-card shared-image transition.
 - [x] Apply the shared mobile article-card image transition and luxury easing to every linked article card, including Top Guides, homepage editorial features, All Resources, and article recommendations.
+- [x] Eliminate the white flash between a mobile article-card tap and its destination article hero while preserving the shared-image transition.

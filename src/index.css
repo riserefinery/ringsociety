@@ -75,7 +75,20 @@ body {
   }
 
   ::view-transition-image-pair(*) {
-    isolation: auto;
+    isolation: isolate;
+  }
+
+  /* Keep the app shell fixed while the named article image animates. The default
+     root crossfade briefly exposed the white document canvas between card tap
+     and destination hero render on mobile browsers. */
+  ::view-transition-group(root) {
+    animation-duration: 1ms;
+  }
+
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
   }
 }
 

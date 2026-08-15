@@ -14,6 +14,9 @@ describe('core-page navigation transitions', () => {
     expect(appRoot).toContain("pathname.startsWith('/guides/')")
     expect(styles).toContain('::view-transition-old(core-page-shell)')
     expect(styles).toContain('::view-transition-new(core-page-shell)')
+    expect(styles).toContain('::view-transition-group(root)')
+    expect(styles).toContain('::view-transition-old(root)')
+    expect(styles).toContain('animation: none;')
     expect(styles).toContain('prefers-reduced-motion: reduce')
   })
 
