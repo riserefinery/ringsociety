@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Link, useLocation } from 'react-router'
+import { motion } from 'motion/react'
 import { iconCream, logoWordmark } from '../lib/assets'
 import { primaryNav, legalLinks, copyright } from '../lib/nav'
 import { serif } from './ui'
@@ -32,12 +33,11 @@ export default function MobileNav({
   }, [open])
 
   return (
-    <div
-      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] transition-[transform,opacity] md:hidden ${
-        open ? 'duration-[220ms] ease-[cubic-bezier(0.23,1,0.32,1)]' : 'duration-[180ms] ease-[cubic-bezier(0.4,0,1,1)]'
-      } ${
-        open ? 'translate-x-0 opacity-100' : 'pointer-events-none -translate-x-full opacity-0'
-      }`}
+    <motion.div
+      initial={false}
+      animate={{ x: open ? '0%' : '-100%', opacity: open ? 1 : 0 }}
+      transition={open ? { duration: 0.28, ease: [0.23, 1, 0.32, 1] } : { duration: 0.22, ease: [0.4, 0, 1, 1] }}
+      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] md:hidden ${open ? '' : 'pointer-events-none'}`}
       role="dialog"
       aria-modal="true"
       aria-hidden={!open}
@@ -118,6 +118,6 @@ export default function MobileNav({
         </div>
         <p className="text-[11px] leading-[1.5] text-[#abb7b1] opacity-80">{copyright}</p>
       </div>
-    </div>
+    </motion.div>
   )
 }

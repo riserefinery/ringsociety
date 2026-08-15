@@ -143,3 +143,4 @@
 - [x] Remove clashing mobile core-page and mobile-navigation motion, and ensure hero images never remain black on repeated mobile visits.
 - [x] Move mobile article-card labels from bottom-left to top-right across homepage, Top Guides, and All Resources cards while keeping article hero labels unchanged.
 - [x] Add a lightly eased mobile menu open/close motion with right-to-left closing, plus a fast right-to-left hero-image wipe followed by a short hero-text reveal delay.
+- [x] Correct mobile navigation so it enters left-to-right and exits right-to-left with visible easing.
