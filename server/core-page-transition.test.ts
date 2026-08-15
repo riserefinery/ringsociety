@@ -23,9 +23,15 @@ describe('core-page navigation transitions', () => {
     const footer = read('src/components/Footer.tsx')
     const hero = read('src/components/Hero.tsx')
 
-    for (const source of [header, mobileNav, footer, hero]) {
+    for (const source of [header, footer, hero]) {
       expect(source).toContain('prefetch="intent"')
       expect(source).toContain('viewTransition')
     }
+
+    expect(mobileNav).toContain('prefetch="intent"')
+    expect(mobileNav).toContain('onClick={onNavigate}')
+    expect(mobileNav).not.toContain('viewTransition')
+    expect(header).toContain('closeMenuForNavigation')
+    expect(header).toContain('menuClosingInstantly')
   })
 })

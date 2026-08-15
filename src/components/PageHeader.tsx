@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { motion } from 'motion/react'
 import { fadeUp, staggerContainer } from '../lib/motion'
 import { serif } from './ui'
@@ -30,11 +30,8 @@ export default function PageHeader({
   /** Keeps another page header level with the All Resources header. */
   matchResourcesHeight?: boolean
 }) {
-  const [imageReady, setImageReady] = useState(false)
-
-  useEffect(() => {
-    setImageReady(false)
-  }, [image])
+  const [loadedImage, setLoadedImage] = useState<string | null>(null)
+  const imageReady = loadedImage === image
 
   const revealState = imageReady ? 'show' : 'hidden'
 
@@ -44,10 +41,11 @@ export default function PageHeader({
         className={`relative flex min-h-[calc(100svh-91px)] items-center justify-center overflow-hidden px-6 py-20 md:py-[120px] ${matchResourcesHeight ? 'md:min-h-[480px]' : 'md:min-h-[320px]'} ${fullBleedDesktop ? 'md:rounded-none' : 'md:rounded-lg'}`}
         style={{ background: '#1a1a1a' }}
       >
-        <img src={image} alt="" onLoad={() => setImageReady(true)} onError={() => setImageReady(true)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
+        <img key={image} src={image} alt="" onLoad={() => setLoadedImage(image)} onError={() => setLoadedImage(image)} className="absolute inset-0 h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
         <motion.div
+          key={image}
           aria-hidden="true"
-          className="absolute inset-0 bg-[#1a1a1a]"
+          className="absolute inset-0 hidden bg-[#1a1a1a] md:block"
           initial={{ x: 0 }}
           animate={imageReady ? { x: '100%' } : { x: 0 }}
           transition={{ duration: 0.62, ease: [0.23, 1, 0.32, 1] }}

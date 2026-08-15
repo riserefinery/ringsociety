@@ -15,6 +15,7 @@ const DEFAULT_HELLO_BAR_TEXT = 'Your trusted guide to the perfect Engagement rin
 export default function Header() {
   const nav = headerNav.slice(0, 2)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [menuClosingInstantly, setMenuClosingInstantly] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [helloBarText, setHelloBarText] = useState<string | null>(null)
@@ -67,6 +68,15 @@ export default function Header() {
     setMenuOpen(false)
     setSearchOpen(true)
   }
+  const closeMenuForNavigation = () => {
+    setMenuClosingInstantly(true)
+    setMenuOpen(false)
+  }
+  useEffect(() => {
+    if (!menuClosingInstantly || menuOpen) return
+    const frame = requestAnimationFrame(() => setMenuClosingInstantly(false))
+    return () => cancelAnimationFrame(frame)
+  }, [menuClosingInstantly, menuOpen])
   return (
     <>
       {/* green top bar — scrolls away with the page */}
@@ -153,7 +163,12 @@ export default function Header() {
       </header>
 
       {/* full-screen mobile nav overlay */}
-      <MobileNav open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <MobileNav
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+        onNavigate={closeMenuForNavigation}
+        closeInstantly={menuClosingInstantly}
+      />
 
       {/* command-palette search overlay */}
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />

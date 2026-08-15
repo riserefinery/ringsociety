@@ -53,6 +53,10 @@ describe('landing-page hero load-in', () => {
     expect(pageHeader).toContain("animate={imageReady ? { x: '100%' } : { x: 0 }}")
     expect(pageHeader).toContain('variants={staggerContainer}')
     expect(pageHeader).toContain('variants={fadeUp}')
+    expect(pageHeader).toContain('const [loadedImage, setLoadedImage]')
+    expect(pageHeader).toContain('const imageReady = loadedImage === image')
+    expect(pageHeader).toContain('<img key={image}')
+    expect(pageHeader).toContain('hidden bg-[#1a1a1a] md:block')
   })
 
   it('sets the Our Mission pre-image loading surface to black', () => {

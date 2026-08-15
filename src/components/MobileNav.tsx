@@ -10,7 +10,17 @@ import { serif } from './ui'
  * are pulled from the shared nav model so it never drifts from the
  * desktop header or the footer.
  */
-export default function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
+export default function MobileNav({
+  open,
+  onClose,
+  onNavigate,
+  closeInstantly = false,
+}: {
+  open: boolean
+  onClose: () => void
+  onNavigate: () => void
+  closeInstantly?: boolean
+}) {
   const { pathname } = useLocation()
 
   // lock body scroll while the overlay is open
@@ -25,7 +35,7 @@ export default function MobileNav({ open, onClose }: { open: boolean; onClose: (
 
   return (
     <div
-      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] transition-all duration-300 ease-out md:hidden ${
+      className={`fixed inset-0 z-[70] flex flex-col justify-between bg-[#f9f6f2] ${closeInstantly ? 'transition-none' : 'transition-all duration-300 ease-out'} md:hidden ${
         open ? 'translate-x-0 opacity-100' : 'pointer-events-none -translate-x-full opacity-0'
       }`}
       role="dialog"
@@ -72,7 +82,7 @@ export default function MobileNav({ open, onClose }: { open: boolean; onClose: (
           return (
             <div key={item.label} className="relative z-[1] w-full">
               {item.to ? (
-                <Link to={item.to} prefetch="intent" viewTransition onClick={onClose} className="block w-full">
+                <Link to={item.to} prefetch="intent" onClick={onNavigate} className="block w-full">
                   {content}
                 </Link>
               ) : (
@@ -95,13 +105,13 @@ export default function MobileNav({ open, onClose }: { open: boolean; onClose: (
           <p className="flex flex-wrap gap-x-2">
             {legalLinks.slice(0, 3).map((l, i) => (
               <span key={l.label}>
-                <Link to={l.to ?? '/'} prefetch="intent" viewTransition onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">{l.label}</Link>
+                <Link to={l.to ?? '/'} prefetch="intent" onClick={onNavigate} className="cursor-pointer transition-opacity hover:opacity-100">{l.label}</Link>
                 {i < 2 && <span className="pl-2 opacity-60">|</span>}
               </span>
             ))}
           </p>
           {legalLinks.slice(3).map((l) => (
-            <Link key={l.label} to={l.to ?? '/'} prefetch="intent" viewTransition onClick={onClose} className="cursor-pointer transition-opacity hover:opacity-100">
+            <Link key={l.label} to={l.to ?? '/'} prefetch="intent" onClick={onNavigate} className="cursor-pointer transition-opacity hover:opacity-100">
               {l.label}
             </Link>
           ))}
