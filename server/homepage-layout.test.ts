@@ -84,6 +84,6 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(homeIntro).toContain('z-[2147483646]')
     expect(homeIntro).toContain('z-[2147483647]')
     expect(homeIntro).toContain('createPortal')
-    expect(css).toContain('::view-transition-group(ring-society-header)')
+    expect(css).not.toContain('ring-society-header')
   })
 })

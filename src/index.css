@@ -91,17 +91,6 @@ body {
     mix-blend-mode: normal;
   }
 
-  /* The site header is a single persistent shell, not a page surface. Keep it
-     visually fixed while any native route transition captures the rest of the app. */
-  ::view-transition-group(ring-society-header) {
-    animation-duration: 1ms;
-  }
-
-  ::view-transition-old(ring-society-header),
-  ::view-transition-new(ring-society-header) {
-    animation: none;
-    mix-blend-mode: normal;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

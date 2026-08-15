@@ -72,13 +72,13 @@ describe('CMS route wiring', () => {
     expect(css).toContain('@keyframes article-hero-expand')
     expect(header).not.toContain('article-header-arrival')
     expect(header).toContain('z-[90]')
-    expect(header).toContain("viewTransitionName: 'ring-society-header'")
+    expect(header).not.toContain('viewTransitionName')
     expect(header).toContain('HELLO_BAR_SESSION_KEY')
     expect(article).toContain('article-hero-image-expand')
     expect(card).not.toContain('viewTransition')
     expect(css).toContain('cubic-bezier(0.16, 1, 0.12, 1)')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
-    expect(css).toContain('::view-transition-group(ring-society-header)')
+    expect(css).not.toContain('ring-society-header')
   })
 
   it('supports ordered Sanity related-guide overrides and popular-guide fallbacks without recommending the current article', () => {
