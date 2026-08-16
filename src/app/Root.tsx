@@ -1,8 +1,9 @@
 import { Outlet, ScrollRestoration, useLocation } from 'react-router'
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Header, Footer } from '../components'
 
 const canonicalHost = 'https://ringsociety.com'
+const HELLO_BAR_SESSION_KEY = 'ring-society:hello-bar-seen'
 
 const routeMeta: Record<string, { title: string; description: string }> = {
   '/': {
@@ -87,11 +88,27 @@ function RouteMeta() {
 export default function Root() {
   const { pathname } = useLocation()
   const isArticleRoute = pathname.startsWith('/guides/')
+  const initialPathname = useRef(pathname)
+  const [showHelloBar, setShowHelloBar] = useState(() => {
+    try {
+      if (sessionStorage.getItem(HELLO_BAR_SESSION_KEY)) return false
+      sessionStorage.setItem(HELLO_BAR_SESSION_KEY, 'true')
+      return true
+    } catch {
+      return true
+    }
+  })
+
+  useLayoutEffect(() => {
+    if (pathname !== initialPathname.current && showHelloBar) {
+      setShowHelloBar(false)
+    }
+  }, [pathname, showHelloBar])
 
   return (
     <div className="flex w-full flex-col items-center bg-white">
       <RouteMeta />
-      <Header />
+      <Header showHelloBar={showHelloBar} />
       <main
         className="w-full"
         style={isArticleRoute ? undefined : { viewTransitionName: 'core-page-shell' }}

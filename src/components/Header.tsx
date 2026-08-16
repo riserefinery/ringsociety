@@ -1,5 +1,5 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router'
+import { memo, useEffect, useState } from 'react'
+import { Link } from 'react-router'
 import { logoWordmark, burgerMenu } from '../lib/assets'
 import { headerNav } from '../lib/nav'
 import MobileNav from './MobileNav'
@@ -10,32 +10,14 @@ import { getCmsSiteSettings } from '../sanity/queries'
 const COMPACT_HEADER_ENTER_SCROLL_Y = 48
 const COMPACT_HEADER_EXIT_SCROLL_Y = 16
 const DEFAULT_HELLO_BAR_TEXT = 'Your trusted guide to the perfect Engagement ring'
-const HELLO_BAR_SESSION_KEY = 'ring-society:hello-bar-seen'
 
 /** Universal site header + nav. Shared across every page. */
-export default function Header() {
-  const { pathname } = useLocation()
+function Header({ showHelloBar }: { showHelloBar: boolean }) {
   const nav = headerNav.slice(0, 2)
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [helloBarText, setHelloBarText] = useState<string | null>(null)
-  const [initialPathname] = useState(pathname)
-  const [showHelloBar, setShowHelloBar] = useState(() => {
-    try {
-      if (sessionStorage.getItem(HELLO_BAR_SESSION_KEY)) return false
-      sessionStorage.setItem(HELLO_BAR_SESSION_KEY, 'true')
-      return true
-    } catch {
-      return true
-    }
-  })
-
-  useLayoutEffect(() => {
-    if (pathname !== initialPathname && showHelloBar) {
-      setShowHelloBar(false)
-    }
-  }, [initialPathname, pathname, showHelloBar])
 
   useEffect(() => {
     const onScroll = () => {
@@ -189,3 +171,5 @@ export default function Header() {
     </>
   )
 }
+
+export default memo(Header)

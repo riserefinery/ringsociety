@@ -63,6 +63,7 @@ describe('CMS route wiring', () => {
     const card = read('src/components/GuideCard.tsx')
     const css = read('src/index.css')
     const header = read('src/components/Header.tsx')
+    const rootShell = read('src/app/Root.tsx')
 
     expect(card).not.toContain('useViewTransitionState')
     expect(card).not.toContain('viewTransitionName')
@@ -75,7 +76,8 @@ describe('CMS route wiring', () => {
     expect(header).not.toContain('article-header-arrival')
     expect(header).toContain('z-[90]')
     expect(header).not.toContain('viewTransitionName')
-    expect(header).toContain('HELLO_BAR_SESSION_KEY')
+    expect(header).toContain('export default memo(Header)')
+    expect(rootShell).toContain('HELLO_BAR_SESSION_KEY')
     expect(article).toContain('article-hero-image-expand')
     expect(card).not.toContain('viewTransition')
     expect(css).toContain('cubic-bezier(0.16, 1, 0.12, 1)')

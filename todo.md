@@ -172,3 +172,5 @@
 - [x] Restore the mobile navigation overlay above the persistent header while it is open.
 - [x] Perform one final isolated refinement to reduce the remaining brief article-card route flash without altering the fixed homepage loader.
 - [x] Revert the scoped View Transition API experiment because its full page-shell motion was worse than the prior stable article-card baseline.
+- [x] Review and validate any untested high-value hypotheses from the external mobile header-flash debugging suggestions without disturbing the restored baseline.
+- [x] Test isolating route-dependent session-bar state from the persistent header and memoizing stable mobile chrome to reduce the remaining card-navigation flash.
