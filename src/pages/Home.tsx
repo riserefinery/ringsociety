@@ -2,14 +2,11 @@ import { useEffect, useState } from 'react'
 import { motion } from 'motion/react'
 import { IMAGES, heroMobileImg } from '../lib/assets'
 import { articlePathForTitle } from '../lib/content'
-import { Newsletter, Hero, GuideCard, EditorialRow, HomeIntro, Reveal, Stagger, RevealItem, serif, type Card } from '../components'
+import { Newsletter, Hero, GuideCard, EditorialRow, Reveal, Stagger, RevealItem, serif, type Card } from '../components'
 import { getCmsArticleCards } from '../sanity/queries'
 
-/** Whether the homepage load-in should play (once per session, honoring reduced motion). */
-function shouldPlayIntro() {
-  if (typeof window === 'undefined') return false
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-  return !sessionStorage.getItem('rs-intro-played')
+function startsWithReducedMotion() {
+  return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
 /* ---------- discover guides ---------- */
@@ -225,16 +222,14 @@ function MoreGuides({ cmsCards }: { cmsCards: Card[] }) {
 
 /* ---------- page ---------- */
 export default function Home() {
-  const [play] = useState(shouldPlayIntro)
-  const [heroReady, setHeroReady] = useState(!play)
+  const [heroReady, setHeroReady] = useState(startsWithReducedMotion)
   const [cmsCards, setCmsCards] = useState<Card[]>([])
 
   useEffect(() => {
-    if (!play) return
-    sessionStorage.setItem('rs-intro-played', '1')
-    const t = setTimeout(() => setHeroReady(true), 4200)
-    return () => clearTimeout(t)
-  }, [play])
+    if (heroReady) return
+    const frame = requestAnimationFrame(() => setHeroReady(true))
+    return () => cancelAnimationFrame(frame)
+  }, [heroReady])
 
   useEffect(() => {
     let active = true
@@ -250,14 +245,7 @@ export default function Home() {
 
   return (
     <>
-      {play && <HomeIntro />}
-      <motion.div
-        className="flex w-full flex-col"
-        style={{ transformOrigin: 'center top' }}
-        initial={play ? { scale: 0.98 } : false}
-        animate={play ? { scale: 1 } : undefined}
-        transition={play ? { duration: 1.1, delay: 3.35, ease: [0.4, 0, 0.2, 1] } : undefined}
-      >
+      <div className="flex w-full flex-col">
         <Hero
           as="h1"
           image={IMAGES.hero}
@@ -275,14 +263,19 @@ export default function Home() {
           fullBleedDesktop
           alignContentToPageGrid
         />
-        <div className="flex w-full flex-col items-center gap-16 pb-16 pt-16 md:gap-24 md:pb-0 md:pt-24">
+        <motion.div
+          className="flex w-full flex-col items-center gap-16 pb-16 pt-16 md:gap-24 md:pb-0 md:pt-24"
+          initial={startsWithReducedMotion() ? false : { opacity: 0, y: 10 }}
+          animate={startsWithReducedMotion() ? undefined : { opacity: 1, y: 0 }}
+          transition={{ duration: 0.48, delay: 0.14, ease: [0.23, 1, 0.32, 1] }}
+        >
           <DiscoverGuides cmsCards={cmsCards} />
           <EditorialSection cmsCards={cmsCards} />
           <BlackSection cmsCards={cmsCards} />
           <MoreGuides cmsCards={cmsCards} />
           <Newsletter />
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </>
   )
 }
