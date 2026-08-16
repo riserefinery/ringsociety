@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
+import { motion, useReducedMotion } from 'motion/react'
 import {
   getArticle,
   getRelated,
@@ -14,6 +15,7 @@ import { shareArrow } from '../lib/assets'
 import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import ResponsiveImage from '../components/ResponsiveImage'
 import { getCachedCmsArticle, getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
+import { fadeUp, staggerContainer } from '../lib/motion'
 
 /* ---------- icons ---------- */
 
@@ -469,6 +471,7 @@ export default function Article() {
   const [barVisible, setBarVisible] = useState(false)
   const [fadeVisible, setFadeVisible] = useState(true)
   const [heroReady, setHeroReady] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
   const heroReadySlug = useRef<string | null>(null)
 
   useLayoutEffect(() => {
@@ -546,30 +549,35 @@ export default function Article() {
           <div className="overflow-hidden bg-[#fbf9f7] md:rounded-[8px]">
             <div className="flex flex-col md:flex-row">
               {/* text */}
-              <div className="order-2 flex flex-col gap-6 px-6 py-12 md:order-1 md:w-1/2 md:justify-center md:gap-[66px] md:px-[96px] md:py-[52px]">
-                <p className="text-[11px] font-semibold uppercase tracking-[2px] text-black">
+              <motion.div
+                className="order-2 flex flex-col gap-6 px-6 py-12 md:order-1 md:w-1/2 md:justify-center md:gap-[66px] md:px-[96px] md:py-[52px]"
+                variants={staggerContainer}
+                initial={prefersReducedMotion ? false : 'hidden'}
+                animate={prefersReducedMotion || heroReady ? 'show' : 'hidden'}
+              >
+                <motion.p variants={fadeUp} className="text-[11px] font-semibold uppercase tracking-[2px] text-black">
                   {doc.category}
-                </p>
-                <div className="flex flex-col gap-4 md:gap-6">
-                  <h1
+                </motion.p>
+                <motion.div variants={fadeUp} className="flex flex-col gap-4 md:gap-6">
+                  <motion.h1
                     className="text-[38px] leading-[1.1] tracking-[-0.5px] text-black md:text-[58px] md:tracking-[-1px]"
                     style={{ fontFamily: serif }}
                   >
                     {doc.title}
-                  </h1>
-                  <p className="body-copy tracking-[0.3px] text-black md:tracking-normal">
+                  </motion.h1>
+                  <motion.p className="body-copy tracking-[0.3px] text-black md:tracking-normal">
                     {doc.subtitle}
-                  </p>
-                </div>
-                <div className="flex items-center gap-6">
+                  </motion.p>
+                </motion.div>
+                <motion.div variants={fadeUp} className="flex items-center gap-6">
                   <span className="text-[11px] font-semibold uppercase tracking-[2px] text-[#7b7b7b]">
                     {readTime}
                   </span>
                   <button aria-label="Share article" className="transition-opacity hover:opacity-60">
                     <img src={shareArrow} alt="" className="h-[16px] w-auto" />
                   </button>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
               {/* photo */}
               <div
                 className={`relative order-1 h-[316px] w-full md:order-2 md:h-[551px] md:w-1/2 ${heroReady ? 'article-hero-image-expand' : ''}`}

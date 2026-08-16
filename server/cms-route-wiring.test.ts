@@ -83,6 +83,11 @@ describe('CMS route wiring', () => {
     expect(css).toContain('cubic-bezier(0.16, 1, 0.12, 1)')
     expect(css).toContain('@media (prefers-reduced-motion: reduce)')
     expect(css).not.toContain('ring-society-header')
+    expect(article).toContain("import { motion, useReducedMotion } from 'motion/react'")
+    expect(article).toContain('const prefersReducedMotion = useReducedMotion()')
+    expect(article).toContain('variants={staggerContainer}')
+    expect(article).toContain("animate={prefersReducedMotion || heroReady ? 'show' : 'hidden'}")
+    expect(article).toContain('<motion.h1')
   })
 
   it('supports ordered Sanity related-guide overrides and popular-guide fallbacks without recommending the current article', () => {

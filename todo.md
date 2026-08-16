@@ -175,5 +175,7 @@
 - [x] Review and validate any untested high-value hypotheses from the external mobile header-flash debugging suggestions without disturbing the restored baseline.
 - [x] Test isolating route-dependent session-bar state from the persistent header and memoizing stable mobile chrome to reduce the remaining card-navigation flash.
 - [x] Run a Core Web Vitals performance audit of the Vercel review build, including the homepage preloader and mobile article-card transition behavior.
-- [ ] Replace the blocking first-session homepage preloader with a lighter premium entrance that improves mobile FCP and LCP while retaining a polished first-load feel.
-- [ ] Re-run the comparable mobile performance audit and document the change in homepage loading metrics.
+- [x] Replace the blocking first-session homepage preloader with a lighter premium entrance that improves mobile FCP and LCP while retaining a polished first-load feel.
+- [x] Re-run the comparable mobile performance audit and document the change in homepage loading metrics.
+- [x] Run and report a matching desktop performance measurement for the optimized homepage alongside the mobile comparison.
+- [ ] Add a lightweight homepage-style staggered reveal to article hero text beneath each article image without delaying the image or reducing the optimized homepage score.
