@@ -28,7 +28,7 @@ export default async function leadCapture(req, res) {
   if (!lead) return res.status(400).json({ error: 'Please provide a first name, last name, and valid email address.' })
   if (lead.blocked) return res.status(200).json({ ok: true })
 
-  const workflowUrl = process.env.GHL_INBOUND_WEBHOOK_URL
+  const workflowUrl = process.env.N8N_LEAD_WEBHOOK_URL
   if (!workflowUrl) return res.status(503).json({ error: 'Lead capture is not configured yet.' })
 
   try {
@@ -46,13 +46,13 @@ export default async function leadCapture(req, res) {
     })
 
     if (!upstream.ok) {
-      console.error('[lead-capture] GoHighLevel workflow returned', upstream.status)
+      console.error('[lead-capture] n8n lead workflow returned', upstream.status)
       return res.status(502).json({ error: 'We could not deliver your message. Please try again.' })
     }
 
     return res.status(200).json({ ok: true })
   } catch (error) {
-    console.error('[lead-capture] GoHighLevel handoff failed', error)
+    console.error('[lead-capture] n8n lead workflow handoff failed', error)
     return res.status(502).json({ error: 'We could not deliver your message. Please try again.' })
   }
 }
