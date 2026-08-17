@@ -73,18 +73,16 @@ function Header({ showHelloBar }: { showHelloBar: boolean }) {
   }
   return (
     <>
-      {/* Green hello bar: present for the opening page of each session only. */}
-      {showHelloBar && (
-        <div
-          data-testid="hello-bar"
-          className="flex w-full items-center justify-center overflow-hidden px-4 py-2"
-          style={{ background: 'var(--forest)' }}
-        >
-          <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
-            {helloBarText ?? '\u00a0'}
-          </p>
-        </div>
-      )}
+      {/* Desktop keeps the hello bar throughout a session; mobile shows it on the opening page only. */}
+      <div
+        data-testid="hello-bar"
+        className={`${showHelloBar ? 'flex' : 'hidden'} w-full items-center justify-center overflow-hidden px-4 py-2 md:flex`}
+        style={{ background: 'var(--forest)' }}
+      >
+        <p className="text-center text-[11px] font-semibold uppercase tracking-[1.5px] text-white">
+          {helloBarText ?? '\u00a0'}
+        </p>
+      </div>
 
       {/* white bar — sticks to the top of the viewport sitewide */}
       <header

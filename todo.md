@@ -179,3 +179,4 @@
 - [x] Re-run the comparable mobile performance audit and document the change in homepage loading metrics.
 - [x] Run and report a matching desktop performance measurement for the optimized homepage alongside the mobile comparison.
 - [x] Add a lightweight homepage-style staggered reveal to article hero text beneath each article image without delaying the image or reducing the optimized homepage score.
+- [x] Keep the green top bar visible across desktop page changes while retaining its first-page-only session behavior on mobile.
