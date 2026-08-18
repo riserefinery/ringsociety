@@ -3,11 +3,11 @@ import { parseLead } from '../api/lead-capture.mjs'
 
 describe('GoHighLevel lead payload validation', () => {
   it('normalizes the approved three-field lead payload', () => {
-    expect(parseLead({ firstName: ' Ada ', lastName: ' Lovelace ', email: 'ADA@EXAMPLE.COM', source: 'Footer CTA' })).toEqual({
+    expect(parseLead({ firstName: ' Ada ', lastName: ' Lovelace ', email: 'ADA@EXAMPLE.COM', source: 'footer' })).toEqual({
       firstName: 'Ada',
       lastName: 'Lovelace',
       email: 'ada@example.com',
-      source: 'Footer CTA',
+      source: 'footer',
     })
   })
 

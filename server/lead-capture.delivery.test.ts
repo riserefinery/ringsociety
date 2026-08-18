@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import leadCapture from '../api/lead-capture.mjs'
 
@@ -26,6 +28,11 @@ function createResponse(): ResponseCapture {
 describe('n8n lead delivery', () => {
   const originalWebhook = process.env.N8N_LEAD_WEBHOOK_URL
 
+  it('uses the n8n lead-magnet source identifier in the footer form', () => {
+    const newsletter = readFileSync(resolve(import.meta.dirname, '../src/components/Newsletter.tsx'), 'utf8')
+    expect(newsletter).toContain('source="footer"')
+  })
+
   afterEach(() => {
     vi.restoreAllMocks()
     process.env.N8N_LEAD_WEBHOOK_URL = originalWebhook
@@ -38,14 +45,14 @@ describe('n8n lead delivery', () => {
 
     await leadCapture({
       method: 'POST',
-      body: { firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'Footer CTA' },
+      body: { firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'footer' },
     }, response)
 
     expect(response.statusCode).toBe(200)
     expect(fetchMock).toHaveBeenCalledWith('https://n8n.example.test/webhook/lead', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'Footer CTA' }),
+      body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'footer' }),
     })
   })
 })
