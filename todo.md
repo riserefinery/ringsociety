@@ -185,3 +185,5 @@
 - [x] Keep the green top bar visible across desktop page changes while retaining its first-page-only session behavior on mobile.
 - [x] Apply the supplied Ring Society black SVG as the site favicon and verify it in the deployed page metadata.
 - [x] Add cache-busted PNG favicon fallbacks from the supplied SVG and verify reliable browser delivery.
+- [ ] Diagnose and correct the supplied favicon’s visible browser rendering despite valid deployed icon declarations.
+- [ ] Diagnose and correct the footer lead-magnet success-without-delivery behavior through n8n and GoHighLevel.
