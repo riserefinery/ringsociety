@@ -184,3 +184,4 @@
 - [x] Add a lightweight homepage-style staggered reveal to article hero text beneath each article image without delaying the image or reducing the optimized homepage score.
 - [x] Keep the green top bar visible across desktop page changes while retaining its first-page-only session behavior on mobile.
 - [x] Apply the supplied Ring Society black SVG as the site favicon and verify it in the deployed page metadata.
+- [x] Add cache-busted PNG favicon fallbacks from the supplied SVG and verify reliable browser delivery.
