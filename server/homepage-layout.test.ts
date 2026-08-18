@@ -62,7 +62,7 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(feature).toContain('text-[36px] leading-[1.18]')
     expect(article).toContain('body-copy')
     expect(legal).toContain('body-copy')
-    expect(favicon).toContain('/manus-storage/ring-society-favicon_7da91438.svg')
+    expect(favicon).toContain('/manus-storage/ring-society-icon-black_6813ccce.svg')
     expect(header).toContain('h-[28.8px] w-[18px]')
     expect(header).toContain('<SearchIcon size={18} />')
     expect(header).toContain('className="flex h-8 w-8 items-center justify-center"')

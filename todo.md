@@ -15,6 +15,8 @@
 - [x] Connect the existing resources listing and guide detail template to published Sanity posts through an additive query/mapping layer with local Figma Make fallback content.
 - [ ] Replace the footer CTA’s local-only form behavior with First Name, Last Name, and Email capture that posts only to a private server-side GoHighLevel workflow endpoint.
 - [ ] Correct the lead handoff to use the intended n8n production webhook and verify its downstream mapping into GoHighLevel before live form activation.
+- [ ] Verify a controlled live Contact-form submission through n8n into GoHighLevel, including its topic and optional message fields.
+- [ ] Diagnose and resolve inconsistent lead delivery reported by Jake from the live Vercel site, including submission feedback and downstream contact handling.
 - [x] Add the Contact page and functional footer Contact link without changing the established public-site visual language.
 - [x] Register no-index legal route scaffolds and footer destinations while withholding counsel-approved legal copy until supplied.
 - [x] Add route-aware document titles, canonical URLs, social metadata, and no-index handling for unpublished legal placeholders.
@@ -181,3 +183,4 @@
 - [x] Run and report a matching desktop performance measurement for the optimized homepage alongside the mobile comparison.
 - [x] Add a lightweight homepage-style staggered reveal to article hero text beneath each article image without delaying the image or reducing the optimized homepage score.
 - [x] Keep the green top bar visible across desktop page changes while retaining its first-page-only session behavior on mobile.
+- [x] Apply the supplied Ring Society black SVG as the site favicon and verify it in the deployed page metadata.
