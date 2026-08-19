@@ -186,5 +186,5 @@
 - [x] Apply the supplied Ring Society black SVG as the site favicon and verify it in the deployed page metadata.
 - [x] Add cache-busted PNG favicon fallbacks from the supplied SVG and verify reliable browser delivery.
 - [x] Diagnose and correct the supplied favicon’s visible browser rendering despite valid deployed icon declarations.
-- [ ] Replace the externally hosted favicon declarations with a site-root Chrome-compatible favicon asset after the browser fell back to its default icon.
+- [x] Replace the externally hosted favicon declarations with a site-root Chrome-compatible favicon asset after the browser fell back to its default icon.
 - [ ] Diagnose and correct the footer lead-magnet success-without-delivery behavior through n8n and GoHighLevel.
