@@ -28,9 +28,11 @@ function createResponse(): ResponseCapture {
 describe('n8n lead delivery', () => {
   const originalWebhook = process.env.N8N_LEAD_WEBHOOK_URL
 
-  it('uses the confirmed Contact submission source contract in the above-footer lead magnet', () => {
+  it('uses the explicit lead-magnet source in the above-footer form and contact source on the Contact page', () => {
     const newsletter = readFileSync(resolve(import.meta.dirname, '../src/components/Newsletter.tsx'), 'utf8')
-    expect(newsletter).toContain('source="Contact Page"')
+    const contact = readFileSync(resolve(import.meta.dirname, '../src/pages/Contact.tsx'), 'utf8')
+    expect(newsletter).toContain('source="lead-magnet"')
+    expect(contact).toContain('source="contact"')
   })
 
   afterEach(() => {
@@ -38,21 +40,21 @@ describe('n8n lead delivery', () => {
     process.env.N8N_LEAD_WEBHOOK_URL = originalWebhook
   })
 
-  it('forwards the lead-magnet payload with the confirmed Contact source only to the private n8n endpoint', async () => {
+  it('forwards the lead-magnet payload only to the private n8n endpoint', async () => {
     process.env.N8N_LEAD_WEBHOOK_URL = 'https://n8n.example.test/webhook/lead'
     const fetchMock = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response('', { status: 200 }))
     const response = createResponse()
 
     await leadCapture({
       method: 'POST',
-      body: { firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'Contact Page' },
+      body: { firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'lead-magnet' },
     }, response)
 
     expect(response.statusCode).toBe(200)
     expect(fetchMock).toHaveBeenCalledWith('https://n8n.example.test/webhook/lead', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'Contact Page' }),
+      body: JSON.stringify({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', source: 'lead-magnet' }),
     })
   })
 })

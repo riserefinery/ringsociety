@@ -25,14 +25,14 @@ describe('GoHighLevel lead payload validation', () => {
       firstName: 'Ada',
       lastName: 'Lovelace',
       email: 'ada@example.com',
-      source: 'Contact Page',
+      source: 'contact',
       topic: ' General question about engagement rings ',
       message: ' Can you help us compare settings? ',
     })).toEqual({
       firstName: 'Ada',
       lastName: 'Lovelace',
       email: 'ada@example.com',
-      source: 'Contact Page',
+      source: 'contact',
       topic: 'General question about engagement rings',
       message: 'Can you help us compare settings?',
     })

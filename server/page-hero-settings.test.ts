@@ -99,7 +99,7 @@ describe('CMS page hero settings and contact layout', () => {
     expect(contact).toContain('How can we help you?')
     expect(contact).toContain('General Inquiries')
     expect(contact).toContain('Response Time')
-    expect(contact).toContain('source="Contact Page" variant="contact"')
+    expect(contact).toContain('source="contact" variant="contact"')
     expect(leadForm).toContain('name="firstName"')
     expect(leadForm).toContain('name="lastName"')
     expect(leadForm).toContain('name="email"')

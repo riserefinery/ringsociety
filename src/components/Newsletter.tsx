@@ -27,7 +27,7 @@ export default function Newsletter() {
                 questions thousands of couples ask before they buy.
               </p>
               <LeadForm
-                source="Contact Page"
+                source="lead-magnet"
                 submitLabel="Send Me the Guides"
                 successMessage="Thank you — your guides are on the way."
                 className="mx-auto mt-9 max-w-[404px]"

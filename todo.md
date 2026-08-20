@@ -207,3 +207,5 @@
 - [ ] Make the lead-magnet CTA immediately above the footer use the exact confirmed Contact-form submission contract and verify it with Jake.
 - [ ] Send and verify a controlled internal test payload through the live Vercel lead endpoint using the above-footer lead-magnet contract.
 - [ ] Eliminate browser-form false success caused by a populated lead-capture honeypot or other client-side suppression path.
+- [ ] Set the above-footer form source to `lead-magnet` and the Contact form source to `contact` while preserving the verified n8n delivery path.
+- [ ] Save a project-level rule requiring future Ring Society forms to use the server-side n8n lead webhook with an explicit per-form source name.

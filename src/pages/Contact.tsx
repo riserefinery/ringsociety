@@ -49,7 +49,7 @@ export default function Contact() {
         <div className="rounded-lg px-6 py-10 md:px-12 md:py-14" style={{ background: 'var(--cream)' }}>
           <h2 className="text-[11px] font-semibold uppercase tracking-[1.8px] text-[#173d2c]">Send us a note</h2>
           <p className="body-copy mt-4 max-w-[480px] text-[#626262]">Share your details below and our team will follow up as soon as possible.</p>
-          <LeadForm source="Contact Page" variant="contact" submitLabel="Send Message" successMessage="Thank you — we will be in touch soon." className="mt-10 max-w-[404px]" />
+          <LeadForm source="contact" variant="contact" submitLabel="Send Message" successMessage="Thank you — we will be in touch soon." className="mt-10 max-w-[404px]" />
           <p className="mt-7 text-[12px] leading-[1.6] text-[#747474]">By submitting this form you agree to our <a className="underline underline-offset-2" href="/privacy-policy">Privacy Policy</a> and <a className="underline underline-offset-2" href="/terms-and-conditions">Terms &amp; Conditions</a>.</p>
         </div>
       </section>
