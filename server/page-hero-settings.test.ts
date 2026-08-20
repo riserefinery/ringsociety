@@ -32,6 +32,8 @@ describe('CMS page hero settings and contact layout', () => {
     expect(helper).toContain("'center bottom'")
     expect(pageHeader).toContain('imagePosition = \'center center\'')
     expect(pageHeader).toContain('md:max-w-[640px]')
+    expect(read('src/components/Hero.tsx')).toContain("width: '620px'")
+    expect(read('src/components/Hero.tsx')).toContain("boxSizing: 'content-box'")
     expect(mission).toContain('imagePosition={hero.imagePosition}')
     expect(resources).toContain('matchResourcesHeight')
     expect(topGuides).toContain('matchResourcesHeight')
