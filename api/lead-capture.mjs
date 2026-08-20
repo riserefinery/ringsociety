@@ -26,7 +26,7 @@ export default async function leadCapture(req, res) {
 
   const lead = parseLead(req.body)
   if (!lead) return res.status(400).json({ error: 'Please provide a first name, last name, and valid email address.' })
-  if (lead.blocked) return res.status(200).json({ ok: true })
+  if (lead.blocked) return res.status(422).json({ error: 'We could not verify this submission. Please try again.' })
 
   const workflowUrl = process.env.N8N_LEAD_WEBHOOK_URL
   if (!workflowUrl) return res.status(503).json({ error: 'Lead capture is not configured yet.' })

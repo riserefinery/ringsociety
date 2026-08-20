@@ -205,3 +205,5 @@
 - [x] Prepare a Sanity-first article and inline-image migration workflow for the approved Google Docs or Markdown source materials.
 - [ ] Diagnose and correct footer lead-magnet success feedback that occurs without a corresponding n8n workflow execution.
 - [ ] Make the lead-magnet CTA immediately above the footer use the exact confirmed Contact-form submission contract and verify it with Jake.
+- [ ] Send and verify a controlled internal test payload through the live Vercel lead endpoint using the above-footer lead-magnet contract.
+- [ ] Eliminate browser-form false success caused by a populated lead-capture honeypot or other client-side suppression path.

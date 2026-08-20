@@ -38,7 +38,6 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
         firstName: String(form.get('firstName') ?? ''),
         lastName: String(form.get('lastName') ?? ''),
         email: String(form.get('email') ?? ''),
-        website: String(form.get('website') ?? ''),
         source,
         topic: String(form.get('topic') ?? ''),
         message: String(form.get('message') ?? ''),
@@ -91,7 +90,6 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
           <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={field} />
         </>
       )}
-      <input name="website" tabIndex={-1} autoComplete="off" className="sr-only" aria-hidden="true" />
       {status === 'error' && <p role="alert" className="-mt-2 text-[13px] leading-[1.5] text-[#9b3131]">{error}</p>}
       <SolidButton disabled={status === 'sending'} className="mt-3 w-full">
         {status === 'sending' ? 'Sending…' : submitLabel}

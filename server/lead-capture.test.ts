@@ -16,7 +16,7 @@ describe('GoHighLevel lead payload validation', () => {
     expect(parseLead({ firstName: 'Ada', lastName: 'Lovelace', email: 'not-an-email' })).toBeNull()
   })
 
-  it('silently blocks honeypot submissions', () => {
+  it('marks honeypot submissions for explicit rejection instead of false success', () => {
     expect(parseLead({ firstName: 'Ada', lastName: 'Lovelace', email: 'ada@example.com', website: 'bot.example' })).toEqual({ blocked: true })
   })
 
