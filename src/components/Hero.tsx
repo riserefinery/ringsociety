@@ -201,12 +201,12 @@ function HeroDesktop({
             )}
             <MHeading
               variants={fadeUp}
-              className={`text-[clamp(40px,5vw,58px)] leading-[1.05] tracking-[-1px] ${alignContentToPageGrid ? 'max-w-[467px]' : ''}`}
+              className={`text-[clamp(40px,5vw,58px)] leading-[1.05] tracking-[-1px] ${alignContentToPageGrid ? 'max-w-[620px]' : ''}`}
               style={{ fontFamily: serif }}
             >
               {title}
             </MHeading>
-            <motion.p variants={fadeUp} className="body-copy max-w-[467px] text-white/90">
+            <motion.p variants={fadeUp} className={`body-copy text-white/90 ${alignContentToPageGrid ? 'max-w-[620px]' : 'max-w-[467px]'}`}>
               {body}
             </motion.p>
             <motion.div variants={fadeUp}>

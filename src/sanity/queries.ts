@@ -4,6 +4,7 @@ import type { CmsPageDocument, CmsPost, CmsSiteSettings, CmsTopGuidesDocument } 
 
 const articleRequestCache = new Map<string, Promise<ReturnType<typeof toArticleDoc> | null>>()
 const articleResultCache = new Map<string, ReturnType<typeof toArticleDoc> | null>()
+let topGuidesRequestCache: Promise<CmsTopGuidesDocument | null> | null = null
 
 const postProjection = `{
   _id,
@@ -102,7 +103,20 @@ const topGuidesProjection = `{
   "selectedPosts": selectedPosts[]{
     _key,
     "postId": @._ref,
-    "post": @->${postProjection}
+    "post": @->{
+      _id,
+      title,
+      "slug": slug.current,
+      excerpt,
+      contentType,
+      isMostLoved,
+      heroImage,
+      bigFeatureImage,
+      "articleLabel": articleLabel->{_id, name},
+      topGuidesBadge,
+      topGuidesTextTone,
+      "categories": categories[]->{title, filterKey}
+    }
   }
 }`
 
@@ -119,11 +133,13 @@ export async function getCmsPage(documentType: 'blogLanding' | 'topGuidesLanding
 export async function getCmsTopGuidesPage() {
   if (!sanityClient) return null
 
-  try {
-    return await sanityClient.fetch<CmsTopGuidesDocument | null>(`*[_type == "topGuidesLanding"][0] ${topGuidesProjection}`)
-  } catch {
-    return null
-  }
+  if (topGuidesRequestCache) return topGuidesRequestCache
+
+  topGuidesRequestCache = sanityClient
+    .fetch<CmsTopGuidesDocument | null>(`*[_type == "topGuidesLanding"][0] ${topGuidesProjection}`)
+    .catch(() => null)
+
+  return topGuidesRequestCache
 }
 
 export async function getCmsSiteSettings() {

@@ -13,6 +13,7 @@ describe('CMS page hero settings and contact layout', () => {
 
     expect(responsiveImage).toContain("name: 'focalPoint'")
     expect(responsiveImage).toContain("value: 'center center'")
+    expect(responsiveImage).toContain("value: 'center bottom'")
     expect(documents).toContain("name: 'topGuidesLanding'")
     expect(documents).toContain("name: 'missionPage'")
     expect(documents).toContain("title: 'Hero Image and Alignment'")
@@ -27,8 +28,10 @@ describe('CMS page hero settings and contact layout', () => {
     const resources = read('src/pages/Resources.tsx')
     const topGuides = read('src/pages/TopGuides.tsx')
 
-    expect(helper).toContain("hero?.focalPoint ?? 'center center'")
+    expect(helper).toContain('validObjectPositions')
+    expect(helper).toContain("'center bottom'")
     expect(pageHeader).toContain('imagePosition = \'center center\'')
+    expect(pageHeader).toContain('md:max-w-[640px]')
     expect(mission).toContain('imagePosition={hero.imagePosition}')
     expect(resources).toContain('matchResourcesHeight')
     expect(topGuides).toContain('matchResourcesHeight')

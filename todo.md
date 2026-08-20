@@ -193,3 +193,6 @@
 - [x] Replace direct Shopfine app navigation with a dismissible in-site matching-funnel modal, using a 90%-viewport desktop panel and a full-screen mobile panel when embedding is permitted.
 - [x] Ensure the matching-funnel flow opens only as an in-page modal and never relies on pop-up windows or browser pop-up permissions.
 - [x] Refine the matching-funnel modal to use the same 90%-viewport card treatment on mobile while retaining the dark overlay and close control.
+- [x] Restore a stable, appropriately wide shared hero text column on very large desktop displays across the homepage, Our Mission, and other shared hero surfaces.
+- [x] Make the Our Mission hero image reliably honor its Sanity-selected vertical alignment, including bottom alignment at every viewport size.
+- [x] Diagnose and eliminate delayed Top Guides card loading without reintroducing image swaps, content flashes, or layout shift.

@@ -64,7 +64,7 @@ export default function PageHeader({
         />
         <div className="absolute inset-0" style={{ background: 'rgba(0,0,0,0.35)' }} />
         <motion.div
-          className="relative flex max-w-[560px] flex-col items-center gap-6 text-center text-[#f9f6f2]"
+          className="relative flex max-w-[560px] flex-col items-center gap-6 text-center text-[#f9f6f2] md:max-w-[640px]"
           variants={delayedTextStagger}
           initial="hidden"
           animate={revealState}
@@ -73,7 +73,7 @@ export default function PageHeader({
           <motion.h1 variants={fadeUp} className="text-[44px] leading-[1.1] tracking-[-1.5px] md:text-[clamp(40px,6vw,58px)]" style={{ fontFamily: serif }}>
             {title}
           </motion.h1>
-          {subtitle && <motion.p variants={fadeUp} className="body-copy max-w-[444px]">{subtitle}</motion.p>}
+          {subtitle && <motion.p variants={fadeUp} className="body-copy max-w-[444px] md:max-w-[560px]">{subtitle}</motion.p>}
           {filters && <motion.div variants={fadeUp} className="mt-3 md:mt-4">{filters}</motion.div>}
         </motion.div>
       </div>
