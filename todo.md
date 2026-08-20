@@ -203,3 +203,5 @@
 - [x] Restore the original narrow hero composition on MacBook Pro and conventional desktop widths while applying the wider 620px column only on ultra-wide monitors.
 - [x] Reduce the footer ring-matching CTA gap by approximately 30% while preserving its existing styling.
 - [x] Prepare a Sanity-first article and inline-image migration workflow for the approved Google Docs or Markdown source materials.
+- [ ] Diagnose and correct footer lead-magnet success feedback that occurs without a corresponding n8n workflow execution.
+- [ ] Make the lead-magnet CTA immediately above the footer use the exact confirmed Contact-form submission contract and verify it with Jake.
