@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration, useLocation } from 'react-router'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Header, Footer } from '../components'
+import { Header, Footer, MatchingFunnelModal } from '../components'
 
 const canonicalHost = 'https://ringsociety.com'
 const HELLO_BAR_SESSION_KEY = 'ring-society:hello-bar-seen'
@@ -116,6 +116,7 @@ export default function Root() {
         <Outlet />
       </main>
       <Footer />
+      <MatchingFunnelModal />
       <ScrollRestoration />
     </div>
   )

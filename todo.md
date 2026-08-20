@@ -190,3 +190,5 @@
 - [ ] Diagnose and correct the footer lead-magnet success-without-delivery behavior through n8n and GoHighLevel.
 - [x] Update the global footer CTA to “Ready to Find Your Ring?” / “GET THE PERFECT MATCH” with the existing Shopfine app destination.
 - [x] Rename the mobile navigation’s jeweler link to “Find Your Perfect Ring,” link it to the Shopfine app, and move it to the final navigation position.
+- [x] Replace direct Shopfine app navigation with a dismissible in-site matching-funnel modal, using a 90%-viewport desktop panel and a full-screen mobile panel when embedding is permitted.
+- [x] Ensure the matching-funnel flow opens only as an in-page modal and never relies on pop-up windows or browser pop-up permissions.

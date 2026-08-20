@@ -1,6 +1,7 @@
 /* Central component system — import universal elements from here. */
 export { default as Header } from './Header'
 export { default as Footer } from './Footer'
+export { default as MatchingFunnelModal } from './MatchingFunnelModal'
 export { default as MobileNav } from './MobileNav'
 export { default as SearchOverlay } from './SearchOverlay'
 export { Reveal, Stagger, RevealItem } from './Reveal'

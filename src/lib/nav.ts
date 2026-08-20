@@ -4,7 +4,7 @@
    their links from here so the three never drift out of sync.
 ----------------------------------------------------------------*/
 
-export type NavLink = { label: string; to?: string; href?: string }
+export type NavLink = { label: string; to?: string; action?: 'matching-funnel' }
 
 /** Primary site navigation — shared by the desktop header and the mobile menu. */
 export const primaryNav: NavLink[] = [
@@ -12,7 +12,7 @@ export const primaryNav: NavLink[] = [
   { label: 'Top Guides', to: '/top-guides' },
   { label: 'All Resources', to: '/all-resources' },
   { label: 'Our Mission', to: '/our-mission' },
-  { label: 'Find Your Perfect Ring', href: 'https://app.ringsociety.com/' },
+  { label: 'Find Your Perfect Ring', action: 'matching-funnel' },
 ]
 
 /** Desktop header links (Overview lives on the logo, so it is omitted here). */

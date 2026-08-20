@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { svgPaths, iconRS, logoXL } from '../lib/assets'
 import { legalLinks, copyright } from '../lib/nav'
 import { serif } from './ui'
+import { openMatchingFunnel } from './MatchingFunnelModal'
 
 type FooterLink = string | { label: string; to?: string }
 
@@ -76,10 +77,10 @@ export default function Footer() {
             <p className="mt-[72px] text-[32px] leading-[1.25] text-white" style={{ fontFamily: serif }}>
               Ready to Find Your Ring?
             </p>
-            <a href="https://app.ringsociety.com/" className="group mt-[29px] flex items-center gap-3 text-white">
+            <button type="button" onClick={openMatchingFunnel} className="group mt-[29px] flex items-center gap-3 text-white">
               <span className="text-[13px] font-semibold uppercase tracking-[2px]">Get the Perfect Match</span>
               <ArrowCircle />
-            </a>
+            </button>
           </div>
 
           {col('Most-Loved Guides', guides, 'w-full min-w-0')}

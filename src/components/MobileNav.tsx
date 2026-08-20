@@ -4,6 +4,7 @@ import { motion } from 'motion/react'
 import { iconCream, logoWordmark } from '../lib/assets'
 import { primaryNav, legalLinks, copyright } from '../lib/nav'
 import { serif } from './ui'
+import { openMatchingFunnel } from './MatchingFunnelModal'
 
 /**
  * Full-screen mobile navigation overlay.
@@ -81,10 +82,17 @@ export default function MobileNav({
           )
           return (
             <div key={item.label} className="relative z-[1] w-full">
-              {item.href ? (
-                <a href={item.href} onClick={onNavigate} className="block w-full">
+              {item.action === 'matching-funnel' ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    openMatchingFunnel()
+                    onNavigate()
+                  }}
+                  className="block w-full text-left"
+                >
                   {content}
-                </a>
+                </button>
               ) : item.to ? (
                 <Link to={item.to} prefetch="intent" onClick={onNavigate} className="block w-full">
                   {content}
