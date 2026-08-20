@@ -182,7 +182,7 @@ function HeroDesktop({
               fullBleedDesktop
                 ? alignContentToPageGrid
                   ? {
-                      width: '620px',
+                      width: 'clamp(467px, calc(100vw - 813px), 620px)',
                       maxWidth: 'calc(100vw - max(40px, calc((100vw - 1440px) / 2 + 40px)) - 40px)',
                       boxSizing: 'content-box',
                       paddingLeft: 'max(40px, calc((100vw - 1440px) / 2 + 40px))',

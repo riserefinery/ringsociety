@@ -14,7 +14,7 @@ describe('shared full-bleed hero and CTA layout', () => {
     expect(hero).toContain('fullBleedDesktop?: boolean')
     expect(hero).toContain('alignContentToPageGrid?: boolean')
     expect(hero).toContain("fullBleedDesktop ? 'hidden w-full md:block'")
-    expect(hero).toContain("width: '620px'")
+    expect(hero).toContain("width: 'clamp(467px, calc(100vw - 813px), 620px)'")
     expect(hero).toContain("boxSizing: 'content-box'")
     expect(hero).toContain("paddingLeft: 'max(40px, calc((100vw - 1440px) / 2 + 40px))'")
     expect(hero).toContain("paddingLeft: 'max(136px, calc((100vw - 1440px) / 2 + 136px))'")

@@ -196,4 +196,5 @@
 - [x] Restore a stable, appropriately wide shared hero text column on very large desktop displays across the homepage, Our Mission, and other shared hero surfaces.
 - [x] Make the Our Mission hero image reliably honor its Sanity-selected vertical alignment, including bottom alignment at every viewport size.
 - [x] Diagnose and eliminate delayed Top Guides card loading without reintroducing image swaps, content flashes, or layout shift.
-- [ ] Diagnose and correct the remaining large-monitor hero column mismatch between the Ring Society Vercel site and local preview.
+- [x] Diagnose and correct the remaining large-monitor hero column mismatch between the Ring Society Vercel site and local preview.
+- [x] Restore a narrower shared hero content proportion on smaller desktop and laptop widths while retaining the 620px large-monitor column.
