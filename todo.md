@@ -201,3 +201,5 @@
 - [x] Eliminate the Our Mission hero’s visible fallback-to-CMS image-position snap on initial page load.
 - [x] Track the recurring managed-preview `dist/public/*` packaging error as an infrastructure issue while Vercel remains the public deployment path.
 - [x] Restore the original narrow hero composition on MacBook Pro and conventional desktop widths while applying the wider 620px column only on ultra-wide monitors.
+- [x] Reduce the footer ring-matching CTA gap by approximately 30% while preserving its existing styling.
+- [ ] Prepare a Sanity-first article and inline-image migration workflow for the approved Google Docs or Markdown source materials.

@@ -16,5 +16,6 @@ describe('footer responsive layout', () => {
     expect(footer).toContain('Ready to Find Your Ring?')
     expect(footer).toContain('Get the Perfect Match')
     expect(footer).toContain('onClick={openMatchingFunnel}')
+    expect(footer).toContain('group mt-[20px] flex items-center gap-3 text-white')
   })
 })

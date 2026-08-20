@@ -77,7 +77,7 @@ export default function Footer() {
             <p className="mt-[72px] text-[32px] leading-[1.25] text-white" style={{ fontFamily: serif }}>
               Ready to Find Your Ring?
             </p>
-            <button type="button" onClick={openMatchingFunnel} className="group mt-[29px] flex items-center gap-3 text-white">
+            <button type="button" onClick={openMatchingFunnel} className="group mt-[20px] flex items-center gap-3 text-white">
               <span className="text-[13px] font-semibold uppercase tracking-[2px]">Get the Perfect Match</span>
               <ArrowCircle />
             </button>
