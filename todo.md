@@ -198,3 +198,4 @@
 - [x] Diagnose and eliminate delayed Top Guides card loading without reintroducing image swaps, content flashes, or layout shift.
 - [x] Diagnose and correct the remaining large-monitor hero column mismatch between the Ring Society Vercel site and local preview.
 - [x] Restore a narrower shared hero content proportion on smaller desktop and laptop widths while retaining the 620px large-monitor column.
+- [ ] Eliminate the Our Mission hero’s visible fallback-to-CMS image-position snap on initial page load.

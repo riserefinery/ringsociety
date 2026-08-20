@@ -13,6 +13,8 @@ import { getCmsPage } from '../sanity/queries'
 import { resolvePageHero } from '../sanity/pageHero'
 import type { CmsPageDocument } from '../sanity/types'
 
+const MISSION_INITIAL_IMAGE_POSITION = 'center bottom'
+
 /* ---------- shared statement block (Our Mission / Our Vision) ---------- */
 function Statement({
   eyebrow,
@@ -155,6 +157,7 @@ export default function OurMission() {
   }, [])
 
   const hero = resolvePageHero(pageSettings?.heroImage, missionHero, 'A couple embracing, the light catching an engagement ring')
+  const imagePosition = pageSettings ? hero.imagePosition : MISSION_INITIAL_IMAGE_POSITION
   return (
     <>
       <Hero
@@ -168,8 +171,8 @@ export default function OurMission() {
         ctaLabel="explore top guides"
         mobilePanelColor="#000000"
         imageBackground="#000000"
-        imagePosition={hero.imagePosition}
-        mobileImagePosition={hero.imagePosition}
+        imagePosition={imagePosition}
+        mobileImagePosition={imagePosition}
         fullBleedDesktop
         alignContentToPageGrid
       />
