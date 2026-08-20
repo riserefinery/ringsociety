@@ -15,7 +15,7 @@ The dedicated **Ring Society CMS** Studio has been deployed at [ring-society.san
 | Article related-guide controls | Ready | Each post can override its ordered Explore More cards in Studio; blank selections automatically favor other published Most-Loved Guides. |
 | Top Guides controls | Ready | Editors select, add, remove, and drag-order post references from the Top Guides page; the copy and Big Feature background remain centralized on each selected post. |
 | Global hello bar | Ready | The green bar above the navigation is editable from Site Settings. |
-| Contact page and footer CTA UI | Ready | The footer CTA collects First Name, Last Name, and Email. The Contact page additionally collects a topic and optional message. Live GoHighLevel delivery remains intentionally disabled until the final integration phase. |
+| Contact page and footer CTA UI | Live | Both forms submit through the private server-side n8n handoff. The above-footer lead magnet collects First Name, Last Name, and Email with source `lead-magnet`; the Contact page adds a topic and optional message with source `contact`. |
 | Legal-page destinations | Published | Privacy Policy, Terms & Conditions, Accessibility Statement, and Your Privacy Choices routes are live and linked from the footer and mobile menu. |
 | Canonical domain, CORS, and review preview | Ready for review | `https://ringsociety.com` is canonical; root, `www`, and `https://ringsociety-web.vercel.app` are approved for Sanity client access. The Studio Presentation tool opens the Vercel review site. |
 
@@ -62,9 +62,11 @@ The Shopfine Vercel project **`ringsociety-web`** is already connected to the re
 | Production domain | `ringsociety.com` (not assigned yet) |
 | Redirect host | `www.ringsociety.com` → `ringsociety.com` |
 | Required public variables | `VITE_SANITY_PROJECT_ID=p1o8iwkt`, `VITE_SANITY_DATASET=production` |
-| Deferred server secret | `GHL_INBOUND_WEBHOOK_URL` |
+| Required server secret | `N8N_LEAD_WEBHOOK_URL` (configured for Production and Preview) |
 
 The stable Vercel review origin is already configured in Sanity CORS with credentials disabled. Do not use a broad wildcard unless the deployment workflow requires it.
+
+> **Managed-preview note:** The managed preview service may report a post-build packaging error because it expects a `dist/public/` directory, whereas this Vite site correctly builds its public application into `dist/`. This occurs after a successful application build and does not affect the GitHub-to-Vercel deployment path or the public Vercel review site.
 
 ## Browser-independent Studio release
 
@@ -89,13 +91,14 @@ The current CMS migration created the existing catalog as **drafts**. Drafts are
 | Input | Required for | Owner/action |
 |---|---|---|
 | Complete, approved guide articles and images | CMS publishing and launch | Ring Society editorial team |
-| GoHighLevel inbound-workflow URL | Final lead-capture activation | Configure later; store only as `GHL_INBOUND_WEBHOOK_URL` in Vercel/secure environment settings |
 | Production domain cutover | Public launch | Assign `ringsociety.com` to `ringsociety-web`, redirect `www`, and leave `app.ringsociety.com` assigned to the existing quiz project. |
 
-## GoHighLevel final step
+## Live lead-capture integration
 
-The public source is ready for the selected inbound-workflow approach, but no live CRM endpoint has been configured. At final activation, create one GoHighLevel workflow with the **Inbound Webhook** trigger, store its private workflow URL as `GHL_INBOUND_WEBHOOK_URL`, and test both forms. The footer CTA sends `firstName`, `lastName`, `email`, and `source`; the Contact page additionally sends `topic` and an optional `message`. The server never exposes the workflow URL to browsers.
+Lead capture is live through the private `N8N_LEAD_WEBHOOK_URL` server secret. Browser forms submit only to `/api/lead-capture`; the server forwards valid payloads to the n8n workflow, which then hands them to GoHighLevel. The workflow URL is never exposed in client-side code or documentation.
+
+The above-footer lead magnet sends `firstName`, `lastName`, `email`, and `source: "lead-magnet"`. The Contact form sends the same identity fields with `source: "contact"`, plus its selected `topic` and optional `message`. Future lead-generating forms must reuse this server-side route and receive their own explicit lowercase kebab-case source identifier. Do not report form success when delivery fails.
 
 ## Validation performed
 
-The public Vite build completes successfully. The lead payload validator covers normalisation, missing/invalid fields, honeypot blocking, and the Contact-only topic/message values. The Sanity Studio schema is released to the Ring Society `production` dataset, the dedicated Studio application is live, and Presentation points to the Vercel review URL.
+The public Vite build completes successfully. The lead payload validator covers normalisation, missing/invalid fields, explicit source values, and Contact-only topic/message values. Direct endpoint, visible browser-form, n8n, and GoHighLevel delivery tests passed for the lead magnet; Contact delivery is also verified. The Sanity Studio schema is released to the Ring Society `production` dataset, the dedicated Studio application is live, and Presentation points to the Vercel review URL.

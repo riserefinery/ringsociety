@@ -187,7 +187,7 @@
 - [x] Add cache-busted PNG favicon fallbacks from the supplied SVG and verify reliable browser delivery.
 - [x] Diagnose and correct the supplied favicon’s visible browser rendering despite valid deployed icon declarations.
 - [x] Replace the externally hosted favicon declarations with a site-root Chrome-compatible favicon asset after the browser fell back to its default icon.
-- [ ] Diagnose and correct the footer lead-magnet success-without-delivery behavior through n8n and GoHighLevel.
+- [x] Diagnose and correct the footer lead-magnet success-without-delivery behavior through n8n and GoHighLevel.
 - [x] Update the global footer CTA to “Ready to Find Your Ring?” / “GET THE PERFECT MATCH” with the existing Shopfine app destination.
 - [x] Rename the mobile navigation’s jeweler link to “Find Your Perfect Ring,” link it to the Shopfine app, and move it to the final navigation position.
 - [x] Replace direct Shopfine app navigation with a dismissible in-site matching-funnel modal, using a 90%-viewport desktop panel and a full-screen mobile panel when embedding is permitted.
@@ -203,9 +203,9 @@
 - [x] Restore the original narrow hero composition on MacBook Pro and conventional desktop widths while applying the wider 620px column only on ultra-wide monitors.
 - [x] Reduce the footer ring-matching CTA gap by approximately 30% while preserving its existing styling.
 - [x] Prepare a Sanity-first article and inline-image migration workflow for the approved Google Docs or Markdown source materials.
-- [ ] Diagnose and correct footer lead-magnet success feedback that occurs without a corresponding n8n workflow execution.
-- [ ] Make the lead-magnet CTA immediately above the footer use the exact confirmed Contact-form submission contract and verify it with Jake.
-- [ ] Send and verify a controlled internal test payload through the live Vercel lead endpoint using the above-footer lead-magnet contract.
-- [ ] Eliminate browser-form false success caused by a populated lead-capture honeypot or other client-side suppression path.
-- [ ] Set the above-footer form source to `lead-magnet` and the Contact form source to `contact` while preserving the verified n8n delivery path.
-- [ ] Save a project-level rule requiring future Ring Society forms to use the server-side n8n lead webhook with an explicit per-form source name.
+- [x] Diagnose and correct footer lead-magnet success feedback that occurs without a corresponding n8n workflow execution.
+- [x] Make the lead-magnet CTA immediately above the footer use the exact confirmed Contact-form submission contract and verify it with Jake.
+- [x] Send and verify a controlled internal test payload through the live Vercel lead endpoint using the above-footer lead-magnet contract.
+- [x] Eliminate browser-form false success caused by a populated lead-capture honeypot or other client-side suppression path.
+- [x] Set the above-footer form source to `lead-magnet` and the Contact form source to `contact` while preserving the verified n8n delivery path.
+- [x] Save a project-level rule requiring future Ring Society forms to use the server-side n8n lead webhook with an explicit per-form source name.
