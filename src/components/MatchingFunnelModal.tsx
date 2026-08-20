@@ -39,7 +39,7 @@ export default function MatchingFunnelModal() {
   if (!open) return null
 
   return (
-    <div className="fixed inset-0 z-[130] flex items-center justify-center bg-black/70 p-0 md:p-[5vh]" role="presentation">
+    <div className="fixed inset-0 z-[130] flex items-center justify-center bg-black/70" role="presentation">
       <button
         type="button"
         aria-label="Close ring matching quiz"
@@ -50,7 +50,7 @@ export default function MatchingFunnelModal() {
         role="dialog"
         aria-modal="true"
         aria-label="Find your perfect ring"
-        className="relative z-[1] h-full w-full overflow-hidden bg-white shadow-2xl md:h-[90vh] md:w-[90vw] md:rounded-lg"
+        className="relative z-[1] h-[90vh] w-[90vw] overflow-hidden rounded-lg bg-white shadow-2xl"
       >
         <button
           ref={closeButtonRef}

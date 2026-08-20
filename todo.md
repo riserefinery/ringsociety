@@ -192,3 +192,4 @@
 - [x] Rename the mobile navigation’s jeweler link to “Find Your Perfect Ring,” link it to the Shopfine app, and move it to the final navigation position.
 - [x] Replace direct Shopfine app navigation with a dismissible in-site matching-funnel modal, using a 90%-viewport desktop panel and a full-screen mobile panel when embedding is permitted.
 - [x] Ensure the matching-funnel flow opens only as an in-page modal and never relies on pop-up windows or browser pop-up permissions.
+- [x] Refine the matching-funnel modal to use the same 90%-viewport card treatment on mobile while retaining the dark overlay and close control.
