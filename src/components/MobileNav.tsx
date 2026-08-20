@@ -81,7 +81,11 @@ export default function MobileNav({
           )
           return (
             <div key={item.label} className="relative z-[1] w-full">
-              {item.to ? (
+              {item.href ? (
+                <a href={item.href} onClick={onNavigate} className="block w-full">
+                  {content}
+                </a>
+              ) : item.to ? (
                 <Link to={item.to} prefetch="intent" onClick={onNavigate} className="block w-full">
                   {content}
                 </Link>

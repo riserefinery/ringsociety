@@ -4,15 +4,15 @@
    their links from here so the three never drift out of sync.
 ----------------------------------------------------------------*/
 
-export type NavLink = { label: string; to?: string }
+export type NavLink = { label: string; to?: string; href?: string }
 
 /** Primary site navigation — shared by the desktop header and the mobile menu. */
 export const primaryNav: NavLink[] = [
   { label: 'Overview', to: '/' },
   { label: 'Top Guides', to: '/top-guides' },
   { label: 'All Resources', to: '/all-resources' },
-  { label: 'Find a Top Local Jeweler' },
   { label: 'Our Mission', to: '/our-mission' },
+  { label: 'Find Your Perfect Ring', href: 'https://app.ringsociety.com/' },
 ]
 
 /** Desktop header links (Overview lives on the logo, so it is omitted here). */

@@ -188,3 +188,5 @@
 - [x] Diagnose and correct the supplied favicon’s visible browser rendering despite valid deployed icon declarations.
 - [x] Replace the externally hosted favicon declarations with a site-root Chrome-compatible favicon asset after the browser fell back to its default icon.
 - [ ] Diagnose and correct the footer lead-magnet success-without-delivery behavior through n8n and GoHighLevel.
+- [x] Update the global footer CTA to “Ready to Find Your Ring?” / “GET THE PERFECT MATCH” with the existing Shopfine app destination.
+- [x] Rename the mobile navigation’s jeweler link to “Find Your Perfect Ring,” link it to the Shopfine app, and move it to the final navigation position.

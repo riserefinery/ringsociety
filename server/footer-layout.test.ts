@@ -13,5 +13,8 @@ describe('footer responsive layout', () => {
     expect(footer).toContain('md:gap-x-10 md:gap-y-14')
     expect(footer).toContain("col('Most-Loved Guides', guides, 'w-full min-w-0')")
     expect(footer).toContain("col('More', [{ label: 'Our Mission', to: '/our-mission' }, { label: 'Contact Us', to: '/contact' }], 'w-full min-w-0')")
+    expect(footer).toContain('Ready to Find Your Ring?')
+    expect(footer).toContain('Get the Perfect Match')
+    expect(footer).toContain('href="https://app.ringsociety.com/"')
   })
 })

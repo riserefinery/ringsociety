@@ -74,12 +74,12 @@ export default function Footer() {
               </svg>
             </div>
             <p className="mt-[72px] text-[32px] leading-[1.25] text-white" style={{ fontFamily: serif }}>
-              Need a Top Local Jeweler?
+              Ready to Find Your Ring?
             </p>
-            <button className="group mt-[29px] flex items-center gap-3 text-white">
-              <span className="text-[13px] font-semibold uppercase tracking-[2px]">Find a jeweler</span>
+            <a href="https://app.ringsociety.com/" className="group mt-[29px] flex items-center gap-3 text-white">
+              <span className="text-[13px] font-semibold uppercase tracking-[2px]">Get the Perfect Match</span>
               <ArrowCircle />
-            </button>
+            </a>
           </div>
 
           {col('Most-Loved Guides', guides, 'w-full min-w-0')}
