@@ -8,13 +8,16 @@ describe('shared full-bleed hero and CTA layout', () => {
   it('aligns the homepage hero’s widened desktop content column with the shared page grid', () => {
     const home = readFileSync(resolve(root, 'src/pages/Home.tsx'), 'utf8')
     const hero = readFileSync(resolve(root, 'src/components/Hero.tsx'), 'utf8')
+    const stylesheet = readFileSync(resolve(root, 'src/index.css'), 'utf8')
 
     expect(home).toContain('fullBleedDesktop')
     expect(home).toContain('alignContentToPageGrid')
     expect(hero).toContain('fullBleedDesktop?: boolean')
     expect(hero).toContain('alignContentToPageGrid?: boolean')
     expect(hero).toContain("fullBleedDesktop ? 'hidden w-full md:block'")
-    expect(hero).toContain("width: 'clamp(467px, calc(100vw - 813px), 620px)'")
+    expect(hero).toContain('hero-grid-copy')
+    expect(stylesheet).toContain('.hero-grid-copy')
+    expect(stylesheet).toContain('@media (min-width: 1800px)')
     expect(hero).toContain("boxSizing: 'content-box'")
     expect(hero).toContain("paddingLeft: 'max(40px, calc((100vw - 1440px) / 2 + 40px))'")
     expect(hero).toContain("paddingLeft: 'max(136px, calc((100vw - 1440px) / 2 + 136px))'")

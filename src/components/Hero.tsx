@@ -177,12 +177,11 @@ function HeroDesktop({
         />
         <div className="absolute inset-0 flex items-center">
           <motion.div
-            className={`flex flex-col gap-9 px-8 text-white md:px-24 ${fullBleedDesktop && alignContentToPageGrid ? 'max-w-none' : 'max-w-[560px]'}`}
+            className={`flex flex-col gap-9 px-8 text-white md:px-24 ${fullBleedDesktop && alignContentToPageGrid ? 'max-w-none hero-grid-copy' : 'max-w-[560px]'}`}
             style={
               fullBleedDesktop
                 ? alignContentToPageGrid
                   ? {
-                      width: 'clamp(467px, calc(100vw - 813px), 620px)',
                       maxWidth: 'calc(100vw - max(40px, calc((100vw - 1440px) / 2 + 40px)) - 40px)',
                       boxSizing: 'content-box',
                       paddingLeft: 'max(40px, calc((100vw - 1440px) / 2 + 40px))',

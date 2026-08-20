@@ -28,6 +28,18 @@ body {
   line-height: 1.5;
 }
 
+/* Keep the editorial hero intimate on laptops and conventional desktops.
+   Only an ultra-wide canvas gets the expanded text measure. */
+.hero-grid-copy {
+  width: 467px;
+}
+
+@media (min-width: 1800px) {
+  .hero-grid-copy {
+    width: 620px;
+  }
+}
+
 @media (min-width: 768px) {
   .body-copy {
     line-height: 1.6;
