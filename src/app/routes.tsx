@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, Navigate } from 'react-router'
 import Root from './Root'
 import Home from '../pages/Home'
 import TopGuides from '../pages/TopGuides'
@@ -21,6 +21,8 @@ export const router = createBrowserRouter([
       { path: 'top-guides', Component: TopGuides },
       { path: 'all-resources', Component: Resources },
       { path: 'our-mission', Component: OurMission },
+      { path: 'guides/go-big-or-shop-small', element: <Navigate replace to="/guides/big-box-vs-local-vs-online-jewelers" /> },
+      { path: 'guides/most-popular-trending-ring-styles-2026', element: <Navigate replace to="/guides/engagement-ring-trends-2026" /> },
       { path: 'guides/:slug', Component: Article },
       { path: 'contact', Component: Contact },
       { path: 'privacy-policy', Component: () => <LegalPage title="Privacy Policy" document={privacyPolicy} /> },

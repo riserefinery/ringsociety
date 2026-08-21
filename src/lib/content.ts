@@ -99,7 +99,7 @@ export const pillarGuides: Guide[] = [
     imagePosition: 'center',
   },
   {
-    slug: 'go-big-or-shop-small',
+    slug: 'big-box-vs-local-vs-online-jewelers',
     category: 'Guide',
     title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online',
     excerpt:
@@ -166,14 +166,14 @@ export type Article = Card & { filters: FilterKey[] }
 const cmsSlugByTitle: Record<string, string> = {
   'How to Buy an Engagement Ring': 'how-to-buy-an-engagement-ring',
   'How to Choose A Jeweler: Our 10-Point Framework': 'how-to-choose-a-jeweler',
-  'The Most Popular & Trending Ring Styles and Diamonds in 2026': 'most-popular-trending-ring-styles-2026',
+  'The Most Popular & Trending Ring Styles and Diamonds in 2026': 'engagement-ring-trends-2026',
   'Engagement Rings with Hidden Halos: The Subtle Sparkle Trend': 'engagement-rings-with-hidden-halos',
   'Engagement Ring Budgets: How Much Should You Spend?': 'engagement-ring-budgets',
   'The Complete Guide to Engagement Ring Settings & Styles': 'engagement-ring-settings-and-styles',
   'How to Find Her Ring Size Without Ruining the Surprise': 'how-to-find-her-ring-size',
   'Which Diamond Shape Looks the Biggest?': 'which-diamond-shape-looks-biggest',
   'The 4Cs of Diamonds (Explained in Plain English)': '4cs-of-diamonds',
-  'Go Big or Shop Small? Big-Box vs. Local vs. Online': 'go-big-or-shop-small',
+  'Go Big or Shop Small? Big-Box vs. Local vs. Online': 'big-box-vs-local-vs-online-jewelers',
   'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison': 'natural-vs-lab-grown-diamonds',
   'What Drives Diamond Pricing? Hear from Experts': 'what-drives-diamond-pricing',
   'The Ultimate Guide to Diamond Clarity, and What it Means for Your Ring Choice & Budget': 'ultimate-guide-to-diamond-clarity',

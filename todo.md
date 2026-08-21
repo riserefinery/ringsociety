@@ -6,17 +6,17 @@
 - [x] Explain and confirm the recommended deployment arrangement: one Vercel public-site project and a managed Sanity Studio, both sourced from the same GitHub repository.
 - [x] Confirm the Ring Society Sanity project ID as `p1o8iwkt` and the intended dataset name as `production`.
 - [x] Verify that project `p1o8iwkt` owns the intended `production` dataset and contains no Reflect Advisors documents before writing Ring Society content.
-- [ ] Configure the server-side GoHighLevel handoff for First Name, Last Name, and Email only, using a private workflow URL stored in deployment secrets.
-- [ ] Activate GoHighLevel workflow credential entry and live submission testing now that the public-site baseline has been approved.
+- [x] Configure the server-side GoHighLevel handoff for First Name, Last Name, and Email only, using a private workflow URL stored in deployment secrets.
+- [x] Activate GoHighLevel workflow credential entry and live submission testing now that the public-site baseline has been approved.
 - [x] Add the current Vercel review origin to Sanity CORS while reserving `ringsociety.com` and `www.ringsociety.com` for the future production cutover.
 - [x] Receive and publish the supplied Privacy Policy, Terms & Conditions, Accessibility Statement, and privacy-choice content on their legal routes.
 - [x] Treat `https://ringsociety.com` as the intended canonical production URL, subject to final domain configuration confirmation.
 - [x] Add a code-managed Ring Society Studio application, organization byline singleton, categories, posts, blog landing, contact-page, legal-page, SEO, and responsive-image schemas without seeding content.
 - [x] Connect the existing resources listing and guide detail template to published Sanity posts through an additive query/mapping layer with local Figma Make fallback content.
-- [ ] Replace the footer CTA’s local-only form behavior with First Name, Last Name, and Email capture that posts only to a private server-side GoHighLevel workflow endpoint.
-- [ ] Correct the lead handoff to use the intended n8n production webhook and verify its downstream mapping into GoHighLevel before live form activation.
-- [ ] Verify a controlled live Contact-form submission through n8n into GoHighLevel, including its topic and optional message fields.
-- [ ] Diagnose and resolve inconsistent lead delivery reported by Jake from the live Vercel site, including submission feedback and downstream contact handling.
+- [x] Replace the footer CTA’s local-only form behavior with First Name, Last Name, and Email capture that posts only to a private server-side GoHighLevel workflow endpoint.
+- [x] Correct the lead handoff to use the intended n8n production webhook and verify its downstream mapping into GoHighLevel before live form activation.
+- [x] Verify a controlled live Contact-form submission through n8n into GoHighLevel, including its topic and optional message fields.
+- [x] Diagnose and resolve inconsistent lead delivery reported by Jake from the live Vercel site, including submission feedback and downstream contact handling.
 - [x] Add the Contact page and functional footer Contact link without changing the established public-site visual language.
 - [x] Register no-index legal route scaffolds and footer destinations while withholding counsel-approved legal copy until supplied.
 - [x] Add route-aware document titles, canonical URLs, social metadata, and no-index handling for unpublished legal placeholders.
@@ -209,3 +209,6 @@
 - [x] Eliminate browser-form false success caused by a populated lead-capture honeypot or other client-side suppression path.
 - [x] Set the above-footer form source to `lead-magnet` and the Contact form source to `contact` while preserving the verified n8n delivery path.
 - [x] Save a project-level rule requiring future Ring Society forms to use the server-side n8n lead webhook with an explicit per-form source name.
+- [ ] Diagnose why the live lead-magnet source is still reported as `contact` after deployment and correct the Vercel or n8n override.
+- [ ] Change the Go Big or Shop Small article URL to `/big-box-vs-local-vs-online-jewelers/` across CMS-backed pages and linked card surfaces.
+- [ ] Change the 2026 ring trends article URL to `/engagement-ring-trends-2026/` across CMS-backed pages and linked card surfaces.
