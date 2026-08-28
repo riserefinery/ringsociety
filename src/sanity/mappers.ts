@@ -2,8 +2,29 @@ import type { Article, ArticleBlock, ArticleCta, ArticleDoc, FilterKey, Guide } 
 import { imageUrl } from './image'
 import type { CmsPortableBlock, CmsPost, CmsSidebarCta, CmsTopGuidesSelection } from './types'
 
-function textFromBlock(block: CmsPortableBlock): string {
-  return block.children?.map((child) => child.text ?? '').join('').trim() ?? ''
+function inlineFromBlock(block: CmsPortableBlock) {
+  const links = new Map(
+    (block.markDefs ?? [])
+      .filter((definition) => definition._key && definition._type === 'link' && definition.href)
+      .map((definition) => [definition._key as string, definition.href as string]),
+  )
+
+  return (block.children ?? [])
+    .map((child) => {
+      const marks = child.marks ?? []
+      return {
+        text: child.text ?? '',
+        strong: marks.includes('strong') || marks.includes('b'),
+        em: marks.includes('em') || marks.includes('i'),
+        code: marks.includes('code'),
+        href: marks.map((mark) => links.get(mark)).find(Boolean),
+      }
+    })
+    .filter((child) => child.text)
+}
+
+function textFromInline(inline: ReturnType<typeof inlineFromBlock>): string {
+  return inline.map((child) => child.text).join('').trim()
 }
 
 function toBlocks(blocks: CmsPortableBlock[] | undefined): ArticleBlock[] {
@@ -11,9 +32,32 @@ function toBlocks(blocks: CmsPortableBlock[] | undefined): ArticleBlock[] {
 
   for (const block of blocks ?? []) {
     if (block._type === 'block') {
-      const text = textFromBlock(block)
+      const inline = inlineFromBlock(block)
+      const text = textFromInline(inline)
       if (!text) continue
-      mapped.push(block.style === 'h2' ? { type: 'h2', text, toc: text.replace(/^\d+\.\s*/, '') } : { type: 'p', text })
+
+      if (block.listItem) {
+        const ordered = block.listItem === 'number'
+        const last = mapped[mapped.length - 1]
+        if (last?.type === 'list' && last.ordered === ordered) {
+          last.items.push({ text, inline })
+        } else {
+          mapped.push({ type: 'list', ordered, items: [{ text, inline }] })
+        }
+        continue
+      }
+
+      if (block.style === 'h2') {
+        mapped.push({ type: 'h2', text, inline, toc: text.replace(/^\d+\.\s*/, '') })
+      } else if (block.style === 'h3') {
+        mapped.push({ type: 'h3', text, inline })
+      } else if (block.style === 'h4') {
+        mapped.push({ type: 'h4', text, inline })
+      } else if (block.style === 'blockquote') {
+        mapped.push({ type: 'blockquote', text, inline })
+      } else {
+        mapped.push({ type: 'p', text, inline })
+      }
       continue
     }
 

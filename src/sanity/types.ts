@@ -17,12 +17,25 @@ export type CmsCategory = {
   filterKey?: 'jeweler' | 'trends' | 'perspectives' | 'diamonds'
 }
 
-export type CmsTextSpan = { text?: string }
+export type CmsTextSpan = {
+  _key?: string
+  _type?: 'span'
+  text?: string
+  marks?: string[]
+}
+
+export type CmsLinkMark = {
+  _key?: string
+  _type?: 'link'
+  href?: string
+}
 
 export type CmsPortableBlock = {
   _type?: string
   style?: string
+  listItem?: 'bullet' | 'number'
   children?: CmsTextSpan[]
+  markDefs?: CmsLinkMark[]
   asset?: CmsImageAsset
   alt?: string
   caption?: string

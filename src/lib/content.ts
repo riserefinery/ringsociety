@@ -334,9 +334,21 @@ export function mergePublishedArticleCards(cmsArticles: Article[]): Article[] {
    blocks auto-populate the sticky table of contents, and every
    `image` block joins the in-article zoom gallery.
 ----------------------------------------------------------------*/
+export type ArticleInline = {
+  text: string
+  strong?: boolean
+  em?: boolean
+  code?: boolean
+  href?: string
+}
+
 export type ArticleBlock =
-  | { type: 'p'; text: string; muted?: boolean }
-  | { type: 'h2'; text: string; toc: string }
+  | { type: 'p'; text: string; inline?: ArticleInline[]; muted?: boolean }
+  | { type: 'h2'; text: string; inline?: ArticleInline[]; toc: string }
+  | { type: 'h3'; text: string; inline?: ArticleInline[] }
+  | { type: 'h4'; text: string; inline?: ArticleInline[] }
+  | { type: 'blockquote'; text: string; inline?: ArticleInline[] }
+  | { type: 'list'; ordered: boolean; items: { text: string; inline?: ArticleInline[] }[] }
   | { type: 'image'; src: string; alt: string; caption?: string; note?: string }
   | { type: 'deflist'; items: { term: string; def: string }[] }
   | { type: 'note'; label: string; text: string }
@@ -531,7 +543,12 @@ export function readingTimeFor(doc: ArticleDoc): string {
     switch (b.type) {
       case 'p':
       case 'h2':
+      case 'h3':
+      case 'h4':
+      case 'blockquote':
         return b.text
+      case 'list':
+        return b.items.map((item) => item.text).join(' ')
       case 'image':
         return `${b.caption ?? ''} ${b.note ?? ''}`
       case 'note':

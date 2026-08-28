@@ -9,6 +9,7 @@ import {
   defaultArticleCta,
   type ArticleBlock,
   type ArticleCta,
+  type ArticleInline,
   type ArticleDoc,
 } from '../lib/content'
 import { shareArrow } from '../lib/assets'
@@ -166,6 +167,29 @@ function ArticleBody({
 }) {
   const Divider = () => <div className="h-px w-full bg-[#abb7b1]/20" />
 
+  const renderInline = (inline: ArticleInline[] | undefined, fallback: string) => {
+    const segments = inline?.length ? inline : [{ text: fallback }]
+    return segments.map((segment, index) => {
+      let content: React.ReactNode = segment.text
+      if (segment.code) content = <code className="rounded bg-[#f3f0ec] px-1.5 py-0.5 text-[0.9em]">{content}</code>
+      if (segment.strong) content = <strong>{content}</strong>
+      if (segment.em) content = <em>{content}</em>
+      if (segment.href) {
+        const external = /^https?:\/\//i.test(segment.href)
+        content = (
+          <a
+            href={segment.href}
+            className="underline decoration-[#244737]/50 underline-offset-4 transition-colors hover:text-[#244737] hover:decoration-[#244737]"
+            {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
+          >
+            {content}
+          </a>
+        )
+      }
+      return <span key={`${key}-${index}`}>{content}</span>
+    })
+  }
+
   const renderBlock = (block: ArticleBlock, key: number) => {
     switch (block.type) {
       case 'h2':
@@ -176,8 +200,24 @@ function ArticleBody({
             className="scroll-mt-[120px] text-[28px] leading-[1.18] tracking-[-0.3px] text-black md:text-[42px] md:leading-[1.2] md:tracking-normal"
             style={{ fontFamily: serif }}
           >
-            {block.text}
+            {renderInline(block.inline, block.text)}
           </h2>
+        )
+      case 'h3':
+        return (
+          <h3
+            key={key}
+            className="scroll-mt-[120px] text-[22px] font-medium leading-[1.3] tracking-[-0.1px] text-black md:text-[28px]"
+            style={{ fontFamily: serif }}
+          >
+            {renderInline(block.inline, block.text)}
+          </h3>
+        )
+      case 'h4':
+        return (
+          <h4 key={key} className="scroll-mt-[120px] text-[16px] font-semibold leading-[1.4] tracking-[0.1px] text-black md:text-[18px]">
+            {renderInline(block.inline, block.text)}
+          </h4>
         )
       case 'p':
         return (
@@ -187,9 +227,32 @@ function ArticleBody({
               block.muted ? 'text-[#7b7b7b]' : 'text-black'
             }`}
           >
-            {block.text}
+            {renderInline(block.inline, block.text)}
           </p>
         )
+      case 'blockquote':
+        return (
+          <blockquote
+            key={key}
+            className="border-l-2 border-[#244737] py-1 pl-5 text-[20px] leading-[1.45] tracking-[-0.1px] text-[#244737] md:pl-7 md:text-[26px]"
+            style={{ fontFamily: serif }}
+          >
+            {renderInline(block.inline, block.text)}
+          </blockquote>
+        )
+      case 'list': {
+        const List = block.ordered ? 'ol' : 'ul'
+        return (
+          <List
+            key={key}
+            className={`body-copy flex flex-col gap-3 pl-6 text-black ${block.ordered ? 'list-decimal' : 'list-disc'}`}
+          >
+            {block.items.map((item, itemIndex) => (
+              <li key={itemIndex}>{renderInline(item.inline, item.text)}</li>
+            ))}
+          </List>
+        )
+      }
       case 'note':
         return (
           <div
@@ -259,7 +322,7 @@ function ArticleBody({
     <div className="flex w-full flex-col gap-8 md:gap-12">
       <div className="body-copy flex flex-col gap-4 text-black md:gap-5">
         {intro.map((b) => (
-          <p key={key++}>{b.type === 'p' ? b.text : ''}</p>
+          <p key={key++}>{b.type === 'p' ? renderInline(b.inline, b.text) : ''}</p>
         ))}
       </div>
       {sections.map((section, si) => (

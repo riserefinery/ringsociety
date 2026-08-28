@@ -9,6 +9,21 @@ const standardBlock = defineArrayMember({
   lists: [],
 })
 
+const articleBlock = defineArrayMember({
+  type: 'block',
+  styles: [
+    { title: 'Normal', value: 'normal' },
+    { title: 'Section Heading', value: 'h2' },
+    { title: 'Subsection Heading', value: 'h3' },
+    { title: 'Supporting Heading', value: 'h4' },
+    { title: 'Blockquote', value: 'blockquote' },
+  ],
+  lists: [
+    { title: 'Bulleted list', value: 'bullet' },
+    { title: 'Numbered list', value: 'number' },
+  ],
+})
+
 const articleImage = defineArrayMember({
   type: 'image',
   options: { hotspot: true },
@@ -103,7 +118,7 @@ export const post = defineType({
     defineField({ name: 'excerpt', title: 'Excerpt', type: 'text', group: 'content', rows: 3, validation: (Rule) => Rule.required().max(240) }),
     defineField({ name: 'contentType', title: 'Content Type', type: 'string', group: 'content', initialValue: 'Guide', options: { list: ['Guide', 'Article', 'Trends', 'Perspectives'] } }),
     defineField({ name: 'intro', title: 'Article Introduction', type: 'array', group: 'content', of: [standardBlock] }),
-    defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [standardBlock, articleImage, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
+    defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [articleBlock, articleImage, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
     defineField({ name: 'heroImage', title: 'Hero Image', type: 'responsiveImage', group: 'media', validation: (Rule) => Rule.required() }),
     defineField({ name: 'bigFeatureImage', title: 'Big Feature Image', description: 'Wide background artwork for this post when it appears on the Top Guides page. Leave blank to use Hero Image.', type: 'responsiveImage', group: 'media' }),
     defineField({ name: 'categories', title: 'Categories', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'reference', to: [{ type: 'category' }] })] }),
