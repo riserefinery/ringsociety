@@ -205,11 +205,7 @@ function ArticleBody({
         )
       case 'h3':
         return (
-          <h3
-            key={key}
-            className="scroll-mt-[120px] text-[22px] font-medium leading-[1.3] tracking-[-0.1px] text-black md:text-[28px]"
-            style={{ fontFamily: serif }}
-          >
+          <h3 key={key} className="scroll-mt-[120px] text-[24px] font-medium leading-[1.3] text-black">
             {renderInline(block.inline, block.text)}
           </h3>
         )
@@ -234,7 +230,7 @@ function ArticleBody({
         return (
           <blockquote
             key={key}
-            className="border-l-2 border-[#244737] py-1 pl-5 text-[20px] leading-[1.45] tracking-[-0.1px] text-[#244737] md:pl-7 md:text-[26px]"
+            className="border-l border-black py-1 pl-5 text-[32px] leading-[1.3] tracking-[-0.2px] text-black md:pl-7"
             style={{ fontFamily: serif }}
           >
             {renderInline(block.inline, block.text)}
