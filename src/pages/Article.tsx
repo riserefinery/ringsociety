@@ -2,7 +2,6 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import { motion, useReducedMotion } from 'motion/react'
 import {
-  getArticle,
   getRelated,
   filterKeyForCategory,
   readingTimeFor,
@@ -501,24 +500,35 @@ function CtaCard({ cta }: { cta: ArticleCta }) {
 
 export default function Article() {
   const { slug } = useParams()
-  const fallbackDoc = useMemo(() => getArticle(slug), [slug])
   const [cmsDoc, setCmsDoc] = useState<ArticleDoc | null>(null)
+  const [cmsResolved, setCmsResolved] = useState(false)
   // The route component is reused when readers move between guides. Ignore the
   // prior guide's CMS record until the matching record finishes loading so the
   // destination hero receives the correct shared-image transition identity.
   const cmsDocForSlug = cmsDoc?.slug === slug ? cmsDoc : null
   const prewarmedCmsDoc = getCachedCmsArticle(slug)
-  const doc = prewarmedCmsDoc ?? cmsDocForSlug ?? fallbackDoc
-  const cta = doc.cta ?? defaultArticleCta
-  const readTime = useMemo(() => readingTimeFor(doc), [doc])
+  // CMS content is the sole source of truth for article routes. Do not render
+  // legacy placeholder content while the document request is in flight.
+  const doc = prewarmedCmsDoc ?? cmsDocForSlug
+  const cta = doc?.cta ?? defaultArticleCta
+  const readTime = useMemo(() => (doc ? readingTimeFor(doc) : ''), [doc])
 
   useEffect(() => {
     let active = true
     setCmsDoc(null)
+    setCmsResolved(false)
 
-    getCmsArticle(slug).then((nextDoc) => {
-      if (active && nextDoc) setCmsDoc(nextDoc)
-    })
+    getCmsArticle(slug)
+      .then((nextDoc) => {
+        if (!active) return
+        setCmsDoc(nextDoc)
+        setCmsResolved(true)
+      })
+      .catch(() => {
+        if (!active) return
+        setCmsDoc(null)
+        setCmsResolved(true)
+      })
 
     return () => {
       active = false
@@ -526,6 +536,7 @@ export default function Article() {
   }, [slug])
 
   useEffect(() => {
+    if (!doc) return
     const canonical = `https://ringsociety.com/guides/${doc.slug}`
     const upsert = (selector: string, attribute: 'name' | 'property', content: string) => {
       let element = document.querySelector<HTMLMetaElement>(selector)
@@ -574,7 +585,7 @@ export default function Article() {
 
   const gallery: GalleryImage[] = useMemo(
     () =>
-      doc.body
+      (doc?.body ?? [])
         .filter((b): b is Extract<ArticleBlock, { type: 'image' }> => b.type === 'image')
         .map((b) => ({ src: b.src, alt: b.alt, caption: b.caption })),
     [doc],
@@ -583,13 +594,13 @@ export default function Article() {
 
   const toc = useMemo(
     () =>
-      doc.body
+      (doc?.body ?? [])
         .filter((b): b is Extract<ArticleBlock, { type: 'h2' }> => b.type === 'h2')
         .map((b) => ({ id: slugify(b.toc), label: b.toc })),
     [doc],
   )
 
-  const related = getRelated(doc)
+  const related = doc ? getRelated(doc) : []
   const heroRef = useRef<HTMLElement>(null)
   const readingRef = useRef<HTMLDivElement>(null)
   const [lightbox, setLightbox] = useState<number | null>(null)
@@ -607,7 +618,7 @@ export default function Article() {
   }, [slug])
 
   const revealHero = () => {
-    if (heroReadySlug.current === doc.slug) return
+    if (!doc || heroReadySlug.current === doc.slug) return
     heroReadySlug.current = doc.slug
     setHeroReady(true)
   }
@@ -615,7 +626,7 @@ export default function Article() {
   useEffect(() => {
     const image = heroRef.current?.querySelector('img')
     if (image?.complete && image.naturalWidth > 0) revealHero()
-  }, [doc.slug, doc.hero, doc.heroImage])
+  }, [doc?.slug, doc?.hero, doc?.heroImage])
 
   // scroll-spy + reading progress
   useEffect(() => {
@@ -655,6 +666,16 @@ export default function Article() {
       window.removeEventListener('resize', onScroll)
     }
   }, [toc])
+
+  if (!doc) {
+    return (
+      <main aria-busy={!cmsResolved} className="mx-auto flex min-h-[55vh] w-full max-w-[1440px] items-center justify-center px-6">
+        <p className="text-[13px] font-medium uppercase tracking-[1.5px] text-[#7b7b7b]">
+          {cmsResolved ? 'This guide is being prepared.' : 'Loading guide'}
+        </p>
+      </main>
+    )
+  }
 
   return (
     <>
