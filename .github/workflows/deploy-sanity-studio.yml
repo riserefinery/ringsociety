@@ -1,0 +1,48 @@
+name: Deploy Sanity Studio
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'studio/**'
+      - '.github/workflows/deploy-sanity-studio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-sanity-studio-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy Studio
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: studio
+    env:
+      SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: studio/pnpm-lock.yaml
+
+      - name: Install Studio dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy Studio
+        run: pnpm exec sanity deploy --yes --schema-required
