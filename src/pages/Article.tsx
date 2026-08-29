@@ -11,6 +11,8 @@ import {
   type ArticleCta,
   type ArticleInline,
   type ArticleDoc,
+  type ArticleRelatedGuide,
+  type ArticleSource,
 } from '../lib/content'
 import { shareArrow } from '../lib/assets'
 import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
@@ -328,6 +330,72 @@ function ArticleBody({
         </div>
       ))}
     </div>
+  )
+}
+
+/* ---------- article end matter ---------- */
+
+function EndMatterAccordion({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <details className="group border-t border-black/15 last:border-b">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-[16px] font-medium text-black marker:hidden">
+        <span>{title}</span>
+        <span aria-hidden className="text-[24px] font-normal leading-none transition-transform duration-200 group-open:rotate-45">
+          +
+        </span>
+      </summary>
+      <div className="pb-6">{children}</div>
+    </details>
+  )
+}
+
+function ArticleEndMatter({
+  relatedGuides,
+  sources,
+}: {
+  relatedGuides: ArticleRelatedGuide[]
+  sources: ArticleSource[]
+}) {
+  if (!relatedGuides.length && !sources.length) return null
+
+  return (
+    <section aria-label="Article resources" className="mt-14 border-t border-black/15 pt-1 md:mt-20">
+      {relatedGuides.length > 0 && (
+        <EndMatterAccordion title="Related Guides">
+          <ul className="flex list-disc flex-col gap-3 pl-5 text-[15px] leading-[1.55] text-black">
+            {relatedGuides.map((guide) => (
+              <li key={`${guide.title}-${guide.url}`}>
+                <a
+                  href={guide.url}
+                  className="underline decoration-[#244737]/50 underline-offset-4 transition-colors hover:text-[#244737] hover:decoration-[#244737]"
+                >
+                  {guide.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </EndMatterAccordion>
+      )}
+      {sources.length > 0 && (
+        <EndMatterAccordion title="Sources">
+          <div className="flex flex-col gap-3 text-[14px] leading-[1.55] text-[#4d4d4d]">
+            {sources.map((source) => (
+              <p key={`${source.citation}-${source.url}`}>
+                {source.citation}{' '}
+                <a
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="break-words underline decoration-[#244737]/50 underline-offset-4 transition-colors hover:text-[#244737] hover:decoration-[#244737]"
+                >
+                  {source.url}
+                </a>
+              </p>
+            ))}
+          </div>
+        </EndMatterAccordion>
+      )}
+    </section>
   )
 }
 
@@ -669,6 +737,10 @@ export default function Article() {
               body={doc.body}
               onZoom={(i) => setLightbox(i)}
               galleryIndexOf={galleryIndexOf}
+            />
+            <ArticleEndMatter
+              relatedGuides={doc.articleRelatedGuides ?? []}
+              sources={doc.sources ?? []}
             />
             {/* bottom-of-article fade to entice the scroll; releases at the end */}
             <div

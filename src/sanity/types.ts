@@ -58,6 +58,18 @@ export type CmsArticleLabel = {
   name?: string
 }
 
+export type CmsArticleRelatedGuide = {
+  _key?: string
+  title?: string
+  url?: string
+}
+
+export type CmsSource = {
+  _key?: string
+  citation?: string
+  url?: string
+}
+
 export type CmsPost = {
   _id: string
   title?: string
@@ -73,6 +85,8 @@ export type CmsPost = {
   topGuidesTextTone?: 'light' | 'dark'
   intro?: CmsPortableBlock[]
   body?: CmsPortableBlock[]
+  articleRelatedGuides?: CmsArticleRelatedGuide[]
+  sources?: CmsSource[]
   keywordTags?: string[]
   sidebarCta?: CmsSidebarCta
   relatedPosts?: CmsPost[]

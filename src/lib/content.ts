@@ -367,6 +367,16 @@ export type ArticleCta = {
   to?: string
 }
 
+export type ArticleRelatedGuide = {
+  title: string
+  url: string
+}
+
+export type ArticleSource = {
+  citation: string
+  url: string
+}
+
 export const defaultArticleCta: ArticleCta = {
   title: 'Lab Grown vs Natural Diamonds',
   label: 'view the guide',
@@ -389,6 +399,10 @@ export type ArticleDoc = {
   cta?: ArticleCta
   intro: ArticleBlock[]
   body: ArticleBlock[]
+  /** Optional reading links rendered below the article in a closed accordion. */
+  articleRelatedGuides?: ArticleRelatedGuide[]
+  /** Optional source citations rendered below the article in a closed accordion. */
+  sources?: ArticleSource[]
   /** Editor-selected Explore More cards. When present, they are used in this order. */
   related?: Card[]
   /** Published Most-Loved CMS cards used when no per-article override is selected. */

@@ -133,6 +133,12 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
     cta: toCta(post.sidebarCta),
     intro: toBlocks(post.intro),
     body: toBlocks(post.body),
+    articleRelatedGuides: (post.articleRelatedGuides ?? [])
+      .filter((guide) => Boolean(guide.title && guide.url))
+      .map((guide) => ({ title: guide.title as string, url: guide.url as string })),
+    sources: (post.sources ?? [])
+      .filter((source) => Boolean(source.citation && source.url))
+      .map((source) => ({ citation: source.citation as string, url: source.url as string })),
     related: related.length ? related : undefined,
   }
 }

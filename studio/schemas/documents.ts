@@ -110,6 +110,7 @@ export const post = defineType({
     { name: 'content', title: 'Content', default: true },
     { name: 'media', title: 'Media' },
     { name: 'discovery', title: 'Discovery' },
+    { name: 'endMatter', title: 'Article End Matter' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -119,6 +120,40 @@ export const post = defineType({
     defineField({ name: 'contentType', title: 'Content Type', type: 'string', group: 'content', initialValue: 'Guide', options: { list: ['Guide', 'Article', 'Trends', 'Perspectives'] } }),
     defineField({ name: 'intro', title: 'Article Introduction', type: 'array', group: 'content', of: [standardBlock] }),
     defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [articleBlock, articleImage, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
+    defineField({
+      name: 'articleRelatedGuides',
+      title: 'Related Guides (Article End Matter)',
+      description: 'Optional in-article reading links. The public page renders these in a closed Related Guides accordion below the main article; they do not appear in the table of contents or Explore More cards.',
+      type: 'array',
+      group: 'endMatter',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({ name: 'title', title: 'Guide Title', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'url', title: 'Guide URL', type: 'url', validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'], allowRelative: true }) }),
+          ],
+          preview: { select: { title: 'title', subtitle: 'url' } },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'sources',
+      title: 'Sources (Article End Matter)',
+      description: 'Optional citations. The public page renders these in a closed Sources accordion below the main article; they do not appear in the table of contents.',
+      type: 'array',
+      group: 'endMatter',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({ name: 'citation', title: 'Citation', type: 'string', validation: (Rule) => Rule.required() }),
+            defineField({ name: 'url', title: 'Source URL', type: 'url', validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'], allowRelative: true }) }),
+          ],
+          preview: { select: { title: 'citation', subtitle: 'url' } },
+        }),
+      ],
+    }),
     defineField({ name: 'heroImage', title: 'Hero Image', type: 'responsiveImage', group: 'media', validation: (Rule) => Rule.required() }),
     defineField({ name: 'bigFeatureImage', title: 'Big Feature Image', description: 'Wide background artwork for this post when it appears on the Top Guides page. Leave blank to use Hero Image.', type: 'responsiveImage', group: 'media' }),
     defineField({ name: 'categories', title: 'Categories', type: 'array', group: 'discovery', of: [defineArrayMember({ type: 'reference', to: [{ type: 'category' }] })] }),

@@ -20,6 +20,8 @@ const postProjection = `{
   topGuidesTextTone,
   intro,
   body,
+  articleRelatedGuides,
+  sources,
   keywordTags,
   sidebarCta,
   "categories": categories[]->{title, filterKey},
