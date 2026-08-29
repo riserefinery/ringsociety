@@ -34,7 +34,18 @@ A blockquote is for a genuine quotation. An Editorial Callout is for Ring Societ
 
 ## Lists and related links
 
-Use the native `Bulleted list` and `Numbered list` controls for semantic lists. For a curated set of article links embedded in the body, such as **Related Guides**, use a bulleted list with each item linked. The separate `Related Guides (Optional Override)` discovery field controls the post-card recommendations shown after an article and should not be used as a replacement for body-copy reading lists.
+Use the native `Bulleted list` and `Numbered list` controls for semantic lists within the main Article Body. The separate `Related Guides (Optional Override)` discovery field controls the post-card recommendations shown after an article and should not be used as a replacement for body-copy reading lists.
+
+## Article end matter
+
+**Sources** and body-level **Related Guides** are article end matter, not Article Body content. They must be stored in the dedicated **Article End Matter** Studio group, then rendered below the main article as two closed accordion toggles.
+
+| Source-document section | Sanity field | Public presentation | Table of contents |
+|---|---|---|---|
+| `Related Guides` | `Related Guides (Article End Matter)` | Closed Related Guides accordion with linked reading list | Excluded |
+| `Sources` / `References` | `Sources (Article End Matter)` | Closed Sources accordion with individual linked citations | Excluded |
+
+During every article import, identify the end-matter boundary before generating Portable Text. Remove the `Related Guides` and `Sources` headings, their items, and their citations from Article Body. Capture each related guide as a title-and-URL entry, and each source as a citation-and-URL entry. Keep all main text, citations that appear inline within paragraphs, images, callouts, and article headings in Article Body.
 
 ## Editorial imagery
 
@@ -47,7 +58,8 @@ Before a migrated guide is published, verify the following:
 - The `Title` field is the single page-level title; no `h1` remains in Article Body.
 - Every heading has the right level and no inline formatting marks.
 - The navigation includes `h2` headings only.
-- Lists are native list blocks, not manually typed bullet characters or separate paragraph approximations.
+- Lists inside Article Body are native list blocks, not manually typed bullet characters or separate paragraph approximations.
+- `Related Guides` and `Sources` do not appear as blocks or headings in Article Body; their structured fields contain every approved link and citation.
 - Blockquotes and Editorial Callouts are used for their distinct editorial purposes.
 - Every image retains the approved asset, alt text, caption, source order, and lightbox behavior.
 - The public presentation is reviewed at desktop and mobile widths before publication.
