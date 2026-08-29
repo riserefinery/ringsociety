@@ -359,7 +359,7 @@ function ArticleEndMatter({
   if (!relatedGuides.length && !sources.length) return null
 
   return (
-    <section aria-label="Article resources" className="mt-14 border-t border-black/15 pt-1 md:mt-20">
+    <section aria-label="Article resources" className="mt-14 md:mt-20">
       {relatedGuides.length > 0 && (
         <EndMatterAccordion title="Related Guides">
           <ul className="flex list-disc flex-col gap-3 pl-5 text-[15px] leading-[1.55] text-black">
