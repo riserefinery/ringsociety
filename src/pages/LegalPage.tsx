@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Eyebrow, serif } from '../components'
@@ -6,9 +7,39 @@ type LegalPageProps = {
   title: string
   document: string
   showPrivacyRequestNote?: boolean
+  noIndex?: boolean
 }
 
-export default function LegalPage({ title, document, showPrivacyRequestNote = false }: LegalPageProps) {
+export default function LegalPage({ title, document, showPrivacyRequestNote = false, noIndex = false }: LegalPageProps) {
+  useEffect(() => {
+    if (!noIndex) return
+
+    const pageDocument = globalThis.document
+    const previousTitle = pageDocument.title
+    const existingRobots = pageDocument.querySelector('meta[name="robots"]')
+    const previousRobots = existingRobots?.getAttribute('content') ?? null
+    const robots = existingRobots ?? pageDocument.createElement('meta')
+
+    if (!existingRobots) {
+      robots.setAttribute('name', 'robots')
+      pageDocument.head.appendChild(robots)
+    }
+
+    pageDocument.title = `${title} | Ring Society`
+    robots.setAttribute('content', 'noindex, follow')
+
+    return () => {
+      pageDocument.title = previousTitle
+      if (!existingRobots) {
+        robots.remove()
+      } else if (previousRobots === null) {
+        robots.removeAttribute('content')
+      } else {
+        robots.setAttribute('content', previousRobots)
+      }
+    }
+  }, [noIndex, title])
+
   return (
     <section className="w-full bg-[#f9f6f2] px-5 py-14 md:px-10 md:py-24">
       <article className="mx-auto max-w-[860px] rounded-[2px] bg-white px-6 py-10 shadow-[0_12px_48px_rgba(27,33,29,0.06)] md:px-14 md:py-16">

@@ -37,11 +37,11 @@ Ring Society is not responsible for the acts, omissions, products, services, pri
 
 ## 5. Promotions, Offers, Gift Cards, and Incentives
 
-Ring Society may offer gift cards, savings cards, discounts, referral benefits, giveaways, sweepstakes, contests, or other promotional offers (each, a “**Promotion**”). A Promotion is void where prohibited. Participation is voluntary and subject to these Terms, the specific rules, disclosures, or official terms presented with the Promotion, and applicable law. If there is a conflict between these Terms and Promotion-specific terms, the Promotion-specific terms control for that Promotion.
+Ring Society may offer gift cards, savings cards, discounts, referral benefits, giveaways, sweepstakes, contests, or other promotional offers (each, a “**Promotion**”). A Promotion is void where prohibited. Participation is voluntary and subject to these Terms, the specific rules, disclosures, or official terms presented with the Promotion, and applicable law. If there is a conflict between these Terms and Promotion-specific terms, the Promotion-specific terms control for that Promotion. The Ring Society Diamond Card is also subject to the [Diamond Card Terms & Eligibility](/diamond-card-terms-and-eligibility).
 
 Unless Promotion-specific terms state otherwise, a Promotion is not transferable, may not be exchanged for cash, may not be combined with another offer, is limited to one per person or household, and may be modified, suspended, or discontinued by Ring Society to the extent permitted by law. A Promotion that is redeemed with an independent jeweler may be subject to the jeweler’s participation, availability, product exclusions, and other disclosed conditions. Ring Society is not responsible for a jeweler’s failure to honor an offer except as required by applicable law or Promotion-specific terms.
 
-No purchase is necessary to use the public educational content or take the quiz. A Promotion may require particular eligibility conditions, a requested consultation, a qualifying purchase, or other conditions that will be stated in its specific rules. Ring Society may disqualify a participant who uses fraudulent, deceptive, automated, abusive, or otherwise improper means to participate.
+No purchase is necessary to use the public educational content or take the quiz. A Promotion may require particular eligibility conditions, a requested consultation, a qualifying purchase, or other conditions that will be stated in its specific rules. Ring Society may disqualify a participant who uses fraudulent, deceptive, automated, abusive, or otherwise improper means to participate.  
 
 ## 6. SMS/MMS Program
 

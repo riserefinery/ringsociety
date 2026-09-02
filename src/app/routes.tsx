@@ -11,6 +11,7 @@ import privacyPolicy from '../content/legal/privacy-policy.md?raw'
 import termsAndConditions from '../content/legal/terms-and-conditions.md?raw'
 import accessibilityStatement from '../content/legal/accessibility-statement.md?raw'
 import privacyChoices from '../content/legal/privacy-choices.md?raw'
+import diamondCardTermsAndEligibility from '../content/legal/diamond-card-terms-and-eligibility.md?raw'
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
       { path: 'contact', Component: Contact },
       { path: 'privacy-policy', Component: () => <LegalPage title="Privacy Policy" document={privacyPolicy} /> },
       { path: 'terms-and-conditions', Component: () => <LegalPage title="Terms & Conditions" document={termsAndConditions} /> },
+      { path: 'diamond-card-terms-and-eligibility', Component: () => <LegalPage title="Diamond Card Terms & Eligibility" document={diamondCardTermsAndEligibility} noIndex /> },
       { path: 'accessibility', Component: () => <LegalPage title="Accessibility Statement" document={accessibilityStatement} /> },
       { path: 'do-not-sell', Component: () => <LegalPage title="Your Privacy Choices" document={privacyChoices} showPrivacyRequestNote /> },
     ],

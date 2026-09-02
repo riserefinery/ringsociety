@@ -5,13 +5,14 @@ import { describe, expect, it } from 'vitest'
 const root = resolve(import.meta.dirname, '..')
 
 describe('published legal pages', () => {
-  it('registers all four supplied legal documents on their public routes', () => {
+  it('registers all supplied legal documents on their public routes', () => {
     const routes = readFileSync(resolve(root, 'src/app/routes.tsx'), 'utf8')
     const expectedRoutes = [
       "'privacy-policy'",
       "'terms-and-conditions'",
       "'accessibility'",
       "'do-not-sell'",
+      "'diamond-card-terms-and-eligibility'",
     ]
 
     expectedRoutes.forEach((route) => expect(routes).toContain(route))
@@ -24,12 +25,29 @@ describe('published legal pages', () => {
       ['terms-and-conditions.md', '# Terms and Conditions'],
       ['accessibility-statement.md', '# Accessibility Statement'],
       ['privacy-choices.md', '# Do Not Disclose My Personal Information'],
+      ['diamond-card-terms-and-eligibility.md', '# Diamond Card Terms & Eligibility'],
     ] as const
 
     documents.forEach(([file, heading]) => {
       const content = readFileSync(resolve(root, 'src/content/legal', file), 'utf8')
       expect(content).toContain(heading)
     })
+  })
+
+  it('keeps the Diamond Card terms page out of search indexing and links the Terms promotion section to it', () => {
+    const routes = readFileSync(resolve(root, 'src/app/routes.tsx'), 'utf8')
+    const legalPage = readFileSync(resolve(root, 'src/pages/LegalPage.tsx'), 'utf8')
+    const terms = readFileSync(resolve(root, 'src/content/legal/terms-and-conditions.md'), 'utf8')
+    const diamondCard = readFileSync(resolve(root, 'src/content/legal/diamond-card-terms-and-eligibility.md'), 'utf8')
+    const vercelConfig = readFileSync(resolve(root, 'vercel.json'), 'utf8')
+
+    expect(routes).toContain('<LegalPage title="Diamond Card Terms & Eligibility" document={diamondCardTermsAndEligibility} noIndex />')
+    expect(legalPage).toContain("robots.setAttribute('content', 'noindex, follow')")
+    expect(vercelConfig).toContain('"source": "/diamond-card-terms-and-eligibility"')
+    expect(vercelConfig).toContain('"key": "X-Robots-Tag", "value": "noindex, follow"')
+    expect(terms).toContain('[Diamond Card Terms & Eligibility](/diamond-card-terms-and-eligibility)')
+    expect(diamondCard).toContain('[Terms & Conditions](/terms-and-conditions)')
+    expect(diamondCard).toContain('[Privacy Policy](/privacy-policy)')
   })
 
   it('uses the shorter privacy-choice label and makes mobile legal links route-aware', () => {

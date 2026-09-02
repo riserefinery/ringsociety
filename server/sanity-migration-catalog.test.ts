@@ -5,7 +5,7 @@ const dataset = process.env.VITE_SANITY_DATASET ?? 'production'
 
 type MigrationCatalog = {
   guideCount: number
-  legalCount: number
+  legalSlugs: string[]
   jewelerHeroAsset?: string
   jewelerBigFeatureAsset?: string
   topGuideSelectionCount: number
@@ -19,7 +19,7 @@ describe('Sanity migrated content catalog', () => {
 
     const query = `{
       "guideCount": count(*[_type == "post" && (_id match "drafts.post-**" || _id match "post-**")]),
-      "legalCount": count(*[_type == "legalPage" && _id match "drafts.**"]),
+      "legalSlugs": array::unique(*[_type == "legalPage"].slug.current),
       "jewelerHeroAsset": coalesce(*[_id == "drafts.post-how-to-choose-a-jeweler"][0].heroImage.mainImage.asset._ref, *[_id == "post-how-to-choose-a-jeweler"][0].heroImage.mainImage.asset._ref),
       "jewelerBigFeatureAsset": coalesce(*[_id == "drafts.post-how-to-choose-a-jeweler"][0].bigFeatureImage.mainImage.asset._ref, *[_id == "post-how-to-choose-a-jeweler"][0].bigFeatureImage.mainImage.asset._ref),
       "topGuideSelectionCount": count(coalesce(*[_id == "drafts.topGuidesLanding"][0].selectedPosts, *[_id == "topGuidesLanding"][0].selectedPosts)),
@@ -34,7 +34,14 @@ describe('Sanity migrated content catalog', () => {
     const payload = (await response.json()) as { result: MigrationCatalog }
 
     expect(payload.result.guideCount).toBeGreaterThanOrEqual(15)
-    expect(payload.result.legalCount).toBe(4)
+    expect(payload.result.legalSlugs).toHaveLength(5)
+    expect(payload.result.legalSlugs).toEqual(expect.arrayContaining([
+      'privacy-policy',
+      'terms-and-conditions',
+      'accessibility',
+      'do-not-sell',
+      'diamond-card-terms-and-eligibility',
+    ]))
     expect(payload.result.jewelerHeroAsset).toBe('image-b326d3006e0d637442eb00c087fbc53130793ac8-1340x895-jpg')
     expect(payload.result.jewelerBigFeatureAsset).toMatch(/^image-/)
     expect(payload.result.topGuideSelectionCount).toBe(8)
