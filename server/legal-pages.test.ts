@@ -43,8 +43,8 @@ describe('published legal pages', () => {
 
     expect(routes).toContain('<LegalPage title="Diamond Card Terms & Eligibility" document={diamondCardTermsAndEligibility} noIndex />')
     expect(legalPage).toContain("robots.setAttribute('content', 'noindex, follow')")
-    expect(vercelConfig).toContain('"source": "/diamond-card-terms-and-eligibility"')
-    expect(vercelConfig).toContain('"key": "X-Robots-Tag", "value": "noindex, follow"')
+    expect(vercelConfig).toContain('"src": "/diamond-card-terms-and-eligibility"')
+    expect(vercelConfig).toContain('"X-Robots-Tag": "noindex, follow"')
     expect(terms).toContain('[Diamond Card Terms & Eligibility](/diamond-card-terms-and-eligibility)')
     expect(diamondCard).toContain('[Terms & Conditions](/terms-and-conditions)')
     expect(diamondCard).toContain('[Privacy Policy](/privacy-policy)')
