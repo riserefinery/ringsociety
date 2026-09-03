@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import { resourcesBg } from '../lib/assets'
-import { FILTERS, allArticles, mergePublishedArticleCards, type FilterKey } from '../lib/content'
+import { FILTERS, allArticles, articlePathForTitle, mergePublishedArticleCards, type FilterKey } from '../lib/content'
 import { PageHeader, GuideCard, Newsletter, Stagger, RevealItem } from '../components'
 import { getCmsArticleCards, getCmsPage } from '../sanity/queries'
 import { resolvePageHero } from '../sanity/pageHero'
@@ -92,11 +92,18 @@ export default function Resources() {
       <section className="mx-auto w-full max-w-[1440px] px-5 pt-12 md:px-10 md:pt-16">
         <h2 className="sr-only">All engagement ring guides and articles</h2>
         <Stagger key={selected} className="grid grid-cols-1 gap-5 md:grid-cols-3">
-          {visible.map((a) => (
-            <RevealItem key={a.title} className="h-full">
-              <GuideCard card={a} />
-            </RevealItem>
-          ))}
+          {visible.map((a) => {
+            // A published CMS card can refine its title after the fallback has rendered.
+            // Keep the motion wrapper keyed to the canonical route so that refinement
+            // updates the existing cell instead of remounting a hidden stagger child.
+            const resourceKey = a.to ?? articlePathForTitle(a.title)
+
+            return (
+              <RevealItem key={resourceKey} className="h-full">
+                <GuideCard card={a} />
+              </RevealItem>
+            )
+          })}
         </Stagger>
       </section>
       <div className="w-full pt-16 md:pt-24">

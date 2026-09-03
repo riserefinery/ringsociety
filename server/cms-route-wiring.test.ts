@@ -17,9 +17,13 @@ describe('CMS route wiring', () => {
     expect(content).toContain('Replace this placeholder body in Sanity')
     expect(content).toContain('const to = card.to ?? articlePathForTitle(card.title)')
     expect(resources).toContain('mergePublishedArticleCards(cmsArticles)')
+    expect(resources).toContain('const resourceKey = a.to ?? articlePathForTitle(a.title)')
+    expect(resources).toContain('<RevealItem key={resourceKey} className="h-full">')
     expect(home).toContain('articlePathForTitle')
     expect(home).toContain('function cmsCardFor(card: Card, cmsCards: Card[])')
     expect(home).toContain('GuideCard card={cmsCardFor(c, cmsCards)}')
+    expect(home).toContain('ctaTo="/guides/how-to-buy-an-engagement-ring"')
+    expect(home).not.toContain('ctaTo="/guides/the-definitive-engagement-ring-buying-guide-2026"')
   })
 
   it('connects both Top Guides actions to the corresponding article route', () => {

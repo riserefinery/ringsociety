@@ -241,7 +241,7 @@ export default function Home() {
     }
   }, [])
 
-  const heroLabel = cmsCards.find((card) => card.to === '/guides/the-definitive-engagement-ring-buying-guide-2026')?.badge ?? 'most loved'
+  const heroLabel = cmsCards.find((card) => card.to === '/guides/how-to-buy-an-engagement-ring')?.badge ?? 'most loved'
 
   return (
     <>
@@ -257,7 +257,7 @@ export default function Home() {
           title="How to Buy an Engagement Ring"
           body="Shopping for an engagement ring should be one of life’s biggest moments… but often couples find it intimidating and stressful. We’ll show you everything, from styles to budgeting, to jewelers."
           ctaLabel="view the guide"
-          ctaTo="/guides/the-definitive-engagement-ring-buying-guide-2026"
+          ctaTo="/guides/how-to-buy-an-engagement-ring"
           mobileCtaFullWidth
           ready={heroReady}
           fullBleedDesktop
