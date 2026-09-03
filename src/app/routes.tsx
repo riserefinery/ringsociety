@@ -32,6 +32,7 @@ export const router = createBrowserRouter([
       { path: 'accessibility', Component: () => <LegalPage title="Accessibility Statement" document={accessibilityStatement} /> },
       { path: 'privacy-choices', Component: () => <LegalPage title="Your Privacy Choices" document={privacyChoices} showPrivacyRequestNote /> },
       { path: 'do-not-sell', element: <Navigate replace to="/privacy-choices" /> },
+      { path: 'do-not-disclose-my-personal-information', element: <Navigate replace to="/privacy-choices" /> },
     ],
   },
 ])

@@ -68,5 +68,6 @@ describe('published legal pages', () => {
       expect(routes).toContain(`path: '${destination.slice(1)}'`)
     })
     expect(routes).toContain('path: \'do-not-sell\', element: <Navigate replace to="/privacy-choices" />')
+    expect(routes).toContain('path: \'do-not-disclose-my-personal-information\', element: <Navigate replace to="/privacy-choices" />')
   })
 })
