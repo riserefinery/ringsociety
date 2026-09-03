@@ -30,7 +30,8 @@ export const router = createBrowserRouter([
       { path: 'terms-and-conditions', Component: () => <LegalPage title="Terms & Conditions" document={termsAndConditions} /> },
       { path: 'diamond-card-terms-and-eligibility', Component: () => <LegalPage title="Diamond Card Terms & Eligibility" document={diamondCardTermsAndEligibility} noIndex /> },
       { path: 'accessibility', Component: () => <LegalPage title="Accessibility Statement" document={accessibilityStatement} /> },
-      { path: 'do-not-sell', Component: () => <LegalPage title="Your Privacy Choices" document={privacyChoices} showPrivacyRequestNote /> },
+      { path: 'privacy-choices', Component: () => <LegalPage title="Your Privacy Choices" document={privacyChoices} showPrivacyRequestNote /> },
+      { path: 'do-not-sell', element: <Navigate replace to="/privacy-choices" /> },
     ],
   },
 ])

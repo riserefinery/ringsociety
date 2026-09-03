@@ -11,7 +11,7 @@ describe('published legal pages', () => {
       "'privacy-policy'",
       "'terms-and-conditions'",
       "'accessibility'",
-      "'do-not-sell'",
+      "'privacy-choices'",
       "'diamond-card-terms-and-eligibility'",
     ]
 
@@ -56,16 +56,17 @@ describe('published legal pages', () => {
     const footer = readFileSync(resolve(root, 'src/components/Footer.tsx'), 'utf8')
     const routes = readFileSync(resolve(root, 'src/app/routes.tsx'), 'utf8')
 
-    expect(nav).toContain("{ label: 'Your Privacy Choices', to: '/do-not-sell' }")
+    expect(nav).toContain("{ label: 'Your Privacy Choices', to: '/privacy-choices' }")
     expect(nav).not.toContain('Do Not Sell My Personal Information')
     expect(mobileNav).toContain("<Link to={l.to ?? '/'} prefetch=\"intent\" onClick={onNavigate}")
     expect(mobileNav).not.toContain('viewTransition')
     expect(footer).toContain('<Link key={label} to={i.to} prefetch="intent" viewTransition className={cls}>')
 
-    const destinations = ['/privacy-policy', '/terms-and-conditions', '/accessibility', '/do-not-sell']
+    const destinations = ['/privacy-policy', '/terms-and-conditions', '/accessibility', '/privacy-choices']
     destinations.forEach((destination) => {
       expect(nav).toContain(`to: '${destination}'`)
       expect(routes).toContain(`path: '${destination.slice(1)}'`)
     })
+    expect(routes).toContain('path: \'do-not-sell\', element: <Navigate replace to="/privacy-choices" />')
   })
 })

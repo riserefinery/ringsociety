@@ -38,7 +38,7 @@ const routeMeta: Record<string, { title: string; description: string }> = {
     title: 'Accessibility Statement | Ring Society',
     description: 'Learn about Ring Society’s accessibility commitment and how to request accessibility assistance.',
   },
-  '/do-not-sell': {
+  '/privacy-choices': {
     title: 'Your Privacy Choices | Ring Society',
     description: 'Learn how to exercise applicable privacy choices with Ring Society, including sale, sharing, and targeted-advertising opt-outs.',
   },

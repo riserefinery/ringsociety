@@ -181,7 +181,7 @@ async function main() {
     { slug: 'privacy-policy', title: 'Privacy Policy', file: 'src/content/legal/privacy-policy.md' },
     { slug: 'terms-and-conditions', title: 'Terms & Conditions', file: 'src/content/legal/terms-and-conditions.md' },
     { slug: 'accessibility', title: 'Accessibility Statement', file: 'src/content/legal/accessibility-statement.md' },
-    { slug: 'do-not-sell', title: 'Your Privacy Choices', file: 'src/content/legal/privacy-choices.md' },
+    { slug: 'privacy-choices', title: 'Your Privacy Choices', file: 'src/content/legal/privacy-choices.md' },
   ]
 
   for (const legal of legalDocuments) {

@@ -5,7 +5,7 @@ const links = [
   ['Privacy Policy', '/privacy-policy'],
   ['Terms & Conditions', '/terms-and-conditions'],
   ['Accessibility', '/accessibility'],
-  ['Your Privacy Choices', '/do-not-sell'],
+  ['Your Privacy Choices', '/privacy-choices'],
 ]
 
 async function expectPath(page, path) {

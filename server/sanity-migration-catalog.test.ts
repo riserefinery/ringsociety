@@ -39,7 +39,7 @@ describe('Sanity migrated content catalog', () => {
       'privacy-policy',
       'terms-and-conditions',
       'accessibility',
-      'do-not-sell',
+      'privacy-choices',
       'diamond-card-terms-and-eligibility',
     ]))
     expect(payload.result.jewelerHeroAsset).toBe('image-b326d3006e0d637442eb00c087fbc53130793ac8-1340x895-jpg')

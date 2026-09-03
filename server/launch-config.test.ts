@@ -7,8 +7,11 @@ const root = resolve(import.meta.dirname, '..')
 describe('launch configuration', () => {
   it('keeps the Vercel filesystem/API routing ahead of the SPA fallback', () => {
     const config = JSON.parse(readFileSync(resolve(root, 'vercel.json'), 'utf8'))
-    expect(config.routes[0]).toEqual({ handle: 'filesystem' })
-    expect(config.routes[1]).toEqual({ src: '/(.*)', dest: '/index.html' })
+    const filesystemIndex = config.routes.findIndex((route: { handle?: string }) => route.handle === 'filesystem')
+    const spaFallbackIndex = config.routes.findIndex((route: { src?: string; dest?: string }) => route.src === '/(.*)' && route.dest === '/index.html')
+
+    expect(filesystemIndex).toBeGreaterThanOrEqual(0)
+    expect(spaFallbackIndex).toBeGreaterThan(filesystemIndex)
   })
 
   it('references the verified public CDN social image', () => {
@@ -18,7 +21,7 @@ describe('launch configuration', () => {
 
   it('defines page-specific metadata for every legal placeholder route', () => {
     const source = readFileSync(resolve(root, 'src/app/Root.tsx'), 'utf8')
-    for (const path of ['/privacy-policy', '/terms-and-conditions', '/accessibility', '/do-not-sell']) {
+    for (const path of ['/privacy-policy', '/terms-and-conditions', '/accessibility', '/privacy-choices']) {
       expect(source).toContain(`'${path}':`)
     }
   })
