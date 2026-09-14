@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
+  <title>Text Us</title><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif}.message{text-align:center}.message a{color:#000}</style></head><body><div class="message"><p id="status">Opening Messages...</p><p><a id="fallback" href="#" style="display:none">Tap here to text us</a></p></div><script>const params = new URLSearchParams(window.location.search);
+    let phone = params.get('phone');
+
+    if (phone) {
+
+      // Remove spaces, brackets, dashes, etc.
+      phone = phone.replace(/[^\d+]/g, '');
+
+      // Make sure we have the + sign
+      if (!phone.startsWith('+')) {
+        phone = '+' + phone;
+      }
+
+      const smsUrl = 'sms:' + phone;
+
+      // Set fallback link
+      const fallback = document.getElementById('fallback');
+      fallback.href = smsUrl;
+      fallback.style.display = 'inline';
+
+      // Try to open Messages
+      window.location.href = smsUrl;
+
+    } else {
+
+      document.getElementById('status').textContent =
+        'No phone number was provided.';
+    }</script></body></html>
