@@ -25,12 +25,12 @@ function ArrowCircle() {
 
 /** Universal site footer. Shared across every page. */
 export default function Footer() {
-  const guides = [
-    'How to Choose Your Jeweler: Use Our 10-Point Framework',
-    'How to Buy an Engagement Ring',
-    'Engagement Ring Budgets Explained: How Much Should You Spend?',
-    'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison',
-    'The 4Cs of Diamonds Explained in Plain English',
+  const guides: FooterLink[] = [
+    { label: 'How to Choose Your Jeweler: Use Our 10-Point Framework', to: '/guides/how-to-choose-a-jeweler' },
+    { label: 'How to Buy an Engagement Ring', to: '/guides/how-to-buy-an-engagement-ring' },
+    { label: 'Engagement Ring Budgets Explained: How Much Should You Spend?', to: '/guides/engagement-ring-budgets' },
+    { label: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', to: '/guides/natural-vs-lab-grown-diamonds' },
+    { label: 'The 4Cs of Diamonds Explained in Plain English', to: '/guides/4cs-of-diamonds' },
   ]
   const col = (heading: string, items: FooterLink[], width: string) => (
     <div className={`flex flex-col gap-[23px] ${width}`}>
