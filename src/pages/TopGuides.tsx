@@ -36,7 +36,10 @@ export default function TopGuides() {
     let active = true
     getCmsTopGuidesPage().then(async (page) => {
       const firstGuide = mergeTopGuideRows(page?.selectedPosts, pillarGuides)[0]
-      await preloadImage(firstGuide?.guideFeature ?? firstGuide?.feature)
+      const firstGuideImages = Array.from(
+        new Set([firstGuide?.feature, firstGuide?.guideFeature].filter((source): source is string => Boolean(source))),
+      )
+      await Promise.all(firstGuideImages.map(preloadImage))
       if (!active) return
       setPageSettings(page)
       setCmsResolved(true)
