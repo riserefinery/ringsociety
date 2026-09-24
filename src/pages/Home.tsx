@@ -77,7 +77,7 @@ const secondRowCards: Card[] = [
   },
   {
     category: 'Guides',
-    title: 'The 4Cs of Diamonds (Explained in Plain English)',
+    title: 'The 4Cs of Diamonds Explained in Plain English',
     cta: 'view the guide',
     image: IMAGES.fourCs,
     alt: 'A woman with her hand resting near her face',

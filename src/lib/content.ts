@@ -166,13 +166,16 @@ export type Article = Card & { filters: FilterKey[] }
 const cmsSlugByTitle: Record<string, string> = {
   'How to Buy an Engagement Ring': 'how-to-buy-an-engagement-ring',
   'How to Choose A Jeweler: Our 10-Point Framework': 'how-to-choose-a-jeweler',
+  'The Most Popular & Trending Ring Styles and Diamond Shapes in 2026': 'engagement-ring-trends-2026',
   'The Most Popular & Trending Ring Styles and Diamonds in 2026': 'engagement-ring-trends-2026',
   'Engagement Rings with Hidden Halos: The Subtle Sparkle Trend': 'engagement-rings-with-hidden-halos',
   'Engagement Ring Budgets: How Much Should You Spend?': 'engagement-ring-budgets',
   'The Complete Guide to Engagement Ring Settings & Styles': 'engagement-ring-settings-and-styles',
   'How to Find Her Ring Size Without Ruining the Surprise': 'how-to-find-her-ring-size',
   'Which Diamond Shape Looks the Biggest?': 'which-diamond-shape-looks-biggest',
+  'The 4Cs of Diamonds Explained in Plain English': '4cs-of-diamonds',
   'The 4Cs of Diamonds (Explained in Plain English)': '4cs-of-diamonds',
+  'Go Big or Shop Small? Big-Box vs. Local vs. Online Jewelers': 'big-box-vs-local-vs-online-jewelers',
   'Go Big or Shop Small? Big-Box vs. Local vs. Online': 'big-box-vs-local-vs-online-jewelers',
   'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison': 'natural-vs-lab-grown-diamonds',
   'What Drives Diamond Pricing? Hear from Experts': 'what-drives-diamond-pricing',
@@ -207,7 +210,7 @@ export const allArticles: Article[] = [
   },
   {
     category: 'Trends',
-    title: 'The Most Popular & Trending Ring Styles and Diamonds in 2026',
+    title: 'The Most Popular & Trending Ring Styles and Diamond Shapes in 2026',
     cta: 'trending diamond rings',
     image: IMAGES.trending,
     alt: 'A brilliant-cut diamond ring resting on textured fabric',
@@ -255,7 +258,7 @@ export const allArticles: Article[] = [
   },
   {
     category: 'Guide',
-    title: 'The 4Cs of Diamonds (Explained in Plain English)',
+    title: 'The 4Cs of Diamonds Explained in Plain English',
     cta: 'view the guide',
     image: IMAGES.fourCs,
     alt: 'A woman with her hand resting near her face',
@@ -263,7 +266,7 @@ export const allArticles: Article[] = [
   },
   {
     category: 'Guide',
-    title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online',
+    title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online Jewelers',
     cta: 'view the guide',
     image: IMAGES.emerald,
     alt: 'A gold ring set with an emerald-green stone',

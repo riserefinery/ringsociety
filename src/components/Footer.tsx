@@ -30,7 +30,7 @@ export default function Footer() {
     'How to Buy an Engagement Ring',
     'Engagement Ring Budgets Explained: How Much Should You Spend?',
     'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison',
-    'The 4Cs of Diamonds (Explained in Plain English)',
+    'The 4Cs of Diamonds Explained in Plain English',
   ]
   const col = (heading: string, items: FooterLink[], width: string) => (
     <div className={`flex flex-col gap-[23px] ${width}`}>
