@@ -49,10 +49,11 @@ function RouteMeta() {
 
   useEffect(() => {
     const path = location.pathname === '/' ? '/' : location.pathname.replace(/\/$/, '')
+    // Guide routes own their metadata in Article so their per-guide CMS share
+    // title, description, image, and permalink cannot be overwritten here.
+    if (path.startsWith('/guides/')) return
     const fallback = routeMeta['/']
-    const meta = routeMeta[path] ?? (path.startsWith('/guides/')
-      ? { title: 'Engagement Ring Guide | Ring Society', description: fallback.description }
-      : fallback)
+    const meta = routeMeta[path] ?? fallback
     const canonical = `${canonicalHost}${path}`
 
     document.title = meta.title

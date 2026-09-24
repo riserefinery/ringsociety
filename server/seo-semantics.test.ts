@@ -28,7 +28,7 @@ describe('public SEO, form, and typography system', () => {
     expect(rootShell).toContain('const canonicalHost = \'https://ringsociety.com\'')
     expect(article).toContain('ring-society-article-schema')
     expect(article).toContain("'@type': 'Article'")
-    expect(article).toContain('document.title = `${doc.title} | Ring Society`')
+    expect(article).toContain('document.title = `${shareTitle} | Ring Society`')
   })
 
   it('uses semantic section headings on mission and contact content', () => {

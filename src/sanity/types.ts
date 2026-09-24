@@ -71,6 +71,10 @@ export type CmsSource = {
 }
 
 export type CmsSeo = {
+  title?: string
+  description?: string
+  canonicalPath?: string
+  openGraphImage?: { asset?: CmsImageAsset }
   noIndex?: boolean
 }
 

@@ -115,7 +115,7 @@ export const post = defineType({
   ],
   fields: [
     defineField({ name: 'title', title: 'Title', type: 'string', group: 'content', validation: (Rule) => Rule.required() }),
-    defineField({ name: 'slug', title: 'Slug', type: 'slug', group: 'content', options: { source: 'title', maxLength: 96 }, validation: (Rule) => Rule.required() }),
+    defineField({ name: 'slug', title: 'Permalink', description: 'The editable public URL ending for this guide. For example, this creates /guides/how-to-buy-an-engagement-ring.', type: 'slug', group: 'content', options: { source: 'title', maxLength: 96 }, validation: (Rule) => Rule.required() }),
     defineField({ name: 'excerpt', title: 'Excerpt', type: 'text', group: 'content', rows: 3, validation: (Rule) => Rule.required().max(240) }),
     defineField({ name: 'contentType', title: 'Content Type', type: 'string', group: 'content', initialValue: 'Guide', options: { list: ['Guide', 'Article', 'Trends', 'Perspectives'] } }),
     defineField({ name: 'intro', title: 'Article Introduction', type: 'array', group: 'content', of: [standardBlock] }),
@@ -185,11 +185,11 @@ export const post = defineType({
     }),
     defineField({
       name: 'seo',
-      title: 'SEO',
+      title: 'Search & Sharing',
       type: 'pageSeo',
       group: 'seo',
       initialValue: { noIndex: true },
-      description: 'New guides are kept out of search by default. Turn off “Prevent Search Indexing” only after editorial and expert review approves this guide for search.',
+      description: 'Guide share cards use the title, excerpt, Hero Image, and Permalink by default. Use the optional overrides only when the shared-link presentation should differ. New guides are kept out of search by default; turn off “Prevent Search Indexing” only after editorial and expert review approves this guide for search.',
     }),
   ],
   preview: { select: { title: 'title', subtitle: 'contentType', media: 'heroImage.mainImage' } },

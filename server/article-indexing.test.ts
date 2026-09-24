@@ -26,7 +26,7 @@ describe('article indexing safeguards', () => {
 
     expect(seoSchema).toContain("name: 'noIndex'")
     expect(postSchema).toContain('initialValue: { noIndex: true }')
-    expect(queries).toContain('"seo": seo{noIndex}')
+    expect(queries).toContain('"seo": seo{title, description, canonicalPath, openGraphImage, noIndex}')
     expect(mapper).toContain('noIndex: post.seo?.noIndex === true')
     expect(article).toContain("robots.setAttribute('content', 'noindex, follow')")
   })

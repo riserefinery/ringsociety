@@ -397,6 +397,12 @@ export type ArticleDoc = {
   readTime: string
   hero: string
   heroImage?: CmsResponsiveImage
+  /** Optional CMS share-card overrides. When absent, title, excerpt, Hero Image, and Permalink are used. */
+  shareTitle?: string
+  shareDescription?: string
+  shareImage?: string
+  shareImageAlt?: string
+  canonicalPath?: string
   categories: string[]
   keywordTags: string[]
   /** Whether search engines should exclude this guide from results. */

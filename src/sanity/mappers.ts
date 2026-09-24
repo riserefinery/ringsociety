@@ -115,6 +115,9 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
   const hero = imageUrl(post.heroImage?.mainImage, 1800)
   if (!post.slug || !post.title || !post.excerpt || !hero) return null
 
+  const shareImage = imageUrl(post.seo?.openGraphImage ?? post.heroImage?.mainImage, 1200) ?? hero
+  const canonicalPath = post.seo?.canonicalPath?.startsWith('/') ? post.seo.canonicalPath : `/guides/${post.slug}`
+
   const related = (post.relatedPosts ?? [])
     .map(toCmsCard)
     .filter((card) => Boolean(card.image && card.to && card.to !== `/guides/${post.slug}`))
@@ -128,6 +131,11 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
     readTime: '',
     hero,
     heroImage: post.heroImage,
+    shareTitle: post.seo?.title ?? post.title,
+    shareDescription: post.seo?.description ?? post.excerpt,
+    shareImage,
+    shareImageAlt: post.heroImage?.alt ?? post.title,
+    canonicalPath,
     categories: (post.categories ?? []).map((category) => category.title).filter(Boolean) as string[],
     keywordTags: post.keywordTags ?? [],
     cta: toCta(post.sidebarCta),

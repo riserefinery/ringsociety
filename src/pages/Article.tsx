@@ -537,7 +537,12 @@ export default function Article() {
 
   useEffect(() => {
     if (!doc) return
-    const canonical = `https://ringsociety.com/guides/${doc.slug}`
+    const shareTitle = doc.shareTitle ?? doc.title
+    const shareDescription = doc.shareDescription ?? doc.subtitle
+    const shareImage = doc.shareImage ?? doc.hero
+    const shareImageAlt = doc.shareImageAlt ?? doc.title
+    const canonicalPath = doc.canonicalPath ?? `/guides/${doc.slug}`
+    const canonical = `https://ringsociety.com${canonicalPath}`
     const upsert = (selector: string, attribute: 'name' | 'property', content: string) => {
       let element = document.querySelector<HTMLMetaElement>(selector)
       if (!element) {
@@ -549,14 +554,18 @@ export default function Article() {
     }
     const canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
 
-    document.title = `${doc.title} | Ring Society`
-    upsert('meta[name="description"]', 'name', doc.subtitle)
-    upsert('meta[property="og:title"]', 'property', doc.title)
-    upsert('meta[property="og:description"]', 'property', doc.subtitle)
+    document.title = `${shareTitle} | Ring Society`
+    upsert('meta[name="description"]', 'name', shareDescription)
+    upsert('meta[property="og:title"]', 'property', shareTitle)
+    upsert('meta[property="og:description"]', 'property', shareDescription)
     upsert('meta[property="og:url"]', 'property', canonical)
     upsert('meta[property="og:type"]', 'property', 'article')
-    upsert('meta[name="twitter:title"]', 'name', doc.title)
-    upsert('meta[name="twitter:description"]', 'name', doc.subtitle)
+    upsert('meta[property="og:image"]', 'property', shareImage)
+    upsert('meta[property="og:image:alt"]', 'property', shareImageAlt)
+    upsert('meta[name="twitter:card"]', 'name', 'summary_large_image')
+    upsert('meta[name="twitter:title"]', 'name', shareTitle)
+    upsert('meta[name="twitter:description"]', 'name', shareDescription)
+    upsert('meta[name="twitter:image"]', 'name', shareImage)
     if (canonicalLink) canonicalLink.href = canonical
 
     const existingRobots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
@@ -581,8 +590,9 @@ export default function Article() {
     schema.textContent = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Article',
-      headline: doc.title,
-      description: doc.subtitle,
+      headline: shareTitle,
+      description: shareDescription,
+      image: shareImage,
       mainEntityOfPage: canonical,
       author: { '@type': 'Organization', name: 'Ring Society' },
       publisher: { '@type': 'Organization', name: 'Ring Society', url: 'https://ringsociety.com/' },

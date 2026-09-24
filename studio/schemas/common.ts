@@ -2,13 +2,13 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const pageSeo = defineType({
   name: 'pageSeo',
-  title: 'SEO',
+  title: 'Search & Sharing',
   type: 'object',
   fields: [
-    defineField({ name: 'title', title: 'SEO Title', type: 'string', validation: (Rule) => Rule.max(60) }),
-    defineField({ name: 'description', title: 'SEO Description', type: 'text', rows: 3, validation: (Rule) => Rule.max(160) }),
-    defineField({ name: 'canonicalPath', title: 'Canonical Path', type: 'string', description: 'Example: /guides/how-to-buy-an-engagement-ring' }),
-    defineField({ name: 'openGraphImage', title: 'Social Sharing Image', type: 'image', options: { hotspot: true } }),
+    defineField({ name: 'title', title: 'Share Title Override', description: 'Leave blank to use the article title. Use this only when the shared-link title should differ from the page title.', type: 'string', validation: (Rule) => Rule.max(110).warning('Keep this concise when possible so it is not truncated in a social preview.') }),
+    defineField({ name: 'description', title: 'Share Description Override', description: 'Leave blank to use the article excerpt. Use this only when the shared-link description should differ from the page description.', type: 'text', rows: 3, validation: (Rule) => Rule.max(160) }),
+    defineField({ name: 'canonicalPath', title: 'Canonical URL Override', description: 'Usually leave blank: the public Permalink is used automatically. Example override: /guides/how-to-buy-an-engagement-ring', type: 'string', validation: (Rule) => Rule.custom((value) => !value || String(value).startsWith('/') || 'Use a relative path beginning with /.') }),
+    defineField({ name: 'openGraphImage', title: 'Share Image Override', description: 'Leave blank to use this guide’s Hero Image as the social share image.', type: 'image', options: { hotspot: true } }),
     defineField({ name: 'noIndex', title: 'Prevent Search Indexing', type: 'boolean', initialValue: false }),
   ],
 })

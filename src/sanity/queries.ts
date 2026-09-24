@@ -24,7 +24,7 @@ const postProjection = `{
   sources,
   keywordTags,
   sidebarCta,
-  "seo": seo{noIndex},
+  "seo": seo{title, description, canonicalPath, openGraphImage, noIndex},
   "categories": categories[]->{title, filterKey},
   "relatedPosts": relatedPosts[]->{
     _id,
