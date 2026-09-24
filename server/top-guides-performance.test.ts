@@ -8,11 +8,16 @@ const read = (relativePath: string) => readFileSync(resolve(root, relativePath),
 describe('Top Guides loading resilience', () => {
   it('renders established fallback guide rows immediately while the CMS selection resolves', () => {
     const topGuides = read('src/pages/TopGuides.tsx')
+    const guideFeature = read('src/components/GuideFeature.tsx')
 
     expect(topGuides).toContain('const guides = mergeTopGuideRows(pageSettings?.selectedPosts, pillarGuides)')
     expect(topGuides).not.toContain("const guides = cmsResolved ? mergeTopGuideRows(pageSettings?.selectedPosts, pillarGuides) : []")
     expect(topGuides).not.toContain('h-[420px] w-full md:h-[560px]')
     expect(topGuides).toContain('<Newsletter />')
+    expect(topGuides).toContain('<GuideFeature guide={guide} imageReady={cmsResolved} />')
+    expect(guideFeature).toContain('imageReady = true')
+    expect(guideFeature).toContain('{imageReady && <img src={feature}')
+    expect(guideFeature).toContain('{imageReady && (')
   })
 
   it('keeps the Top Guides CMS request focused on card-required fields and shares an in-flight request', () => {

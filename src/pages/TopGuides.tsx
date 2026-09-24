@@ -40,7 +40,7 @@ export default function TopGuides() {
       >
         {guides.map((guide) => (
           <Reveal key={guide.slug} className="w-full">
-            <GuideFeature guide={guide} />
+            <GuideFeature guide={guide} imageReady={cmsResolved} />
           </Reveal>
         ))}
       </div>

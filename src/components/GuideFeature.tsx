@@ -13,7 +13,7 @@ import { prefetchCmsArticle } from '../sanity/queries'
  *  - Mobile:  the article's feature image (with any badge overlaid) stacked
  *    above a light text block — consistent across all cards.
  */
-export default function GuideFeature({ guide }: { guide: Guide }) {
+export default function GuideFeature({ guide, imageReady = true }: { guide: Guide; imageReady?: boolean }) {
   const { slug, category, badge, title, excerpt, feature, guideFeature, tone, imagePosition = 'center' } = guide
   const articlePath = `/guides/${slug}`
   const prefetchArticle = () => prefetchCmsArticle(slug)
@@ -31,7 +31,7 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
         <article className="flex flex-col gap-5">
           <div className="relative h-[228px] w-full overflow-hidden rounded-[12px]" style={{ background: '#d8cfc4' }}>
             <Link to={articlePath} aria-label={`Read ${title}`} className="block h-full w-full" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
-              <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />
+              {imageReady && <img src={feature} alt="" className="h-full w-full object-cover" style={{ objectPosition: imagePosition }} />}
             </Link>
             {badge && (
               <span className="absolute right-4 top-4">
@@ -62,12 +62,14 @@ export default function GuideFeature({ guide }: { guide: Guide }) {
       <section className="mx-auto hidden w-full max-w-[1440px] px-10 md:block">
         <div className="relative overflow-hidden rounded-lg" style={{ background: '#31353d', aspectRatio: '1344 / 633', minHeight: 560 }}>
           <Link to={articlePath} aria-label={`Read ${title}`} className="absolute inset-0 block" prefetch="intent" onPointerDown={prefetchArticle} onPointerEnter={prefetchArticle} onFocus={prefetchArticle}>
-            <img
-              src={guideFeature ?? feature}
-              alt=""
-              className="h-full w-full object-cover"
-              style={{ objectPosition: imagePosition }}
-            />
+            {imageReady && (
+              <img
+                src={guideFeature ?? feature}
+                alt=""
+                className="h-full w-full object-cover"
+                style={{ objectPosition: imagePosition }}
+              />
+            )}
           </Link>
           <div className="pointer-events-none absolute inset-0" style={{ background: overlay }} />
           <div className="absolute inset-0 flex items-center">
