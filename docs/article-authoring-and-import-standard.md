@@ -2,6 +2,12 @@
 
 This standard applies to every Ring Society post and guide authored or migrated through Sanity.
 
+## Approved presentation reference
+
+Use [How to Buy an Engagement Ring: The Definitive Guide](https://ringsociety-web.vercel.app/guides/how-to-buy-an-engagement-ring) as the approved public reference for all incoming article formatting. Preserve its established reading rhythm, heading hierarchy, body-copy treatment, paragraph spacing, native lists, blockquote treatment, editorial callouts, table-of-contents behavior, end-matter accordions, and related-guide presentation. Do not reproduce its copy or imagery in other articles; use it only as the structural and visual standard.
+
+New source articles may be imported without images when images are not yet approved or available. Do not create placeholder, stock, or AI-generated editorial images. When final assets arrive, upload them as Sanity assets, place them in the approved narrative position, and add descriptive alt text before the article becomes indexable.
+
 ## Semantic hierarchy
 
 | Content purpose | Sanity control | HTML output | In-article navigation |
