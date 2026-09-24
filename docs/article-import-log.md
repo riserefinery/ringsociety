@@ -15,6 +15,21 @@
 
 The article was mapped only to its existing guide page and not to a new route. The imported Portable Text preserves the supplied title, emphasis, headings, lists, citations, and link placement. Internal links were normalized to existing canonical `/guides/` paths. Sources and Related Guides remain in the site’s closed Article End Matter accordions.
 
+## Batch 1 — Tier 1 and 2
+
+The six approved Markdown files in `Tier1and2.zip` were mapped only to their existing Sanity post records and published to their existing public routes. Every record remains protected by `seo.noIndex: true`, the global site no-index policy, and the Vercel `/guides/` `X-Robots-Tag: noindex, follow` header.
+
+| Existing guide | Public route | Imported content | End matter |
+|---|---|---|---|
+| Go Big or Shop Small? Big-Box vs. Local vs. Online Jewelers | `/guides/big-box-vs-local-vs-online-jewelers` | 3 lead-in paragraphs; 56 body blocks | 4 Related Guides; 5 Sources |
+| Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison | `/guides/natural-vs-lab-grown-diamonds` | 2 lead-in paragraphs; 42 body blocks | 6 Related Guides; 7 Sources |
+| The Complete Guide to Engagement Ring Settings & Styles | `/guides/engagement-ring-settings-and-styles` | 4 lead-in paragraphs; 109 body blocks | 5 Related Guides; 4 official GIA Sources |
+| The Ideal Diamond Cut: How to Choose the Right Diamond for Your Ring Setting and Budget | `/guides/ideal-diamond-cut` | 2 lead-in paragraphs; 43 body blocks | 7 Related Guides; 6 Sources |
+| The Ultimate Guide to Diamond Clarity, and What it Means for Your Ring Choice & Budget | `/guides/ultimate-guide-to-diamond-clarity` | 2 lead-in paragraphs; 59 body blocks | 8 Related Guides; 7 Sources |
+| Which Diamond Shape Looks the Biggest? | `/guides/which-diamond-shape-looks-biggest` | 3 lead-in paragraphs; 40 body blocks | 6 Related Guides; 2 Sources |
+
+The Go Big page title was updated sitewide to the supplied headline ending in “Jewelers.” The unavailable `questions-to-ask-before-buying-a-ring` link was removed from every Batch 1 inline reference and Related Guides list. All remaining Ring Society links were normalized to canonical `/guides/` paths. The four Settings & Styles source citations that arrived without URLs were verified against official GIA pages before publication. No new pages, image assets, or inline images were created; existing hero media remains in place until approved article-specific media is supplied.
+
 ## Reusable pilot rules
 
 For each next approved Markdown article, map the supplied content to its matching existing Sanity post draft or published post. Do not create a new page unless the user explicitly requests one. Preserve semantic Markdown structure, convert valid in-body links to canonical existing Ring Society routes, and remove or flag any link whose destination does not yet exist. Do not manufacture imagery: retain an existing approved hero only when appropriate, and add inline images only after approved assets and alt text are provided. Keep every imported article no-indexed until its expert review and final image/SEO approval are complete.
