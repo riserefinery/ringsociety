@@ -47,3 +47,18 @@ The Ring Size guide retains the approved “How to Find Her Ring Size Without Ru
 ## Reusable pilot rules
 
 For each next approved Markdown article, map the supplied content to its matching existing Sanity post draft or published post. Do not create a new page unless the user explicitly requests one. Preserve semantic Markdown structure, convert valid in-body links to canonical existing Ring Society routes, and remove or flag any link whose destination does not yet exist. Do not manufacture imagery: retain an existing approved hero only when appropriate, and add inline images only after approved assets and alt text are provided. Keep every imported article no-indexed until its expert review and final image/SEO approval are complete.
+
+## Pilot 02 — How to Choose A Jeweler: Our 10-Point Framework
+
+| Field | Recorded value |
+|---|---|
+| Source file | `HowtoChooseYourJeweler_RingSocietyFramework.md` |
+| Existing Sanity record | `post-how-to-choose-a-jeweler` |
+| Public route | `/guides/how-to-choose-a-jeweler` |
+| Publication state | Published for pilot review |
+| Search-indexing state | `seo.noIndex: true`; the site-wide and `/guides/` no-index controls remain active |
+| Imported body structure | Five lead-in paragraphs; five H2 sections; thirteen H3 sections; ten italicized reader prompts; one inline GIA Report Check link |
+| End matter | None supplied; no Sources or Related Guides accordion entries were added |
+| Images | No new images were supplied or created. The existing approved Hero Image and social-sharing image remain unchanged. |
+
+The supplied framework was mapped only to the existing Jeweler guide record. The established title, permalink, Hero Image, article label, share title, share description, share image, and canonical path remain unchanged. Its source heading was intentionally treated as the source-document heading rather than a second on-page H1; the existing article title remains the only public H1. No new route, image asset, or indexability change was introduced.
