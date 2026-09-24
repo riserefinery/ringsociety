@@ -15,6 +15,9 @@ describe('Top Guides loading resilience', () => {
     expect(topGuides).not.toContain('h-[420px] w-full md:h-[560px]')
     expect(topGuides).toContain('<Newsletter />')
     expect(topGuides).toContain('<GuideFeature guide={guide} imageReady={cmsResolved} />')
+    expect(topGuides).toContain('function preloadImage(source: string | undefined): Promise<void>')
+    expect(topGuides).toContain('await preloadImage(firstGuide?.guideFeature ?? firstGuide?.feature)')
+    expect(topGuides).toContain('startWhenReady={index === 0 ? firstFeatureReady : undefined}')
     expect(guideFeature).toContain('imageReady = true')
     expect(guideFeature).toContain('{imageReady && <img src={feature}')
     expect(guideFeature).toContain('{imageReady && (')
@@ -27,5 +30,13 @@ describe('Top Guides loading resilience', () => {
     expect(queries).toContain('if (topGuidesRequestCache) return topGuidesRequestCache')
     expect(queries).toContain('bigFeatureImage')
     expect(queries).not.toContain('"post": @->${postProjection}')
+  })
+
+  it('keeps an explicitly gated reveal hidden until its dependency is ready', () => {
+    const reveal = read('src/components/Reveal.tsx')
+
+    expect(reveal).toContain('startWhenReady?: boolean')
+    expect(reveal).toContain("const revealState = startWhenReady === undefined ? undefined : startWhenReady ? 'show' : 'hidden'")
+    expect(reveal).toContain("whileInView={startWhenReady === undefined ? 'show' : undefined}")
   })
 })

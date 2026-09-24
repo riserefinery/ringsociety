@@ -39,7 +39,7 @@ describe('CMS route wiring', () => {
     expect(topGuides).toContain('const [cmsResolved, setCmsResolved] = useState(false)')
     expect(topGuides).toContain('const guides = mergeTopGuideRows(pageSettings?.selectedPosts, pillarGuides)')
     expect(topGuides).toContain('aria-busy={!cmsResolved}')
-    expect(topGuides).toContain('{guides.map((guide) => (')
+    expect(topGuides).toContain('{guides.map((guide, index) => (')
     expect(topGuides).toContain('<Newsletter />')
     expect(editorialRow).toContain('to?: string')
     expect(editorialRow).toContain('Read ${typeof title === \'string\' ? title : eyebrow}')

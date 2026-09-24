@@ -14,20 +14,25 @@ export function Reveal({
   as = 'div',
   className,
   delay = 0,
+  startWhenReady,
 }: {
   children: ReactNode
   as?: Tag
   className?: string
   delay?: number
+  /** Holds an element at its hidden state until an async dependency has finished. */
+  startWhenReady?: boolean
 }) {
   const Comp = motion[as]
+  const revealState = startWhenReady === undefined ? undefined : startWhenReady ? 'show' : 'hidden'
   return (
     <Comp
       className={className}
       variants={fadeUp}
       initial="hidden"
-      whileInView="show"
-      viewport={viewportOnce}
+      animate={revealState}
+      whileInView={startWhenReady === undefined ? 'show' : undefined}
+      viewport={startWhenReady === undefined ? viewportOnce : undefined}
       transition={delay ? { duration: 0.72, ease: [0.25, 0.1, 0.25, 1], delay } : undefined}
     >
       {children}
