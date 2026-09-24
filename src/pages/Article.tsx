@@ -559,6 +559,17 @@ export default function Article() {
     upsert('meta[name="twitter:description"]', 'name', doc.subtitle)
     if (canonicalLink) canonicalLink.href = canonical
 
+    const existingRobots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
+    const previousRobots = existingRobots?.getAttribute('content') ?? null
+    const robots = doc.noIndex ? existingRobots ?? document.createElement('meta') : null
+    if (robots) {
+      if (!existingRobots) {
+        robots.setAttribute('name', 'robots')
+        document.head.appendChild(robots)
+      }
+      robots.setAttribute('content', 'noindex, follow')
+    }
+
     const schemaId = 'ring-society-article-schema'
     let schema = document.getElementById(schemaId) as HTMLScriptElement | null
     if (!schema) {
@@ -580,6 +591,13 @@ export default function Article() {
     return () => {
       document.getElementById(schemaId)?.remove()
       upsert('meta[property="og:type"]', 'property', 'website')
+      if (robots && !existingRobots) {
+        robots.remove()
+      } else if (robots && previousRobots === null) {
+        robots.removeAttribute('content')
+      } else if (robots) {
+        robots.setAttribute('content', previousRobots)
+      }
     }
   }, [doc])
 

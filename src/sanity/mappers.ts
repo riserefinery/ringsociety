@@ -133,6 +133,7 @@ export function toArticleDoc(post: CmsPost): ArticleDoc | null {
     cta: toCta(post.sidebarCta),
     intro: toBlocks(post.intro),
     body: toBlocks(post.body),
+    noIndex: post.seo?.noIndex === true,
     articleRelatedGuides: (post.articleRelatedGuides ?? [])
       .filter((guide) => Boolean(guide.title && guide.url))
       .map((guide) => ({ title: guide.title as string, url: guide.url as string })),

@@ -183,7 +183,14 @@ export const post = defineType({
         defineField({ name: 'to', title: 'Destination Path', type: 'string' }),
       ],
     }),
-    defineField({ name: 'seo', title: 'SEO', type: 'pageSeo', group: 'seo' }),
+    defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'pageSeo',
+      group: 'seo',
+      initialValue: { noIndex: true },
+      description: 'New guides are kept out of search by default. Turn off “Prevent Search Indexing” only after editorial and expert review approves this guide for search.',
+    }),
   ],
   preview: { select: { title: 'title', subtitle: 'contentType', media: 'heroImage.mainImage' } },
 })

@@ -396,6 +396,8 @@ export type ArticleDoc = {
   heroImage?: CmsResponsiveImage
   categories: string[]
   keywordTags: string[]
+  /** Whether search engines should exclude this guide from results. */
+  noIndex?: boolean
   cta?: ArticleCta
   intro: ArticleBlock[]
   body: ArticleBlock[]

@@ -70,6 +70,10 @@ export type CmsSource = {
   url?: string
 }
 
+export type CmsSeo = {
+  noIndex?: boolean
+}
+
 export type CmsPost = {
   _id: string
   title?: string
@@ -89,6 +93,7 @@ export type CmsPost = {
   sources?: CmsSource[]
   keywordTags?: string[]
   sidebarCta?: CmsSidebarCta
+  seo?: CmsSeo
   relatedPosts?: CmsPost[]
 }
 
