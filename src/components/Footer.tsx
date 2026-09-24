@@ -26,9 +26,9 @@ function ArrowCircle() {
 /** Universal site footer. Shared across every page. */
 export default function Footer() {
   const guides: FooterLink[] = [
-    { label: 'How to Choose Your Jeweler: Use Our 10-Point Framework', to: '/guides/how-to-choose-a-jeweler' },
-    { label: 'How to Buy an Engagement Ring', to: '/guides/how-to-buy-an-engagement-ring' },
-    { label: 'Engagement Ring Budgets Explained: How Much Should You Spend?', to: '/guides/engagement-ring-budgets' },
+    { label: 'How to Choose A Jeweler: Our 10-Point Framework', to: '/guides/how-to-choose-a-jeweler' },
+    { label: 'How to Buy an Engagement Ring: The Definitive Guide', to: '/guides/how-to-buy-an-engagement-ring' },
+    { label: 'Engagement Ring Budgets: How Much Should You Spend?', to: '/guides/engagement-ring-budgets' },
     { label: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', to: '/guides/natural-vs-lab-grown-diamonds' },
     { label: 'The 4Cs of Diamonds Explained in Plain English', to: '/guides/4cs-of-diamonds' },
   ]
