@@ -5,6 +5,8 @@ export type LeadPayload = {
   source: string
   topic?: string
   message?: string
+  website?: string
+  formStartedAt: number
 }
 
 export async function submitLead(payload: LeadPayload) {

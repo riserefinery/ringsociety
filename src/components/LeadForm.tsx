@@ -26,6 +26,7 @@ const contactTopics = [
 export default function LeadForm({ source, submitLabel, successMessage, className = '', variant = 'compact' }: LeadFormProps) {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
+  const [formStartedAt] = useState(() => Date.now())
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -41,6 +42,8 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
         source,
         topic: String(form.get('topic') ?? ''),
         message: String(form.get('message') ?? ''),
+        website: String(form.get('website') ?? ''),
+        formStartedAt,
       })
       setStatus('success')
     } catch (submissionError) {
@@ -55,6 +58,10 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
 
   return (
     <form onSubmit={submit} className={`flex flex-col gap-6 text-left ${className}`} noValidate>
+      <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+        <label htmlFor={`${source}-website`}>Leave this field empty</label>
+        <input id={`${source}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       {variant === 'contact' ? (
         <>
           <div className="grid gap-6 md:grid-cols-2">
