@@ -10,6 +10,7 @@ import {
 } from './objects'
 import { quiz } from './quizzes'
 import { bookingPage, diamondCardPage, diamondCardTerms, funnelShared, hintPage } from './pages'
+import { sharedResultsDocumentTypes } from './results'
 
 export const funnelObjectTypes = [
   funnelImage,
@@ -22,4 +23,12 @@ export const funnelObjectTypes = [
   phoneCaptureCopy,
 ]
 
-export const funnelDocumentTypes = [quiz, diamondCardPage, diamondCardTerms, hintPage, bookingPage, funnelShared]
+export const funnelDocumentTypes = [
+  quiz,
+  diamondCardPage,
+  diamondCardTerms,
+  hintPage,
+  bookingPage,
+  funnelShared,
+  ...sharedResultsDocumentTypes,
+]

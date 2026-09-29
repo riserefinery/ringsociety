@@ -381,6 +381,10 @@
         "scrollHint": "Scroll to reveal your matches and your jeweler"
       },
       "heroOutOfTerritory": {
+        "titleLineOne": "You’re One Step Closer",
+        "titleLineTwoLead": "to The ",
+        "titleAccent": "Perfect",
+        "titleLineTwoRest": " Ring",
         "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
         "bodyRest": "",
         "scrollHint": "Scroll to reveal your matches"
@@ -391,99 +395,12 @@
         "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
         "uniqueTasteFallbackJewelerName": "your matched jeweler"
       },
-      "jeweler": {
-        "title": "Great Taste Deserves a Great Jeweler",
-        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
-        "meetLabel": "Meet",
-        "stickyCtaLabel": "Get Your ring",
-        "reasonsTitle": "Why We Love Them",
-        "reasons": [
-          "Hundreds of 5 star reviews",
-          "History of fair & competitive pricing",
-          "Designs you won't find in a big box store",
-          "4th generation family owned and run",
-          "In business for nearly 100 years",
-          "No high pressure sales EVER",
-          "Fair-trade diamond sourcing",
-          "Easy financing starting at 0% APR"
-        ],
-        "locationTitle": "Where to Find Them",
-        "closingTagline": "This is the jeweler you've been searching for.",
-        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
-      },
-      "diamondCard": {
-        "titleLead": "Redeem your Diamond Card at",
-        "titleNoJeweler": "Redeem your Diamond Card",
-        "ctaLabel": "Schedule consultation",
-        "accordionTitle": "Diamond Card Terms",
-        "introTitle": "How to redeem your savings",
-        "introItems": [
-          {
-            "_key": "item-0",
-            "_type": "funnelListItem",
-            "text": "Book your free consultation within 7 days to activate your card"
-          },
-          {
-            "_key": "item-1",
-            "_type": "funnelListItem",
-            "text": "Once activated, you have 60 days to attend your consultation and use your card",
-            "boldPhrase": "60 days to attend your consultation"
-          },
-          {
-            "_key": "item-2",
-            "_type": "funnelListItem",
-            "text": "Redeemable in person only, at your matched jeweler's store",
-            "boldPhrase": "in person only"
-          },
-          {
-            "_key": "item-3",
-            "_type": "funnelListItem",
-            "text": "Cannot be applied online or over the phone"
-          }
-        ],
-        "savingsTitle": "Your savings scale with your ring",
-        "savingsTiers": [
-          "$250 off rings $2,500+",
-          "$500 off rings $5,000+",
-          "$1,000 off rings $10,000+",
-          "$1,500 off rings $15,000+",
-          "$2,000 off rings $20,000+"
-        ],
-        "summaryLead": "Most couples save $500 to $1,500.",
-        "whyTitle": "Why are they giving away so much?",
-        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
-        "finePrintTitle": "The fine print",
-        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
-      },
-      "designSection": {
-        "title": "Your Custom Ring",
-        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
-        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
-        "choices": [
-          "Yellow Gold",
-          "Round Brilliant Diamond",
-          "Knife-Edge Setting"
-        ],
-        "ctaTitle": "Ready to Make it Real?",
-        "ctaLead": "Schedule a Consult with a ",
-        "ctaLink": "top local jeweler in your area",
-        "ctaRest": " who specializes in engagement rings just like these",
-        "ctaLabel": "Schedule consultation"
-      },
       "readyBanner": {
         "title": "Ready to Make it Real?",
         "bodyLead": "Schedule a Consult with a ",
         "bodyLink": "top local jeweler in your area",
         "bodyRest": " who specializes in engagement rings just like these",
         "ctaLabel": "Schedule consultation"
-      },
-      "footer": {
-        "tagline": "Your trusted guide to the perfect ring",
-        "privacyLabel": "Privacy Policy",
-        "termsLabel": "Terms and Conditions",
-        "accessibilityLabel": "Accessibility",
-        "privacyChoicesLabel": "Your Privacy Choices",
-        "copyright": "© Ring Society {year} | All Rights Reserved"
       }
     },
     "phoneCapture": {
@@ -947,6 +864,10 @@
         "scrollHint": "Scroll to reveal your ring and your jeweler"
       },
       "heroOutOfTerritory": {
+        "titleLineOne": "You’re One Step Closer",
+        "titleLineTwoLead": "to The ",
+        "titleAccent": "Perfect",
+        "titleLineTwoRest": " Ring",
         "bodyLead": "Your ring is stunning, but it is just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
         "bodyRest": "",
         "scrollHint": "Scroll to reveal your matches"
@@ -956,70 +877,6 @@
         "titleAccent": "Matches",
         "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
         "uniqueTasteFallbackJewelerName": "your matched jeweler"
-      },
-      "jeweler": {
-        "title": "Great Taste Deserves a Great Jeweler",
-        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
-        "meetLabel": "Meet",
-        "stickyCtaLabel": "Get Your ring",
-        "reasonsTitle": "Why We Love Them",
-        "reasons": [
-          "Hundreds of 5 star reviews",
-          "History of fair & competitive pricing",
-          "Designs you won't find in a big box store",
-          "4th generation family owned and run",
-          "In business for nearly 100 years",
-          "No high pressure sales EVER",
-          "Fair-trade diamond sourcing",
-          "Easy financing starting at 0% APR"
-        ],
-        "locationTitle": "Where to Find Them",
-        "closingTagline": "This is the jeweler you've been searching for.",
-        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
-      },
-      "diamondCard": {
-        "titleLead": "Redeem your Diamond Card at",
-        "titleNoJeweler": "Redeem your Diamond Card",
-        "ctaLabel": "Schedule consultation",
-        "accordionTitle": "Diamond Card Terms",
-        "introTitle": "How to redeem your savings",
-        "introItems": [
-          {
-            "_key": "item-0",
-            "_type": "funnelListItem",
-            "text": "Book your free consultation within 7 days to activate your card"
-          },
-          {
-            "_key": "item-1",
-            "_type": "funnelListItem",
-            "text": "Once activated, you have 60 days to attend your consultation and use your card",
-            "boldPhrase": "60 days to attend your consultation"
-          },
-          {
-            "_key": "item-2",
-            "_type": "funnelListItem",
-            "text": "Redeemable in person only, at your matched jeweler's store",
-            "boldPhrase": "in person only"
-          },
-          {
-            "_key": "item-3",
-            "_type": "funnelListItem",
-            "text": "Cannot be applied online or over the phone"
-          }
-        ],
-        "savingsTitle": "Your savings scale with your ring",
-        "savingsTiers": [
-          "$250 off rings $2,500+",
-          "$500 off rings $5,000+",
-          "$1,000 off rings $10,000+",
-          "$1,500 off rings $15,000+",
-          "$2,000 off rings $20,000+"
-        ],
-        "summaryLead": "Most couples save $500 to $1,500.",
-        "whyTitle": "Why are they giving away so much?",
-        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
-        "finePrintTitle": "The fine print",
-        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
       },
       "designSection": {
         "title": "Your Custom Ring",
@@ -1042,14 +899,6 @@
         "bodyLink": "top local jeweler in your area",
         "bodyRest": " who specializes in engagement rings just like these",
         "ctaLabel": "Schedule consultation"
-      },
-      "footer": {
-        "tagline": "Your trusted guide to the perfect ring",
-        "privacyLabel": "Privacy Policy",
-        "termsLabel": "Terms and Conditions",
-        "accessibilityLabel": "Accessibility",
-        "privacyChoicesLabel": "Your Privacy Choices",
-        "copyright": "© Ring Society {year} | All Rights Reserved"
       }
     },
     "phoneCapture": {
@@ -1082,6 +931,7 @@
         "Answer a few quick questions and we'll match you with a trusted, highly vetted jeweler in your area ",
         "and share our exclusive Ring Society Gift Card with you."
       ],
+      "bodySecondItalic": true,
       "bodyTail": "No matches? No worries.\nWe’ll send you something just as valuable instead.",
       "cta": "Find My Jeweler"
     },
@@ -1232,119 +1082,7 @@
     "results": {
       "_type": "quizResults",
       "sectionLabel": "What we do",
-      "hero": {
-        "greetingPrefix": "Great News",
-        "ringStylesReady": "Your ring styles are ready",
-        "title": "Your Diamond Card is Activated",
-        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible.",
-        "bodyRest": "We've paired you with a local jeweler who can help you find or create the ring that's perfect for you.",
-        "scrollHint": "Scroll to reveal your matches and your jeweler"
-      },
-      "heroOutOfTerritory": {
-        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
-        "bodyRest": "",
-        "scrollHint": "Scroll to reveal your matches"
-      },
-      "matches": {
-        "titleLead": "Meet Your",
-        "titleAccent": "Matches",
-        "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
-        "uniqueTasteFallbackJewelerName": "your matched jeweler"
-      },
-      "jeweler": {
-        "title": "Great Taste Deserves a Great Jeweler",
-        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
-        "meetLabel": "Meet",
-        "stickyCtaLabel": "Get Your ring",
-        "reasonsTitle": "Why We Love Them",
-        "reasons": [
-          "Hundreds of 5 star reviews",
-          "History of fair & competitive pricing",
-          "Designs you won't find in a big box store",
-          "4th generation family owned and run",
-          "In business for nearly 100 years",
-          "No high pressure sales EVER",
-          "Fair-trade diamond sourcing",
-          "Easy financing starting at 0% APR"
-        ],
-        "locationTitle": "Where to Find Them",
-        "closingTagline": "This is the jeweler you've been searching for.",
-        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
-      },
-      "diamondCard": {
-        "titleLead": "Redeem your Diamond Card at",
-        "titleNoJeweler": "Redeem your Diamond Card",
-        "ctaLabel": "Schedule consultation",
-        "accordionTitle": "Diamond Card Terms",
-        "introTitle": "How to redeem your savings",
-        "introItems": [
-          {
-            "_key": "item-0",
-            "_type": "funnelListItem",
-            "text": "Book your free consultation within 7 days to activate your card"
-          },
-          {
-            "_key": "item-1",
-            "_type": "funnelListItem",
-            "text": "Once activated, you have 60 days to attend your consultation and use your card",
-            "boldPhrase": "60 days to attend your consultation"
-          },
-          {
-            "_key": "item-2",
-            "_type": "funnelListItem",
-            "text": "Redeemable in person only, at your matched jeweler's store",
-            "boldPhrase": "in person only"
-          },
-          {
-            "_key": "item-3",
-            "_type": "funnelListItem",
-            "text": "Cannot be applied online or over the phone"
-          }
-        ],
-        "savingsTitle": "Your savings scale with your ring",
-        "savingsTiers": [
-          "$250 off rings $2,500+",
-          "$500 off rings $5,000+",
-          "$1,000 off rings $10,000+",
-          "$1,500 off rings $15,000+",
-          "$2,000 off rings $20,000+"
-        ],
-        "summaryLead": "Most couples save $500 to $1,500.",
-        "whyTitle": "Why are they giving away so much?",
-        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
-        "finePrintTitle": "The fine print",
-        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
-      },
-      "designSection": {
-        "title": "Your Custom Ring",
-        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
-        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
-        "choices": [
-          "Yellow Gold",
-          "Round Brilliant Diamond",
-          "Knife-Edge Setting"
-        ],
-        "ctaTitle": "Ready to Make it Real?",
-        "ctaLead": "Schedule a Consult with a ",
-        "ctaLink": "top local jeweler in your area",
-        "ctaRest": " who specializes in engagement rings just like these",
-        "ctaLabel": "Schedule consultation"
-      },
-      "readyBanner": {
-        "title": "Ready to Make it Real?",
-        "bodyLead": "Schedule a Consult with a ",
-        "bodyLink": "top local jeweler in your area",
-        "bodyRest": " who specializes in engagement rings just like these",
-        "ctaLabel": "Schedule consultation"
-      },
-      "footer": {
-        "tagline": "Your trusted guide to the perfect ring",
-        "privacyLabel": "Privacy Policy",
-        "termsLabel": "Terms and Conditions",
-        "accessibilityLabel": "Accessibility",
-        "privacyChoicesLabel": "Your Privacy Choices",
-        "copyright": "© Ring Society {year} | All Rights Reserved"
-      }
+      "hero": {}
     }
   },
   {
@@ -1376,117 +1114,13 @@
       "_type": "quizResults",
       "sectionLabel": "What we do",
       "hero": {
-        "greetingPrefix": "Great News",
-        "ringStylesReady": "Your ring styles are ready",
-        "title": "Your Diamond Card is Activated",
-        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible.",
-        "bodyRest": "We've paired you with a local jeweler who can help you find or create the ring that's perfect for you.",
-        "scrollHint": "Scroll to reveal your matches and your jeweler"
-      },
-      "heroOutOfTerritory": {
-        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
-        "bodyRest": "",
-        "scrollHint": "Scroll to reveal your matches"
-      },
-      "matches": {
-        "titleLead": "Meet Your",
-        "titleAccent": "Matches",
-        "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
-        "uniqueTasteFallbackJewelerName": "your matched jeweler"
-      },
-      "jeweler": {
-        "title": "Great Taste Deserves a Great Jeweler",
-        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
-        "meetLabel": "Meet",
-        "stickyCtaLabel": "Get Your ring",
-        "reasonsTitle": "Why We Love Them",
-        "reasons": [
-          "Hundreds of 5 star reviews",
-          "History of fair & competitive pricing",
-          "Designs you won't find in a big box store",
-          "4th generation family owned and run",
-          "In business for nearly 100 years",
-          "No high pressure sales EVER",
-          "Fair-trade diamond sourcing",
-          "Easy financing starting at 0% APR"
-        ],
-        "locationTitle": "Where to Find Them",
-        "closingTagline": "This is the jeweler you've been searching for.",
-        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
-      },
-      "diamondCard": {
-        "titleLead": "Redeem your Diamond Card at",
-        "titleNoJeweler": "Redeem your Diamond Card",
-        "ctaLabel": "Schedule consultation",
-        "accordionTitle": "Diamond Card Terms",
-        "introTitle": "How to redeem your savings",
-        "introItems": [
-          {
-            "_key": "item-0",
-            "_type": "funnelListItem",
-            "text": "Book your free consultation within 7 days to activate your card"
-          },
-          {
-            "_key": "item-1",
-            "_type": "funnelListItem",
-            "text": "Once activated, you have 60 days to attend your consultation and use your card",
-            "boldPhrase": "60 days to attend your consultation"
-          },
-          {
-            "_key": "item-2",
-            "_type": "funnelListItem",
-            "text": "Redeemable in person only, at your matched jeweler's store",
-            "boldPhrase": "in person only"
-          },
-          {
-            "_key": "item-3",
-            "_type": "funnelListItem",
-            "text": "Cannot be applied online or over the phone"
-          }
-        ],
-        "savingsTitle": "Your savings scale with your ring",
-        "savingsTiers": [
-          "$250 off rings $2,500+",
-          "$500 off rings $5,000+",
-          "$1,000 off rings $10,000+",
-          "$1,500 off rings $15,000+",
-          "$2,000 off rings $20,000+"
-        ],
-        "summaryLead": "Most couples save $500 to $1,500.",
-        "whyTitle": "Why are they giving away so much?",
-        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
-        "finePrintTitle": "The fine print",
-        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
-      },
-      "designSection": {
-        "title": "Your Custom Ring",
-        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
-        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
-        "choices": [
-          "Yellow Gold",
-          "Round Brilliant Diamond",
-          "Knife-Edge Setting"
-        ],
-        "ctaTitle": "Ready to Make it Real?",
-        "ctaLead": "Schedule a Consult with a ",
-        "ctaLink": "top local jeweler in your area",
-        "ctaRest": " who specializes in engagement rings just like these",
-        "ctaLabel": "Schedule consultation"
-      },
-      "readyBanner": {
-        "title": "Ready to Make it Real?",
-        "bodyLead": "Schedule a Consult with a ",
-        "bodyLink": "top local jeweler in your area",
-        "bodyRest": " who specializes in engagement rings just like these",
-        "ctaLabel": "Schedule consultation"
-      },
-      "footer": {
-        "tagline": "Your trusted guide to the perfect ring",
-        "privacyLabel": "Privacy Policy",
-        "termsLabel": "Terms and Conditions",
-        "accessibilityLabel": "Accessibility",
-        "privacyChoicesLabel": "Your Privacy Choices",
-        "copyright": "© Ring Society {year} | All Rights Reserved"
+        "eyebrowPrefix": "Great news",
+        "title": "Your Diamond Card is Ready at the Top Local Jeweler We Matched You With",
+        "finePrintLead": "*Restrictions apply. ",
+        "finePrintLink": "Terms & Eligibility below",
+        "closingLink": "Book your free consultation",
+        "closingTail": " within 7 days to activate your card",
+        "closingSecondary": "Once booked, you have 60 days to attend your consultation and use your card"
       }
     }
   },
@@ -1674,5 +1308,140 @@
     "footerTagline": "Your trusted guide to the perfect ring",
     "whatWeDoBody": "We are the #1 resource for couples looking for a honest and quality-conscious local jeweler for their engagement ring.",
     "giftCardValueNote": "Most couples save $500 to $1,500."
+  },
+  {
+    "_id": "sharedJewelerSection",
+    "_type": "sharedJewelerSection",
+    "routeKey": "results-jeweler",
+    "title": "Great Taste Deserves a Great Jeweler",
+    "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
+    "meetLabel": "Meet",
+    "stickyCtaLabel": "Get Your ring",
+    "reasonsTitle": "Why We Love Them",
+    "reasons": [
+      "Hundreds of 5 star reviews",
+      "History of fair & competitive pricing",
+      "Designs you won't find in a big box store",
+      "4th generation family owned and run",
+      "In business for nearly 100 years",
+      "No high pressure sales EVER",
+      "Fair-trade diamond sourcing",
+      "Easy financing starting at 0% APR"
+    ],
+    "locationTitle": "Where to Find Them",
+    "closingTagline": "This is the jeweler you've been searching for.",
+    "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
+  },
+  {
+    "_id": "sharedDiamondCard",
+    "_type": "sharedDiamondCard",
+    "routeKey": "results-diamond-card",
+    "titleLead": "Redeem your Diamond Card at",
+    "titleNoJeweler": "Redeem your Diamond Card",
+    "ctaLabel": "Schedule consultation",
+    "accordion": {
+      "title": "Diamond Card Terms",
+      "introTitle": "How to redeem your savings",
+      "introItems": [
+        {
+          "_key": "item-0",
+          "_type": "funnelListItem",
+          "text": "Book your free consultation within 7 days to activate your card"
+        },
+        {
+          "_key": "item-1",
+          "_type": "funnelListItem",
+          "text": "Once activated, you have 60 days to attend your consultation and use your card",
+          "boldPhrase": "60 days to attend your consultation"
+        },
+        {
+          "_key": "item-2",
+          "_type": "funnelListItem",
+          "text": "Redeemable in person only, at your matched jeweler's store",
+          "boldPhrase": "in person only"
+        },
+        {
+          "_key": "item-3",
+          "_type": "funnelListItem",
+          "text": "Cannot be applied online or over the phone"
+        }
+      ],
+      "savingsTitle": "Your savings scale with your ring",
+      "savingsTiers": [
+        "$250 off rings $2,500+",
+        "$500 off rings $5,000+",
+        "$1,000 off rings $10,000+",
+        "$1,500 off rings $15,000+",
+        "$2,000 off rings $20,000+"
+      ],
+      "summaryLead": "Most couples save $500 to $1,500.",
+      "whyTitle": "Why are they giving away so much?",
+      "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
+      "finePrintTitle": "The fine print",
+      "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
+    }
+  },
+  {
+    "_id": "sharedFooter",
+    "_type": "sharedFooter",
+    "routeKey": "results-footer",
+    "tagline": "Your trusted guide to the perfect ring",
+    "privacyLabel": "Privacy Policy",
+    "termsLabel": "Terms and Conditions",
+    "accessibilityLabel": "Accessibility",
+    "privacyChoicesLabel": "Your Privacy Choices",
+    "copyright": "© Ring Society {year} | All Rights Reserved"
+  },
+  {
+    "_id": "sharedOutOfTerritory",
+    "_type": "sharedOutOfTerritory",
+    "routeKey": "results-out-of-territory",
+    "guide": {
+      "eyebrowDesktop": "If you’re actively looking, we recommend:",
+      "eyebrowMobileLead": "Here you go",
+      "title": "Our Most Requested Guide",
+      "subtitle": "Everything you need to know to ensure you pick the right jeweler",
+      "ctaLabel": "Access the guide",
+      "tabletImageAlt": "How to Choose the Right Jeweler guide shown on a tablet"
+    },
+    "guidePitch": {
+      "titleLead": "Get the Right Jeweler & You’ll ",
+      "titleAccent": "Get The Perfect Ring",
+      "body": "Before you walk into any jeweler, there are 10 things you should be evaluating, from how long they’ve been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and whether their approach is education-first, not pressure-first.",
+      "ctaLabel": "Access the guide"
+    },
+    "localJewelers": {
+      "title": "We’ve Found Some Top Local Jewelers Near You",
+      "body": "Your area isn’t part of our certified partner network yet, so we’ve done the next best thing, and pulled together a shortlist of the most well-reviewed jewelers in your local area.",
+      "zipPrefix": "Searching near",
+      "zipHint": "not your zip?"
+    },
+    "localJewelersHero": {
+      "eyebrow": "We’ve got news {firstName}",
+      "title": "Here Are Some Top Local Jewelers Near You",
+      "body": "We pulled together a shortlist of the best-reviewed jewelers in your area, based on real customer ratings. A Certified Partner and Diamond Card aren’t available in your area yet, so we’ll keep you posted as our network grows."
+    },
+    "jewelerResults": {
+      "radiusLabel": "Search radius",
+      "radiusValue": "{radius} miles",
+      "radiusScaleMin": "1 mile",
+      "radiusScaleMax": "30 miles",
+      "eyebrow": "Your results",
+      "title": "Jewelers near {zip} (within {radius} miles)",
+      "subtext": "{count} well-reviewed {options} within your selected radius, ranked by rating and review volume.",
+      "optionSingular": "option",
+      "optionPlural": "options",
+      "searching": "Searching for jewelers near you…",
+      "emptySubtext": "No results in this radius yet — try expanding your search.",
+      "emptyState": "Nothing within {radius} miles. Drag the slider to widen your search.",
+      "noJewelersSubtext": "No jewelers found near this zip yet — check back soon.",
+      "disclaimerLead": "These aren’t Ring Society Certified Partners.",
+      "disclaimerBody": "We haven’t expanded our certification program to this area yet. What you see below is based on publicly available ratings and reviews, not our own vetting process.",
+      "distance": "{distance} miles away",
+      "directionsLabel": "Get directions",
+      "websiteLabel": "Visit website",
+      "openNowSignal": "Open now",
+      "closedNowSignal": "Closed right now"
+    }
   }
 ]

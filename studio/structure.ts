@@ -72,6 +72,19 @@ export const structure: StructureResolver = (S) =>
                       singleton(S, 'funnelShared', 'Shared Funnel Wording'),
                     ]),
                 ),
+              S.divider(),
+              S.listItem()
+                .title('Shared Results')
+                .child(
+                  S.list()
+                    .title('Shared Results')
+                    .items([
+                      singleton(S, 'sharedJewelerSection', 'Jeweler Section'),
+                      singleton(S, 'sharedDiamondCard', 'Diamond Card'),
+                      singleton(S, 'sharedFooter', 'Footer'),
+                      singleton(S, 'sharedOutOfTerritory', 'Out of Territory'),
+                    ]),
+                ),
             ]),
         ),
     ])
