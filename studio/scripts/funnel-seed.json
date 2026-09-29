@@ -1,0 +1,1678 @@
+[
+  {
+    "_id": "quiz.find-your-ring",
+    "_type": "quiz",
+    "title": "Find Your Ring",
+    "routeKey": "find-your-ring",
+    "intro": {
+      "_type": "quizIntro",
+      "heroTitle": "Find the Perfect Engagement Ring",
+      "heroEyebrow": "and get a special gift at the end",
+      "body": [
+        "Answer a few questions, and our ring matching engine will help you find the Perfect Ring you’ve been searching for."
+      ],
+      "bodyFirstEmphasis": "Perfect Ring",
+      "durationLabel": "60 second quiz",
+      "desktopDurationLabel": "60 second quiz",
+      "closingLead": "Ready to Find",
+      "closingEmphasis": "The Perfect Ring?",
+      "cta": "Yes, Show me the ring"
+    },
+    "steps": [
+      {
+        "_key": "q1",
+        "_type": "quizStep",
+        "internalName": "Name",
+        "enabled": true,
+        "question": "What's Your Name?",
+        "subtitle": "We like to keep things personal around here :)",
+        "placeholder": "Type Your Name",
+        "requiredErrorMessage": "Please enter your name",
+        "stepId": "q1",
+        "stepType": "text-input",
+        "answerField": "first_name",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q2",
+        "_type": "quizStep",
+        "internalName": "Who are you looking for",
+        "enabled": true,
+        "question": "Nice to meet you {first_name}!\nWho are you looking for?",
+        "options": [
+          {
+            "_key": "looking-for-partner",
+            "_type": "quizOption",
+            "label": "my partner",
+            "value": "looking_for_partner"
+          },
+          {
+            "_key": "looking-for-myself",
+            "_type": "quizOption",
+            "label": "myself",
+            "value": "looking_for_myself"
+          },
+          {
+            "_key": "shopping-together",
+            "_type": "quizOption",
+            "label": "we’re looking together",
+            "value": "shopping_together"
+          }
+        ],
+        "stepId": "q2",
+        "stepType": "single-select",
+        "answerField": "buyer_type",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q3",
+        "_type": "quizStep",
+        "internalName": "Metal colour",
+        "enabled": true,
+        "question": "Which metal color do you prefer?",
+        "options": [
+          {
+            "_key": "platinum-or-white-gold",
+            "_type": "quizOption",
+            "label": "platinum or white gold",
+            "value": "platinum_or_white_gold"
+          },
+          {
+            "_key": "yellow-gold",
+            "_type": "quizOption",
+            "label": "yellow gold",
+            "value": "yellow_gold"
+          },
+          {
+            "_key": "rose-gold",
+            "_type": "quizOption",
+            "label": "rose gold",
+            "value": "rose_gold"
+          }
+        ],
+        "stepId": "q3",
+        "stepType": "single-select-image",
+        "answerField": "metal_preference",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay before the contact step that reveals the matched jeweler."
+      },
+      {
+        "_key": "q4",
+        "_type": "quizStep",
+        "internalName": "Style",
+        "enabled": true,
+        "question": "Which style speaks to you?",
+        "options": [
+          {
+            "_key": "classic-timeless",
+            "_type": "quizOption",
+            "label": "Classic & Timeless",
+            "value": "classic_timeless"
+          },
+          {
+            "_key": "romantic-vintage",
+            "_type": "quizOption",
+            "label": "Romantic & Vintage",
+            "value": "romantic_vintage"
+          },
+          {
+            "_key": "modern-minimal",
+            "_type": "quizOption",
+            "label": "Modern & Minimal",
+            "value": "modern_minimal"
+          },
+          {
+            "_key": "bold-statement",
+            "_type": "quizOption",
+            "label": "Bold & Statement",
+            "value": "bold_statement"
+          }
+        ],
+        "stepId": "q4",
+        "stepType": "single-select-image",
+        "answerField": "ring_style",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q5",
+        "_type": "quizStep",
+        "internalName": "Shape",
+        "enabled": true,
+        "question": "Which shape are you drawn too?",
+        "subtitle": "Choose up to 3",
+        "options": [
+          {
+            "_key": "round",
+            "_type": "quizOption",
+            "label": "round brilliant",
+            "value": "round"
+          },
+          {
+            "_key": "oval",
+            "_type": "quizOption",
+            "label": "oval",
+            "value": "oval"
+          },
+          {
+            "_key": "emerald",
+            "_type": "quizOption",
+            "label": "emerald",
+            "value": "emerald"
+          },
+          {
+            "_key": "pear",
+            "_type": "quizOption",
+            "label": "pear",
+            "value": "pear"
+          },
+          {
+            "_key": "cushion",
+            "_type": "quizOption",
+            "label": "cushion",
+            "value": "cushion"
+          },
+          {
+            "_key": "radiant",
+            "_type": "quizOption",
+            "label": "radiant",
+            "value": "radiant"
+          },
+          {
+            "_key": "marquise",
+            "_type": "quizOption",
+            "label": "marquis",
+            "value": "marquise"
+          },
+          {
+            "_key": "princess",
+            "_type": "quizOption",
+            "label": "princess",
+            "value": "princess"
+          }
+        ],
+        "stepId": "q5",
+        "stepType": "multi-select-image",
+        "answerField": "shape",
+        "questionCounter": true,
+        "selectionLimit": 3,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay after the zip question."
+      },
+      {
+        "_key": "q8",
+        "_type": "quizStep",
+        "internalName": "Zip code",
+        "enabled": true,
+        "question": "What's your zip code?",
+        "subtitle": "We'll use this to show you our top recommended jeweler in your area!",
+        "placeholder": "Zip Code",
+        "requiredErrorMessage": "Please enter your zip code",
+        "stepId": "q8",
+        "stepType": "zip-input",
+        "answerField": "zip",
+        "questionCounter": false,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "Hidden when the funnel is opened from a jeweler location link. Runs the zip territory check when submitted.",
+        "reorderLocked": "Must stay before the Diamond Card phone step, which the territory check controls."
+      },
+      {
+        "_key": "q7",
+        "_type": "quizStep",
+        "internalName": "Budget",
+        "enabled": true,
+        "question": "What's your budget range?",
+        "subtitle": "*This is not required, but it does help us give you more accurate matches!",
+        "options": [
+          {
+            "_key": "under-2k",
+            "_type": "quizOption",
+            "label": "under $2K",
+            "value": "under_2k"
+          },
+          {
+            "_key": "2k-4k",
+            "_type": "quizOption",
+            "label": "$2K - $4K",
+            "value": "2k_4k"
+          },
+          {
+            "_key": "4k-8k",
+            "_type": "quizOption",
+            "label": "$4K - $8K",
+            "value": "4k_8k"
+          },
+          {
+            "_key": "8k-15k",
+            "_type": "quizOption",
+            "label": "$8K - $15K",
+            "value": "8k_15k"
+          },
+          {
+            "_key": "15k-25k",
+            "_type": "quizOption",
+            "label": "$15K - $25K",
+            "value": "15k_25k"
+          },
+          {
+            "_key": "above-25k",
+            "_type": "quizOption",
+            "label": "$25K+",
+            "value": "above_25k"
+          }
+        ],
+        "stepId": "q7",
+        "stepType": "single-select",
+        "answerField": "budget_range",
+        "questionCounter": true,
+        "optional": true,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay before the timeline question, which only appears when budget is skipped."
+      },
+      {
+        "_key": "q7b",
+        "_type": "quizStep",
+        "internalName": "Timeline",
+        "enabled": true,
+        "question": "How long until you make it official?",
+        "options": [
+          {
+            "_key": "within-1-month",
+            "_type": "quizOption",
+            "label": "within a month",
+            "value": "within_1_month"
+          },
+          {
+            "_key": "1-3-months",
+            "_type": "quizOption",
+            "label": "1-3 months",
+            "value": "1_3_months"
+          },
+          {
+            "_key": "3-6-months",
+            "_type": "quizOption",
+            "label": "3-6 months",
+            "value": "3_6_months"
+          },
+          {
+            "_key": "in-next-year",
+            "_type": "quizOption",
+            "label": "6-12 months",
+            "value": "in_next_year"
+          },
+          {
+            "_key": "not-for-a-while",
+            "_type": "quizOption",
+            "label": "not for a while",
+            "value": "not_for_a_while"
+          }
+        ],
+        "stepId": "q7b",
+        "stepType": "single-select",
+        "answerField": "timeline",
+        "questionCounter": false,
+        "optional": false,
+        "branchRule": "Shown only when \"Budget\" is left unanswered.",
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay after the budget question, which decides whether this question appears."
+      },
+      {
+        "_key": "q9",
+        "_type": "quizStep",
+        "internalName": "Email",
+        "enabled": true,
+        "question": "{first_name}, you're done!\n\nWhat’s the best email to send your results to?",
+        "placeholder": "Your Email",
+        "note": "No spam, ever. Unsubscribe anytime.",
+        "footerLabel": "See my matches",
+        "stepId": "q9",
+        "stepType": "email-input",
+        "answerField": "email",
+        "questionCounter": false,
+        "optional": false,
+        "webhookTrigger": "Delivery step 1",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q10",
+        "_type": "quizStep",
+        "internalName": "Phone",
+        "enabled": true,
+        "question": "Get Your Diamond Card & Unlock Your Jeweler",
+        "subtitle": "Enter your number and we'll text your card right away. You'll also unlock the perfect jeweler we matched you with, revealed on the next screen.",
+        "placeholder": "Phone Number",
+        "note": "By providing your phone number, you agree to receive text messages from Ring Society. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel at any time.",
+        "footerLabel": "TEXT ME MY DIAMOND CARD",
+        "stepId": "q10",
+        "stepType": "phone-input",
+        "answerField": "phone",
+        "questionCounter": false,
+        "optional": true,
+        "webhookTrigger": "Delivery step 2",
+        "flowRules": "Hidden for out-of-territory visitors.",
+        "reorderLocked": "Must stay after the zip question, which the territory check runs on."
+      }
+    ],
+    "results": {
+      "_type": "quizResults",
+      "sectionLabel": "What we do",
+      "hero": {
+        "greetingPrefix": "Great News",
+        "ringStylesReady": "Your ring styles are ready",
+        "title": "Your Diamond Card is Activated",
+        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible.",
+        "bodyRest": "We've paired you with a local jeweler who can help you find or create the ring that's perfect for you.",
+        "scrollHint": "Scroll to reveal your matches and your jeweler"
+      },
+      "heroOutOfTerritory": {
+        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
+        "bodyRest": "",
+        "scrollHint": "Scroll to reveal your matches"
+      },
+      "matches": {
+        "titleLead": "Meet Your",
+        "titleAccent": "Matches",
+        "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
+        "uniqueTasteFallbackJewelerName": "your matched jeweler"
+      },
+      "jeweler": {
+        "title": "Great Taste Deserves a Great Jeweler",
+        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
+        "meetLabel": "Meet",
+        "stickyCtaLabel": "Get Your ring",
+        "reasonsTitle": "Why We Love Them",
+        "reasons": [
+          "Hundreds of 5 star reviews",
+          "History of fair & competitive pricing",
+          "Designs you won't find in a big box store",
+          "4th generation family owned and run",
+          "In business for nearly 100 years",
+          "No high pressure sales EVER",
+          "Fair-trade diamond sourcing",
+          "Easy financing starting at 0% APR"
+        ],
+        "locationTitle": "Where to Find Them",
+        "closingTagline": "This is the jeweler you've been searching for.",
+        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
+      },
+      "diamondCard": {
+        "titleLead": "Redeem your Diamond Card at",
+        "titleNoJeweler": "Redeem your Diamond Card",
+        "ctaLabel": "Schedule consultation",
+        "accordionTitle": "Diamond Card Terms",
+        "introTitle": "How to redeem your savings",
+        "introItems": [
+          {
+            "_key": "item-0",
+            "_type": "funnelListItem",
+            "text": "Book your free consultation within 7 days to activate your card"
+          },
+          {
+            "_key": "item-1",
+            "_type": "funnelListItem",
+            "text": "Once activated, you have 60 days to attend your consultation and use your card",
+            "boldPhrase": "60 days to attend your consultation"
+          },
+          {
+            "_key": "item-2",
+            "_type": "funnelListItem",
+            "text": "Redeemable in person only, at your matched jeweler's store",
+            "boldPhrase": "in person only"
+          },
+          {
+            "_key": "item-3",
+            "_type": "funnelListItem",
+            "text": "Cannot be applied online or over the phone"
+          }
+        ],
+        "savingsTitle": "Your savings scale with your ring",
+        "savingsTiers": [
+          "$250 off rings $2,500+",
+          "$500 off rings $5,000+",
+          "$1,000 off rings $10,000+",
+          "$1,500 off rings $15,000+",
+          "$2,000 off rings $20,000+"
+        ],
+        "summaryLead": "Most couples save $500 to $1,500.",
+        "whyTitle": "Why are they giving away so much?",
+        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
+        "finePrintTitle": "The fine print",
+        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
+      },
+      "designSection": {
+        "title": "Your Custom Ring",
+        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
+        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
+        "choices": [
+          "Yellow Gold",
+          "Round Brilliant Diamond",
+          "Knife-Edge Setting"
+        ],
+        "ctaTitle": "Ready to Make it Real?",
+        "ctaLead": "Schedule a Consult with a ",
+        "ctaLink": "top local jeweler in your area",
+        "ctaRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "readyBanner": {
+        "title": "Ready to Make it Real?",
+        "bodyLead": "Schedule a Consult with a ",
+        "bodyLink": "top local jeweler in your area",
+        "bodyRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "footer": {
+        "tagline": "Your trusted guide to the perfect ring",
+        "privacyLabel": "Privacy Policy",
+        "termsLabel": "Terms and Conditions",
+        "accessibilityLabel": "Accessibility",
+        "privacyChoicesLabel": "Your Privacy Choices",
+        "copyright": "© Ring Society {year} | All Rights Reserved"
+      }
+    },
+    "phoneCapture": {
+      "_type": "phoneCaptureCopy",
+      "eyebrowFallback": "Your gift",
+      "eyebrowPrefix": "We have your gift",
+      "title": "Up to $2,000 off* Your Ring",
+      "claimLine": "Claim your Diamond Card, ready for use at the top jeweler we matched you with",
+      "validityLine": "Valid for 60 days at your matched jeweler",
+      "formTitle": "Get Your Diamond Card & Unlock Your Jeweler",
+      "subtitleEmphasis": "perfect jeweler",
+      "subtitleTail": " we matched you with, revealed on the next screen.",
+      "note": "By providing your phone number, you agree to receive text messages from Ring Society. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel at any time.",
+      "ctaLabel": "TEXT ME MY DIAMOND CARD",
+      "declineLabel": "No thanks, just show me my matches"
+    }
+  },
+  {
+    "_id": "quiz.design-your-ring",
+    "_type": "quiz",
+    "title": "Design Your Ring",
+    "routeKey": "design-your-ring",
+    "intro": {
+      "_type": "quizIntro",
+      "heroTitle": "Custom Design Your Engagement Ring",
+      "heroEyebrow": "and get a special gift at the end",
+      "body": [
+        "Answer a few questions, and our Ai-powered Ring Design Tool will create a custom ring design for you for free."
+      ],
+      "durationLabel": "design your ring in 60 seconds",
+      "desktopDurationLabel": "design your dream ring in 60 seconds",
+      "closingLead": "Ready to Create Your",
+      "closingEmphasis": "Dream Ring?",
+      "cta": "Yes, Show me the ring",
+      "desktopCta": "Yes, Let's design the ring"
+    },
+    "steps": [
+      {
+        "_key": "q1",
+        "_type": "quizStep",
+        "internalName": "Name",
+        "enabled": true,
+        "question": "What's Your Name?",
+        "subtitle": "We like to keep things personal around here :)",
+        "placeholder": "Type Your Name",
+        "requiredErrorMessage": "Please enter your name",
+        "stepId": "q1",
+        "stepType": "text-input",
+        "answerField": "first_name",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q2",
+        "_type": "quizStep",
+        "internalName": "Who are you looking for",
+        "enabled": true,
+        "question": "Nice to meet you {first_name}!\nWho are you looking for?",
+        "options": [
+          {
+            "_key": "looking-for-partner",
+            "_type": "quizOption",
+            "label": "my partner",
+            "value": "looking_for_partner"
+          },
+          {
+            "_key": "looking-for-myself",
+            "_type": "quizOption",
+            "label": "myself",
+            "value": "looking_for_myself"
+          },
+          {
+            "_key": "shopping-together",
+            "_type": "quizOption",
+            "label": "we’re looking together",
+            "value": "shopping_together"
+          }
+        ],
+        "stepId": "q2",
+        "stepType": "single-select",
+        "answerField": "buyer_type",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q3",
+        "_type": "quizStep",
+        "internalName": "Metal colour",
+        "enabled": true,
+        "question": "Which metal color do you prefer?",
+        "options": [
+          {
+            "_key": "platinum-or-white-gold",
+            "_type": "quizOption",
+            "label": "platinum or white gold",
+            "value": "platinum_or_white_gold"
+          },
+          {
+            "_key": "yellow-gold",
+            "_type": "quizOption",
+            "label": "yellow gold",
+            "value": "yellow_gold"
+          },
+          {
+            "_key": "rose-gold",
+            "_type": "quizOption",
+            "label": "rose gold",
+            "value": "rose_gold"
+          }
+        ],
+        "stepId": "q3",
+        "stepType": "single-select-image",
+        "answerField": "metal_preference",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay before the contact step that reveals the matched jeweler."
+      },
+      {
+        "_key": "q4",
+        "_type": "quizStep",
+        "internalName": "Style",
+        "enabled": true,
+        "question": "Which style speaks to you?",
+        "options": [
+          {
+            "_key": "classic-timeless",
+            "_type": "quizOption",
+            "label": "Classic & Timeless",
+            "value": "classic_timeless"
+          },
+          {
+            "_key": "romantic-vintage",
+            "_type": "quizOption",
+            "label": "Romantic & Vintage",
+            "value": "romantic_vintage"
+          },
+          {
+            "_key": "modern-minimal",
+            "_type": "quizOption",
+            "label": "Modern & Minimal",
+            "value": "modern_minimal"
+          },
+          {
+            "_key": "bold-statement",
+            "_type": "quizOption",
+            "label": "Bold & Statement",
+            "value": "bold_statement"
+          }
+        ],
+        "stepId": "q4",
+        "stepType": "single-select-image",
+        "answerField": "ring_style",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q5",
+        "_type": "quizStep",
+        "internalName": "Shape",
+        "enabled": true,
+        "question": "Which shape are you drawn too?",
+        "subtitle": "Choose up to 3",
+        "options": [
+          {
+            "_key": "round",
+            "_type": "quizOption",
+            "label": "round brilliant",
+            "value": "round"
+          },
+          {
+            "_key": "oval",
+            "_type": "quizOption",
+            "label": "oval",
+            "value": "oval"
+          },
+          {
+            "_key": "emerald",
+            "_type": "quizOption",
+            "label": "emerald",
+            "value": "emerald"
+          },
+          {
+            "_key": "pear",
+            "_type": "quizOption",
+            "label": "pear",
+            "value": "pear"
+          },
+          {
+            "_key": "cushion",
+            "_type": "quizOption",
+            "label": "cushion",
+            "value": "cushion"
+          },
+          {
+            "_key": "radiant",
+            "_type": "quizOption",
+            "label": "radiant",
+            "value": "radiant"
+          },
+          {
+            "_key": "marquise",
+            "_type": "quizOption",
+            "label": "marquis",
+            "value": "marquise"
+          },
+          {
+            "_key": "princess",
+            "_type": "quizOption",
+            "label": "princess",
+            "value": "princess"
+          }
+        ],
+        "stepId": "q5",
+        "stepType": "multi-select-image",
+        "answerField": "shape",
+        "questionCounter": true,
+        "selectionLimit": 3,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay after the zip question."
+      },
+      {
+        "_key": "q8",
+        "_type": "quizStep",
+        "internalName": "Zip code",
+        "enabled": true,
+        "question": "What's your zip code?",
+        "subtitle": "We'll use this to show you our top recommended jeweler in your area!",
+        "placeholder": "Zip Code",
+        "requiredErrorMessage": "Please enter your zip code",
+        "stepId": "q8",
+        "stepType": "zip-input",
+        "answerField": "zip",
+        "questionCounter": false,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "Hidden when the funnel is opened from a jeweler location link. Runs the zip territory check when submitted.",
+        "reorderLocked": "Must stay before the Diamond Card phone step, which the territory check controls."
+      },
+      {
+        "_key": "q7",
+        "_type": "quizStep",
+        "internalName": "Budget",
+        "enabled": true,
+        "question": "What's your budget range?",
+        "subtitle": "*This is not required, but it does help us give you more accurate matches!",
+        "options": [
+          {
+            "_key": "under-2k",
+            "_type": "quizOption",
+            "label": "under $2K",
+            "value": "under_2k"
+          },
+          {
+            "_key": "2k-4k",
+            "_type": "quizOption",
+            "label": "$2K - $4K",
+            "value": "2k_4k"
+          },
+          {
+            "_key": "4k-8k",
+            "_type": "quizOption",
+            "label": "$4K - $8K",
+            "value": "4k_8k"
+          },
+          {
+            "_key": "8k-15k",
+            "_type": "quizOption",
+            "label": "$8K - $15K",
+            "value": "8k_15k"
+          },
+          {
+            "_key": "15k-25k",
+            "_type": "quizOption",
+            "label": "$15K - $25K",
+            "value": "15k_25k"
+          },
+          {
+            "_key": "above-25k",
+            "_type": "quizOption",
+            "label": "$25K+",
+            "value": "above_25k"
+          }
+        ],
+        "stepId": "q7",
+        "stepType": "single-select",
+        "answerField": "budget_range",
+        "questionCounter": true,
+        "optional": true,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay before the timeline question, which only appears when budget is skipped."
+      },
+      {
+        "_key": "q1-setting",
+        "_type": "quizStep",
+        "internalName": "Setting",
+        "enabled": true,
+        "question": "Choose a Setting",
+        "options": [
+          {
+            "_key": "solitaire",
+            "_type": "quizOption",
+            "label": "solitaire",
+            "value": "solitaire"
+          },
+          {
+            "_key": "cathedral",
+            "_type": "quizOption",
+            "label": "Cathedral",
+            "value": "cathedral"
+          },
+          {
+            "_key": "classic-halo",
+            "_type": "quizOption",
+            "label": "Classic Halo",
+            "value": "classic_halo"
+          },
+          {
+            "_key": "hidden-halo",
+            "_type": "quizOption",
+            "label": "Hidden Halo",
+            "value": "hidden_halo"
+          },
+          {
+            "_key": "three-stone",
+            "_type": "quizOption",
+            "label": "Three-Stone",
+            "value": "three_stone"
+          },
+          {
+            "_key": "pave-band",
+            "_type": "quizOption",
+            "label": "Pavé Band",
+            "value": "pave_band"
+          },
+          {
+            "_key": "bezel",
+            "_type": "quizOption",
+            "label": "Bezel",
+            "value": "bezel"
+          },
+          {
+            "_key": "toi-et-moi",
+            "_type": "quizOption",
+            "label": "Toi et Moi",
+            "value": "toi_et_moi"
+          }
+        ],
+        "stepId": "q1-setting",
+        "stepType": "single-select-image",
+        "answerField": "ring_setting",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q7b",
+        "_type": "quizStep",
+        "internalName": "Timeline",
+        "enabled": true,
+        "question": "How long until you make it official?",
+        "options": [
+          {
+            "_key": "within-1-month",
+            "_type": "quizOption",
+            "label": "within a month",
+            "value": "within_1_month"
+          },
+          {
+            "_key": "1-3-months",
+            "_type": "quizOption",
+            "label": "1-3 months",
+            "value": "1_3_months"
+          },
+          {
+            "_key": "3-6-months",
+            "_type": "quizOption",
+            "label": "3-6 months",
+            "value": "3_6_months"
+          },
+          {
+            "_key": "in-next-year",
+            "_type": "quizOption",
+            "label": "6-12 months",
+            "value": "in_next_year"
+          },
+          {
+            "_key": "not-for-a-while",
+            "_type": "quizOption",
+            "label": "not for a while",
+            "value": "not_for_a_while"
+          }
+        ],
+        "stepId": "q7b",
+        "stepType": "single-select",
+        "answerField": "timeline",
+        "questionCounter": false,
+        "optional": false,
+        "branchRule": "Shown only when \"Budget\" is left unanswered.",
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay after the budget question, which decides whether this question appears."
+      },
+      {
+        "_key": "q9",
+        "_type": "quizStep",
+        "internalName": "Email",
+        "enabled": true,
+        "question": "{first_name}, you're done!\n\nWhat’s the best email to send your results to?",
+        "placeholder": "Your Email",
+        "note": "No spam, ever. Unsubscribe anytime.",
+        "footerLabel": "See my matches",
+        "stepId": "q9",
+        "stepType": "email-input",
+        "answerField": "email",
+        "questionCounter": false,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q10",
+        "_type": "quizStep",
+        "internalName": "Phone",
+        "enabled": true,
+        "question": "Get Your Diamond Card & Unlock Your Jeweler",
+        "subtitle": "Enter your number and we'll text your card right away. You'll also unlock the perfect jeweler we matched you with, revealed on the next screen.",
+        "placeholder": "Phone Number",
+        "note": "By providing your phone number, you agree to receive text messages from Ring Society. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel at any time.",
+        "footerLabel": "TEXT ME MY DIAMOND CARD",
+        "stepId": "q10",
+        "stepType": "phone-input",
+        "answerField": "phone",
+        "questionCounter": false,
+        "optional": true,
+        "webhookTrigger": "None",
+        "flowRules": "Hidden for out-of-territory visitors.",
+        "reorderLocked": "Must stay after the zip question, which the territory check runs on."
+      }
+    ],
+    "results": {
+      "_type": "quizResults",
+      "sectionLabel": "What we do",
+      "hero": {
+        "greetingPrefix": "Great News",
+        "ringStylesReady": "Your custom ring is ready",
+        "title": "Your Diamond Card is Activated",
+        "bodyLead": "We’ve paired you with a local jeweler who can help you custom design and create the ring that's perfect for you.",
+        "bodyRest": "",
+        "scrollHint": "Scroll to reveal your ring and your jeweler"
+      },
+      "heroOutOfTerritory": {
+        "bodyLead": "Your ring is stunning, but it is just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
+        "bodyRest": "",
+        "scrollHint": "Scroll to reveal your matches"
+      },
+      "matches": {
+        "titleLead": "Meet Your",
+        "titleAccent": "Matches",
+        "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
+        "uniqueTasteFallbackJewelerName": "your matched jeweler"
+      },
+      "jeweler": {
+        "title": "Great Taste Deserves a Great Jeweler",
+        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
+        "meetLabel": "Meet",
+        "stickyCtaLabel": "Get Your ring",
+        "reasonsTitle": "Why We Love Them",
+        "reasons": [
+          "Hundreds of 5 star reviews",
+          "History of fair & competitive pricing",
+          "Designs you won't find in a big box store",
+          "4th generation family owned and run",
+          "In business for nearly 100 years",
+          "No high pressure sales EVER",
+          "Fair-trade diamond sourcing",
+          "Easy financing starting at 0% APR"
+        ],
+        "locationTitle": "Where to Find Them",
+        "closingTagline": "This is the jeweler you've been searching for.",
+        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
+      },
+      "diamondCard": {
+        "titleLead": "Redeem your Diamond Card at",
+        "titleNoJeweler": "Redeem your Diamond Card",
+        "ctaLabel": "Schedule consultation",
+        "accordionTitle": "Diamond Card Terms",
+        "introTitle": "How to redeem your savings",
+        "introItems": [
+          {
+            "_key": "item-0",
+            "_type": "funnelListItem",
+            "text": "Book your free consultation within 7 days to activate your card"
+          },
+          {
+            "_key": "item-1",
+            "_type": "funnelListItem",
+            "text": "Once activated, you have 60 days to attend your consultation and use your card",
+            "boldPhrase": "60 days to attend your consultation"
+          },
+          {
+            "_key": "item-2",
+            "_type": "funnelListItem",
+            "text": "Redeemable in person only, at your matched jeweler's store",
+            "boldPhrase": "in person only"
+          },
+          {
+            "_key": "item-3",
+            "_type": "funnelListItem",
+            "text": "Cannot be applied online or over the phone"
+          }
+        ],
+        "savingsTitle": "Your savings scale with your ring",
+        "savingsTiers": [
+          "$250 off rings $2,500+",
+          "$500 off rings $5,000+",
+          "$1,000 off rings $10,000+",
+          "$1,500 off rings $15,000+",
+          "$2,000 off rings $20,000+"
+        ],
+        "summaryLead": "Most couples save $500 to $1,500.",
+        "whyTitle": "Why are they giving away so much?",
+        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
+        "finePrintTitle": "The fine print",
+        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
+      },
+      "designSection": {
+        "title": "Your Custom Ring",
+        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
+        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
+        "choices": [
+          "Yellow Gold",
+          "Round Brilliant Diamond",
+          "Knife-Edge Setting"
+        ],
+        "ctaTitle": "Ready to Make it Real?",
+        "ctaLead": "Schedule a Consult with a ",
+        "ctaLink": "top local jeweler in your area",
+        "ctaRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "readyBanner": {
+        "title": "Ready to Make it Real?",
+        "bodyLead": "Schedule a Consult with a ",
+        "bodyLink": "top local jeweler in your area",
+        "bodyRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "footer": {
+        "tagline": "Your trusted guide to the perfect ring",
+        "privacyLabel": "Privacy Policy",
+        "termsLabel": "Terms and Conditions",
+        "accessibilityLabel": "Accessibility",
+        "privacyChoicesLabel": "Your Privacy Choices",
+        "copyright": "© Ring Society {year} | All Rights Reserved"
+      }
+    },
+    "phoneCapture": {
+      "_type": "phoneCaptureCopy",
+      "eyebrowFallback": "Your gift",
+      "eyebrowPrefix": "We have your gift",
+      "title": "Up to $2,000 off* Your Ring",
+      "claimLine": "Claim your Diamond Card, ready for use at the top jeweler we matched you with",
+      "validityLine": "Valid for 60 days at your matched jeweler",
+      "formTitle": "Get Your Diamond Card & Unlock Your Jeweler",
+      "subtitleEmphasis": "perfect jeweler",
+      "subtitleTail": " we matched you with, revealed on the next screen.",
+      "note": "By providing your phone number, you agree to receive text messages from Ring Society. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel at any time.",
+      "ctaLabel": "TEXT ME MY DIAMOND CARD",
+      "declineLabel": "No thanks, just show me my matches"
+    }
+  },
+  {
+    "_id": "quiz.find-a-jeweler",
+    "_type": "quiz",
+    "title": "Find a Jeweler",
+    "routeKey": "find-a-jeweler",
+    "intro": {
+      "_type": "quizIntro",
+      "heroTitle": "Find a",
+      "heroTitleEmphasis": "Top Local Jeweler",
+      "mobileImageTitle": "Shopping for an Engagement Ring?",
+      "heroEyebrow": "AND RECEIVE AN EXCLUSIVE Gift card to save up to $2,000 on your ring!",
+      "body": [
+        "Answer a few quick questions and we'll match you with a trusted, highly vetted jeweler in your area ",
+        "and share our exclusive Ring Society Gift Card with you."
+      ],
+      "bodyTail": "No matches? No worries.\nWe’ll send you something just as valuable instead.",
+      "cta": "Find My Jeweler"
+    },
+    "steps": [
+      {
+        "_key": "q1",
+        "_type": "quizStep",
+        "internalName": "Name",
+        "enabled": true,
+        "question": "What's Your Name?",
+        "subtitle": "We like to keep things personal around here :)",
+        "placeholder": "Type Your Name",
+        "requiredErrorMessage": "Please enter your name",
+        "stepId": "q1",
+        "stepType": "text-input",
+        "answerField": "first_name",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q2",
+        "_type": "quizStep",
+        "internalName": "Who are you looking for",
+        "enabled": true,
+        "question": "Nice to meet you {first_name}!\nWho are you looking for?",
+        "options": [
+          {
+            "_key": "looking-for-partner",
+            "_type": "quizOption",
+            "label": "my partner",
+            "value": "looking_for_partner"
+          },
+          {
+            "_key": "looking-for-myself",
+            "_type": "quizOption",
+            "label": "myself",
+            "value": "looking_for_myself"
+          },
+          {
+            "_key": "shopping-together",
+            "_type": "quizOption",
+            "label": "we're looking together",
+            "value": "shopping_together"
+          }
+        ],
+        "stepId": "q2",
+        "stepType": "single-select",
+        "answerField": "buyer_type",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q3",
+        "_type": "quizStep",
+        "internalName": "Zip code",
+        "enabled": true,
+        "question": "What's your zip code?",
+        "subtitle": "We'll use this to match you with a local jeweler in your area.",
+        "placeholder": "Zip Code",
+        "requiredErrorMessage": "Please enter your zip code",
+        "stepId": "q3",
+        "stepType": "zip-input",
+        "answerField": "zip",
+        "questionCounter": true,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "Hidden when the funnel is opened from a jeweler location link.",
+        "reorderLocked": "Must stay before the contact step that reveals the matched jeweler."
+      },
+      {
+        "_key": "q4",
+        "_type": "quizStep",
+        "internalName": "Budget",
+        "enabled": true,
+        "question": "What's your budget range?",
+        "subtitle": "*This is not required, but it does help us find you more accurate matches!",
+        "options": [
+          {
+            "_key": "under-2k",
+            "_type": "quizOption",
+            "label": "under $2K",
+            "value": "under_2k"
+          },
+          {
+            "_key": "2k-4k",
+            "_type": "quizOption",
+            "label": "$2K - $4K",
+            "value": "2k_4k"
+          },
+          {
+            "_key": "4k-8k",
+            "_type": "quizOption",
+            "label": "$4K - $8K",
+            "value": "4k_8k"
+          },
+          {
+            "_key": "8k-15k",
+            "_type": "quizOption",
+            "label": "$8K - $15K",
+            "value": "8k_15k"
+          },
+          {
+            "_key": "15k-25k",
+            "_type": "quizOption",
+            "label": "$15K - $25K",
+            "value": "15k_25k"
+          },
+          {
+            "_key": "above-25k",
+            "_type": "quizOption",
+            "label": "$25K+",
+            "value": "above_25k"
+          }
+        ],
+        "stepId": "q4",
+        "stepType": "single-select",
+        "answerField": "budget_range",
+        "questionCounter": true,
+        "optional": true,
+        "webhookTrigger": "None",
+        "flowRules": "None."
+      },
+      {
+        "_key": "q5",
+        "_type": "quizStep",
+        "internalName": "Email",
+        "enabled": true,
+        "question": "Enter Your Email to Reveal Your Matched Jeweler.",
+        "subtitle": "Add Your Phone Number and We'll Text You a Gift Card for up to $2,000*",
+        "placeholder": "*Your Email",
+        "note": "*Gift card value and jeweler match are based on your local area and ring purchase price. Most matched couples receive $500–$1,500 off. We will only text you a gift card if we have a certified jeweler in your area. Full details on the next page. No purchase required.",
+        "noteSecondary": "By submitting this form, you agree to receive SMS and email communications from Ring Society. Message & data rates may apply. Reply STOP to opt out anytime.",
+        "footerLabel": "Unlock Jeweler & Gift Card",
+        "stepId": "q5",
+        "stepType": "contact-input",
+        "answerField": "email",
+        "questionCounter": false,
+        "optional": false,
+        "webhookTrigger": "None",
+        "flowRules": "None.",
+        "reorderLocked": "Must stay after the zip question."
+      }
+    ],
+    "results": {
+      "_type": "quizResults",
+      "sectionLabel": "What we do",
+      "hero": {
+        "greetingPrefix": "Great News",
+        "ringStylesReady": "Your ring styles are ready",
+        "title": "Your Diamond Card is Activated",
+        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible.",
+        "bodyRest": "We've paired you with a local jeweler who can help you find or create the ring that's perfect for you.",
+        "scrollHint": "Scroll to reveal your matches and your jeweler"
+      },
+      "heroOutOfTerritory": {
+        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
+        "bodyRest": "",
+        "scrollHint": "Scroll to reveal your matches"
+      },
+      "matches": {
+        "titleLead": "Meet Your",
+        "titleAccent": "Matches",
+        "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
+        "uniqueTasteFallbackJewelerName": "your matched jeweler"
+      },
+      "jeweler": {
+        "title": "Great Taste Deserves a Great Jeweler",
+        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
+        "meetLabel": "Meet",
+        "stickyCtaLabel": "Get Your ring",
+        "reasonsTitle": "Why We Love Them",
+        "reasons": [
+          "Hundreds of 5 star reviews",
+          "History of fair & competitive pricing",
+          "Designs you won't find in a big box store",
+          "4th generation family owned and run",
+          "In business for nearly 100 years",
+          "No high pressure sales EVER",
+          "Fair-trade diamond sourcing",
+          "Easy financing starting at 0% APR"
+        ],
+        "locationTitle": "Where to Find Them",
+        "closingTagline": "This is the jeweler you've been searching for.",
+        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
+      },
+      "diamondCard": {
+        "titleLead": "Redeem your Diamond Card at",
+        "titleNoJeweler": "Redeem your Diamond Card",
+        "ctaLabel": "Schedule consultation",
+        "accordionTitle": "Diamond Card Terms",
+        "introTitle": "How to redeem your savings",
+        "introItems": [
+          {
+            "_key": "item-0",
+            "_type": "funnelListItem",
+            "text": "Book your free consultation within 7 days to activate your card"
+          },
+          {
+            "_key": "item-1",
+            "_type": "funnelListItem",
+            "text": "Once activated, you have 60 days to attend your consultation and use your card",
+            "boldPhrase": "60 days to attend your consultation"
+          },
+          {
+            "_key": "item-2",
+            "_type": "funnelListItem",
+            "text": "Redeemable in person only, at your matched jeweler's store",
+            "boldPhrase": "in person only"
+          },
+          {
+            "_key": "item-3",
+            "_type": "funnelListItem",
+            "text": "Cannot be applied online or over the phone"
+          }
+        ],
+        "savingsTitle": "Your savings scale with your ring",
+        "savingsTiers": [
+          "$250 off rings $2,500+",
+          "$500 off rings $5,000+",
+          "$1,000 off rings $10,000+",
+          "$1,500 off rings $15,000+",
+          "$2,000 off rings $20,000+"
+        ],
+        "summaryLead": "Most couples save $500 to $1,500.",
+        "whyTitle": "Why are they giving away so much?",
+        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
+        "finePrintTitle": "The fine print",
+        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
+      },
+      "designSection": {
+        "title": "Your Custom Ring",
+        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
+        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
+        "choices": [
+          "Yellow Gold",
+          "Round Brilliant Diamond",
+          "Knife-Edge Setting"
+        ],
+        "ctaTitle": "Ready to Make it Real?",
+        "ctaLead": "Schedule a Consult with a ",
+        "ctaLink": "top local jeweler in your area",
+        "ctaRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "readyBanner": {
+        "title": "Ready to Make it Real?",
+        "bodyLead": "Schedule a Consult with a ",
+        "bodyLink": "top local jeweler in your area",
+        "bodyRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "footer": {
+        "tagline": "Your trusted guide to the perfect ring",
+        "privacyLabel": "Privacy Policy",
+        "termsLabel": "Terms and Conditions",
+        "accessibilityLabel": "Accessibility",
+        "privacyChoicesLabel": "Your Privacy Choices",
+        "copyright": "© Ring Society {year} | All Rights Reserved"
+      }
+    }
+  },
+  {
+    "_id": "diamondCardPage",
+    "_type": "diamondCardPage",
+    "routeKey": "get-diamond-card",
+    "landing": {
+      "eyebrow": "the #1 resource for finding top jewelers",
+      "heroTitle": "Want a VIP Gift Card Worth Up to $2,000 at a Top Local Jeweler?",
+      "heroCta": "Claim My VIP Gift Card",
+      "heroDisclaimer": "Discount on purchase is contingent on price of ring. Most couples save $500 to $1,500. Restrictions apply. Full terms and eligibility details below. No purchase required to claim.",
+      "formTitle": "Get Your Diamond Card",
+      "formSubtitle": "And Unlock Your Jeweler",
+      "formBody": "Enter your details and we'll text you your Diamond Card. We'll also reveal the top jeweler in your area that we matched you with.",
+      "namePlaceholder": "Name*",
+      "zipPlaceholder": "Zip Code (So we can match you)*",
+      "emailPlaceholder": "Email*",
+      "phonePlaceholder": "Phone Number*",
+      "submitLabel": "Text Me My Diamond Card",
+      "formDisclaimer": "By providing your phone number, you agree to receive text messages from Ring Society. Message and data rates may apply. Message frequency varies. Reply HELP for help or STOP to cancel at any time.",
+      "footerTagline": "Your trusted guide to the perfect ring",
+      "errors": {
+        "missingFields": "Please fill in your name, zip code, email, and phone number.",
+        "invalidZip": "Please enter a valid 5-digit zip code.",
+        "invalidPhone": "Please enter a valid phone number"
+      }
+    },
+    "results": {
+      "_type": "quizResults",
+      "sectionLabel": "What we do",
+      "hero": {
+        "greetingPrefix": "Great News",
+        "ringStylesReady": "Your ring styles are ready",
+        "title": "Your Diamond Card is Activated",
+        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible.",
+        "bodyRest": "We've paired you with a local jeweler who can help you find or create the ring that's perfect for you.",
+        "scrollHint": "Scroll to reveal your matches and your jeweler"
+      },
+      "heroOutOfTerritory": {
+        "bodyLead": "Your rings are stunning, but they are just the tip of the iceberg of what’s possible. Talk to a top local jeweler to discuss your options. Need help locating one? Scroll down!",
+        "bodyRest": "",
+        "scrollHint": "Scroll to reveal your matches"
+      },
+      "matches": {
+        "titleLead": "Meet Your",
+        "titleAccent": "Matches",
+        "uniqueTasteNote": "You’ve got a distinctive taste — these are our closest matches, but the exact ring you’re picturing may not fit a template. That’s what consultations are for: the team at {jewelerName} specializes in taking \"close\" the rest of the way.",
+        "uniqueTasteFallbackJewelerName": "your matched jeweler"
+      },
+      "jeweler": {
+        "title": "Great Taste Deserves a Great Jeweler",
+        "description": "We've matched you with a top 1% jeweler in your area who specializes in engagement rings just like these.",
+        "meetLabel": "Meet",
+        "stickyCtaLabel": "Get Your ring",
+        "reasonsTitle": "Why We Love Them",
+        "reasons": [
+          "Hundreds of 5 star reviews",
+          "History of fair & competitive pricing",
+          "Designs you won't find in a big box store",
+          "4th generation family owned and run",
+          "In business for nearly 100 years",
+          "No high pressure sales EVER",
+          "Fair-trade diamond sourcing",
+          "Easy financing starting at 0% APR"
+        ],
+        "locationTitle": "Where to Find Them",
+        "closingTagline": "This is the jeweler you've been searching for.",
+        "activationReminder": "Schedule a free consultation in the next 7 days to activate your card and lock in your savings (even if your appointment is weeks out!)"
+      },
+      "diamondCard": {
+        "titleLead": "Redeem your Diamond Card at",
+        "titleNoJeweler": "Redeem your Diamond Card",
+        "ctaLabel": "Schedule consultation",
+        "accordionTitle": "Diamond Card Terms",
+        "introTitle": "How to redeem your savings",
+        "introItems": [
+          {
+            "_key": "item-0",
+            "_type": "funnelListItem",
+            "text": "Book your free consultation within 7 days to activate your card"
+          },
+          {
+            "_key": "item-1",
+            "_type": "funnelListItem",
+            "text": "Once activated, you have 60 days to attend your consultation and use your card",
+            "boldPhrase": "60 days to attend your consultation"
+          },
+          {
+            "_key": "item-2",
+            "_type": "funnelListItem",
+            "text": "Redeemable in person only, at your matched jeweler's store",
+            "boldPhrase": "in person only"
+          },
+          {
+            "_key": "item-3",
+            "_type": "funnelListItem",
+            "text": "Cannot be applied online or over the phone"
+          }
+        ],
+        "savingsTitle": "Your savings scale with your ring",
+        "savingsTiers": [
+          "$250 off rings $2,500+",
+          "$500 off rings $5,000+",
+          "$1,000 off rings $10,000+",
+          "$1,500 off rings $15,000+",
+          "$2,000 off rings $20,000+"
+        ],
+        "summaryLead": "Most couples save $500 to $1,500.",
+        "whyTitle": "Why are they giving away so much?",
+        "whyBody": "Because we send them serious couples, {jewelerName} gives our members this Diamond Card to share. Rather than spend on advertising, they invest in meeting buyers like you. A win for everyone.",
+        "finePrintTitle": "The fine print",
+        "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
+      },
+      "designSection": {
+        "title": "Your Custom Ring",
+        "ringName": "Your Knife-Edge Solitaire Engagement Ring",
+        "choicesLead": "Based on your selections, here’s are the design choices we made together:",
+        "choices": [
+          "Yellow Gold",
+          "Round Brilliant Diamond",
+          "Knife-Edge Setting"
+        ],
+        "ctaTitle": "Ready to Make it Real?",
+        "ctaLead": "Schedule a Consult with a ",
+        "ctaLink": "top local jeweler in your area",
+        "ctaRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "readyBanner": {
+        "title": "Ready to Make it Real?",
+        "bodyLead": "Schedule a Consult with a ",
+        "bodyLink": "top local jeweler in your area",
+        "bodyRest": " who specializes in engagement rings just like these",
+        "ctaLabel": "Schedule consultation"
+      },
+      "footer": {
+        "tagline": "Your trusted guide to the perfect ring",
+        "privacyLabel": "Privacy Policy",
+        "termsLabel": "Terms and Conditions",
+        "accessibilityLabel": "Accessibility",
+        "privacyChoicesLabel": "Your Privacy Choices",
+        "copyright": "© Ring Society {year} | All Rights Reserved"
+      }
+    }
+  },
+  {
+    "_id": "diamondCardTerms",
+    "_type": "diamondCardTerms",
+    "routeKey": "diamond-card-terms",
+    "title": "Diamond Card Terms",
+    "introTitle": "How to redeem your savings",
+    "introItems": [
+      {
+        "_key": "redeem",
+        "_type": "funnelListSection",
+        "title": "How to redeem your savings",
+        "items": [
+          {
+            "_key": "item-0",
+            "_type": "funnelListItem",
+            "text": "Book your free consultation within 7 days to activate your card"
+          },
+          {
+            "_key": "item-1",
+            "_type": "funnelListItem",
+            "text": "Once activated, you have 60 days to attend your consultation and use your card",
+            "boldPhrase": "60 days to attend your consultation"
+          },
+          {
+            "_key": "item-2",
+            "_type": "funnelListItem",
+            "text": "Redeemable in person only, at your matched jeweler's store",
+            "boldPhrase": "in person only"
+          },
+          {
+            "_key": "item-3",
+            "_type": "funnelListItem",
+            "text": "Cannot be applied online or over the phone"
+          }
+        ]
+      }
+    ],
+    "savingsTitle": "Your savings scale with your ring",
+    "savingsItems": [
+      {
+        "_key": "savings",
+        "_type": "funnelListSection",
+        "title": "Your savings scale with your ring",
+        "items": [
+          {
+            "_key": "tier-0",
+            "_type": "funnelListItem",
+            "text": "$250 off rings $2,500+"
+          },
+          {
+            "_key": "tier-1",
+            "_type": "funnelListItem",
+            "text": "$500 off rings $5,000+"
+          },
+          {
+            "_key": "tier-2",
+            "_type": "funnelListItem",
+            "text": "$1,000 off rings $10,000+"
+          },
+          {
+            "_key": "tier-3",
+            "_type": "funnelListItem",
+            "text": "$1,500 off rings $15,000+"
+          },
+          {
+            "_key": "tier-4",
+            "_type": "funnelListItem",
+            "text": "$2,000 off rings $20,000+"
+          }
+        ]
+      }
+    ],
+    "summaryLead": "Most couples save $500 to $1,500.",
+    "summaryRest": "Valid for 60 days, one-time use.",
+    "finePrintTitle": "The fine print",
+    "finePrint": "Valid on engagement rings or wedding bands. One-time use, can't be combined with other offers. Some brands may be excluded at the jeweler's discretion. Some jewelers let you apply it to other pieces, just ask."
+  },
+  {
+    "_id": "hintPage",
+    "_type": "hintPage",
+    "routeKey": "drop-a-hint",
+    "pageTitle": "Drop a Hint",
+    "banner": {
+      "prefix": "schedule your appointment before",
+      "suffix": "to activate your diamond card"
+    },
+    "ring": {
+      "name": "The Knife-Edge Solitaire Engagement Ring",
+      "jewelerLabelTemplate": "Available at {jewelerName}"
+    },
+    "form": {
+      "namePlaceholder": "*Your Name",
+      "partnerNamePlaceholder": "*Your Partner's Name",
+      "partnerEmailPlaceholder": "*Your Partner's Email",
+      "subjectDefault": "Check Out This Ring I Created",
+      "messageTemplate": "Check out this ring I made with Ring Society. It is {ringName}. Thought you'd like to see it! I can get it at {jewelerName} in {location}.",
+      "messageTemplateWithoutLocation": "Check out this ring I made with Ring Society. It is {ringName}. Thought you'd like to see it! I can get it at {jewelerName}.",
+      "messageTemplateWithoutJeweler": "Check out this ring I made with Ring Society. It is {ringName}. Thought you'd like to see it!",
+      "submitLabel": "Send my Hint"
+    },
+    "success": {
+      "leadTemplate": "Your ring is on the way to {partnerName}",
+      "fallbackPartnerName": "your partner",
+      "tagline": "Consider the seed planted.",
+      "nextStepTemplate": "When you're ready, the next step is booking a consultation with {jewelerName} — together.",
+      "questionsLead": "Have questions first? Text our concierge, at"
+    },
+    "errors": {
+      "missingFields": "Please fill in your name, your partner's name, and their email.",
+      "invalidPartnerEmail": "Please enter a valid email address for your partner.",
+      "partnerEmailSameAsSender": "Please use your partner's email — it can't be the same as yours."
+    }
+  },
+  {
+    "_id": "bookingPage",
+    "_type": "bookingPage",
+    "routeKey": "booking",
+    "picker": {
+      "headlineLines": [
+        "You've got your Matches",
+        "Your Diamond Card",
+        "Your Jeweler"
+      ],
+      "headlineAccent": "Now Let's Get Your Ring",
+      "bodyLead": "You've got your styles and your Diamond Card, with up to $2,000 toward your ring.",
+      "bodyRest": "The last step is sitting down with a concierge at {jewelerName}, who'll help you bring it all together so you can finally get the forever ring you've been looking for.",
+      "pickerTitle": "Pick the window that works for you.",
+      "pickerSubtitle": "Reserve now. Reschedule anytime!",
+      "chooseDayLabel": "Choose a day",
+      "chooseTimeLabel": "Select a time window",
+      "visitDescription": "Your visit is a relaxed, 30-minute guided consultation, with a 2-hour arrival window so there's no rush and no pressure. They're there to help you explore, not to sell you.",
+      "confirmationNote": "We'll text you the day before to confirm your window. Need to adjust it? Just reply to our text.",
+      "scheduleCta": "schedule now",
+      "phonePlaceholder": "Phone Number",
+      "footerTitle": "Got questions before you book, or need to schedule further out?",
+      "footerLead": "Text us anytime on"
+    },
+    "confirmation": {
+      "heroTitleLead": "You're all set",
+      "consultationEyebrow": "Your consultation with",
+      "confirmedLead": "is confirmed for",
+      "arrivalLead": "please arrive between",
+      "locationEyebrow": "They are located at",
+      "bookingCta": "Booking",
+      "confirmedCta": "confirmed",
+      "whatHappensNext": {
+        "title": "What happens next",
+        "bodyLead": "We'll text you the day before to confirm. Just reply ",
+        "bodyEmphasis": "YES",
+        "bodyTail": " and your window is locked in. If anything changes, reply to that text to adjust."
+      },
+      "whatToExpect": {
+        "title": "What to expect",
+        "body": "This is a relaxed, 30-minute guided consultation. No rush, no pressure. A concierge will walk you through the choices that matter most: the right stone, the right setting, and how to bring your matches to life within your budget."
+      },
+      "whatToBring": {
+        "title": "What to bring",
+        "intro": "We recommend any of the following:",
+        "items": [
+          "Photos you've saved",
+          "Pinterest board or pins",
+          "Ideas you're considering",
+          "Or just yourself!"
+        ]
+      },
+      "diamondCardReminder": {
+        "title": "Don't Forget Your Diamond Card!",
+        "instruction": "Screenshot your card, or present your texts from us at your consultation",
+        "footerNote": "need a refresher on how your card works? It's in your inbox!"
+      },
+      "contact": {
+        "titleLead": "Questions before you go in?",
+        "titleTail": "Text us anytime at",
+        "textLead": "Text us on "
+      }
+    }
+  },
+  {
+    "_id": "funnelShared",
+    "_type": "funnelShared",
+    "routeKey": "shared",
+    "footerTagline": "Your trusted guide to the perfect ring",
+    "whatWeDoBody": "We are the #1 resource for couples looking for a honest and quality-conscious local jeweler for their engagement ring.",
+    "giftCardValueNote": "Most couples save $500 to $1,500."
+  }
+]
