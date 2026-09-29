@@ -1,7 +1,20 @@
 import type { StructureResolver } from 'sanity/structure'
 
-const singleton = (S: Parameters<StructureResolver>[0], type: string, title: string) =>
-  S.listItem().title(title).id(type).child(S.document().schemaType(type).documentId(type).title(title))
+/**
+ * A singleton entry. `type` is the schema type and `documentId` is the document it opens —
+ * these are usually the same, but the quizzes share the `quiz` type across three documents,
+ * so they must be passed separately.
+ */
+const singleton = (
+  S: Parameters<StructureResolver>[0],
+  type: string,
+  title: string,
+  documentId: string = type,
+) =>
+  S.listItem()
+    .title(title)
+    .id(documentId)
+    .child(S.document().schemaType(type).documentId(documentId).title(title))
 
 /**
  * The three quizzes are fixed funnels, so each gets its own named entry rather than an
@@ -11,9 +24,9 @@ const quizzes = (S: Parameters<StructureResolver>[0]) =>
   S.list()
     .title('Quizzes')
     .items([
-      singleton(S, 'quiz-find-your-ring', 'Find Your Ring'),
-      singleton(S, 'quiz-design-your-ring', 'Design Your Ring'),
-      singleton(S, 'quiz-find-a-jeweler', 'Find a Jeweler'),
+      singleton(S, 'quiz', 'Find Your Ring', 'quiz-find-your-ring'),
+      singleton(S, 'quiz', 'Design Your Ring', 'quiz-design-your-ring'),
+      singleton(S, 'quiz', 'Find a Jeweler', 'quiz-find-a-jeweler'),
     ])
 
 export const structure: StructureResolver = (S) =>
