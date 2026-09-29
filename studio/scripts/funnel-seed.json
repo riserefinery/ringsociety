@@ -1,6 +1,6 @@
 [
   {
-    "_id": "quiz.find-your-ring",
+    "_id": "quiz-find-your-ring",
     "_type": "quiz",
     "title": "Find Your Ring",
     "routeKey": "find-your-ring",
@@ -502,7 +502,7 @@
     }
   },
   {
-    "_id": "quiz.design-your-ring",
+    "_id": "quiz-design-your-ring",
     "_type": "quiz",
     "title": "Design Your Ring",
     "routeKey": "design-your-ring",
@@ -1068,7 +1068,7 @@
     }
   },
   {
-    "_id": "quiz.find-a-jeweler",
+    "_id": "quiz-find-a-jeweler",
     "_type": "quiz",
     "title": "Find a Jeweler",
     "routeKey": "find-a-jeweler",

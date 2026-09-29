@@ -11,9 +11,9 @@ const quizzes = (S: Parameters<StructureResolver>[0]) =>
   S.list()
     .title('Quizzes')
     .items([
-      singleton(S, 'quiz.find-your-ring', 'Find Your Ring'),
-      singleton(S, 'quiz.design-your-ring', 'Design Your Ring'),
-      singleton(S, 'quiz.find-a-jeweler', 'Find a Jeweler'),
+      singleton(S, 'quiz-find-your-ring', 'Find Your Ring'),
+      singleton(S, 'quiz-design-your-ring', 'Design Your Ring'),
+      singleton(S, 'quiz-find-a-jeweler', 'Find a Jeweler'),
     ])
 
 export const structure: StructureResolver = (S) =>
