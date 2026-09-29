@@ -58,7 +58,13 @@ export const diamondCardPage = defineType({
             defineField({ name: 'invalidPhone', title: 'Invalid Phone', type: 'string' }),
           ],
         }),
-        defineField({ name: 'handImage', title: 'Hero Image', type: 'funnelImage' }),
+        defineField({
+          name: 'handImage',
+          title: 'Hero Image',
+          type: 'funnelImage',
+          description:
+            'Portrait, ideally 866×2011 (about 1:2.3). Leave blank to keep the current image.',
+        }),
       ],
     }),
     defineField({
@@ -254,7 +260,13 @@ export const bookingPage = defineType({
         defineField({ name: 'phonePlaceholder', title: 'Phone Field Placeholder', type: 'string' }),
         defineField({ name: 'footerTitle', title: 'Footer Question', type: 'text', rows: 2 }),
         defineField({ name: 'footerLead', title: 'Footer Lead-in', type: 'string' }),
-        defineField({ name: 'heroBackground', title: 'Hero Background', type: 'funnelImage' }),
+        defineField({
+          name: 'heroBackground',
+          title: 'Hero Background',
+          type: 'funnelImage',
+          description:
+            'Portrait, ideally 786×1360 (about 1:1.7). Leave blank to keep the current image.',
+        }),
       ],
     }),
     defineField({

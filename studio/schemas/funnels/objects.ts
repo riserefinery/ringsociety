@@ -43,7 +43,7 @@ export const funnelImage = defineType({
       type: 'image',
       options: { hotspot: true },
       description:
-        'Leave blank to keep the image currently shipped with the site. Uploading a new one replaces it.',
+        'Leave blank to keep the image currently shipped with the site — the preview above shows exactly what is live now. Uploading a new one replaces it.',
     }),
     defineField({
       name: 'alt',
@@ -87,7 +87,8 @@ export const quizOption = defineType({
       title: 'Image Override',
       type: 'image',
       options: { hotspot: true },
-      description: 'Used by image-based questions such as shape, metal colour, and setting.',
+      description:
+        'Square, ideally 800×800 or larger. Shown in the answer grid for image questions such as shape and metal colour. Leave blank to keep the current image.',
     }),
     defineField({
       name: 'imageAlt',
@@ -370,12 +371,19 @@ export const quizIntro = defineType({
       title: 'Button Label (Desktop Override)',
       type: 'string',
     }),
-    defineField({ name: 'heroImage', title: 'Hero Image', type: 'funnelImage' }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'funnelImage',
+      description:
+        'Portrait, ideally 1440×2048 (about 1:1.4). Find a Jeweler uses a wide landscape image instead. Leave blank to keep the current image.',
+    }),
     defineField({
       name: 'mobileHeroImage',
       title: 'Mobile Hero Image',
       type: 'funnelImage',
-      description: 'Leave blank to reuse the hero image on mobile.',
+      description:
+        'Portrait or square, ideally 786×776. Only shown on phones. Leave blank to reuse the hero image.',
     }),
   ],
   preview: {

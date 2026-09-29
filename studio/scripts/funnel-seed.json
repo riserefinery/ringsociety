@@ -16,7 +16,18 @@
       "desktopDurationLabel": "60 second quiz",
       "closingLead": "Ready to Find",
       "closingEmphasis": "The Perfect Ring?",
-      "cta": "Yes, Show me the ring"
+      "cta": "Yes, Show me the ring",
+      "heroImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-76cb9ce67ab7e42920e1ab2fbf5577c2ab58ecfe-1440x2048-png"
+          }
+        },
+        "alt": "Woman resting her hand beside her face, wearing a cushion-cut halo engagement ring"
+      }
     },
     "steps": [
       {
@@ -81,19 +92,43 @@
             "_key": "platinum-or-white-gold",
             "_type": "quizOption",
             "label": "platinum or white gold",
-            "value": "platinum_or_white_gold"
+            "value": "platinum_or_white_gold",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-d21ded7dc360b19e71cfcba56308ec674224d6ff-2048x2048-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "yellow-gold",
             "_type": "quizOption",
             "label": "yellow gold",
-            "value": "yellow_gold"
+            "value": "yellow_gold",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-d21ded7dc360b19e71cfcba56308ec674224d6ff-2048x2048-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "rose-gold",
             "_type": "quizOption",
             "label": "rose gold",
-            "value": "rose_gold"
+            "value": "rose_gold",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-d21ded7dc360b19e71cfcba56308ec674224d6ff-2048x2048-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           }
         ],
         "stepId": "q3",
@@ -116,25 +151,57 @@
             "_key": "classic-timeless",
             "_type": "quizOption",
             "label": "Classic & Timeless",
-            "value": "classic_timeless"
+            "value": "classic_timeless",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "romantic-vintage",
             "_type": "quizOption",
             "label": "Romantic & Vintage",
-            "value": "romantic_vintage"
+            "value": "romantic_vintage",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "modern-minimal",
             "_type": "quizOption",
             "label": "Modern & Minimal",
-            "value": "modern_minimal"
+            "value": "modern_minimal",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "bold-statement",
             "_type": "quizOption",
             "label": "Bold & Statement",
-            "value": "bold_statement"
+            "value": "bold_statement",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           }
         ],
         "stepId": "q4",
@@ -157,49 +224,113 @@
             "_key": "round",
             "_type": "quizOption",
             "label": "round brilliant",
-            "value": "round"
+            "value": "round",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-2a0fd1bacf6661d6807e337f3164da4462d46c35-580x460-jpg"
+              }
+            },
+            "imageAlt": "Round brilliant cut diamond"
           },
           {
             "_key": "oval",
             "_type": "quizOption",
             "label": "oval",
-            "value": "oval"
+            "value": "oval",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-8cc0842ccbc09aea6f85a0c6381038cd0f5140c8-580x460-jpg"
+              }
+            },
+            "imageAlt": "Oval cut diamond"
           },
           {
             "_key": "emerald",
             "_type": "quizOption",
             "label": "emerald",
-            "value": "emerald"
+            "value": "emerald",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-99ad0ffca9fc6618a4d821aec6e1f9fd0e144303-580x460-jpg"
+              }
+            },
+            "imageAlt": "Emerald cut diamond"
           },
           {
             "_key": "pear",
             "_type": "quizOption",
             "label": "pear",
-            "value": "pear"
+            "value": "pear",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-43e962d9875dd82a55879b3c39d2c71363add752-580x460-jpg"
+              }
+            },
+            "imageAlt": "Pear cut diamond"
           },
           {
             "_key": "cushion",
             "_type": "quizOption",
             "label": "cushion",
-            "value": "cushion"
+            "value": "cushion",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-dd2a6c3346cc3d0d8035e8b240eee1b2f0e3ef1e-580x460-jpg"
+              }
+            },
+            "imageAlt": "Cushion cut diamond"
           },
           {
             "_key": "radiant",
             "_type": "quizOption",
             "label": "radiant",
-            "value": "radiant"
+            "value": "radiant",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-391273e7c9d1bd039fd4eb1100c82d34dd2941ed-580x460-jpg"
+              }
+            },
+            "imageAlt": "Radiant cut diamond"
           },
           {
             "_key": "marquise",
             "_type": "quizOption",
             "label": "marquis",
-            "value": "marquise"
+            "value": "marquise",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-e227b2ba6c3400d2fa18a5b1dfce5ef0063c16f0-580x460-jpg"
+              }
+            },
+            "imageAlt": "Marquise cut diamond"
           },
           {
             "_key": "princess",
             "_type": "quizOption",
             "label": "princess",
-            "value": "princess"
+            "value": "princess",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-c9829443e369f101392de8d5b9f180b5905b8bf3-580x460-jpg"
+              }
+            },
+            "imageAlt": "Princess cut diamond"
           }
         ],
         "stepId": "q5",
@@ -435,7 +566,18 @@
       "closingLead": "Ready to Create Your",
       "closingEmphasis": "Dream Ring?",
       "cta": "Yes, Show me the ring",
-      "desktopCta": "Yes, Let's design the ring"
+      "desktopCta": "Yes, Let's design the ring",
+      "heroImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-d2e41171c2098116f8c342f0d3a92d5b63dba2fd-1440x2048-png"
+          }
+        },
+        "alt": "Woman resting her hand against her cheek, wearing a marquise-cut solitaire engagement ring"
+      }
     },
     "steps": [
       {
@@ -500,19 +642,43 @@
             "_key": "platinum-or-white-gold",
             "_type": "quizOption",
             "label": "platinum or white gold",
-            "value": "platinum_or_white_gold"
+            "value": "platinum_or_white_gold",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-d21ded7dc360b19e71cfcba56308ec674224d6ff-2048x2048-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "yellow-gold",
             "_type": "quizOption",
             "label": "yellow gold",
-            "value": "yellow_gold"
+            "value": "yellow_gold",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-d21ded7dc360b19e71cfcba56308ec674224d6ff-2048x2048-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "rose-gold",
             "_type": "quizOption",
             "label": "rose gold",
-            "value": "rose_gold"
+            "value": "rose_gold",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-d21ded7dc360b19e71cfcba56308ec674224d6ff-2048x2048-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           }
         ],
         "stepId": "q3",
@@ -535,25 +701,57 @@
             "_key": "classic-timeless",
             "_type": "quizOption",
             "label": "Classic & Timeless",
-            "value": "classic_timeless"
+            "value": "classic_timeless",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "romantic-vintage",
             "_type": "quizOption",
             "label": "Romantic & Vintage",
-            "value": "romantic_vintage"
+            "value": "romantic_vintage",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "modern-minimal",
             "_type": "quizOption",
             "label": "Modern & Minimal",
-            "value": "modern_minimal"
+            "value": "modern_minimal",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           },
           {
             "_key": "bold-statement",
             "_type": "quizOption",
             "label": "Bold & Statement",
-            "value": "bold_statement"
+            "value": "bold_statement",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-55f140038d1117d8f072200e46504fa84def4e3f-1024x1024-png"
+              }
+            },
+            "imageAlt": "Engagement ring style"
           }
         ],
         "stepId": "q4",
@@ -576,49 +774,113 @@
             "_key": "round",
             "_type": "quizOption",
             "label": "round brilliant",
-            "value": "round"
+            "value": "round",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-2a0fd1bacf6661d6807e337f3164da4462d46c35-580x460-jpg"
+              }
+            },
+            "imageAlt": "Round brilliant cut diamond"
           },
           {
             "_key": "oval",
             "_type": "quizOption",
             "label": "oval",
-            "value": "oval"
+            "value": "oval",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-8cc0842ccbc09aea6f85a0c6381038cd0f5140c8-580x460-jpg"
+              }
+            },
+            "imageAlt": "Oval cut diamond"
           },
           {
             "_key": "emerald",
             "_type": "quizOption",
             "label": "emerald",
-            "value": "emerald"
+            "value": "emerald",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-99ad0ffca9fc6618a4d821aec6e1f9fd0e144303-580x460-jpg"
+              }
+            },
+            "imageAlt": "Emerald cut diamond"
           },
           {
             "_key": "pear",
             "_type": "quizOption",
             "label": "pear",
-            "value": "pear"
+            "value": "pear",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-43e962d9875dd82a55879b3c39d2c71363add752-580x460-jpg"
+              }
+            },
+            "imageAlt": "Pear cut diamond"
           },
           {
             "_key": "cushion",
             "_type": "quizOption",
             "label": "cushion",
-            "value": "cushion"
+            "value": "cushion",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-dd2a6c3346cc3d0d8035e8b240eee1b2f0e3ef1e-580x460-jpg"
+              }
+            },
+            "imageAlt": "Cushion cut diamond"
           },
           {
             "_key": "radiant",
             "_type": "quizOption",
             "label": "radiant",
-            "value": "radiant"
+            "value": "radiant",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-391273e7c9d1bd039fd4eb1100c82d34dd2941ed-580x460-jpg"
+              }
+            },
+            "imageAlt": "Radiant cut diamond"
           },
           {
             "_key": "marquise",
             "_type": "quizOption",
             "label": "marquis",
-            "value": "marquise"
+            "value": "marquise",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-e227b2ba6c3400d2fa18a5b1dfce5ef0063c16f0-580x460-jpg"
+              }
+            },
+            "imageAlt": "Marquise cut diamond"
           },
           {
             "_key": "princess",
             "_type": "quizOption",
             "label": "princess",
-            "value": "princess"
+            "value": "princess",
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_type": "reference",
+                "_ref": "image-c9829443e369f101392de8d5b9f180b5905b8bf3-580x460-jpg"
+              }
+            },
+            "imageAlt": "Princess cut diamond"
           }
         ],
         "stepId": "q5",
@@ -714,49 +976,57 @@
             "_key": "solitaire",
             "_type": "quizOption",
             "label": "solitaire",
-            "value": "solitaire"
+            "value": "solitaire",
+            "imageAlt": ""
           },
           {
             "_key": "cathedral",
             "_type": "quizOption",
             "label": "Cathedral",
-            "value": "cathedral"
+            "value": "cathedral",
+            "imageAlt": ""
           },
           {
             "_key": "classic-halo",
             "_type": "quizOption",
             "label": "Classic Halo",
-            "value": "classic_halo"
+            "value": "classic_halo",
+            "imageAlt": ""
           },
           {
             "_key": "hidden-halo",
             "_type": "quizOption",
             "label": "Hidden Halo",
-            "value": "hidden_halo"
+            "value": "hidden_halo",
+            "imageAlt": ""
           },
           {
             "_key": "three-stone",
             "_type": "quizOption",
             "label": "Three-Stone",
-            "value": "three_stone"
+            "value": "three_stone",
+            "imageAlt": ""
           },
           {
             "_key": "pave-band",
             "_type": "quizOption",
             "label": "Pavé Band",
-            "value": "pave_band"
+            "value": "pave_band",
+            "imageAlt": ""
           },
           {
             "_key": "bezel",
             "_type": "quizOption",
             "label": "Bezel",
-            "value": "bezel"
+            "value": "bezel",
+            "imageAlt": ""
           },
           {
             "_key": "toi-et-moi",
             "_type": "quizOption",
             "label": "Toi et Moi",
-            "value": "toi_et_moi"
+            "value": "toi_et_moi",
+            "imageAlt": ""
           }
         ],
         "stepId": "q1-setting",
@@ -933,7 +1203,29 @@
       ],
       "bodySecondItalic": true,
       "bodyTail": "No matches? No worries.\nWe’ll send you something just as valuable instead.",
-      "cta": "Find My Jeweler"
+      "cta": "Find My Jeweler",
+      "heroImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-1f84c22947e3e47811cbf4894ea447e7b93fa162-4096x2374-jpg"
+          }
+        },
+        "alt": "Woman smiling and raising her hand to her face, wearing a cushion-cut halo engagement ring"
+      },
+      "mobileHeroImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-09bf8065df2d91f4aa597cd9c0419bd9a202832e-786x776-png"
+          }
+        },
+        "alt": "Woman smiling and raising her hand to her face, wearing a cushion-cut halo engagement ring"
+      }
     },
     "steps": [
       {
@@ -1108,6 +1400,17 @@
         "missingFields": "Please fill in your name, zip code, email, and phone number.",
         "invalidZip": "Please enter a valid 5-digit zip code.",
         "invalidPhone": "Please enter a valid phone number"
+      },
+      "handImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-53e41223dd401b348d887b96e84505dc5020a500-866x2011-png"
+          }
+        },
+        "alt": "Hand holding a Ring Society Diamond Card"
       }
     },
     "results": {
@@ -1259,7 +1562,18 @@
       "scheduleCta": "schedule now",
       "phonePlaceholder": "Phone Number",
       "footerTitle": "Got questions before you book, or need to schedule further out?",
-      "footerLead": "Text us anytime on"
+      "footerLead": "Text us anytime on",
+      "heroBackground": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-132076bccbc8f7dbf4e44e80b4a02adb456fcd6d-786x1360-png"
+          }
+        },
+        "alt": "Booking screen background"
+      }
     },
     "confirmation": {
       "heroTitleLead": "You're all set",
