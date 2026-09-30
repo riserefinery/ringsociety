@@ -14,6 +14,19 @@ const lockedFieldset = {
 const lockedField = (name: string, title: string, description: string, type = 'string') =>
   defineField({ name, title, type, readOnly: true, fieldset: 'locked', description })
 
+/**
+ * Social sharing for a funnel page. Mirrors the quiz documents so every funnel has the same
+ * "Search & Sharing" block in the same place.
+ */
+const shareField = () =>
+  defineField({
+    name: 'seo',
+    title: 'Search & Sharing',
+    type: 'pageSeo',
+    description:
+      'Controls the title, description and image shown when this funnel is shared. Leave blank to use the funnel defaults.',
+  })
+
 /** VIP Gift Card landing page and its results page — /get-diamond-card. */
 export const diamondCardPage = defineType({
   name: 'diamondCardPage',
@@ -74,6 +87,7 @@ export const diamondCardPage = defineType({
       description:
         'Fixed wording on /results/diamond-card. Jeweler details and card value are delivered live.',
     }),
+    shareField(),
   ],
   preview: { prepare: () => ({ title: 'VIP Gift Card Funnel' }) },
 })
@@ -118,6 +132,7 @@ export const diamondCardTerms = defineType({
     defineField({ name: 'summaryRest', title: 'Validity Line', type: 'string', description: 'e.g. "Valid for 60 days, one-time use."' }),
     defineField({ name: 'finePrintTitle', title: 'Fine Print — Title', type: 'string' }),
     defineField({ name: 'finePrint', title: 'Fine Print', type: 'text', rows: 6 }),
+    shareField(),
   ],
   preview: { prepare: () => ({ title: 'Diamond Card Terms' }) },
 })
@@ -217,6 +232,7 @@ export const hintPage = defineType({
         defineField({ name: 'partnerEmailSameAsSender', title: 'Partner Email Matches Sender', type: 'string' }),
       ],
     }),
+    shareField(),
   ],
   preview: { prepare: () => ({ title: 'Drop a Hint' }) },
 })
@@ -338,6 +354,7 @@ export const bookingPage = defineType({
         }),
       ],
     }),
+    shareField(),
   ],
   preview: { prepare: () => ({ title: 'Booking & Confirmation' }) },
 })
