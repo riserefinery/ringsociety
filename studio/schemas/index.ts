@@ -1,5 +1,6 @@
 import { callout, definitionList, pageSeo, responsiveImage } from './common'
 import { articleLabel, blogLanding, category, contactPage, legalPage, missionPage, post, publicationSettings, siteSettings, topGuidesLanding } from './documents'
+import { funnelDocumentTypes, funnelObjectTypes } from './funnels'
 
 export const schemaTypes = [
   pageSeo,
@@ -16,4 +17,6 @@ export const schemaTypes = [
   missionPage,
   contactPage,
   legalPage,
+  ...funnelObjectTypes,
+  ...funnelDocumentTypes,
 ]
