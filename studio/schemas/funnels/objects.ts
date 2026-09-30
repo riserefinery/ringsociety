@@ -69,6 +69,53 @@ export const funnelImage = defineType({
  * One answer choice. `label` is editorial; `value` is the matching contract sent to n8n and
  * must never be edited, so it is locked.
  */
+/**
+ * The metals a visitor can choose. The values match the metal question's answer values exactly,
+ * so an image can never be filed under a metal the quiz cannot produce.
+ */
+const METAL_CHOICES = [
+  { title: 'Platinum or White Gold', value: 'platinum_or_white_gold' },
+  { title: 'Yellow Gold', value: 'yellow_gold' },
+  { title: 'Rose Gold', value: 'rose_gold' },
+]
+
+/** One metal-specific image for an answer choice. */
+export const metalImage = defineType({
+  name: 'metalImage',
+  title: 'Metal Image',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'metal',
+      title: 'Metal',
+      type: 'string',
+      options: { list: METAL_CHOICES, layout: 'radio' },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'image',
+      title: 'Image',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'The same choice rendered in this metal. Keep the framing identical to the others.',
+    }),
+    defineField({
+      name: 'alt',
+      title: 'Alt Text',
+      type: 'string',
+      description: 'Describe the ring and the metal, e.g. "Solitaire engagement ring in rose gold".',
+    }),
+  ],
+  preview: {
+    select: { metal: 'metal', alt: 'alt', media: 'image' },
+    prepare: ({ metal, alt, media }) => ({
+      title: METAL_CHOICES.find((choice) => choice.value === metal)?.title ?? 'Metal not set',
+      subtitle: alt,
+      media,
+    }),
+  },
+})
+
 export const quizOption = defineType({
   name: 'quizOption',
   title: 'Answer Choice',
@@ -99,6 +146,25 @@ export const quizOption = defineType({
         Rule.custom((value, context) => {
           const parent = context.parent as { image?: unknown } | undefined
           if (parent?.image && !value) return 'Alt text is required when an image is set.'
+          return true
+        }),
+    }),
+    defineField({
+      name: 'imageByMetal',
+      title: 'Images by Metal',
+      type: 'array',
+      of: [defineArrayMember({ type: 'metalImage' })],
+      description:
+        'The same choice in other metals. When a visitor has already picked a metal, their choice is shown instead of the image above. Any metal left out — or the whole list empty — falls back to the image above, so a partially filled list is safe.',
+      validation: (Rule) =>
+        Rule.custom((value) => {
+          const list = (value ?? []) as Array<{ metal?: string }>
+          const seen = new Set<string>()
+          for (const entry of list) {
+            if (!entry?.metal) continue
+            if (seen.has(entry.metal)) return 'Each metal can only appear once.'
+            seen.add(entry.metal)
+          }
           return true
         }),
     }),
@@ -200,6 +266,14 @@ export const quizStep = defineType({
       title: 'Expand Options Label',
       type: 'string',
       description: 'The control that reveals the remaining choices, when a step starts collapsed.',
+    }),
+    defineField({
+      name: 'followsMetalChoice',
+      title: 'Show Images in the Chosen Metal',
+      type: 'boolean',
+      initialValue: true,
+      description:
+        'When on, an answer choice that has images filed under "Images by Metal" shows the one matching the metal the visitor picked earlier. When off, every choice keeps its single main image. Has no effect on choices without metal images.',
     }),
     defineField({
       name: 'options',
