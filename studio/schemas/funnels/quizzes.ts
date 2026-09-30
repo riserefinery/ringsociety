@@ -104,6 +104,30 @@ export const quiz = defineType({
       type: 'quizIntro',
     }),
     defineField({
+      name: 'background',
+      title: 'Question Screen Background',
+      type: 'object',
+      options: { collapsible: true, collapsed: false },
+      description:
+        'The backdrop behind every question in this funnel. It is set once here and cannot vary from question to question.',
+      fields: [
+        defineField({
+          name: 'mobile',
+          title: 'Background — Mobile',
+          type: 'funnelImage',
+          description:
+            'Shown on phones. Around 786×776 (about 1:1). Leave blank to keep the current image.',
+        }),
+        defineField({
+          name: 'desktop',
+          title: 'Background — Desktop',
+          type: 'funnelImage',
+          description:
+            'Shown on tablet and desktop. The ring funnels use 2880×2048 (about 1.4:1); Find a Jeweler uses a 4096×2374 photograph. Leave blank to keep the current image.',
+        }),
+      ],
+    }),
+    defineField({
       name: 'steps',
       title: 'Questions',
       type: 'array',

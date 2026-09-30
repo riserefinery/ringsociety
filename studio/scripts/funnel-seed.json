@@ -27,6 +27,41 @@
           }
         },
         "alt": "Woman resting her hand beside her face, wearing a cushion-cut halo engagement ring"
+      },
+      "mobileHeroImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-76cb9ce67ab7e42920e1ab2fbf5577c2ab58ecfe-1440x2048-png"
+          }
+        },
+        "alt": "Woman resting her hand beside her face, wearing a cushion-cut halo engagement ring"
+      }
+    },
+    "background": {
+      "mobile": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-a75a21ad2a900c85e3ad792e05f4e2ae64642f7f-784x498-png"
+          }
+        },
+        "alt": "Dark green marble with gold veining"
+      },
+      "desktop": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-d939b81a5fc502750046aaed383db13648bd04f6-2880x2048-png"
+          }
+        },
+        "alt": "Dark green marble with gold veining"
       }
     },
     "steps": [
@@ -577,6 +612,41 @@
           }
         },
         "alt": "Woman resting her hand against her cheek, wearing a marquise-cut solitaire engagement ring"
+      },
+      "mobileHeroImage": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-d2e41171c2098116f8c342f0d3a92d5b63dba2fd-1440x2048-png"
+          }
+        },
+        "alt": "Woman resting her hand against her cheek, wearing a marquise-cut solitaire engagement ring"
+      }
+    },
+    "background": {
+      "mobile": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-a75a21ad2a900c85e3ad792e05f4e2ae64642f7f-784x498-png"
+          }
+        },
+        "alt": "Dark green marble with gold veining"
+      },
+      "desktop": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-d939b81a5fc502750046aaed383db13648bd04f6-2880x2048-png"
+          }
+        },
+        "alt": "Dark green marble with gold veining"
       }
     },
     "steps": [
@@ -1222,6 +1292,30 @@
           "asset": {
             "_type": "reference",
             "_ref": "image-09bf8065df2d91f4aa597cd9c0419bd9a202832e-786x776-png"
+          }
+        },
+        "alt": "Woman smiling and raising her hand to her face, wearing a cushion-cut halo engagement ring"
+      }
+    },
+    "background": {
+      "mobile": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-734e0fa89a702ccfd14cd3f51beb76d9ef3ec472-786x498-png"
+          }
+        },
+        "alt": "Close-up of a smiling woman's hand wearing a cushion-cut halo engagement ring"
+      },
+      "desktop": {
+        "_type": "funnelImage",
+        "image": {
+          "_type": "image",
+          "asset": {
+            "_type": "reference",
+            "_ref": "image-1f84c22947e3e47811cbf4894ea447e7b93fa162-4096x2374-jpg"
           }
         },
         "alt": "Woman smiling and raising her hand to her face, wearing a cushion-cut halo engagement ring"

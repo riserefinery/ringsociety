@@ -31,6 +31,14 @@ const IMAGES = [
   { path: '/images/hero-bg-find-jeweler-quiz.jpg', role: 'Find a Jeweler — hero (desktop)' },
   { path: '/images/intro-find-jeweler-bg-mobile.png', role: 'Find a Jeweler — hero (mobile)' },
 
+  // Backgrounds behind the questions. One pair per funnel; not per question.
+  { path: '/images/hero-bg-mobile.png', role: 'Ring funnels — questions background (mobile)' },
+  { path: '/images/hero-main-quiz-bg.png', role: 'Ring funnels — questions background (desktop)' },
+  {
+    path: '/images/hero-find-jeweler-bg-mobile.png.png',
+    role: 'Find a Jeweler — questions background (mobile)',
+  },
+
   // Quiz answer images
   { path: '/images/pop.png', role: 'Ring style answer' },
   { path: '/images/pop-2.png', role: 'Ring style answer (alternate)' },
