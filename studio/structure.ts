@@ -85,6 +85,9 @@ export const structure: StructureResolver = (S) =>
                       singleton(S, 'sharedOutOfTerritory', 'Out of Territory'),
                     ]),
                 ),
+              S.listItem()
+                .title('Loading Screen')
+                .child(singleton(S, 'funnelLoadingScreen', 'Funnel — Loading Screen')),
             ]),
         ),
     ])

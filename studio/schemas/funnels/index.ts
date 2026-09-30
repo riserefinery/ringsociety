@@ -12,12 +12,14 @@ import {
 import { quiz } from './quizzes'
 import { bookingPage, diamondCardPage, diamondCardTerms, funnelShared, hintPage } from './pages'
 import { sharedResultsDocumentTypes } from './results'
+import { funnelLoadingScreen, loadingCard } from './loading'
 
 export const funnelObjectTypes = [
   funnelImage,
   funnelListItem,
   funnelListSection,
   metalImage,
+  loadingCard,
   quizOption,
   quizStep,
   quizIntro,
@@ -32,5 +34,6 @@ export const funnelDocumentTypes = [
   hintPage,
   bookingPage,
   funnelShared,
+  funnelLoadingScreen,
   ...sharedResultsDocumentTypes,
 ]
