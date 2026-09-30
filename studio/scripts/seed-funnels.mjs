@@ -1,12 +1,16 @@
 /**
  * Seeds the funnel content into Sanity.
  *
- * Idempotent: every document has a deterministic id and is written with createOrReplace, so
- * rerunning this never creates duplicates. The content it writes is a faithful copy of the
- * copy currently hard-coded in the funnel app, so publishing it changes nothing visible.
+ * Every document has a deterministic id, so rerunning this never creates duplicates. But
+ * `createOrReplace` overwrites whatever is already there, and once an editor has changed a
+ * document in the Studio a reseed would silently destroy that work.
+ *
+ * So writing over an existing document now requires `--force`. Without it, documents that already
+ * exist are left exactly as they are; only missing ones are created.
  *
  * Usage:
  *   sanity exec scripts/seed-funnels.mjs --with-user-token
+ *   sanity exec scripts/seed-funnels.mjs --with-user-token -- --force
  */
 import { readFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
@@ -20,12 +24,28 @@ const client = getCliClient({ apiVersion: '2025-01-01' })
 
 const documents = JSON.parse(readFileSync(seedFile, 'utf8'))
 
-let count = 0
+const force = process.argv.includes('--force')
+
+let written = 0
+let skipped = 0
+
 for (const doc of documents) {
   const { _id, _type, ...rest } = doc
+
+  if (!force && (await client.getDocument(_id))) {
+    skipped += 1
+    console.log(`  left alone: ${_id} (already exists)`)
+    continue
+  }
+
   await client.createOrReplace({ _id, _type, ...rest })
-  count += 1
+  written += 1
   console.log(`  written: ${_id}`)
 }
 
-console.log(`\nSeeded ${count} funnel documents into ${client.config().projectId}/${client.config().dataset}.`)
+console.log(
+  `\nSeeded ${written} document(s) into ${client.config().projectId}/${client.config().dataset}.` +
+    (skipped
+      ? `\nLeft ${skipped} existing document(s) untouched. Pass --force to overwrite them — that discards every Studio edit they contain.`
+      : '')
+)
