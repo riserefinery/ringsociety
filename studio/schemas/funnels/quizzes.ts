@@ -164,7 +164,6 @@ export const quiz = defineType({
       type: 'string',
       description:
         'The small uppercase line under the funnel heading, e.g. AND RECEIVE AN EXCLUSIVE RING SOCIETY OFFER. Shown on every step.',
-      group: 'content',
     }),
     defineField({
       name: 'steps',
