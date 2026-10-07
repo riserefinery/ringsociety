@@ -116,6 +116,15 @@ export const quiz = defineType({
       type: 'quizIntro',
     }),
     defineField({
+      name: 'landingVariants',
+      title: 'Landing Page Variants',
+      type: 'array',
+      of: [defineArrayMember({ type: 'landingVariant' })],
+      group: 'landing',
+      description:
+        'Optional. Leave empty to show the Landing Screen above to everyone. Add variants to split traffic between different landing pages.',
+    }),
+    defineField({
       name: 'steps',
       group: 'questions',
       title: 'Questions',
