@@ -205,6 +205,13 @@ export const quizStep = defineType({
         'Turn off to hide this question from visitors without deleting it. Question numbering updates automatically.',
     }),
     defineField({
+      name: 'heroSubtitle',
+      title: 'Subhead Above the Card — This Question Only',
+      type: 'string',
+      description:
+        'Leave blank to use the funnel’s default subhead. Fill it in to show different wording above the card on this question only.',
+    }),
+    defineField({
       name: 'question',
       title: 'Question',
       type: 'text',
@@ -221,13 +228,6 @@ export const quizStep = defineType({
           }
           return true
         }).warning(),
-    }),
-    defineField({
-      name: 'heroSubtitle',
-      title: 'Subhead Above the Card — This Question Only',
-      type: 'string',
-      description:
-        'Leave blank to use the funnel’s default subhead. Fill it in to show different wording above the card on this question only.',
     }),
     defineField({
       name: 'subtitle',
