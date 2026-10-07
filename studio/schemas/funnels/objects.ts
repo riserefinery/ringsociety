@@ -223,6 +223,13 @@ export const quizStep = defineType({
         }).warning(),
     }),
     defineField({
+      name: 'heroSubtitle',
+      title: 'Subhead Above the Card — This Question Only',
+      type: 'string',
+      description:
+        'Leave blank to use the funnel’s default subhead. Fill it in to show different wording above the card on this question only.',
+    }),
+    defineField({
       name: 'subtitle',
       title: 'Supporting Line',
       type: 'text',
