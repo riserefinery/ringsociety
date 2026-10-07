@@ -59,11 +59,6 @@ export const structure: StructureResolver = (S) =>
                     .items([
                       singleton(S, 'diamondCardPage', 'VIP Gift Card Funnel'),
                       singleton(S, 'diamondCardTerms', 'Diamond Card Terms'),
-                      singleton(
-                        S,
-                        'diamondCardTermsEligibility',
-                        'Diamond Card Terms & Eligibility (Modal)',
-                      ),
                     ]),
                 ),
               S.listItem()
@@ -77,6 +72,11 @@ export const structure: StructureResolver = (S) =>
                       singleton(S, 'funnelShared', 'Shared Funnel Wording'),
                     ]),
                 ),
+              singleton(
+                S,
+                'diamondCardTermsEligibility',
+                'Diamond Card Terms & Eligibility',
+              ),
               S.divider(),
               S.listItem()
                 .title('Shared Results')
