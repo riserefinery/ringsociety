@@ -446,6 +446,29 @@ export const quizIntro = defineType({
       type: 'string',
     }),
     defineField({
+      name: 'heroSubhead',
+      title: 'Hero Subhead',
+      type: 'text',
+      rows: 3,
+      description:
+        'A single serif line between the heading and the button. Filling this in switches the intro to the landing-page layout: eyebrow, heading, subhead, button, small print — and the Body paragraphs below are not shown.',
+    }),
+    defineField({
+      name: 'heroDisclaimer',
+      title: 'Small Print Under Button',
+      type: 'text',
+      rows: 4,
+      description:
+        'Shown directly below the button. Include the offer terms and eligibility note.',
+    }),
+    defineField({
+      name: 'heroDisclaimerLink',
+      title: 'Small Print — Linked Phrase',
+      type: 'string',
+      description:
+        'An exact phrase from the small print above, e.g. "See full terms and eligibility." It renders underlined and opens the Diamond Card Terms. Leave blank for plain text.',
+    }),
+    defineField({
       name: 'heroImage',
       title: 'Hero Image',
       type: 'funnelImage',

@@ -128,6 +128,37 @@ export const quiz = defineType({
       ],
     }),
     defineField({
+      name: 'phonePrompt',
+      title: 'Phone Prompt Screen',
+      type: 'object',
+      options: { collapsible: true, collapsed: true },
+      description:
+        'The in-between screen shown when someone submits their email without a phone number. It is meant to look different from the questions so it breaks the flow. Leave a field blank to keep the current value.',
+      fields: [
+        defineField({
+          name: 'heading',
+          title: 'Heading',
+          type: 'string',
+          description:
+            'Sits in the band above the card. Currently "One Last Thing Before We Reveal Your Jeweler".',
+        }),
+        defineField({
+          name: 'mobile',
+          title: 'Background — Mobile',
+          type: 'funnelImage',
+          description:
+            'Shown on phones. The marble is 784×498. Leave blank to keep the current image.',
+        }),
+        defineField({
+          name: 'desktop',
+          title: 'Background — Desktop',
+          type: 'funnelImage',
+          description:
+            'Shown on tablet and desktop. The marble is 2880×2048. Leave blank to keep the current image.',
+        }),
+      ],
+    }),
+    defineField({
       name: 'steps',
       title: 'Questions',
       type: 'array',
