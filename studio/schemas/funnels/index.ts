@@ -14,9 +14,9 @@ import { quiz } from './quizzes'
 import {
   diamondCardTermsEligibility,
   dctCallout,
-  dctHeading,
   dctList,
   dctParagraph,
+  dctSection,
   dctSubheading,
   dctTable,
 } from './diamondCardTermsEligibility'
@@ -36,7 +36,7 @@ export const funnelObjectTypes = [
   landingVariant,
   quizResults,
   phoneCaptureCopy,
-  dctHeading,
+  dctSection,
   dctSubheading,
   dctParagraph,
   dctCallout,

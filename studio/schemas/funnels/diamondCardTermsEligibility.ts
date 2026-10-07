@@ -7,6 +7,11 @@ import { defineArrayMember, defineField, defineType } from 'sanity';
  * "Terms & Eligibility" links. It is held once for the whole site, so the landing
  * page modal, the results pages and the footer links all show the same thing.
  *
+ * Organised as numbered sections. Each section is a collapsed entry in the Studio
+ * showing its heading, so ten sections read as ten lines rather than forty blocks
+ * in a flat list. Open a section to edit the paragraphs, tables and lists inside
+ * it.
+ *
  * The block types mirror exactly what the app already renders, so the existing
  * wording did not have to be reworked to become editable. Text fields accept
  * **bold** around a phrase, the same convention the current copy uses.
@@ -22,22 +27,6 @@ const previewText = (fallback: string) => ({
   }),
 });
 
-export const dctHeading = defineType({
-  name: 'dctHeading',
-  title: 'Section Heading',
-  type: 'object',
-  fields: [
-    defineField({
-      name: 'text',
-      title: 'Heading',
-      type: 'string',
-      description:
-        'A numbered section heading, e.g. "3. Diamond Card Savings Amounts".',
-    }),
-  ],
-  preview: previewText('Section Heading'),
-});
-
 export const dctSubheading = defineType({
   name: 'dctSubheading',
   title: 'Subheading',
@@ -47,7 +36,7 @@ export const dctSubheading = defineType({
       name: 'text',
       title: 'Subheading',
       type: 'string',
-      description: 'A minor heading within a section.',
+      description: 'A minor heading within this section.',
     }),
   ],
   preview: previewText('Subheading'),
@@ -162,9 +151,53 @@ export const dctTable = defineType({
   },
 });
 
+/**
+ * One numbered part of the terms, e.g. "3. Diamond Card Savings Amounts".
+ * Holds its own heading so the list stays readable when collapsed.
+ */
+export const dctSection = defineType({
+  name: 'dctSection',
+  title: 'Section',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'heading',
+      title: 'Section Heading',
+      type: 'string',
+      description: 'e.g. "3. Diamond Card Savings Amounts".',
+    }),
+    defineField({
+      name: 'content',
+      title: 'Content',
+      type: 'array',
+      description: 'Drag to reorder. These appear under this heading.',
+      of: [
+        defineArrayMember({ type: 'dctSubheading' }),
+        defineArrayMember({ type: 'dctParagraph' }),
+        defineArrayMember({ type: 'dctCallout' }),
+        defineArrayMember({ type: 'dctList' }),
+        defineArrayMember({ type: 'dctTable' }),
+      ],
+    }),
+  ],
+  preview: {
+    select: { heading: 'heading', content: 'content' },
+    prepare: ({
+      heading,
+      content,
+    }: {
+      heading?: string;
+      content?: unknown[];
+    }) => ({
+      title: heading || 'Untitled section',
+      subtitle: `${content?.length ?? 0} block(s)`,
+    }),
+  },
+});
+
 export const diamondCardTermsEligibility = defineType({
   name: 'diamondCardTermsEligibility',
-  title: 'Diamond Card Terms & Eligibility (Modal)',
+  title: 'Diamond Card Terms & Eligibility',
   type: 'document',
   fields: [
     defineField({
@@ -180,21 +213,15 @@ export const diamondCardTermsEligibility = defineType({
       description: 'Shown under the title, e.g. "Last updated: October 2026".',
     }),
     defineField({
-      name: 'blocks',
-      title: 'Content',
+      name: 'sections',
+      title: 'Sections',
       type: 'array',
-      description: 'Drag to reorder. These appear in the modal in this order.',
-      of: [
-        defineArrayMember({ type: 'dctHeading' }),
-        defineArrayMember({ type: 'dctSubheading' }),
-        defineArrayMember({ type: 'dctParagraph' }),
-        defineArrayMember({ type: 'dctCallout' }),
-        defineArrayMember({ type: 'dctList' }),
-        defineArrayMember({ type: 'dctTable' }),
-      ],
+      description:
+        'Each section becomes its own numbered part of the terms. Drag to reorder.',
+      of: [defineArrayMember({ type: 'dctSection' })],
     }),
   ],
   preview: {
-    prepare: () => ({ title: 'Diamond Card Terms & Eligibility (Modal)' }),
+    prepare: () => ({ title: 'Diamond Card Terms & Eligibility' }),
   },
 });
