@@ -80,9 +80,16 @@ export const quiz = defineType({
       options: { collapsible: true, collapsed: true },
     },
   ],
+  groups: [
+    { name: 'landing', title: 'Landing Page' },
+    { name: 'questions', title: 'Questions' },
+    { name: 'results', title: 'Results' },
+    { name: 'settings', title: 'Settings' },
+  ],
   fields: [
     defineField({
       name: 'title',
+      group: 'settings',
       title: 'Funnel Name',
       type: 'string',
       description: 'For your reference only, e.g. "Find Your Ring".',
@@ -90,6 +97,7 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'routeKey',
+      group: 'settings',
       title: 'Route Key',
       type: 'string',
       readOnly: true,
@@ -100,11 +108,13 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'intro',
+      group: 'landing',
       title: 'Landing Screen',
       type: 'quizIntro',
     }),
     defineField({
       name: 'background',
+      group: 'questions',
       title: 'Question Screen Background',
       type: 'object',
       options: { collapsible: true, collapsed: false },
@@ -129,6 +139,7 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'phonePrompt',
+      group: 'questions',
       title: 'Phone Prompt Screen',
       type: 'object',
       options: { collapsible: true, collapsed: true },
@@ -160,6 +171,7 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'heroSubtitle',
+      group: 'questions',
       title: 'Subhead Above the Card',
       type: 'string',
       description:
@@ -167,6 +179,7 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'steps',
+      group: 'questions',
       title: 'Questions',
       type: 'array',
       of: [defineArrayMember({ type: 'quizStep' })],
@@ -176,6 +189,7 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'results',
+      group: 'results',
       title: 'Results Page Copy',
       type: 'quizResults',
       description:
@@ -183,11 +197,12 @@ export const quiz = defineType({
     }),
     defineField({
       name: 'phoneCapture',
+      group: 'questions',
       title: 'Diamond Card Step',
       type: 'phoneCaptureCopy',
       description: 'The phone step shown after email on the two ring funnels.',
     }),
-    defineField({ name: 'seo', title: 'Search & Sharing', type: 'pageSeo' }),
+    defineField({ name: 'seo', title: 'Search & Sharing', type: 'pageSeo', group: 'settings' }),
   ],
   preview: {
     select: { title: 'title', routeKey: 'routeKey', steps: 'steps' },
