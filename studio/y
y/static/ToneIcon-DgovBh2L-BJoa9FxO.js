@@ -1,0 +1,1 @@
+import{t as e}from"./compiler-runtime-C4g8XhC5.js";import{t}from"./jsx-runtime-NZYk81nU.js";var n=e(),r=t(),i=e=>{let t=(0,n.c)(5),{tone:i,icon:a}=e,o=`var(--card-badge-${i}-icon-color)`,s;t[0]===o?s=t[1]:(s={"--card-icon-color":o},t[0]=o,t[1]=s);let c=s,l;return t[2]!==a||t[3]!==c?(l=(0,r.jsx)(a,{style:c}),t[2]=a,t[3]=c,t[4]=l):l=t[4],l};export{i as t};

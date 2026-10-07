@@ -6,7 +6,6 @@ import {
   phoneCaptureCopy,
   landingVariant,
   quizIntro,
-  landingVariant,
   quizOption,
   quizResults,
   quizStep,
@@ -25,6 +24,7 @@ export const funnelObjectTypes = [
   quizOption,
   quizStep,
   quizIntro,
+  landingVariant,
   quizResults,
   phoneCaptureCopy,
 ]
