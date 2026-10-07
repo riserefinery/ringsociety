@@ -83,10 +83,12 @@ export const quiz = defineType({
   groups: [
     { name: 'landing', title: 'Landing Page' },
     { name: 'questions', title: 'Questions' },
+    { name: 'capture', title: 'Email and Phone Capture' },
     { name: 'results', title: 'Results' },
     { name: 'settings', title: 'Settings' },
   ],
   fields: [
+
     defineField({
       name: 'title',
       group: 'settings',
@@ -106,11 +108,30 @@ export const quiz = defineType({
       description:
         'Binds this document to its funnel. The application matches on this value, so it is locked.',
     }),
+    defineField({ name: 'seo', title: 'Search & Sharing', type: 'pageSeo', group: 'settings' }),
     defineField({
       name: 'intro',
       group: 'landing',
       title: 'Landing Screen',
       type: 'quizIntro',
+    }),
+    defineField({
+      name: 'steps',
+      group: 'questions',
+      title: 'Questions',
+      type: 'array',
+      of: [defineArrayMember({ type: 'quizStep' })],
+      description:
+        'Drag to reorder. Turn a question off to hide it without deleting it. Questions marked ORDER LOCKED must keep their position relative to the question named on them.',
+      validation: (Rule) => Rule.custom(validateStepOrder).warning(),
+    }),
+    defineField({
+      name: 'heroSubtitle',
+      group: 'questions',
+      title: 'Subhead Above the Card',
+      type: 'string',
+      description:
+        'The small uppercase line under the funnel heading, e.g. AND RECEIVE AN EXCLUSIVE RING SOCIETY OFFER. Shown on every step.',
     }),
     defineField({
       name: 'background',
@@ -138,8 +159,15 @@ export const quiz = defineType({
       ],
     }),
     defineField({
+      name: 'phoneCapture',
+      group: 'capture',
+      title: 'Diamond Card Step',
+      type: 'phoneCaptureCopy',
+      description: 'The phone step shown after email on the two ring funnels.',
+    }),
+    defineField({
       name: 'phonePrompt',
-      group: 'questions',
+      group: 'capture',
       title: 'Phone Prompt Screen',
       type: 'object',
       options: { collapsible: true, collapsed: true },
@@ -170,24 +198,6 @@ export const quiz = defineType({
       ],
     }),
     defineField({
-      name: 'heroSubtitle',
-      group: 'questions',
-      title: 'Subhead Above the Card',
-      type: 'string',
-      description:
-        'The small uppercase line under the funnel heading, e.g. AND RECEIVE AN EXCLUSIVE RING SOCIETY OFFER. Shown on every step.',
-    }),
-    defineField({
-      name: 'steps',
-      group: 'questions',
-      title: 'Questions',
-      type: 'array',
-      of: [defineArrayMember({ type: 'quizStep' })],
-      description:
-        'Drag to reorder. Turn a question off to hide it without deleting it. Questions marked ORDER LOCKED must keep their position relative to the question named on them.',
-      validation: (Rule) => Rule.custom(validateStepOrder).warning(),
-    }),
-    defineField({
       name: 'results',
       group: 'results',
       title: 'Results Page Copy',
@@ -195,14 +205,7 @@ export const quiz = defineType({
       description:
         'The fixed wording on this funnel\u2019s results page. Matched-jeweler data is delivered live.',
     }),
-    defineField({
-      name: 'phoneCapture',
-      group: 'questions',
-      title: 'Diamond Card Step',
-      type: 'phoneCaptureCopy',
-      description: 'The phone step shown after email on the two ring funnels.',
-    }),
-    defineField({ name: 'seo', title: 'Search & Sharing', type: 'pageSeo', group: 'settings' }),
+
   ],
   preview: {
     select: { title: 'title', routeKey: 'routeKey', steps: 'steps' },
