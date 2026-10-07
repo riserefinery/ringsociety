@@ -184,6 +184,47 @@ export const quiz = defineType({
         'The in-between screen shown when someone submits their email without a phone number. It is meant to look different from the questions so it breaks the flow. Leave a field blank to keep the current value.',
       fields: [
         defineField({
+          name: 'headline',
+          title: 'Card Headline',
+          type: 'string',
+          description:
+            'The headline inside the card. Currently "Want your Diamond Card texted to you right away?". Leave blank to keep the current wording.',
+        }),
+        defineField({
+          name: 'benefitLine',
+          title: 'Benefit Line',
+          type: 'text',
+          rows: 2,
+          description:
+            'The supporting line under the headline. Leave blank to keep the current wording.',
+        }),
+        defineField({
+          name: 'placeholder',
+          title: 'Phone Field Placeholder',
+          type: 'string',
+          description: 'Leave blank for "Phone Number".',
+        }),
+        defineField({
+          name: 'ctaLabel',
+          title: 'Primary Button Label',
+          type: 'string',
+          description: 'Leave blank for "YES, TEXT MY DIAMOND CARD".',
+        }),
+        defineField({
+          name: 'declineLabel',
+          title: 'Decline Link Label',
+          type: 'string',
+          description: 'Leave blank for "No thanks, just show me my jeweler".',
+        }),
+        defineField({
+          name: 'consent',
+          title: 'Consent and Disclaimer',
+          type: 'text',
+          rows: 6,
+          description:
+            'The fine print under the buttons — the consent line and the savings disclaimer. Blank lines between paragraphs are preserved. Leave blank to keep the current wording.',
+        }),
+        defineField({
           name: 'heading',
           title: 'Heading',
           type: 'string',
