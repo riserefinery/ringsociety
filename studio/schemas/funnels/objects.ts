@@ -496,6 +496,71 @@ export const quizIntro = defineType({
 })
 
 /** Static copy for a results page. Matched-jeweler data always comes from n8n, never from here. */
+/**
+ * One testable version of a funnel's landing page. The funnel's own `intro` is the
+ * control and stays the default when no variant is switched on.
+ */
+export const landingVariant = defineType({
+  name: 'landingVariant',
+  title: 'Landing Page Variant',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'key',
+      title: 'Reporting Key',
+      type: 'string',
+      description:
+        'A short stable label used to attribute leads, e.g. "a" or "b". Set it before the variant goes live — changing it later splits your reporting.',
+      validation: (Rule) =>
+        Rule.custom((value) =>
+          value
+            ? true
+            : 'Give this variant a reporting key, or its results cannot be attributed.'
+        ).warning(),
+    }),
+    defineField({
+      name: 'label',
+      title: 'Name',
+      type: 'string',
+      description: 'For your reference in the Studio, e.g. "Short hero".',
+    }),
+    defineField({
+      name: 'enabled',
+      title: 'Show This Variant',
+      type: 'boolean',
+      initialValue: true,
+      description: 'Turn off to stop sending traffic here without deleting the content.',
+    }),
+    defineField({
+      name: 'weight',
+      title: 'Traffic Weight',
+      type: 'number',
+      initialValue: 1,
+      description:
+        'Relative share of visitors. A variant weighted 2 receives twice the traffic of one weighted 1.',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Landing Content',
+      type: 'quizIntro',
+      description: 'The landing page as this variant should appear.',
+    }),
+  ],
+  preview: {
+    select: { key: 'key', label: 'label', enabled: 'enabled', weight: 'weight' },
+    prepare: ({ key, label, enabled, weight }) => ({
+      title: label || (key ? `Variant ${key}` : 'Untitled variant'),
+      subtitle: [
+        key ? `key: ${key}` : 'NO KEY — cannot be attributed',
+        enabled === false ? 'OFF' : null,
+        `weight ${weight ?? 1}`,
+      ]
+        .filter(Boolean)
+        .join(' · '),
+    }),
+  },
+})
+
 export const quizResults = defineType({
   name: 'quizResults',
   title: 'Results Page Copy',
