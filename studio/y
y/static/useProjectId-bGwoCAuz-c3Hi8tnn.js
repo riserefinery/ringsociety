@@ -1,0 +1,1 @@
+import{u as e}from"./dist-BL0qmVID.js";function t(){return e().projectId}export{t};
