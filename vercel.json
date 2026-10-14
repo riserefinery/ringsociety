@@ -4,6 +4,13 @@
   "outputDirectory": "dist",
   "routes": [
     {
+      "src": "/text-us-949-630-3642(?:\\.html)?/?",
+      "headers": {
+        "X-Robots-Tag": "noindex, nofollow"
+      },
+      "continue": true
+    },
+    {
       "src": "/diamond-card-terms-and-eligibility",
       "headers": {
         "X-Robots-Tag": "noindex, follow"
