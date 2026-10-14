@@ -1,29 +1,86 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex, nofollow">
-  <title>Text Us</title><style>body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:Arial,sans-serif}.message{text-align:center}.message a{color:#000}</style></head><body><div class="message"><p id="status">Opening Messages...</p><p><a id="fallback" href="#" style="display:none">Tap here to text us</a></p></div><script>const params = new URLSearchParams(window.location.search);
-    let phone = params.get('phone');
-
-    if (phone) {
-
-      // Remove spaces, brackets, dashes, etc.
-      phone = phone.replace(/[^\d+]/g, '');
-
-      // Make sure we have the + sign
-      if (!phone.startsWith('+')) {
-        phone = '+' + phone;
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#F8F6F2" />
+    <title>Text Us | Ring Society</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <style>
+      :root { color-scheme: light; }
+      body {
+        box-sizing: border-box;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 32px 24px;
+        background: #F8F6F2;
+        color: #000;
       }
+      .message {
+        width: 100%;
+        text-align: center;
+      }
+      .logo {
+        display: block;
+        width: auto;
+        height: 26px;
+        margin: 0 auto 38px;
+      }
+      #status {
+        margin: 0;
+        font-family: 'Instrument Serif', Georgia, serif;
+        font-size: 28px;
+        font-weight: 400;
+        line-height: 1.18;
+        letter-spacing: -0.3px;
+      }
+      @media (min-width: 768px) {
+        #status {
+          font-size: 42px;
+          line-height: 1.2;
+          letter-spacing: normal;
+        }
+      }
+      .fallback-wrap {
+        margin: 16px 0 0;
+      }
+      .fallback {
+        color: #000;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="message">
+      <img class="logo" src="https://files.manuscdn.com/user_upload_by_module/session_file/310519663235760234/VbpMddvjRvEyVZEb.svg" alt="Ring Society" />
+      <h2 id="status">Just a moment please</h2>
+      <p class="fallback-wrap">
+        <a id="fallback" class="fallback" href="#" style="display: none">Tap here to text us</a>
+      </p>
+    </main>
+    <script>
+      const params = new URLSearchParams(window.location.search)
+      let phone = params.get('phone')
 
-      const smsUrl = 'sms:' + phone;
+      if (phone) {
+        phone = phone.replace(/[^\d+]/g, '')
+        if (!phone.startsWith('+')) phone = '+' + phone
 
-      // Set fallback link
-      const fallback = document.getElementById('fallback');
-      fallback.href = smsUrl;
-      fallback.style.display = 'inline';
-
-      // Try to open Messages
-      window.location.href = smsUrl;
-
-    } else {
-
-      document.getElementById('status').textContent =
-        'No phone number was provided.';
-    }</script></body></html>
+        const smsUrl = 'sms:' + phone
+        const fallback = document.getElementById('fallback')
+        fallback.href = smsUrl
+        fallback.style.display = 'inline'
+        window.location.href = smsUrl
+      } else {
+        document.getElementById('status').textContent = 'No phone number was provided.'
+      }
+    </script>
+  </body>
+</html>

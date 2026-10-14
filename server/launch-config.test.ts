@@ -21,6 +21,10 @@ describe('launch configuration', () => {
 
     expect(route?.headers?.['X-Robots-Tag']).toBe('noindex, nofollow')
     expect(launcher).toContain('name="robots" content="noindex, nofollow"')
+    expect(launcher).toContain('Just a moment please')
+    expect(launcher).toContain("font-family: 'Instrument Serif', Georgia, serif")
+    expect(launcher).toContain('background: #F8F6F2')
+    expect(launcher).toContain('VbpMddvjRvEyVZEb.svg')
     expect(launcher).toContain("let phone = params.get('phone')")
     expect(launcher).toContain("const smsUrl = 'sms:' + phone")
   })
