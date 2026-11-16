@@ -351,11 +351,16 @@ function EndMatterAccordion({ title, children }: { title: string; children: Reac
 function ArticleEndMatter({
   relatedGuides,
   sources,
+  bulletedSources = false,
 }: {
   relatedGuides: ArticleRelatedGuide[]
   sources: ArticleSource[]
+  bulletedSources?: boolean
 }) {
   if (!relatedGuides.length && !sources.length) return null
+
+  const SourceList = bulletedSources ? 'ul' : 'div'
+  const SourceEntry = bulletedSources ? 'li' : 'p'
 
   return (
     <section aria-label="Article resources" className="mt-14 md:mt-20">
@@ -377,9 +382,13 @@ function ArticleEndMatter({
       )}
       {sources.length > 0 && (
         <EndMatterAccordion title="Sources">
-          <div className="flex flex-col gap-3 text-[14px] leading-[1.55] text-[#4d4d4d]">
+          <SourceList
+            className={bulletedSources
+              ? 'flex list-disc flex-col gap-3 pl-5 text-[14px] leading-[1.55] text-[#4d4d4d]'
+              : 'flex flex-col gap-3 text-[14px] leading-[1.55] text-[#4d4d4d]'}
+          >
             {sources.map((source) => (
-              <p key={`${source.citation}-${source.url}`}>
+              <SourceEntry key={`${source.citation}-${source.url}`}>
                 {source.citation}{' '}
                 <a
                   href={source.url}
@@ -389,9 +398,9 @@ function ArticleEndMatter({
                 >
                   {source.url}
                 </a>
-              </p>
+              </SourceEntry>
             ))}
-          </div>
+          </SourceList>
         </EndMatterAccordion>
       )}
     </section>
@@ -774,6 +783,7 @@ export default function Article() {
             <ArticleEndMatter
               relatedGuides={doc.articleRelatedGuides ?? []}
               sources={doc.sources ?? []}
+              bulletedSources={doc.slug === 'how-to-buy-an-engagement-ring'}
             />
             {/* bottom-of-article fade to entice the scroll; releases at the end */}
             <div
