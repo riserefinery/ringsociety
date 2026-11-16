@@ -1,6 +1,7 @@
 import { sanityClient } from './client'
 import { toArticleDoc, toCmsCards } from './mappers'
 import type { CmsPageDocument, CmsPost, CmsSiteSettings, CmsTopGuidesDocument } from './types'
+import type { ArticleDoc } from '../lib/content'
 
 const articleRequestCache = new Map<string, Promise<ReturnType<typeof toArticleDoc> | null>>()
 const articleResultCache = new Map<string, ReturnType<typeof toArticleDoc> | null>()
@@ -87,6 +88,12 @@ export async function getCmsArticle(slug: string | undefined) {
 /** Return a prewarmed post synchronously when a prior card interaction completed its CMS request. */
 export function getCachedCmsArticle(slug: string | undefined) {
   return slug ? articleResultCache.get(slug) ?? null : null
+}
+
+/** Keep the approved static page and its first browser render on the same public CMS snapshot. */
+export function seedCmsArticle(article: ArticleDoc) {
+  articleResultCache.set(article.slug, article)
+  articleRequestCache.set(article.slug, Promise.resolve(article))
 }
 
 /** Prewarm the CMS record before a card navigation without blocking the interaction. */

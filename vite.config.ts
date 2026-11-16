@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
 import siteConfiguration from './.figma/make/site.json'
+import { APPROVED_ARTICLE_PATH } from './src/lib/articleSeo'
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -93,6 +94,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
   const bodyStart = config.customScripts?.bodyStart ?? ''
   const bodyEnd = config.customScripts?.bodyEnd ?? ''
   const robotsTxt = config.robots?.index === false ? 'User-agent: *\nDisallow: /\n' : ''
+  const productionRobotsTxt = `${robotsTxt}Allow: ${APPROVED_ARTICLE_PATH}$\nAllow: /assets/\n`
 
   return {
     name: 'figma-site-configuration',
@@ -111,6 +113,12 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
         type: 'asset',
         fileName: 'robots.txt',
         source: robotsTxt,
+      })
+      // Vercel serves this variant only on ringsociety.com; preview hosts stay blocked.
+      this.emitFile({
+        type: 'asset',
+        fileName: 'robots-production.txt',
+        source: productionRobotsTxt,
       })
     },
     transformIndexHtml: {

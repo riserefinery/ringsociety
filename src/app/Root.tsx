@@ -1,6 +1,7 @@
 import { Outlet, ScrollRestoration, useLocation } from 'react-router'
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Header, Footer, MatchingFunnelModal } from '../components'
+import { SITE_ROBOTS_BASELINE } from '../lib/articleSeo'
 
 const canonicalHost = 'https://ringsociety.com'
 const HELLO_BAR_SESSION_KEY = 'ring-society:hello-bar-seen'
@@ -68,6 +69,7 @@ function RouteMeta() {
     }
 
     upsert('meta[name="description"]', 'name', meta.description)
+    upsert('meta[name="robots"]', 'name', SITE_ROBOTS_BASELINE)
     upsert('meta[property="og:title"]', 'property', meta.title)
     upsert('meta[property="og:description"]', 'property', meta.description)
     upsert('meta[property="og:url"]', 'property', canonical)

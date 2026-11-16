@@ -18,6 +18,30 @@
       "continue": true
     },
     {
+      "src": "/robots\\.txt$",
+      "has": [{ "type": "host", "value": "ringsociety.com" }],
+      "dest": "/robots-production.txt"
+    },
+    {
+      "src": "/guides/how-to-buy-an-engagement-ring/(?:index\\.html)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/how-to-buy-an-engagement-ring",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/how-to-buy-an-engagement-ring$",
+      "has": [{ "type": "host", "value": "ringsociety.com" }],
+      "headers": { "X-Robots-Tag": "index, follow" },
+      "dest": "/approved-articles/how-to-buy-an-engagement-ring.html"
+    },
+    {
+      "src": "/approved-articles/(.*)",
+      "headers": { "X-Robots-Tag": "noindex, follow" },
+      "continue": true
+    },
+    {
       "src": "/guides/(.*)",
       "headers": {
         "X-Robots-Tag": "noindex, follow"

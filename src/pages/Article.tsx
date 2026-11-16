@@ -18,6 +18,7 @@ import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif
 import ResponsiveImage from '../components/ResponsiveImage'
 import { getCachedCmsArticle, getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
 import { fadeUp, staggerContainer } from '../lib/motion'
+import { articleMetadata, articleStructuredData, SITE_ROBOTS_BASELINE } from '../lib/articleSeo'
 
 /* ---------- icons ---------- */
 
@@ -541,8 +542,8 @@ export default function Article() {
     const shareDescription = doc.shareDescription ?? doc.subtitle
     const shareImage = doc.shareImage ?? doc.hero
     const shareImageAlt = doc.shareImageAlt ?? doc.title
-    const canonicalPath = doc.canonicalPath ?? `/guides/${doc.slug}`
-    const canonical = `https://ringsociety.com${canonicalPath}`
+    const metadata = articleMetadata(doc, window.location.hostname)
+    const canonical = metadata.canonical
     const upsert = (selector: string, attribute: 'name' | 'property', content: string) => {
       let element = document.querySelector<HTMLMetaElement>(selector)
       if (!element) {
@@ -551,10 +552,18 @@ export default function Article() {
         document.head.appendChild(element)
       }
       element.content = content
+      document.querySelectorAll(selector).forEach((duplicate, index) => {
+        if (index > 0) duplicate.remove()
+      })
     }
-    const canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    let canonicalLink = document.querySelector<HTMLLinkElement>('link[rel="canonical"]')
+    if (!canonicalLink) {
+      canonicalLink = document.createElement('link')
+      canonicalLink.rel = 'canonical'
+      document.head.appendChild(canonicalLink)
+    }
 
-    document.title = `${shareTitle} | Ring Society`
+    document.title = metadata.noIndex ? `${shareTitle} | Ring Society` : shareTitle
     upsert('meta[name="description"]', 'name', shareDescription)
     upsert('meta[property="og:title"]', 'property', shareTitle)
     upsert('meta[property="og:description"]', 'property', shareDescription)
@@ -566,18 +575,8 @@ export default function Article() {
     upsert('meta[name="twitter:title"]', 'name', shareTitle)
     upsert('meta[name="twitter:description"]', 'name', shareDescription)
     upsert('meta[name="twitter:image"]', 'name', shareImage)
-    if (canonicalLink) canonicalLink.href = canonical
-
-    const existingRobots = document.querySelector<HTMLMetaElement>('meta[name="robots"]')
-    const previousRobots = existingRobots?.getAttribute('content') ?? null
-    const robots = doc.noIndex ? existingRobots ?? document.createElement('meta') : null
-    if (robots) {
-      if (!existingRobots) {
-        robots.setAttribute('name', 'robots')
-        document.head.appendChild(robots)
-      }
-      robots.setAttribute('content', 'noindex, follow')
-    }
+    canonicalLink.href = canonical
+    upsert('meta[name="robots"]', 'name', metadata.noIndex ? 'noindex, follow' : 'index, follow')
 
     const schemaId = 'ring-society-article-schema'
     let schema = document.getElementById(schemaId) as HTMLScriptElement | null
@@ -587,27 +586,13 @@ export default function Article() {
       schema.type = 'application/ld+json'
       document.head.appendChild(schema)
     }
-    schema.textContent = JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'Article',
-      headline: shareTitle,
-      description: shareDescription,
-      image: shareImage,
-      mainEntityOfPage: canonical,
-      author: { '@type': 'Organization', name: 'Ring Society' },
-      publisher: { '@type': 'Organization', name: 'Ring Society', url: 'https://ringsociety.com/' },
-    })
+    schema.textContent = JSON.stringify(articleStructuredData(doc))
 
     return () => {
       document.getElementById(schemaId)?.remove()
       upsert('meta[property="og:type"]', 'property', 'website')
-      if (robots && !existingRobots) {
-        robots.remove()
-      } else if (robots && previousRobots === null) {
-        robots.removeAttribute('content')
-      } else if (robots) {
-        robots.setAttribute('content', previousRobots)
-      }
+      // Never restore the indexable artifact's tag when leaving for an unreviewed page.
+      upsert('meta[name="robots"]', 'name', SITE_ROBOTS_BASELINE)
     }
   }, [doc])
 
