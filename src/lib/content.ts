@@ -352,7 +352,7 @@ export type ArticleBlock =
   | { type: 'h4'; text: string; inline?: ArticleInline[] }
   | { type: 'blockquote'; text: string; inline?: ArticleInline[] }
   | { type: 'list'; ordered: boolean; items: { text: string; inline?: ArticleInline[] }[] }
-  | { type: 'image'; src: string; alt: string; caption?: string; note?: string }
+  | { type: 'image'; src: string; mobileSrc?: string; alt: string; caption?: string; note?: string }
   | { type: 'deflist'; items: { term: string; def: string }[] }
   | { type: 'note'; label: string; text: string }
 

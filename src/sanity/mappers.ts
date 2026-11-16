@@ -63,7 +63,8 @@ function toBlocks(blocks: CmsPortableBlock[] | undefined): ArticleBlock[] {
 
     if (block._type === 'image') {
       const src = imageUrl(block, 1440)
-      if (src) mapped.push({ type: 'image', src, alt: block.alt ?? '', caption: block.caption, note: block.note })
+      const mobileSrc = imageUrl(block.mobileImage, 900)
+      if (src) mapped.push({ type: 'image', src, mobileSrc, alt: block.alt ?? '', caption: block.caption, note: block.note })
       continue
     }
 

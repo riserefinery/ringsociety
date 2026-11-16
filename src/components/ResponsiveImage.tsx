@@ -1,18 +1,21 @@
+import type { MouseEventHandler, ReactEventHandler } from 'react'
 import { imageUrl } from '../sanity/image'
 import type { CmsResponsiveImage } from '../sanity/types'
 
 type ResponsiveImageProps = {
   image?: CmsResponsiveImage
   fallbackSrc: string
+  mobileSrc?: string
   alt: string
   className?: string
   sizes?: string
-  onLoad?: () => void
+  onLoad?: ReactEventHandler<HTMLImageElement>
+  onClick?: MouseEventHandler<HTMLImageElement>
 }
 
 /** This preserves the current image layouts while allowing intentional editorial crops. */
-export default function ResponsiveImage({ image, fallbackSrc, alt, className, sizes, onLoad }: ResponsiveImageProps) {
-  const mobile = imageUrl(image?.mobileImage, 900)
+export default function ResponsiveImage({ image, fallbackSrc, mobileSrc, alt, className, sizes, onLoad, onClick }: ResponsiveImageProps) {
+  const mobile = mobileSrc ?? imageUrl(image?.mobileImage, 900)
   const tablet = imageUrl(image?.tabletImage, 1200)
   const xl = imageUrl(image?.xlImage, 2400)
   const main = imageUrl(image?.mainImage, 1800) ?? fallbackSrc
@@ -23,7 +26,7 @@ export default function ResponsiveImage({ image, fallbackSrc, alt, className, si
       {xl && <source media="(min-width: 1536px)" srcSet={xl} />}
       {tablet && <source media="(min-width: 768px)" srcSet={tablet} />}
       {mobile && <source media="(max-width: 767px)" srcSet={mobile} />}
-      <img src={main} alt={image?.alt ?? alt} className={className} sizes={sizes} style={{ objectPosition }} onLoad={onLoad} />
+      <img src={main} alt={image?.alt ?? alt} className={className} sizes={sizes} style={{ objectPosition }} onLoad={onLoad} onClick={onClick} />
     </picture>
   )
 }
