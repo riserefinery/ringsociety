@@ -16,6 +16,7 @@ import {
 import { shareArrow } from '../lib/assets'
 import { ArticleLabel, GuideCard, Newsletter, Reveal, Stagger, RevealItem, serif } from '../components'
 import ResponsiveImage from '../components/ResponsiveImage'
+import ArticleCallout from '../components/ArticleCallout'
 import { getCachedCmsArticle, getCmsArticle, prefetchCmsArticle } from '../sanity/queries'
 import { fadeUp, staggerContainer } from '../lib/motion'
 import { articleMetadata, articleStructuredData, SITE_ROBOTS_BASELINE } from '../lib/articleSeo'
@@ -252,15 +253,7 @@ function ArticleBody({
         )
       }
       case 'note':
-        return (
-          <div
-            key={key}
-            className="body-copy rounded-[8px] border border-[#abb7b1]/20 bg-[#fbf9f7] p-4 tracking-[0.1px] text-black"
-          >
-            <span className="font-semibold">{block.label}: </span>
-            {block.text}
-          </div>
-        )
+        return <ArticleCallout key={key} text={block.text} />
       case 'deflist':
         return (
           <dl key={key} className="flex flex-col gap-6 pl-2 md:pl-4">
