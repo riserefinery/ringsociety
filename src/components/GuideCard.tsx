@@ -13,6 +13,8 @@ import { prefetchCmsArticle } from '../sanity/queries'
 export type Card = {
   category: string
   title: string
+  /** Published article subtitle, used by linked editorial surfaces. */
+  excerpt?: string
   cta: string
   image: string
   alt: string

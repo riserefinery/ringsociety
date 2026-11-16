@@ -1,10 +1,25 @@
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
+import { toCmsCard } from '../src/sanity/mappers'
 
 const root = resolve(import.meta.dirname, '..')
 
 describe('shared full-bleed hero and CTA layout', () => {
+  it('uses the linked published guide title and excerpt rather than duplicated homepage copy', () => {
+    const home = readFileSync(resolve(root, 'src/pages/Home.tsx'), 'utf8')
+    const post = { _id: 'post-how-to-buy-an-engagement-ring', slug: 'how-to-buy-an-engagement-ring', title: 'Updated article title', excerpt: 'Updated article subtitle' }
+    const card = toCmsCard(post)
+    expect(card).toMatchObject({ title: post.title, excerpt: post.excerpt, to: '/guides/how-to-buy-an-engagement-ring' })
+    expect(home).toContain("const featuredGuide = cmsCards.find((card) => card.to === '/guides/how-to-buy-an-engagement-ring')")
+    expect(home).toContain('title={featuredGuide?.title ||')
+    expect(home).toContain('body={featuredGuide?.excerpt ||')
+    expect(home).toContain("label={featuredGuide?.category ?? 'Guide'}")
+    expect(home).not.toContain('Shopping for an engagement ring should be')
+    expect(home).toContain('image={IMAGES.hero}')
+    expect(home).toContain('mobileImage={heroMobileImg}')
+  })
+
   it('aligns the homepage hero’s widened desktop content column with the shared page grid', () => {
     const home = readFileSync(resolve(root, 'src/pages/Home.tsx'), 'utf8')
     const hero = readFileSync(resolve(root, 'src/components/Hero.tsx'), 'utf8')

@@ -101,6 +101,7 @@ export function toCmsCard(post: CmsPost): Article {
   return {
     category,
     title: post.title ?? 'Untitled guide',
+    excerpt: post.excerpt,
     cta: 'view the guide',
     image,
     alt: post.heroImage?.alt ?? '',

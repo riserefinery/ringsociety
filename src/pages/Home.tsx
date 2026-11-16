@@ -241,7 +241,8 @@ export default function Home() {
     }
   }, [])
 
-  const heroLabel = cmsCards.find((card) => card.to === '/guides/how-to-buy-an-engagement-ring')?.badge ?? 'most loved'
+  const featuredGuide = cmsCards.find((card) => card.to === '/guides/how-to-buy-an-engagement-ring')
+  const heroLabel = featuredGuide?.badge ?? 'most loved'
 
   return (
     <>
@@ -251,11 +252,11 @@ export default function Home() {
           image={IMAGES.hero}
           mobileImage={heroMobileImg}
           alt="A woman resting her hand against her face, an engagement ring catching the light"
-          label="Guide"
+          label={featuredGuide?.category ?? 'Guide'}
           badge={heroLabel}
           mobileEyebrow="Our Most-Loved Guide"
-          title="How to Buy an Engagement Ring"
-          body="Shopping for an engagement ring should be one of life’s biggest moments… but often couples find it intimidating and stressful. We’ll show you everything, from styles to budgeting, to jewelers."
+          title={featuredGuide?.title || 'How to Buy an Engagement Ring: The Definitive Guide'}
+          body={featuredGuide?.excerpt || 'Everything you need to choose with confidence, from styles and stones to budgets and finding the right jeweler.'}
           ctaLabel="view the guide"
           ctaTo="/guides/how-to-buy-an-engagement-ring"
           mobileCtaFullWidth
