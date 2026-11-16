@@ -92,8 +92,9 @@ export default async function guideShare(req, res) {
 
     res.setHeader('Content-Type', 'text/html; charset=utf-8')
     res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=86400')
-    res.setHeader('X-Robots-Tag', meta.noIndex ? 'noindex, follow' : 'index, follow')
-    return res.status(200).send(req.method === 'HEAD' ? '' : shareDocument(meta))
+    // This metadata-only endpoint is never a separately indexable article URL.
+    res.setHeader('X-Robots-Tag', 'noindex, follow')
+    return res.status(200).send(req.method === 'HEAD' ? '' : shareDocument({ ...meta, noIndex: true }))
   } catch (error) {
     console.error('[guide-share] share metadata lookup failed', error)
     return res.status(502).send('Share metadata unavailable')

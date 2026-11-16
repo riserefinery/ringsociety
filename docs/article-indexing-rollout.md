@@ -1,26 +1,26 @@
 # Ring Society Article Indexing Rollout
 
-## Current pilot mode
+## Approved single-article release
 
-The public Vercel URL remains globally no-indexed because the production apex domain has not yet been assigned. This prevents the preview hostname from competing with the intended `https://ringsociety.com` canonical URLs in search results.
+Only `https://ringsociety.com/guides/how-to-buy-an-engagement-ring` is approved for indexing in this release. The article was reviewed and published in Sanity with the approved title, description, seven graphics, original hero, and `seo.noIndex: false`.
 
-Every `/guides/` route also has a Vercel `X-Robots-Tag: noindex, follow` header. This is the authoritative article-level lock for the pilot: crawlers can read the directive before rendering JavaScript, and the website can be shared with pilot users without putting unreviewed article content into search.
+The build renders this published post through the existing React article template into one HTML artifact. The canonical route serves that content-bearing HTML to visitors, search crawlers, and social crawlers alike. Its head contains the article metadata before JavaScript runs. The browser is seeded with the same public snapshot so its initial article matches the crawler version.
 
-Each post also stores `seo.noIndex`. Existing posts have been set to `true`; new posts default to `true` in the local Studio schema. The public article page emits a matching `meta[name="robots"]` tag when that field is set. The per-post control preserves editorial readiness state for the later production release.
+All other routes keep their existing protections. `.figma/make/site.json` remains `robots.index: false`; the common HTML shell remains noindexed. Vercel keeps the blanket guide header for every unapproved guide, the SMS and legal headers, and the existing metadata-only sharing route for other guides. Preview/noncanonical hosts remain noindexed. The metadata-only API and direct artifact URLs are also noindexed. The approved article's trailing-slash alias redirects to its clean canonical URL.
 
-## Production-release sequence
+On `ringsociety.com` only, robots.txt permits this exact article and its static `/assets/` resources while retaining `Disallow: /` for other pages. The default robots.txt on other hosts continues to block crawling. Do not submit an XML sitemap at this stage.
 
-1. Assign `ringsociety.com` to the public Vercel project and set `www.ringsociety.com` to redirect to the apex. Keep `app.ringsociety.com` assigned to the existing matching-funnel project.
-2. Add the apex and `www` origins to Sanity CORS if they are not already present.
-3. Confirm the homepage’s canonical URL, title, social image, legal pages, and robots response on the apex domain.
-4. Change the global site robots setting from `index: false` to `index: true` so the core site can be crawled.
-5. Keep the `/guides/` Vercel no-index route header in place while articles are being rewritten and fact-checked. Do not submit an XML sitemap at this stage.
-6. After editorial and expert approval of the article set, verify every approved guide has `Prevent Search Indexing` turned off in Studio, remove the temporary `/guides/` header, and then generate and submit a sitemap containing only canonical, indexable URLs.
+## Editorial update and deployment sequence
 
-## Editorial rule
+1. Update the existing Sanity article through a reviewed draft, preserving its slug, hero, and unrelated fields.
+2. Publish only after content, graphics, citations, and metadata are approved.
+3. Regenerate and deploy the crawlable HTML through the normal GitHub/Vercel build. **Sanity publication alone does not refresh this article's static search copy.** Its browser snapshot and raw HTML deliberately stay on the same deployed content revision.
+4. Check the canonical response's meaningful body, unique title/description/canonical/social tags, absence of noindex, and robots allowance with visitor, search, and social User-Agents. Check an unapproved guide and preview host remain protected.
 
-An article should remain no-indexed until its copy has passed factual review, its sources are complete, imagery and alt text are approved, and its SEO title and description have been reviewed. Sources and body-level related guides belong in the existing closed Article End Matter accordions, not in the main Article Body or table of contents.
+The build fails closed if the approved post is unavailable, lacks content, has a mismatched canonical path, or is not explicitly opted into indexing. To revoke indexing for this static page, restore its CMS noindex flag and the deployment-level noindex block or remove the approved route; redeploy the change. A CMS flag cannot instantly revoke already deployed static HTML.
 
 ## Guardrails
 
-Do not use `robots.txt` to block an article that needs to be removed from search. A crawler must be able to access the URL in order to see a `noindex` directive. No-indexed guides should also be omitted from any future sitemap.
+Do not broaden the approved slug or host allowlist without separate approval. Do not release the paused desktop hero-height patch as part of indexing work. Leave `app.ringsociety.com`, Reflect, legal routes, domain redirects, the legacy SMS launcher, and every lead-form integration untouched.
+
+Sources and body-level Related Guides stay in the existing closed Article End Matter accordions, not in the main body or table of contents. Future articles remain noindexed until their own editorial approval and explicit indexing authorization.
