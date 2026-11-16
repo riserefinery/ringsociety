@@ -47,7 +47,7 @@ const slugify = (s: string) =>
 
 /* ---------- lightbox gallery ---------- */
 
-type GalleryImage = { src: string; alt: string; caption?: string }
+type GalleryImage = { src: string; mobileSrc?: string; alt: string; caption?: string }
 
 function Lightbox({
   images,
@@ -61,6 +61,8 @@ function Lightbox({
   onIndex: (i: number) => void
 }) {
   const current = images[index]
+  const [loadedSource, setLoadedSource] = useState<{ asset: string; src: string } | null>(null)
+  const visibleSrc = loadedSource?.asset === current.src ? loadedSource.src : current.src
   const prev = () => onIndex((index - 1 + images.length) % images.length)
   const next = () => onIndex((index + 1) % images.length)
 
@@ -81,7 +83,7 @@ function Lightbox({
   const share = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title: current.alt, url: current.src })
+        await navigator.share({ title: current.alt, url: visibleSrc })
       } catch {
         /* dismissed */
       }
@@ -102,7 +104,7 @@ function Lightbox({
           {index + 1} / {images.length}
         </span>
         <div className="flex items-center gap-3">
-          <a href={current.src} download className={ctrl} aria-label="Save image">
+          <a href={visibleSrc} download className={ctrl} aria-label="Save image">
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M9 2v9m0 0 3.5-3.5M9 11 5.5 7.5M3 15h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -132,10 +134,13 @@ function Lightbox({
           </button>
         )}
         <figure className="flex max-h-full flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
-          <img
-            src={current.src}
+          <ResponsiveImage
+            key={current.src}
+            fallbackSrc={current.src}
+            mobileSrc={current.mobileSrc}
             alt={current.alt}
             className="max-h-[72vh] w-auto max-w-full rounded-[8px] object-contain"
+            onLoad={(event) => setLoadedSource({ asset: current.src, src: event.currentTarget.currentSrc || current.src })}
           />
           {current.caption && (
             <figcaption className="max-w-[560px] text-center text-[12px] leading-[1.5] text-white/60">
@@ -272,8 +277,9 @@ function ArticleBody({
         return (
           <figure key={key} className="flex flex-col gap-3">
             <div className="group relative overflow-hidden rounded-[8px]">
-              <img
-                src={block.src}
+              <ResponsiveImage
+                fallbackSrc={block.src}
+                mobileSrc={block.mobileSrc}
                 alt={block.alt}
                 onClick={() => onZoom(gi)}
                 className="h-auto w-full cursor-zoom-in object-cover"
@@ -593,7 +599,7 @@ export default function Article() {
     () =>
       (doc?.body ?? [])
         .filter((b): b is Extract<ArticleBlock, { type: 'image' }> => b.type === 'image')
-        .map((b) => ({ src: b.src, alt: b.alt, caption: b.caption })),
+        .map((b) => ({ src: b.src, mobileSrc: b.mobileSrc, alt: b.alt, caption: b.caption })),
     [doc],
   )
   const galleryIndexOf = (src: string) => gallery.findIndex((g) => g.src === src)

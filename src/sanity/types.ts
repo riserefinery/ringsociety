@@ -37,6 +37,7 @@ export type CmsPortableBlock = {
   children?: CmsTextSpan[]
   markDefs?: CmsLinkMark[]
   asset?: CmsImageAsset
+  mobileImage?: { asset?: CmsImageAsset }
   alt?: string
   caption?: string
   note?: string

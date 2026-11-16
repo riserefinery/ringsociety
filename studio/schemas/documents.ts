@@ -31,6 +31,13 @@ const articleImage = defineArrayMember({
     defineField({ name: 'alt', title: 'Alt Text', type: 'string', validation: (Rule) => Rule.required() }),
     defineField({ name: 'caption', title: 'Caption', type: 'string' }),
     defineField({ name: 'note', title: 'Image Note', type: 'string' }),
+    defineField({
+      name: 'mobileImage',
+      title: 'Mobile Image Override',
+      type: 'image',
+      options: { hotspot: true },
+      description: 'Optional phone image for screens 767px wide or smaller. Leave blank to use the desktop image.',
+    }),
   ],
 })
 
