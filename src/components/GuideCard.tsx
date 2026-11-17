@@ -7,7 +7,7 @@ import { prefetchCmsArticle } from '../sanity/queries'
 
 /**
  * Universal guide/blog card. The STRUCTURE is fixed across pages —
- * image, category eyebrow, title, morphing CTA. Only the `card`
+ * image, category eyebrow, title, optional excerpt, morphing CTA. Only the `card`
  * content changes depending on the post/guide being linked to.
  */
 export type Card = {
@@ -54,6 +54,7 @@ export default function GuideCard({ card }: { card: Card }) {
         <Eyebrow>{card.category}</Eyebrow>
         <div className="flex flex-col gap-6">
           <h3 className="text-[24px] font-medium leading-[1.3] text-black">{card.title}</h3>
+          {card.excerpt?.trim() && <p className="body-copy text-[#111]">{card.excerpt}</p>}
           <CtaLine label={card.cta} />
         </div>
       </div>

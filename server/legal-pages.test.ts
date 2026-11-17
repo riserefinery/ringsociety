@@ -60,7 +60,7 @@ describe('published legal pages', () => {
     expect(nav).not.toContain('Do Not Sell My Personal Information')
     expect(mobileNav).toContain("<Link to={l.to ?? '/'} prefetch=\"intent\" onClick={onNavigate}")
     expect(mobileNav).not.toContain('viewTransition')
-    expect(footer).toContain('<Link key={label} to={i.to} prefetch="intent" viewTransition className={cls}>')
+    expect(footer).toContain('<Link key={i.to} to={i.to} prefetch="intent" viewTransition className={cls}>')
 
     const destinations = ['/privacy-policy', '/terms-and-conditions', '/accessibility', '/privacy-choices']
     destinations.forEach((destination) => {

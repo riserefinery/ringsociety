@@ -64,6 +64,7 @@ const renderBody = (body: CmsPortableBlock[]) => {
     intro: doc.intro, body: doc.body, onZoom: () => {}, galleryIndexOf: () => -1,
   }))
 }
+
 const packagesRoot = process.env.ARTICLE_PACKAGES_DIR ?? '/home/ubuntu/article-packages'
 const packageTables = (name: string): CmsPortableBlock[] => {
   const fixture = JSON.parse(readFileSync(resolve(packagesRoot, name, 'normalized-content.json'), 'utf8')) as { body: CmsPortableBlock[] }
@@ -151,9 +152,15 @@ describe('article comparison tables', () => {
     expect(renderBody([{ _type: 'articleTable', rows: null } as unknown as CmsPortableBlock])).toContain('<table')
   })
 
-  it('includes table text in reading time', () => {
+  it('includes table text in reading time and retains the local authoring contract', () => {
     const doc = docFor([{ ...table, rows: [{ _type: 'articleTableRow', _key: 'r', cells: [cell(Array(230).fill('word').join(' '))] }] }])
     expect(readingTimeFor(doc)).toBe('2 minute read')
+    const schema = readFileSync(resolve(import.meta.dirname, '../studio/schemas/documents.ts'), 'utf8')
+    for (const field of ["name: 'articleTable'", "name: 'articleTableRow'", "name: 'articleTableCell'", "name: 'isHeader'", "name: 'colSpan'", "name: 'rowSpan'", "name: 'content'"]) expect(schema).toContain(field)
+    expect(schema).toContain('articleBlock, articleImage, articleTable')
+    expect(schema).toContain("name: 'link'")
+    expect(schema).toContain("value: 'strong'")
+    expect(schema).toContain("value: 'em'")
   })
 })
 

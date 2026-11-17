@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useNavigate } from 'react-router'
-import { runSearch, popularEntries, type SearchEntry, type SearchGroup } from '../lib/search'
+import { SEARCH_INDEX, runSearch, popularEntries, useNavigationTitles, withNavigationTitles, type SearchEntry, type SearchGroup } from '../lib/search'
 import { SearchIcon, serif } from './ui'
 
 const RECENTS_KEY = 'rs-recent-searches'
@@ -43,8 +43,10 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const [recents, setRecents] = useState<string[]>([])
+  const titles = useNavigationTitles(open)
+  const index = useMemo(() => withNavigationTitles(SEARCH_INDEX, titles), [titles])
 
-  const results = useMemo(() => (query.trim() ? runSearch(query) : popularEntries()), [query])
+  const results = useMemo(() => (query.trim() ? runSearch(query, 24, index) : popularEntries(5, index)), [query, index])
   // flat list in group order — drives keyboard navigation
   const ordered = useMemo(
     () => GROUP_ORDER.flatMap((g) => results.filter((r) => r.group === g)),
@@ -67,7 +69,7 @@ export default function SearchOverlay({ open, onClose }: { open: boolean; onClos
     setQuery('')
   }, [open])
 
-  useEffect(() => setActive(0), [query])
+  useEffect(() => setActive(0), [query, index])
 
   const pushRecent = (term: string) => {
     const t = term.trim()

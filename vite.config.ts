@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
 import siteConfiguration from './.figma/make/site.json'
-import { APPROVED_ARTICLE_PATH } from './src/lib/articleSeo'
+import { APPROVED_ARTICLE_PATHS } from './src/lib/articleSeo'
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -94,7 +94,7 @@ function figmaSiteConfiguration(config: FigmaSiteConfiguration): Plugin {
   const bodyStart = config.customScripts?.bodyStart ?? ''
   const bodyEnd = config.customScripts?.bodyEnd ?? ''
   const robotsTxt = config.robots?.index === false ? 'User-agent: *\nDisallow: /\n' : ''
-  const productionRobotsTxt = `${robotsTxt}Allow: ${APPROVED_ARTICLE_PATH}$\nAllow: /assets/\n`
+  const productionRobotsTxt = `${robotsTxt}${APPROVED_ARTICLE_PATHS.map((articlePath) => `Allow: ${articlePath}$\n`).join('')}Allow: /assets/\n`
 
   return {
     name: 'figma-site-configuration',

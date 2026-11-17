@@ -17,7 +17,7 @@ async function main() {
   console.log('Building normal client assets and protected HTML shell…')
   await build({ root, mode: 'production', build: { outDir: path.join(root, 'dist'), emptyOutDir: true } })
 
-  console.log('Building isolated approved-article SSR entry…')
+  console.log('Building isolated seven-guide SSR entry…')
   await build({
     root,
     mode: 'production',
@@ -29,6 +29,7 @@ async function main() {
       sourcemap: false,
     },
   })
+  // Fails the whole build unless all seven published records pass every guard.
   await prerenderApprovedArticle()
 }
 
