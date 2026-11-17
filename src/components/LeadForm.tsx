@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import { SolidButton, serif } from './ui'
 import { submitLead } from '../lib/leadCapture'
 
@@ -27,6 +27,10 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle')
   const [error, setError] = useState('')
   const [formStartedAt] = useState(() => Date.now())
+  const [ready, setReady] = useState(false)
+
+  // Effects run only after the form and its submit handler have been committed on the client.
+  useEffect(() => setReady(true), [])
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -57,50 +61,52 @@ export default function LeadForm({ source, submitLabel, successMessage, classNam
   }
 
   return (
-    <form onSubmit={submit} className={`flex flex-col gap-6 text-left ${className}`} noValidate>
-      <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
-        <label htmlFor={`${source}-website`}>Leave this field empty</label>
-        <input id={`${source}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" />
-      </div>
-      {variant === 'contact' ? (
-        <>
-          <div className="grid gap-6 md:grid-cols-2">
+    <form method="post" action="/api/lead-capture" onSubmit={submit} className={`flex flex-col gap-6 text-left ${className}`} noValidate>
+      <fieldset disabled={!ready} className="contents">
+        <div aria-hidden="true" className="absolute -left-[10000px] top-auto h-px w-px overflow-hidden">
+          <label htmlFor={`${source}-website`}>Leave this field empty</label>
+          <input id={`${source}-website`} name="website" type="text" tabIndex={-1} autoComplete="off" />
+        </div>
+        {variant === 'contact' ? (
+          <>
+            <div className="grid gap-6 md:grid-cols-2">
+              <label className={contactLabel}>
+                <span className="sr-only">First Name</span>
+                <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={contactField} />
+              </label>
+              <label className={contactLabel}>
+                <span className="sr-only">Last Name</span>
+                <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={contactField} />
+              </label>
+            </div>
             <label className={contactLabel}>
-              <span className="sr-only">First Name</span>
-              <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={contactField} />
+              <span className="sr-only">Email Address</span>
+              <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={contactField} />
             </label>
             <label className={contactLabel}>
-              <span className="sr-only">Last Name</span>
-              <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={contactField} />
+              <span className="sr-only">What brings you here?</span>
+              <select required name="topic" defaultValue="" className={`${contactField} appearance-none`}>
+                <option value="" disabled>What brings you here?*</option>
+                {contactTopics.map((topic) => <option key={topic} value={topic}>{topic}</option>)}
+              </select>
             </label>
-          </div>
-          <label className={contactLabel}>
-            <span className="sr-only">Email Address</span>
-            <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={contactField} />
-          </label>
-          <label className={contactLabel}>
-            <span className="sr-only">What brings you here?</span>
-            <select required name="topic" defaultValue="" className={`${contactField} appearance-none`}>
-              <option value="" disabled>What brings you here?*</option>
-              {contactTopics.map((topic) => <option key={topic} value={topic}>{topic}</option>)}
-            </select>
-          </label>
-          <label className={contactLabel}>
-            <span className="sr-only">Message (optional)</span>
-            <textarea name="message" rows={6} placeholder="Message (optional)" className={`${contactField} min-h-32 resize-y`} />
-          </label>
-        </>
-      ) : (
-        <>
-          <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={field} />
-          <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={field} />
-          <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={field} />
-        </>
-      )}
-      {status === 'error' && <p role="alert" className="-mt-2 text-[13px] leading-[1.5] text-[#9b3131]">{error}</p>}
-      <SolidButton disabled={status === 'sending'} className="mt-3 w-full">
-        {status === 'sending' ? 'Sending…' : submitLabel}
-      </SolidButton>
+            <label className={contactLabel}>
+              <span className="sr-only">Message (optional)</span>
+              <textarea name="message" rows={6} placeholder="Message (optional)" className={`${contactField} min-h-32 resize-y`} />
+            </label>
+          </>
+        ) : (
+          <>
+            <input required name="firstName" autoComplete="given-name" placeholder="First Name*" className={field} />
+            <input required name="lastName" autoComplete="family-name" placeholder="Last Name*" className={field} />
+            <input required name="email" type="email" autoComplete="email" placeholder="Email*" className={field} />
+          </>
+        )}
+        {status === 'error' && <p role="alert" className="-mt-2 text-[13px] leading-[1.5] text-[#9b3131]">{error}</p>}
+        <SolidButton disabled={status === 'sending'} className="mt-3 w-full">
+          {status === 'sending' ? 'Sending…' : submitLabel}
+        </SolidButton>
+      </fieldset>
     </form>
   )
 }

@@ -1,19 +1,20 @@
-import type { Article, ArticleBlock, ArticleCta, ArticleDoc, FilterKey, Guide } from '../lib/content'
+import type { Article, ArticleBlock, ArticleCta, ArticleDoc, ArticleTableCell, FilterKey, Guide } from '../lib/content'
 import { imageUrl } from './image'
 import type { CmsPortableBlock, CmsPost, CmsSidebarCta, CmsTopGuidesSelection } from './types'
 
 function inlineFromBlock(block: CmsPortableBlock) {
   const links = new Map(
-    (block.markDefs ?? [])
-      .filter((definition) => definition._key && definition._type === 'link' && definition.href)
+    (Array.isArray(block.markDefs) ? block.markDefs : [])
+      .filter((definition) => definition && definition._key && definition._type === 'link' && typeof definition.href === 'string' && definition.href)
       .map((definition) => [definition._key as string, definition.href as string]),
   )
 
-  return (block.children ?? [])
+  return (Array.isArray(block.children) ? block.children : [])
+    .filter((child) => child && typeof child === 'object')
     .map((child) => {
-      const marks = child.marks ?? []
+      const marks = Array.isArray(child.marks) ? child.marks : []
       return {
-        text: child.text ?? '',
+        text: typeof child.text === 'string' ? child.text : '',
         strong: marks.includes('strong') || marks.includes('b'),
         em: marks.includes('em') || marks.includes('i'),
         code: marks.includes('code'),
@@ -27,10 +28,34 @@ function textFromInline(inline: ReturnType<typeof inlineFromBlock>): string {
   return inline.map((child) => child.text).join('').trim()
 }
 
+// HTML limits colSpan to 1000 and rowSpan to 65534. Ignore invalid values
+// rather than letting a malformed CMS cell produce surprising browser layout.
+function validSpan(value: unknown, max: number): number | undefined {
+  return typeof value === 'number' && Number.isInteger(value) && value >= 1 && value <= max ? value : undefined
+}
+
+function tableCell(value: unknown): ArticleTableCell {
+  const cell = value && typeof value === 'object' ? value as { isHeader?: unknown; colSpan?: unknown; rowSpan?: unknown; content?: unknown } : {}
+  const content = Array.isArray(cell.content) ? cell.content : []
+  const paragraphs = content.flatMap((paragraph) => {
+    if (!paragraph || typeof paragraph !== 'object' || paragraph._type !== 'block') return []
+    const inline = inlineFromBlock(paragraph as CmsPortableBlock)
+    // Keep empty paragraphs as well as text-bearing paragraphs in their source order.
+    return [{ text: inline.map((segment) => segment.text).join(''), inline }]
+  })
+  return {
+    isHeader: cell.isHeader === true,
+    colSpan: validSpan(cell.colSpan, 1000),
+    rowSpan: validSpan(cell.rowSpan, 65534),
+    paragraphs,
+  }
+}
+
 function toBlocks(blocks: CmsPortableBlock[] | undefined): ArticleBlock[] {
   const mapped: ArticleBlock[] = []
 
   for (const block of blocks ?? []) {
+    if (!block || typeof block !== 'object') continue
     if (block._type === 'block') {
       const inline = inlineFromBlock(block)
       const text = textFromInline(inline)
@@ -61,10 +86,18 @@ function toBlocks(blocks: CmsPortableBlock[] | undefined): ArticleBlock[] {
       continue
     }
 
+    if (block._type === 'articleTable') {
+      const rows = (Array.isArray(block.rows) ? block.rows : []).map((row) => ({
+        cells: row && Array.isArray(row.cells) ? row.cells.map(tableCell) : [],
+      }))
+      mapped.push({ type: 'table', rows })
+      continue
+    }
+
     if (block._type === 'image') {
       const src = imageUrl(block, 1440)
       const mobileSrc = imageUrl(block.mobileImage, 900)
-      if (src) mapped.push({ type: 'image', src, mobileSrc, alt: block.alt ?? '', caption: block.caption, note: block.note })
+      if (src) mapped.push({ type: 'image', src, mobileSrc, alt: block.alt ?? '', caption: block.caption, note: block.note, ...(block.displayStyle === 'editorial' ? { displayStyle: 'editorial' } : {}) })
       continue
     }
 

@@ -30,8 +30,24 @@ export type CmsLinkMark = {
   href?: string
 }
 
+export type CmsTableCell = {
+  _type?: 'articleTableCell'
+  _key?: string
+  isHeader?: boolean
+  colSpan?: number
+  rowSpan?: number
+  content?: CmsPortableBlock[]
+}
+
+export type CmsTableRow = {
+  _type?: 'articleTableRow'
+  _key?: string
+  cells?: CmsTableCell[]
+}
+
 export type CmsPortableBlock = {
   _type?: string
+  _key?: string
   style?: string
   listItem?: 'bullet' | 'number'
   children?: CmsTextSpan[]
@@ -39,11 +55,13 @@ export type CmsPortableBlock = {
   asset?: CmsImageAsset
   mobileImage?: { asset?: CmsImageAsset }
   alt?: string
+  displayStyle?: 'standard' | 'editorial'
   caption?: string
   note?: string
   label?: string
   text?: string
   items?: { term?: string; definition?: string }[]
+  rows?: CmsTableRow[]
 }
 
 export type CmsSidebarCta = {

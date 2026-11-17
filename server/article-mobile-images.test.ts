@@ -2,10 +2,15 @@ import { createElement } from 'react'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import ResponsiveImage from '../src/components/ResponsiveImage'
 import { toArticleDoc } from '../src/sanity/mappers'
 import type { CmsPortableBlock } from '../src/sanity/types'
+
+vi.hoisted(() => {
+  vi.stubEnv('VITE_SANITY_PROJECT_ID', 'mobiletest')
+  vi.stubEnv('VITE_SANITY_DATASET', 'production')
+})
 
 const root = resolve(import.meta.dirname, '..')
 const read = (file: string) => readFileSync(resolve(root, file), 'utf8')
@@ -49,9 +54,9 @@ describe('optional mobile article images', () => {
     if (image.type !== 'image') throw new Error('Expected an inline image')
     expect(image.mobileSrc).toBeUndefined()
     const article = read('src/pages/Article.tsx')
-    expect(article).toContain('mobileSrc={block.mobileSrc}')
+    expect(article).toContain('mobileSrc={isEditorial ? undefined : block.mobileSrc}')
     expect(article).toContain('mobileSrc={current.mobileSrc}')
-    expect(article).toContain('src: b.src, mobileSrc: b.mobileSrc')
+    expect(article).toContain("mobileSrc: b.displayStyle === 'editorial' ? undefined : b.mobileSrc")
     expect(article).toContain('href={visibleSrc}')
   })
 
