@@ -87,6 +87,7 @@ const secondRowCards: Card[] = [
 function EditorialSection({ cmsCards }: { cmsCards: Card[] }) {
   const jeweler = cmsCardFor({ category: 'Guide', title: 'How to Choose A Jeweler: Our 10-Point Framework', cta: 'view the guide', image: IMAGES.jeweler, alt: 'A jeweler holding a diamond engagement ring' }, cmsCards)
   const settings = cmsCardFor({ category: 'Guide', title: 'The Complete Guide to Engagement Ring Settings & Styles', cta: 'view the guide', image: IMAGES.settings, alt: 'An assortment of rings on a dark surface' }, cmsCards)
+  const jewelerTitle = cmsCards.find((card) => card.to === jeweler.to)?.title
 
   return (
     <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-16 px-5 md:gap-24 md:px-10">
@@ -96,13 +97,15 @@ function EditorialSection({ cmsCards }: { cmsCards: Card[] }) {
         badge={jeweler.badge ?? 'Featured'}
         eyebrow="Guide"
         title={
-          <>
-            How to Choose A Jeweler:
-            <br />
-            Our 10-Point Framework
-          </>
+          jewelerTitle || (
+            <>
+              How to Choose A Jeweler:
+              <br />
+              Our 10-Point Framework
+            </>
+          )
         }
-        body="Before you walk into any jeweler, there are 10 things you should be evaluating — from how long they've been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and more."
+        body={jeweler.excerpt?.trim() || "Before you walk into any jeweler, there are 10 things you should be evaluating — from how long they've been in business and the quality of their customer reviews, to how they handle pricing, post-purchase support, and more."}
         to="/guides/how-to-choose-a-jeweler"
         mobileCtaFullWidth
       />
@@ -112,8 +115,8 @@ function EditorialSection({ cmsCards }: { cmsCards: Card[] }) {
         alt={settings.alt}
         badge={settings.badge}
         eyebrow="Guide"
-        title="The Complete Guide to Engagement Ring Settings & Styles"
-        body="A visual guide detailing every major ring setting (Solitaire, Halo, Pavé, Bezel, Channel, Three-Stone). It covers the pros and cons of each, how different settings impact the perceived size of the center stone, and which styles suit more active lifestyles."
+        title={settings.title || 'The Complete Guide to Engagement Ring Settings & Styles'}
+        body={settings.excerpt?.trim() || 'A visual guide detailing every major ring setting (Solitaire, Halo, Pavé, Bezel, Channel, Three-Stone). It covers the pros and cons of each, how different settings impact the perceived size of the center stone, and which styles suit more active lifestyles.'}
         to="/guides/engagement-ring-settings-and-styles"
         mobileCtaFullWidth
       />
@@ -135,6 +138,7 @@ function EditorialSection({ cmsCards }: { cmsCards: Card[] }) {
 function BlackSection({ cmsCards }: { cmsCards: Card[] }) {
   const bigBox = cmsCardFor({ category: 'Guide', title: 'Go Big or Shop Small? Big-Box vs. Local vs. Online', cta: 'view the guide', image: IMAGES.emerald, alt: 'A gold ring set with an emerald-green stone' }, cmsCards)
   const labGrown = cmsCardFor({ category: 'Guide', title: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', cta: 'view the guide', image: IMAGES.labGrown, alt: 'Loose diamonds scattered across a surface' }, cmsCards)
+  const labGrownTitle = cmsCards.find((card) => card.to === labGrown.to)?.title
 
   return (
     <section className="w-full bg-black py-16 md:py-24">
@@ -164,13 +168,15 @@ function BlackSection({ cmsCards }: { cmsCards: Card[] }) {
           badge={labGrown.badge}
           eyebrow="Guide"
           title={
-            <>
-              Natural vs. Lab-Grown Diamonds:
-              <br />
-              The Honest, Unbiased Comparison
-            </>
+            labGrownTitle || (
+              <>
+                Natural vs. Lab-Grown Diamonds:
+                <br />
+                The Honest, Unbiased Comparison
+              </>
+            )
         }
-        body="A transparent guide tackling the biggest question being asked right now. It compares price, chemical makeup, long-term value retention, and ethical considerations."
+        body={labGrown.excerpt?.trim() || 'A transparent guide tackling the biggest question being asked right now. It compares price, chemical makeup, long-term value retention, and ethical considerations.'}
         to="/guides/natural-vs-lab-grown-diamonds"
         mobileCtaFullWidth
       />

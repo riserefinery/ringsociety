@@ -32,6 +32,13 @@ const articleImage = defineArrayMember({
     defineField({ name: 'caption', title: 'Caption', type: 'string' }),
     defineField({ name: 'note', title: 'Image Note', type: 'string' }),
     defineField({
+      name: 'displayStyle',
+      title: 'Image Display Style',
+      type: 'string',
+      description: 'Choose Editorial Photo for centered portrait photographs. Leave blank for standard article graphics.',
+      options: { list: [{ title: 'Standard article graphic', value: 'standard' }, { title: 'Editorial Photo', value: 'editorial' }] },
+    }),
+    defineField({
       name: 'mobileImage',
       title: 'Mobile Image Override',
       type: 'image',
@@ -39,6 +46,65 @@ const articleImage = defineArrayMember({
       description: 'Optional phone image for screens 767px wide or smaller. Leave blank to use the desktop image.',
     }),
   ],
+})
+
+// Named inline object members preserve the Portable Text import contract without
+// requiring a separate schema registration or changing existing body blocks.
+const articleTable = defineArrayMember({
+  name: 'articleTable',
+  title: 'Comparison Table',
+  type: 'object',
+  fields: [
+    defineField({
+      name: 'rows',
+      title: 'Rows',
+      type: 'array',
+      of: [defineArrayMember({
+        name: 'articleTableRow',
+        title: 'Row',
+        type: 'object',
+        fields: [defineField({
+          name: 'cells',
+          title: 'Cells',
+          type: 'array',
+          of: [defineArrayMember({
+            name: 'articleTableCell',
+            title: 'Cell',
+            type: 'object',
+            fields: [
+              defineField({ name: 'isHeader', title: 'Header Cell', type: 'boolean', initialValue: false }),
+              defineField({ name: 'colSpan', title: 'Columns Spanned', type: 'number', description: 'Leave blank for one column.', validation: (Rule) => Rule.integer().min(1).max(1000) }),
+              defineField({ name: 'rowSpan', title: 'Rows Spanned', type: 'number', description: 'Leave blank for one row.', validation: (Rule) => Rule.integer().min(1).max(65534) }),
+              defineField({
+                name: 'content',
+                title: 'Cell Content',
+                type: 'array',
+                of: [defineArrayMember({
+                  type: 'block',
+                  styles: [{ title: 'Normal', value: 'normal' }],
+                  lists: [],
+                  marks: {
+                    decorators: [
+                      { title: 'Strong', value: 'strong' },
+                      { title: 'Emphasis', value: 'em' },
+                      { title: 'Code', value: 'code' },
+                    ],
+                    annotations: [{
+                      name: 'link', title: 'Link', type: 'object',
+                      fields: [defineField({ name: 'href', title: 'URL', type: 'url', validation: (Rule) => Rule.uri({ scheme: ['http', 'https', 'mailto', 'tel'], allowRelative: true }) })],
+                    }],
+                  },
+                })],
+              }),
+            ],
+            preview: { prepare: () => ({ title: 'Cell' }) },
+          })],
+        })],
+        preview: { prepare: () => ({ title: 'Row' }) },
+      })],
+    }),
+  ],
+  preview: { prepare: () => ({ title: 'Comparison Table' }) },
 })
 
 export const siteSettings = defineType({
@@ -126,7 +192,7 @@ export const post = defineType({
     defineField({ name: 'excerpt', title: 'Excerpt', type: 'text', group: 'content', rows: 3, validation: (Rule) => Rule.required().max(240) }),
     defineField({ name: 'contentType', title: 'Content Type', type: 'string', group: 'content', initialValue: 'Guide', options: { list: ['Guide', 'Article', 'Trends', 'Perspectives'] } }),
     defineField({ name: 'intro', title: 'Article Introduction', type: 'array', group: 'content', of: [standardBlock] }),
-    defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [articleBlock, articleImage, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
+    defineField({ name: 'body', title: 'Article Body', type: 'array', group: 'content', of: [articleBlock, articleImage, articleTable, defineArrayMember({ type: 'callout' }), defineArrayMember({ type: 'definitionList' })] }),
     defineField({
       name: 'articleRelatedGuides',
       title: 'Related Guides (Article End Matter)',

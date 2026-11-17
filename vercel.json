@@ -19,11 +19,16 @@
     },
     {
       "src": "/robots\\.txt$",
-      "has": [{ "type": "host", "value": "ringsociety.com" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
       "dest": "/robots-production.txt"
     },
     {
-      "src": "/guides/how-to-buy-an-engagement-ring/(?:index\\.html)?$",
+      "src": "/guides/how-to-buy-an-engagement-ring/(?:index(?:\\.html)?/?)?$",
       "status": 308,
       "headers": {
         "Location": "https://ringsociety.com/guides/how-to-buy-an-engagement-ring",
@@ -32,13 +37,148 @@
     },
     {
       "src": "/guides/how-to-buy-an-engagement-ring$",
-      "has": [{ "type": "host", "value": "ringsociety.com" }],
-      "headers": { "X-Robots-Tag": "index, follow" },
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
       "dest": "/approved-articles/how-to-buy-an-engagement-ring.html"
     },
     {
+      "src": "/guides/engagement-ring-settings-and-styles/(?:index(?:\\.html)?/?)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/engagement-ring-settings-and-styles",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/engagement-ring-settings-and-styles$",
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
+      "dest": "/approved-articles/engagement-ring-settings-and-styles.html"
+    },
+    {
+      "src": "/guides/how-to-choose-a-jeweler/(?:index(?:\\.html)?/?)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/how-to-choose-a-jeweler",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/how-to-choose-a-jeweler$",
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
+      "dest": "/approved-articles/how-to-choose-a-jeweler.html"
+    },
+    {
+      "src": "/guides/engagement-rings-with-hidden-halos/(?:index(?:\\.html)?/?)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/engagement-rings-with-hidden-halos",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/engagement-rings-with-hidden-halos$",
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
+      "dest": "/approved-articles/engagement-rings-with-hidden-halos.html"
+    },
+    {
+      "src": "/guides/natural-vs-lab-grown-diamonds/(?:index(?:\\.html)?/?)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/natural-vs-lab-grown-diamonds",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/natural-vs-lab-grown-diamonds$",
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
+      "dest": "/approved-articles/natural-vs-lab-grown-diamonds.html"
+    },
+    {
+      "src": "/guides/which-diamond-shape-looks-biggest/(?:index(?:\\.html)?/?)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/which-diamond-shape-looks-biggest",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/which-diamond-shape-looks-biggest$",
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
+      "dest": "/approved-articles/which-diamond-shape-looks-biggest.html"
+    },
+    {
+      "src": "/guides/ultimate-guide-to-diamond-clarity/(?:index(?:\\.html)?/?)?$",
+      "status": 308,
+      "headers": {
+        "Location": "https://ringsociety.com/guides/ultimate-guide-to-diamond-clarity",
+        "X-Robots-Tag": "noindex, follow"
+      }
+    },
+    {
+      "src": "/guides/ultimate-guide-to-diamond-clarity$",
+      "has": [
+        {
+          "type": "host",
+          "value": "^ringsociety\\.com$"
+        }
+      ],
+      "headers": {
+        "X-Robots-Tag": "index, follow"
+      },
+      "dest": "/approved-articles/ultimate-guide-to-diamond-clarity.html"
+    },
+    {
       "src": "/approved-articles/(.*)",
-      "headers": { "X-Robots-Tag": "noindex, follow" },
+      "headers": {
+        "X-Robots-Tag": "noindex, follow"
+      },
       "continue": true
     },
     {
@@ -71,9 +211,18 @@
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
     }
   ]

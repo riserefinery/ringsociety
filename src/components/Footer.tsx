@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import { svgPaths, iconRS, logoXL } from '../lib/assets'
 import { legalLinks, copyright } from '../lib/nav'
+import { useNavigationTitles } from '../lib/search'
 import { serif } from './ui'
 import { openMatchingFunnel } from './MatchingFunnelModal'
 
@@ -25,13 +26,17 @@ function ArrowCircle() {
 
 /** Universal site footer. Shared across every page. */
 export default function Footer() {
-  const guides: FooterLink[] = [
+  const titles = useNavigationTitles()
+  const guideFallbacks: FooterLink[] = [
     { label: 'How to Choose A Jeweler: Our 10-Point Framework', to: '/guides/how-to-choose-a-jeweler' },
     { label: 'How to Buy an Engagement Ring: The Definitive Guide', to: '/guides/how-to-buy-an-engagement-ring' },
     { label: 'Engagement Ring Budgets: How Much Should You Spend?', to: '/guides/engagement-ring-budgets' },
     { label: 'Natural vs. Lab-Grown Diamonds: The Honest, Unbiased Comparison', to: '/guides/natural-vs-lab-grown-diamonds' },
     { label: 'The 4Cs of Diamonds Explained in Plain English', to: '/guides/4cs-of-diamonds' },
   ]
+  const guides = guideFallbacks.map((guide) => typeof guide === 'string' || !guide.to
+    ? guide
+    : { ...guide, label: titles.get(guide.to)?.trim() || guide.label })
   const col = (heading: string, items: FooterLink[], width: string) => (
     <div className={`flex flex-col gap-[23px] ${width}`}>
       <p className="text-[12px] font-semibold uppercase tracking-[1px] text-white">{heading}</p>
@@ -45,7 +50,7 @@ export default function Footer() {
               {label}
             </a>
           ) : (
-            <Link key={label} to={i.to} prefetch="intent" viewTransition className={cls}>
+            <Link key={i.to} to={i.to} prefetch="intent" viewTransition className={cls}>
               {label}
             </Link>
           )

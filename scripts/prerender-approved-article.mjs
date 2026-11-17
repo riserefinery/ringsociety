@@ -3,10 +3,17 @@ import path from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const root = fileURLToPath(new URL('../', import.meta.url))
-const approvedSlug = 'how-to-buy-an-engagement-ring'
-const approvedPath = `/guides/${approvedSlug}`
-const approvedCanonical = `https://ringsociety.com${approvedPath}`
-const outputFile = path.join(root, 'dist', 'approved-articles', `${approvedSlug}.html`)
+// Deliberately independent of the SSR bundle: a mismatch aborts the entire build.
+export const approvedSlugs = Object.freeze([
+  'how-to-buy-an-engagement-ring',
+  'engagement-ring-settings-and-styles',
+  'how-to-choose-a-jeweler',
+  'engagement-rings-with-hidden-halos',
+  'natural-vs-lab-grown-diamonds',
+  'which-diamond-shape-looks-biggest',
+  'ultimate-guide-to-diamond-clarity',
+])
+const outputDir = path.join(root, 'dist', 'approved-articles')
 
 function escapeHtml(value) {
   return String(value).replace(/[&<>"']/g, (character) => ({
@@ -58,20 +65,46 @@ const noScriptStyle = `<noscript><style>
 }
 </style></noscript>`
 
+function hasBodyText(body) {
+  if (!Array.isArray(body)) return false
+  const nonempty = (value) => typeof value === 'string' && Boolean(value.trim())
+  return body.some((block) => {
+    if (!block || typeof block !== 'object') return false
+    if (['p', 'blockquote', 'note'].includes(block.type)) return nonempty(block.text)
+    if (block.type === 'list') return Array.isArray(block.items) && block.items.some((item) => nonempty(item?.text))
+    if (block.type === 'deflist') return Array.isArray(block.items) && block.items.some((item) => nonempty(item?.term) || nonempty(item?.def))
+    return false
+  })
+}
+
 /** Pure composition is exported for validation without a browser or CMS request. */
-export function composeApprovedArticleHtml(shell, result) {
+export function composeApprovedArticleHtml(shell, result, expectedSlug = result?.doc?.slug) {
   const { html, doc, meta, structuredData } = result
-  if (doc?.slug !== approvedSlug || doc.noIndex !== false || meta?.noIndex !== false
-    || meta.canonical !== approvedCanonical || !Array.isArray(doc.body) || !doc.body.length) {
+  const canonicalPath = `/guides/${expectedSlug}`
+  const canonical = `https://ringsociety.com${canonicalPath}`
+  if (!approvedSlugs.includes(expectedSlug) || doc?.slug !== expectedSlug || doc.noIndex !== false || meta?.noIndex !== false
+    || (doc.canonicalPath != null && doc.canonicalPath !== canonicalPath)
+    || meta.canonical !== canonical || !Array.isArray(doc.intro) || !hasBodyText(doc.body)) {
     throw new Error('Refusing to emit an unapproved or incomplete article')
   }
   for (const value of [doc.title, doc.subtitle, doc.hero, meta.title, meta.description, meta.image]) {
     if (typeof value !== 'string' || !value.trim()) throw new Error('Missing required article content or metadata')
   }
-  if (typeof html !== 'string' || (html.match(/<h1(?:\s|>)/g) ?? []).length !== 1) {
-    throw new Error('Missing server-rendered article heading')
+  if (meta.title !== (doc.shareTitle ?? doc.title) || meta.description !== (doc.shareDescription ?? doc.subtitle)
+    || meta.image !== (doc.shareImage ?? doc.hero) || meta.imageAlt !== (doc.shareImageAlt ?? doc.title)) {
+    throw new Error('Article metadata does not match its CMS snapshot')
   }
-  if (!structuredData || typeof structuredData !== 'object') throw new Error('Missing article structured data')
+  if (typeof html !== 'string' || (html.match(/<h1(?:\s|>)/g) ?? []).length !== 1 || !html.includes('<footer')) {
+    throw new Error('Missing server-rendered article or shared shell')
+  }
+  if (!structuredData || structuredData['@context'] !== 'https://schema.org' || structuredData['@type'] !== 'Article'
+    || structuredData.headline !== meta.title || structuredData.description !== meta.description
+    || structuredData.image !== meta.image || structuredData.mainEntityOfPage !== canonical
+    || structuredData.author?.['@type'] !== 'Organization' || structuredData.author?.name !== 'Ring Society'
+    || structuredData.publisher?.['@type'] !== 'Organization' || structuredData.publisher?.name !== 'Ring Society'
+    || structuredData.publisher?.url !== 'https://ringsociety.com/') {
+    throw new Error('Article structured data does not match its CMS snapshot')
+  }
 
   const metaTag = (key, value, property = false) =>
     `<meta ${property ? 'property' : 'name'}="${key}" content="${escapeHtml(value)}" />`
@@ -122,22 +155,38 @@ export function composeApprovedArticleHtml(shell, result) {
   return output
 }
 
+/** Stage every validated page before writing any; clear partial outputs on any failure. */
+export async function writeApprovedArticleArtifacts(shell, entry, directory) {
+  await rm(directory, { recursive: true, force: true })
+  try {
+    if (entry.CANONICAL_ORIGIN !== 'https://ringsociety.com'
+      || JSON.stringify(entry.APPROVED_ARTICLE_SLUGS) !== JSON.stringify(approvedSlugs)) {
+      throw new Error('SSR entry approval constants do not match the isolated output allowlist')
+    }
+    const generated = []
+    for (const slug of approvedSlugs) {
+      const result = await entry.renderApprovedArticle(slug)
+      generated.push({ slug, output: composeApprovedArticleHtml(shell, result, slug), blocks: result.doc.body.length })
+    }
+    await mkdir(directory, { recursive: true })
+    for (const { slug, output, blocks } of generated) {
+      const outputFile = path.join(directory, `${slug}.html`)
+      await writeFile(outputFile, output, 'utf8')
+      console.log(`Prerendered /guides/${slug}: ${blocks} body blocks -> ${path.relative(root, outputFile)}`)
+    }
+    return generated.map(({ slug }) => path.join(directory, `${slug}.html`))
+  } catch (error) {
+    await rm(directory, { recursive: true, force: true })
+    throw error
+  }
+}
+
 export async function prerenderApprovedArticle() {
-  // A failed regeneration must not leave a stale, previously approved artifact.
-  await rm(outputFile, { force: true })
+  // Also clear old artifacts if reading the shell or importing the entry fails.
+  await rm(outputDir, { recursive: true, force: true })
   const shell = await readFile(path.join(root, 'dist', 'index.html'), 'utf8')
   const entry = await import(pathToFileURL(path.join(root, '.cache', 'article-prerender', 'entry-article-prerender.js')).href)
-  if (entry.APPROVED_ARTICLE_SLUG !== approvedSlug || entry.APPROVED_ARTICLE_PATH !== approvedPath
-    || `${entry.CANONICAL_ORIGIN}${entry.APPROVED_ARTICLE_PATH}` !== approvedCanonical) {
-    throw new Error('SSR entry approval constants do not match the isolated output allowlist')
-  }
-  const result = await entry.renderApprovedArticle()
-  const output = composeApprovedArticleHtml(shell, result)
-  await mkdir(path.dirname(outputFile), { recursive: true })
-  await writeFile(outputFile, output, 'utf8')
-  const imageCount = result.doc.body.filter((block) => block.type === 'image').length
-  console.log(`Prerendered ${approvedPath}: ${result.doc.body.length} body blocks, ${imageCount} body images -> ${path.relative(root, outputFile)}`)
-  return outputFile
+  return writeApprovedArticleArtifacts(shell, entry, outputDir)
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
