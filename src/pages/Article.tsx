@@ -28,7 +28,7 @@ function ZoomIcon({ className = '' }: { className?: string }) {
   return (
     <span
       className={`grid h-[33px] w-[33px] place-items-center rounded-full border border-[#e7e6e6] ${className}`}
-      style={{ background: 'rgba(252,246,242,0.1)', backdropFilter: 'blur(3px)' }}
+      style={{ background: 'rgba(252,246,242,0.8)', backdropFilter: 'blur(3px)' }}
     >
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
         <circle cx="7" cy="6.5" r="4.6" stroke="black" strokeWidth="1.4" />

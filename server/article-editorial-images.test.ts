@@ -136,6 +136,11 @@ describe.skipIf(!existsSync('/usr/bin/chromium'))('editorial and standard images
       expect(await currentPath('figure img[alt="Existing diagram"]')).toBe(width < 768 ? '/__images/diagram-mobile.webp' : '/__images/diagram-desktop.webp')
       expect(requestedImages).not.toContain('/__images/editorial-mobile-must-not-load.webp')
 
+      for (const figure of [photo, diagram]) {
+        const background = await figure.getByRole('button', { name: 'Zoom image' }).locator('span').evaluate((element) => getComputedStyle(element).backgroundColor)
+        expect(background).toBe('rgba(252, 246, 242, 0.8)')
+      }
+
       await photo.getByRole('button', { name: 'Zoom image' }).click()
       const close = page.getByRole('button', { name: 'Close', exact: true })
       await close.waitFor()
