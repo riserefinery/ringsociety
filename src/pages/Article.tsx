@@ -162,7 +162,7 @@ function Lightbox({
 
 /* ---------- body renderer ---------- */
 
-function ArticleBody({
+export function ArticleBody({
   intro,
   body,
   onZoom,
@@ -272,14 +272,113 @@ function ArticleBody({
             ))}
           </dl>
         )
+      case 'table': {
+        // A first-row spanning header defines a real column group. Emit matching
+        // colgroups so scope="colgroup" has a meaningful HTML table structure.
+        const firstRow = block.rows[0]
+        const hasColumnGroups = firstRow?.cells.some((cell) => (cell.colSpan ?? 1) > 1 && cell.isHeader) ?? false
+        // Track physical columns, not cell indexes: a previous row's rowspan can
+        // move a row's first source cell away from column zero.
+        const occupied: number[] = []
+        const rows = block.rows.map((row, rowIndex) => {
+          const hasActiveRowSpans = occupied.some((span) => span > 0)
+          let column = 0
+          const cells = row.cells.map((cell, cellIndex) => {
+            while (occupied[column] > 0) column++
+            const startColumn = column
+            const colSpan = cell.colSpan ?? 1
+            for (let offset = 0; offset < colSpan; offset++) {
+              occupied[column + offset] = Math.max(occupied[column + offset] ?? 0, cell.rowSpan ?? 1)
+            }
+            column += colSpan
+            return { cell, cellIndex, startColumn, colSpan }
+          })
+          for (let index = 0; index < occupied.length; index++) occupied[index] = Math.max(0, (occupied[index] ?? 0) - 1)
+          return { rowIndex, cells, hasActiveRowSpans }
+        })
+        const columnCount = rows[0]?.cells.reduce((end, cell) => Math.max(end, cell.startColumn + cell.colSpan), 0) ?? 0
+        const isFullWidthHeader = (row: typeof rows[number]) => row.cells.length === 1
+          && row.cells[0].cell.isHeader && row.cells[0].colSpan === columnCount && columnCount > 1
+          && row.cells[0].cell.paragraphs.some((paragraph) => paragraph.text.trim())
+        // Only infer row labels for a table with an actual column-heading band.
+        // A blank corner is fine, but each data column needs a non-empty heading.
+        const firstRowIsHeadings = (rows[0]?.cells.length ?? 0) > 1 && rows[0].cells.every(({ cell }) => cell.isHeader)
+        let headingEnd = firstRowIsHeadings ? 1 : 0
+        while (headingEnd < rows.length && rows[headingEnd].cells.length > 0
+          && rows[headingEnd].cells.every(({ cell }) => cell.isHeader) && !isFullWidthHeader(rows[headingEnd])) headingEnd++
+        const hasColumnHeadings = firstRowIsHeadings && columnCount > 1
+          && Array.from({ length: columnCount - 1 }, (_, index) => index + 1).every((column) =>
+            rows.slice(0, headingEnd).some((row) => row.cells.some(({ cell, startColumn, colSpan }) =>
+              startColumn <= column && column < startColumn + colSpan && cell.paragraphs.some((paragraph) => paragraph.text.trim()),
+            )),
+          )
+        const groupCandidates = hasColumnHeadings ? rows.filter((row) => row.rowIndex >= headingEnd && isFullWidthHeader(row)) : []
+        // Splitting a rowspan across tbody elements changes its layout. In that
+        // ambiguous case, retain the legacy single tbody instead of regrouping.
+        const canGroup = groupCandidates.every((row) => !row.hasActiveRowSpans
+          && row.cells[0].startColumn === 0 && (row.cells[0].cell.rowSpan ?? 1) === 1)
+        const groups: (typeof rows)[] = [[]]
+        for (const row of rows) {
+          if (canGroup && groupCandidates.includes(row)) groups.push([])
+          groups[groups.length - 1].push(row)
+        }
+        return (
+          <div
+            key={key}
+            role="region"
+            aria-label="Scrollable comparison table"
+            tabIndex={0}
+            className="w-full min-w-0 max-w-full overflow-x-auto rounded-[8px] border border-[#abb7b1]/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#244737]"
+          >
+            <table className="body-copy w-full min-w-[42rem] table-auto border-collapse text-left text-black">
+              {hasColumnGroups && firstRow.cells.map((cell, index) => (
+                <colgroup key={index} span={cell.colSpan ?? 1} />
+              ))}
+              {groups.map((group, groupIndex) => <tbody key={groupIndex}>
+                {group.map((row) => {
+                  const cells = row.cells.map(({ cell, cellIndex, startColumn, colSpan }) => {
+                    const isGroupHeader = canGroup && groupCandidates.includes(row)
+                    const hasDataToRight = row.cells.some((item) => item.startColumn >= startColumn + colSpan && !item.cell.isHeader)
+                    const inferredRowHeader = hasColumnHeadings && row.rowIndex >= headingEnd && startColumn === 0
+                      && hasDataToRight && cell.paragraphs.some((paragraph) => paragraph.text.trim())
+                    const Cell = cell.isHeader || inferredRowHeader ? 'th' : 'td'
+                    const scope = isGroupHeader ? 'rowgroup'
+                      : inferredRowHeader || (cell.isHeader && row.rowIndex > 0 && startColumn === 0 && hasDataToRight) ? 'row'
+                      : !cell.isHeader ? undefined
+                      : row.rowIndex === 0 && colSpan > 1 && hasColumnGroups ? 'colgroup'
+                      : 'col'
+                    return (
+                      <Cell
+                        key={cellIndex}
+                        scope={scope}
+                        colSpan={cell.colSpan}
+                        rowSpan={cell.rowSpan}
+                        className={`min-w-[10rem] border-b border-r border-[#abb7b1]/50 px-4 py-4 align-top [overflow-wrap:anywhere] last:border-r-0 ${cell.isHeader ? 'bg-[#f3f7f1] font-semibold' : 'bg-white font-normal'}`}
+                      >
+                        {cell.paragraphs.map((paragraph, paragraphIndex) => (
+                          <p key={paragraphIndex} className={paragraphIndex > 0 ? 'mt-3' : undefined}>
+                            {renderInline(paragraph.inline, paragraph.text)}
+                          </p>
+                        ))}
+                      </Cell>
+                    )
+                  })
+                  return <tr key={row.rowIndex}>{cells}</tr>
+                })}
+              </tbody>)}
+            </table>
+          </div>
+        )
+      }
       case 'image': {
         const gi = galleryIndexOf(block.src)
+        const isEditorial = block.displayStyle === 'editorial'
         return (
-          <figure key={key} className="flex flex-col gap-3">
+          <figure key={key} className={isEditorial ? 'flex w-full flex-col gap-3 self-center md:max-w-[640px]' : 'flex flex-col gap-3'}>
             <div className="group relative overflow-hidden rounded-[8px]">
               <ResponsiveImage
                 fallbackSrc={block.src}
-                mobileSrc={block.mobileSrc}
+                mobileSrc={isEditorial ? undefined : block.mobileSrc}
                 alt={block.alt}
                 onClick={() => onZoom(gi)}
                 className="h-auto w-full cursor-zoom-in object-cover"
@@ -292,12 +391,12 @@ function ArticleBody({
                 <ZoomIcon />
               </button>
             </div>
-            {block.caption && (
+            {!isEditorial && block.caption && (
               <figcaption className="text-[11px] leading-[1.5] tracking-[0.2px] text-[#7b7b7b]">
                 {block.caption}
               </figcaption>
             )}
-            {block.note && (
+            {!isEditorial && block.note && (
               <p className="body-copy italic text-black">{block.note}</p>
             )}
           </figure>
@@ -324,7 +423,10 @@ function ArticleBody({
       </div>
       {sections.map((section, si) => (
         <div key={si} className="flex flex-col gap-6 md:gap-6">
-          <Divider />
+          {/* An editorial image between the intro and the first H2 is not a
+              separate section; keep the existing divider before that H2. */}
+          {!(si === 0 && section.length === 1 && section[0].type === 'image'
+            && section[0].displayStyle === 'editorial' && sections[1]?.[0].type === 'h2') && <Divider />}
           {section.map((b) => renderBlock(b, key++))}
         </div>
       ))}
@@ -608,7 +710,7 @@ export default function Article() {
     () =>
       (doc?.body ?? [])
         .filter((b): b is Extract<ArticleBlock, { type: 'image' }> => b.type === 'image')
-        .map((b) => ({ src: b.src, mobileSrc: b.mobileSrc, alt: b.alt, caption: b.caption })),
+        .map((b) => ({ src: b.src, mobileSrc: b.displayStyle === 'editorial' ? undefined : b.mobileSrc, alt: b.alt, caption: b.displayStyle === 'editorial' ? undefined : b.caption })),
     [doc],
   )
   const galleryIndexOf = (src: string) => gallery.findIndex((g) => g.src === src)
@@ -773,7 +875,7 @@ export default function Article() {
       {/* ---------- reading body + sticky sidebar ---------- */}
       <section className="w-full">
         <div className="mx-auto flex w-full max-w-[1440px] justify-center gap-16 px-6 md:px-10 xl:gap-[115px]">
-          <div ref={readingRef} className="w-full max-w-[710px] pt-16 md:pt-24">
+          <div ref={readingRef} className="w-full min-w-0 max-w-[710px] pt-16 md:pt-24">
             <ArticleBody
               intro={doc.intro}
               body={doc.body}

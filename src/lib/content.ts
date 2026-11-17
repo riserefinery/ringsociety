@@ -345,6 +345,13 @@ export type ArticleInline = {
   href?: string
 }
 
+export type ArticleTableCell = {
+  isHeader: boolean
+  colSpan?: number
+  rowSpan?: number
+  paragraphs: { text: string; inline: ArticleInline[] }[]
+}
+
 export type ArticleBlock =
   | { type: 'p'; text: string; inline?: ArticleInline[]; muted?: boolean }
   | { type: 'h2'; text: string; inline?: ArticleInline[]; toc: string }
@@ -352,9 +359,10 @@ export type ArticleBlock =
   | { type: 'h4'; text: string; inline?: ArticleInline[] }
   | { type: 'blockquote'; text: string; inline?: ArticleInline[] }
   | { type: 'list'; ordered: boolean; items: { text: string; inline?: ArticleInline[] }[] }
-  | { type: 'image'; src: string; mobileSrc?: string; alt: string; caption?: string; note?: string }
+  | { type: 'image'; src: string; mobileSrc?: string; alt: string; caption?: string; note?: string; displayStyle?: 'editorial' }
   | { type: 'deflist'; items: { term: string; def: string }[] }
   | { type: 'note'; label: string; text: string }
+  | { type: 'table'; rows: { cells: ArticleTableCell[] }[] }
 
 /**
  * A sidebar CTA card. A site-wide default lives below; any article can
@@ -580,6 +588,8 @@ export function readingTimeFor(doc: ArticleDoc): string {
         return `${b.label} ${b.text}`
       case 'deflist':
         return b.items.map((it) => `${it.term} ${it.def}`).join(' ')
+      case 'table':
+        return b.rows.flatMap((row) => row.cells.flatMap((cell) => cell.paragraphs.map((paragraph) => paragraph.text))).join(' ')
     }
   }
   const words = [doc.subtitle, ...doc.intro.map(textOf), ...doc.body.map(textOf)]
