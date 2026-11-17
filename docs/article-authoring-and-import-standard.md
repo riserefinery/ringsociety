@@ -42,6 +42,10 @@ A blockquote is for a genuine quotation. An Editorial Callout is for Ring Societ
 
 Use the native `Bulleted list` and `Numbered list` controls for semantic lists within the main Article Body. The separate `Related Guides (Optional Override)` discovery field controls the post-card recommendations shown after an article and should not be used as a replacement for body-copy reading lists.
 
+## Comparison tables
+
+Use native `Comparison Table` blocks for article tables, and place each row's identifying label in the first column. On phones, the first column remains visible while readers scroll the other columns horizontally. This behavior is automatic for existing and future multi-column article tables; full-width section headings scroll normally. Preserve meaningful header cells and merged-cell spans when importing, and check readability on a narrow mobile screen.
+
 ## Article end matter
 
 **Sources** and body-level **Related Guides** are article end matter, not Article Body content. They must be stored in the dedicated **Article End Matter** Studio group, then rendered below the main article as two closed accordion toggles.

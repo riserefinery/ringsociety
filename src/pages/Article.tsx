@@ -297,6 +297,7 @@ export function ArticleBody({
           return { rowIndex, cells, hasActiveRowSpans }
         })
         const columnCount = rows[0]?.cells.reduce((end, cell) => Math.max(end, cell.startColumn + cell.colSpan), 0) ?? 0
+        const hasMultipleColumns = rows.some((row) => row.cells.some((cell) => cell.startColumn > 0))
         const isFullWidthHeader = (row: typeof rows[number]) => row.cells.length === 1
           && row.cells[0].cell.isHeader && row.cells[0].colSpan === columnCount && columnCount > 1
           && row.cells[0].cell.paragraphs.some((paragraph) => paragraph.text.trim())
@@ -328,9 +329,9 @@ export function ArticleBody({
             role="region"
             aria-label="Scrollable comparison table"
             tabIndex={0}
-            className="w-full min-w-0 max-w-full overflow-x-auto rounded-[8px] border border-[#abb7b1]/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#244737]"
+            className="w-full min-w-0 max-w-full overflow-x-auto rounded-[8px] border border-[#abb7b1]/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#244737] max-md:[container-type:inline-size]"
           >
-            <table className="body-copy w-full min-w-[42rem] table-auto border-collapse text-left text-black">
+            <table className="body-copy w-full min-w-[42rem] table-auto border-collapse text-left text-black max-md:w-max max-md:min-w-full">
               {hasColumnGroups && firstRow.cells.map((cell, index) => (
                 <colgroup key={index} span={cell.colSpan ?? 1} />
               ))}
@@ -347,13 +348,19 @@ export function ArticleBody({
                       : !cell.isHeader ? undefined
                       : row.rowIndex === 0 && colSpan > 1 && hasColumnGroups ? 'colgroup'
                       : 'col'
+                    // Pin only the first physical column on phones. Spanning section
+                    // headers must scroll normally rather than covering other columns.
+                    const stickyLabel = hasMultipleColumns && startColumn === 0 && colSpan === 1
+                    // Keep each value column narrow enough to fit alongside the
+                    // pinned label, rather than hiding its first words underneath it.
+                    const mobileValueColumn = hasMultipleColumns && startColumn > 0 && colSpan === 1
                     return (
                       <Cell
                         key={cellIndex}
                         scope={scope}
                         colSpan={cell.colSpan}
                         rowSpan={cell.rowSpan}
-                        className={`min-w-[10rem] border-b border-r border-[#abb7b1]/50 px-4 py-4 align-top [overflow-wrap:anywhere] last:border-r-0 ${cell.isHeader ? 'bg-[#f3f7f1] font-semibold' : 'bg-white font-normal'}`}
+                        className={`min-w-[10rem] border-b border-r border-[#abb7b1]/50 px-4 py-4 align-top [overflow-wrap:anywhere] last:border-r-0 ${cell.isHeader ? 'bg-[#f3f7f1] font-semibold' : 'bg-white font-normal'} ${stickyLabel ? 'max-md:sticky max-md:left-0 max-md:z-10 max-md:w-[clamp(7rem,36vw,9rem)] max-md:min-w-[clamp(7rem,36vw,9rem)] max-md:max-w-[clamp(7rem,36vw,9rem)] max-md:shadow-[1px_0_0_0_rgba(171,183,177,0.5)]' : ''} ${mobileValueColumn ? 'max-md:w-[min(13rem,max(8rem,calc(100cqw-clamp(7rem,36vw,9rem))))] max-md:min-w-[min(13rem,max(8rem,calc(100cqw-clamp(7rem,36vw,9rem))))] max-md:max-w-[min(13rem,max(8rem,calc(100cqw-clamp(7rem,36vw,9rem))))]' : ''}`}
                       >
                         {cell.paragraphs.map((paragraph, paragraphIndex) => (
                           <p key={paragraphIndex} className={paragraphIndex > 0 ? 'mt-3' : undefined}>
