@@ -7,9 +7,15 @@ import { chromium, webkit, type Browser, type BrowserContext, type Page } from '
 import { createServer, type ViteDevServer } from 'vite'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
-// Desktop Playwright viewport sizes are useful cross-engine regressions, not a
-// substitute for testing actual iOS Safari, its collapsing browser chrome, or pinch zoom.
-const widths = [320, 375, 390, 768, 1440]
+// Chromium and WebKit simulations are not physical-device or iOS Safari tests;
+// they cannot reproduce actual browser chrome, pinch zoom, or device hardware.
+const desktopWidths = [768, 1024, 1440]
+const portraitViewports = [
+  { width: 320, height: 568 },
+  { width: 375, height: 812 },
+  { width: 390, height: 844 },
+  { width: 430, height: 932 },
+]
 const fadeSelector = '[data-testid="article-reading-fade"]'
 const endSelector = '[data-testid="article-reading-end"]'
 const anchorSelector = '[data-testid="article-fade-viewport-anchor"]'
@@ -82,8 +88,16 @@ async function installVisualViewport(context: BrowserContext) {
   })
 }
 
-async function openFixture(browser: Browser, origin: string, width: number, options: { motion?: 'reduce' | 'no-preference'; mockViewport?: boolean; noViewport?: boolean } = {}) {
-  const context = await browser.newContext({ viewport: { width, height: 600 }, deviceScaleFactor: 1, reducedMotion: options.motion ?? 'reduce' })
+async function openFixture(browser: Browser, origin: string, width: number, options: { height?: number; touch?: boolean; motion?: 'reduce' | 'no-preference'; mockViewport?: boolean; noViewport?: boolean } = {}) {
+  // WebKit's desktop builds vary in mobile emulation support. hasTouch gives
+  // both engines the coarse pointer needed by the landscape-phone media query.
+  const context = await browser.newContext({
+    viewport: { width, height: options.height ?? 600 },
+    deviceScaleFactor: 1,
+    reducedMotion: options.motion ?? 'reduce',
+    hasTouch: options.touch ?? false,
+    ...(options.touch && browser.browserType().name() === 'chromium' ? { isMobile: true } : {}),
+  })
   if (options.mockViewport) await installVisualViewport(context)
   if (options.noViewport) await context.addInitScript(() => Object.defineProperty(window, 'visualViewport', { configurable: true, value: null }))
   await context.route('**/*', (route) => {
@@ -119,6 +133,21 @@ async function scrollToReading(page: Page) {
   await waitForFade(page, true)
 }
 
+async function expectSuppressedWhileReading(page: Page) {
+  // The scroll listener remains active and sets inline opacity to 1. The CSS
+  // display rule must still suppress the overlay rather than merely hiding an
+  // otherwise inactive fade at the top or bottom of the article.
+  await waitForFade(page, true)
+  const g = await geometry(page)
+  expect(g.hasFadeClass).toBe(true)
+  expect(g.inlineOpacity).toBe('1')
+  expect(g.opacity).toBeGreaterThan(0.98)
+  expect(g.display).toBe('none')
+  expect(g.fade.width).toBe(0)
+  expect(g.fade.height).toBe(0)
+  expect(g.ariaHidden).toBe('true')
+}
+
 async function scrollEndTo(page: Page, delta: number) {
   // The zero-height sentinel is just after end matter. A positive delta is
   // below the visual viewport; 8px is the specified release threshold.
@@ -152,6 +181,7 @@ async function geometry(page: Page) {
       fade: box(fade), body: box(body), hero: box(hero), end: box(end), anchor: box(anchor),
       position: style.position, anchorPosition: getComputedStyle(anchor).position,
       pointerEvents: style.pointerEvents, opacity: Number(style.opacity), visibility: style.visibility,
+      display: style.display, inlineOpacity: fade.style.opacity, hasFadeClass: fade.classList.contains('article-reading-fade'),
       visualBottom: window.visualViewport ? window.visualViewport.offsetTop + window.visualViewport.height : window.innerHeight,
       innerHeight: window.innerHeight, scrollWidth: document.documentElement.scrollWidth, innerWidth: window.innerWidth,
       ariaHidden: fade.getAttribute('aria-hidden'),
@@ -164,6 +194,8 @@ function expectAligned(g: Awaited<ReturnType<typeof geometry>>) {
   expect(g.anchorPosition).toBe('fixed')
   expect(g.pointerEvents).toBe('none')
   expect(g.ariaHidden).toBe('true')
+  expect(g.hasFadeClass).toBe(true)
+  expect(g.display).not.toBe('none')
   expect(g.fade.height).toBeGreaterThan(0)
   expect(Math.abs(g.fade.bottom - g.visualBottom), 'fade bottom must coincide with the *visible* viewport bottom').toBeLessThanOrEqual(1.5)
   expect(Math.abs(g.fade.left - g.body.left), 'fade left must match the article column').toBeLessThanOrEqual(1.5)
@@ -218,7 +250,7 @@ for (const engine of engines) {
     }, 30000)
     afterAll(async () => { await browser?.close(); await server?.close() })
 
-    it.each(widths)('starts off the hero, tracks the reading column and responds to viewport resizing at %ipx', async (width) => {
+    it.each(desktopWidths)('starts off the hero, tracks the reading column and responds to viewport resizing at %ipx', async (width) => {
       const { page, context } = await openFixture(browser, origin, width)
       try {
         await waitForFade(page, false)
@@ -239,7 +271,7 @@ for (const engine of engines) {
         current = await geometry(page)
         expectAligned(current)
         expect(current.opacity).toBeGreaterThan(0.98)
-        const resizedWidth = width === 1440 ? 1000 : width === 768 ? 390 : 768
+        const resizedWidth = width === 1440 ? 1024 : width === 768 ? 1024 : 768
         await page.setViewportSize({ width: resizedWidth, height: 720 })
         await page.waitForFunction((selector) => {
           const intro = [...document.querySelectorAll('p')].find((p) => p.textContent === 'Fade fixture introduction')!
@@ -255,7 +287,7 @@ for (const engine of engines) {
     }, 30000)
 
     it('uses the >8px end threshold, follows expanded end matter, and returns while scrolling back', async () => {
-      const { page, context } = await openFixture(browser, origin, 390)
+      const { page, context } = await openFixture(browser, origin, 1024)
       try {
         await scrollToReading(page)
         expect(await page.locator('section[aria-label="Article resources"]').count()).toBe(1)
@@ -281,7 +313,7 @@ for (const engine of engines) {
     }, 30000)
 
     it('tracks simulated visualViewport resize and scroll without a layout viewport change', async () => {
-      const { page, context } = await openFixture(browser, origin, 390, { mockViewport: true })
+      const { page, context } = await openFixture(browser, origin, 1024, { mockViewport: true })
       try {
         await scrollToReading(page)
         const initial = await geometry(page)
@@ -320,12 +352,12 @@ for (const engine of engines) {
     }, 30000)
 
     it('falls back to the layout viewport when visualViewport is unavailable', async () => {
-      const { page, context } = await openFixture(browser, origin, 390, { noViewport: true })
+      const { page, context } = await openFixture(browser, origin, 1024, { noViewport: true })
       try {
         expect(await page.evaluate(() => window.visualViewport)).toBeNull()
         await scrollToReading(page)
         expectAligned(await geometry(page))
-        await page.setViewportSize({ width: 390, height: 720 })
+        await page.setViewportSize({ width: 1024, height: 720 })
         await page.waitForFunction((selector) => Math.abs(document.querySelector(selector)!.getBoundingClientRect().bottom - innerHeight) < 1.5, fadeSelector)
         expectAligned(await geometry(page))
         await scrollEndTo(page, 6)
@@ -333,62 +365,165 @@ for (const engine of engines) {
       } finally { await context.close() }
     }, 30000)
 
-    it('paints over mobile sticky table labels while remaining click-through', async () => {
-      const { page, context } = await openFixture(browser, origin, 375)
+    it.each(portraitViewports)('suppresses the fade while scrolling at simulated touch portrait $width x $height', async ({ width, height }) => {
+      const { page, context } = await openFixture(browser, origin, width, { height, touch: true })
       try {
+        expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(true)
+        expect((await geometry(page)).display).toBe('none')
+        await scrollToReading(page)
+        await expectSuppressedWhileReading(page)
+        // Check again farther through the body, not just at one scroll position.
+        await page.getByRole('heading', { name: 'Fixture section 3' }).evaluate((heading) => {
+          window.scrollTo({ top: window.scrollY + heading.getBoundingClientRect().top - 140, behavior: 'instant' })
+        })
+        await expectSuppressedWhileReading(page)
+      } finally { await context.close() }
+    }, 30000)
+
+    it('suppresses the fade in simulated touch landscape 844 x 390 while scrolling', async () => {
+      const { page, context } = await openFixture(browser, origin, 844, { height: 390, touch: true })
+      try {
+        expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches && matchMedia('(orientation: landscape)').matches)).toBe(true)
+        await scrollToReading(page)
+        await expectSuppressedWhileReading(page)
+        await page.getByRole('heading', { name: 'Fixture section 3' }).evaluate((heading) => {
+          window.scrollTo({ top: window.scrollY + heading.getBoundingClientRect().top - 120, behavior: 'instant' })
+        })
+        await expectSuppressedWhileReading(page)
+      } finally { await context.close() }
+    }, 30000)
+
+    it.each([{ width: 768, height: 1024 }, { width: 1024, height: 768 }])('retains the fade for a simulated coarse-pointer tablet at $width x $height', async ({ width, height }) => {
+      const { page, context } = await openFixture(browser, origin, width, { height, touch: true })
+      try {
+        expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(true)
+        await scrollToReading(page)
+        const g = await geometry(page)
+        expectAligned(g)
+        expect(g.inlineOpacity).toBe('1')
+      } finally { await context.close() }
+    }, 30000)
+
+    it('retains the fade in a narrow fine-pointer desktop window', async () => {
+      const { page, context } = await openFixture(browser, origin, 390, { height: 844 })
+      try {
+        expect(await page.evaluate(() => matchMedia('(pointer: fine)').matches && !matchMedia('(pointer: coarse)').matches)).toBe(true)
+        await scrollToReading(page)
+        expectAligned(await geometry(page))
+      } finally { await context.close() }
+    }, 30000)
+
+    it('updates immediately across simulated rotations and media-query boundaries without a phone white band', async () => {
+      const { page, context } = await openFixture(browser, origin, 390, { height: 844, touch: true })
+      try {
+        expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(true)
+        await scrollToReading(page)
+        await expectSuppressedWhileReading(page)
+        const sizes = [
+          { width: 844, height: 390, hidden: true },
+          { width: 767, height: 900, hidden: true },
+          { width: 768, height: 900, hidden: false },
+          { width: 768, height: 600, hidden: true },
+          { width: 768, height: 601, hidden: false },
+          { width: 1023, height: 600, hidden: true },
+          { width: 1024, height: 600, hidden: false },
+          { width: 390, height: 844, hidden: true },
+        ]
+        for (const { width, height, hidden } of sizes) {
+          await page.setViewportSize({ width, height })
+          // CSS must apply at the viewport change, independently of the next
+          // scroll update or any stale inline opacity from the prior state.
+          const display = await page.locator(fadeSelector).evaluate((el) => getComputedStyle(el).display)
+          expect(display === 'none', `${width}x${height} suppression immediately after resize`).toBe(hidden)
+          await scrollToReading(page)
+          if (hidden) {
+            await expectSuppressedWhileReading(page)
+            const difference = await paintedDifference(page, { x: Math.floor(width / 2) - 10, y: height - 30, width: 20, height: 20 })
+            expect(difference.changed, `${width}x${height}: explicitly hiding the fade must not change any painted pixels`).toBe(0)
+          } else {
+            expectAligned(await geometry(page))
+          }
+        }
+      } finally { await context.close() }
+    }, 30000)
+
+    it('keeps the simulated mobile sticky table scrollable and unobscured', async () => {
+      const { page, context } = await openFixture(browser, origin, 375, { height: 812, touch: true })
+      try {
+        expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(true)
         const label = page.locator('th').filter({ hasText: 'Fade pinned label' })
         await label.evaluate((cell) => {
           window.scrollTo({ top: window.scrollY + cell.getBoundingClientRect().top - (innerHeight - 105), behavior: 'instant' })
-          const region = cell.closest<HTMLElement>('[role="region"]')!
-          region.scrollLeft = 120
+          cell.closest<HTMLElement>('[role="region"]')!.scrollLeft = 120
         })
-        await waitForFade(page, true)
+        await expectSuppressedWhileReading(page)
         const overlap = await label.evaluate((cell) => {
           const r = cell.getBoundingClientRect()
           const region = cell.closest<HTMLElement>('[role="region"]')!
           const x = Math.floor(r.left + 8)
           const y = innerHeight - 40
           const hit = document.elementFromPoint(x, y)
-          return { position: getComputedStyle(cell).position, scrollLeft: region.scrollLeft, left: r.left, right: r.right, top: r.top, bottom: r.bottom, x, y, hitCell: !!hit && (hit === cell || cell.contains(hit)) }
+          return { position: getComputedStyle(cell).position, scrollLeft: region.scrollLeft, right: r.right, top: r.top, bottom: r.bottom, x, y, innerHeight, hitCell: !!hit && (hit === cell || cell.contains(hit)) }
         })
         expect(overlap.position).toBe('sticky')
         expect(overlap.scrollLeft).toBeGreaterThan(20)
         expect(overlap.top).toBeLessThan(overlap.y)
-        expect(overlap.bottom).toBeGreaterThan(600)
-        expect(overlap.hitCell, 'pointer-events:none must leave the label accessible').toBe(true)
+        expect(overlap.bottom).toBeGreaterThan(overlap.innerHeight)
+        expect(overlap.hitCell).toBe(true)
         const difference = await paintedDifference(page, { x: overlap.x, y: overlap.y, width: Math.min(80, Math.floor(overlap.right - overlap.x - 4)), height: 30 })
-        expect(difference.changed, 'the gradient must actually paint above the sticky label').toBeGreaterThan(20)
+        expect(difference.changed, 'the hidden fade must paint no white band over the label').toBe(0)
       } finally { await context.close() }
     }, 30000)
 
-    it('keeps the real mobile menu and lightbox above the fade', async () => {
-      const { page, context } = await openFixture(browser, origin, 375)
+    it('preserves desktop fade paint over content while remaining click-through', async () => {
+      const { page, context } = await openFixture(browser, origin, 1024)
       try {
+        const label = page.locator('th').filter({ hasText: 'Fade pinned label' })
+        await label.evaluate((cell) => window.scrollTo({ top: window.scrollY + cell.getBoundingClientRect().top - (innerHeight - 105), behavior: 'instant' }))
+        await waitForFade(page, true)
+        expectAligned(await geometry(page))
+        const overlap = await label.evaluate((cell) => {
+          const r = cell.getBoundingClientRect()
+          const x = Math.floor(r.left + 8)
+          const y = innerHeight - 40
+          const hit = document.elementFromPoint(x, y)
+          return { x, y, right: r.right, top: r.top, bottom: r.bottom, hitCell: !!hit && (hit === cell || cell.contains(hit)) }
+        })
+        expect(overlap.top).toBeLessThan(overlap.y)
+        expect(overlap.bottom).toBeGreaterThan(600)
+        expect(overlap.hitCell).toBe(true)
+        const difference = await paintedDifference(page, { x: overlap.x, y: overlap.y, width: Math.min(80, Math.floor(overlap.right - overlap.x - 4)), height: 30 })
+        expect(difference.changed, 'the desktop gradient must still paint over article content').toBeGreaterThan(20)
+      } finally { await context.close() }
+    }, 30000)
+
+    it('keeps the real simulated mobile menu and lightbox functional without the fade', async () => {
+      const { page, context } = await openFixture(browser, origin, 375, { height: 812, touch: true })
+      try {
+        expect(await page.evaluate(() => matchMedia('(pointer: coarse)').matches)).toBe(true)
         await scrollToReading(page)
+        await expectSuppressedWhileReading(page)
         await page.getByRole('button', { name: 'Open menu' }).click()
         await page.locator('[role="dialog"][aria-hidden="false"]').waitFor()
-        await page.waitForTimeout(650)
-        await waitForFade(page, true)
-        let g = await geometry(page)
-        let difference = await paintedDifference(page, { x: Math.floor(g.fade.left + 15), y: 580, width: 20, height: 10 })
-        expect(difference.meanRgbDifference, 'the menu must obscure the fade even where they overlap').toBeLessThan(1)
+        await expectSuppressedWhileReading(page)
         await page.getByRole('button', { name: 'Close menu' }).click()
+        await page.locator('[role="dialog"][aria-hidden="false"]').waitFor({ state: 'hidden' })
+        // The dialog's aria-hidden state changes before its exit animation ends.
         await page.waitForTimeout(650)
         await page.getByRole('button', { name: 'Zoom image' }).click()
         await page.getByRole('button', { name: 'Close', exact: true }).waitFor()
-        await waitForFade(page, true)
-        g = await geometry(page)
-        difference = await paintedDifference(page, { x: Math.floor(g.fade.left + 15), y: 580, width: 20, height: 10 })
-        // The actual lightbox is 94% black, not opaque: a little of the
-        // underlying fade must show through, but the result must remain dark.
-        expect(difference.meanRgbDifference, 'the lightbox must cover the fade except for its translucent backdrop').toBeLessThan(25)
-        expect(difference.meanBrightness, 'a fade above the lightbox would wash its backdrop toward white').toBeLessThan(40)
+        await expectSuppressedWhileReading(page)
+        await page.waitForTimeout(650)
+        const difference = await paintedDifference(page, { x: 30, y: 792, width: 20, height: 10 })
+        expect(difference.changed, 'the suppressed fade must not alter the lightbox').toBe(0)
+        expect(difference.meanBrightness, 'the lightbox backdrop must remain dark').toBeLessThan(40)
         await page.getByRole('button', { name: 'Close', exact: true }).click()
+        expect(await page.getByRole('button', { name: 'Close', exact: true }).count()).toBe(0)
       } finally { await context.close() }
     }, 30000)
 
     it('animates opacity rather than abruptly cutting off the fade', async () => {
-      const { page, context } = await openFixture(browser, origin, 390, { motion: 'no-preference' })
+      const { page, context } = await openFixture(browser, origin, 1024, { motion: 'no-preference' })
       try {
         await waitForFade(page, false)
         const transition = await page.locator(fadeSelector).evaluate((el) => ({ property: getComputedStyle(el).transitionProperty, duration: getComputedStyle(el).transitionDuration }))
@@ -402,18 +537,33 @@ for (const engine of engines) {
           return style.visibility === 'visible' && Number(style.opacity) > 0.02 && Number(style.opacity) < 0.98
         }, fadeSelector, { timeout: 2000 })
         await waitForFade(page, true)
-        await scrollEndTo(page, 4)
-        await page.waitForFunction((selector) => Number(getComputedStyle(document.querySelector(selector)!).opacity) < 0.98, fadeSelector)
-        const during = await geometry(page)
-        expect(during.opacity, 'opacity should interpolate on release').toBeGreaterThan(0.02)
-        expect(during.opacity).toBeLessThan(0.98)
-        expect(during.visibility, 'a hidden element cannot visibly fade out').toBe('visible')
+        // Capture frames in the page itself so round-trips to a busy WebKit
+        // process cannot miss the 500ms transition between separate reads.
+        const releaseSamples = await page.evaluate(async ({ fadeSelector, endSelector }) => {
+          const fade = document.querySelector<HTMLElement>(fadeSelector)!
+          const end = document.querySelector(endSelector)!
+          const viewport = window.visualViewport
+          const bottom = viewport ? viewport.offsetTop + viewport.height : window.innerHeight
+          const samples: { opacity: number; visibility: string }[] = []
+          window.scrollTo({ top: window.scrollY + end.getBoundingClientRect().top - bottom - 4, behavior: 'instant' })
+          const deadline = performance.now() + 2000
+          return await new Promise<typeof samples>((resolve) => {
+            const sample = () => {
+              const style = getComputedStyle(fade)
+              samples.push({ opacity: Number(style.opacity), visibility: style.visibility })
+              if (Number(style.opacity) < 0.02 || performance.now() > deadline) resolve(samples)
+              else requestAnimationFrame(sample)
+            }
+            requestAnimationFrame(sample)
+          })
+        }, { fadeSelector, endSelector })
+        expect(releaseSamples.some(({ opacity, visibility }) => opacity > 0.02 && opacity < 0.98 && visibility === 'visible'), 'opacity should visibly interpolate on release').toBe(true)
         await waitForFade(page, false)
       } finally { await context.close() }
     }, 30000)
 
     it('removes the overlay, anchor, and visualViewport listeners on route exit', async () => {
-      const { page, context } = await openFixture(browser, origin, 375, { mockViewport: true })
+      const { page, context } = await openFixture(browser, origin, 1024, { mockViewport: true })
       try {
         await scrollToReading(page)
         expect((await page.evaluate(() => window.__fadeViewport.counts())).scroll).toBeGreaterThan(0)

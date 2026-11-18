@@ -946,7 +946,7 @@ export default function Article() {
               ref={fadeRef}
               data-testid="article-reading-fade"
               aria-hidden="true"
-              className="pointer-events-none fixed bottom-0 z-20 h-24 bg-gradient-to-b from-transparent to-white opacity-0 transition-opacity duration-500 motion-reduce:transition-none"
+              className="article-reading-fade pointer-events-none fixed bottom-0 z-20 h-24 bg-gradient-to-b from-transparent to-white opacity-0 transition-opacity duration-500 motion-reduce:transition-none"
             />
           </div>
           <Sidebar
