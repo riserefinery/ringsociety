@@ -46,6 +46,15 @@ body {
   }
 }
 
+/* Safari may show content behind its phone toolbar while clipping fixed overlays
+   above it. Remove this decoration on phones to avoid a floating white band. */
+@media (pointer: coarse) and (max-width: 767px),
+       (pointer: coarse) and (orientation: landscape) and (max-width: 1023px) and (max-height: 600px) {
+  .article-reading-fade {
+    display: none;
+  }
+}
+
 ::selection {
   background: var(--forest);
   color: #fff;
