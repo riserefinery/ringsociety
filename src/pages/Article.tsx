@@ -733,11 +733,13 @@ export default function Article() {
   const related = doc ? getRelated(doc) : []
   const heroRef = useRef<HTMLElement>(null)
   const readingRef = useRef<HTMLDivElement>(null)
+  const readingEndRef = useRef<HTMLDivElement>(null)
+  const fadeRef = useRef<HTMLDivElement>(null)
+  const fadeViewportAnchorRef = useRef<HTMLDivElement>(null)
   const [lightbox, setLightbox] = useState<number | null>(null)
   const [activeId, setActiveId] = useState(toc[0]?.id ?? '')
   const [progress, setProgress] = useState(0)
   const [barVisible, setBarVisible] = useState(false)
-  const [fadeVisible, setFadeVisible] = useState(true)
   const [heroReady, setHeroReady] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const heroReadySlug = useRef<string | null>(null)
@@ -775,9 +777,6 @@ export default function Article() {
       const heroBottom = heroRef.current?.getBoundingClientRect().bottom ?? 0
       const readingBottom = readingRef.current?.getBoundingClientRect().bottom ?? Infinity
       setBarVisible(heroBottom <= 0 && readingBottom > window.innerHeight)
-      // release the bottom fade once the end of the article is in view, so the
-      // final paragraph reads fully (dark), not washed out
-      setFadeVisible(readingBottom > window.innerHeight + 8)
       // active section heading nearest the top of the viewport
       if (headings.length) {
         const offset = 160
@@ -796,6 +795,52 @@ export default function Article() {
       window.removeEventListener('resize', onScroll)
     }
   }, [toc])
+
+  // The decorative reading fade follows the actual visible viewport, including
+  // mobile browser chrome. Compare an untransformed fixed anchor with the visual
+  // viewport so browsers that already reposition fixed elements aren't corrected twice.
+  useLayoutEffect(() => {
+    const reading = readingRef.current
+    const readingEnd = readingEndRef.current
+    const fade = fadeRef.current
+    const anchor = fadeViewportAnchorRef.current
+    if (!doc || !reading || !readingEnd || !fade || !anchor) return
+
+    const viewport = window.visualViewport
+    let frame = 0
+    const update = () => {
+      frame = 0
+      const readingRect = reading.getBoundingClientRect()
+      const visibleBottom = viewport ? viewport.offsetTop + viewport.height : window.innerHeight
+      const end = readingEnd.getBoundingClientRect().top
+      const fixedBottom = anchor.getBoundingClientRect().bottom
+
+      fade.style.left = `${readingRect.left}px`
+      fade.style.width = `${readingRect.width}px`
+      fade.style.transform = `translateY(${visibleBottom - fixedBottom}px)`
+      // Don't cover the hero or the final lines when the article ends.
+      const visible = readingRect.top < visibleBottom - 96 && end > visibleBottom + 8
+      fade.style.opacity = visible ? '1' : '0'
+    }
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    viewport?.addEventListener('scroll', schedule, { passive: true })
+    viewport?.addEventListener('resize', schedule)
+    const observer = typeof ResizeObserver === 'undefined' ? undefined : new ResizeObserver(schedule)
+    observer?.observe(reading)
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      viewport?.removeEventListener('scroll', schedule)
+      viewport?.removeEventListener('resize', schedule)
+      observer?.disconnect()
+      if (frame) window.cancelAnimationFrame(frame)
+    }
+  }, [doc])
 
   if (!doc) {
     return (
@@ -894,11 +939,14 @@ export default function Article() {
               sources={doc.sources ?? []}
               bulletedSources={doc.slug === 'how-to-buy-an-engagement-ring'}
             />
-            {/* bottom-of-article fade to entice the scroll; releases at the end */}
+            <div ref={readingEndRef} data-testid="article-reading-end" aria-hidden="true" className="h-0 w-0" />
+            <div ref={fadeViewportAnchorRef} data-testid="article-fade-viewport-anchor" aria-hidden="true" className="pointer-events-none fixed bottom-0 h-0 w-0" />
+            {/* Decorative fade remains aligned to the visible bottom while reading. */}
             <div
-              className={`pointer-events-none sticky bottom-0 -mt-24 h-24 w-full bg-gradient-to-b from-transparent to-white transition-opacity duration-500 ${
-                fadeVisible ? 'opacity-100' : 'opacity-0'
-              }`}
+              ref={fadeRef}
+              data-testid="article-reading-fade"
+              aria-hidden="true"
+              className="pointer-events-none fixed bottom-0 z-20 h-24 bg-gradient-to-b from-transparent to-white opacity-0 transition-opacity duration-500 motion-reduce:transition-none"
             />
           </div>
           <Sidebar
